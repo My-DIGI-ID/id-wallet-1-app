@@ -60,7 +60,7 @@ Some configuration needs to be set:
 	  - TeamId  
 	  - PushServiceName  
 
-### PNS Android
+### Android Firebase PNS
 - src/IDWallet.Android/google-services.json
 
 ### BDR API
