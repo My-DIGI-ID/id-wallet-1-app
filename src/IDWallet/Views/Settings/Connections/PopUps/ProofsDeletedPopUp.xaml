@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<base:CustomPopUp xmlns="http://xamarin.com/schemas/2014/forms"
+                  xmlns:base="clr-namespace:IDWallet.Views.Customs.PopUps;assembly=IDWallet"
+                  xmlns:lang="clr-namespace:IDWallet.Extensions"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  x:Class="IDWallet.Views.Settings.Connections.PopUps.ProofsDeletedPopUp">
+    <base:CustomPopUp.Content>
+        <StackLayout Style="{StaticResource PopUpStackLayout}">
+            <Frame Style="{StaticResource PopUpFrame}"
+                   Padding="0,20">
+                <ContentView>
+                    <StackLayout>
+                        <Label Text="{lang:L10n PopUp_Proofs_Deleted_Title}"
+                               Style="{StaticResource LabelHeader}"
+                               MaxLines="100"
+                               LineBreakMode="WordWrap"
+                               Margin="20,0" />
+                        <BoxView BackgroundColor="{StaticResource PopUpHeaderSeparatorColor}"
+                                 HeightRequest="1"
+                                 HorizontalOptions="FillAndExpand" />
+                        <Label Margin="20,0"
+                               Style="{StaticResource LabelMultiLine}"
+                               TextColor="{StaticResource AttributeValueColor}">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span x:Name="ConnectionNameSpan" />
+                                    <Span Text="{lang:L10n PopUp_Proofs_Deleted_Text}" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Label Margin="20,0"
+                               Style="{StaticResource LabelMultiLine}"
+                               TextColor="{StaticResource AttributeValueColor}">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{lang:L10n PopUp_Proofs_Deleted_Count_Text}" />
+                                    <Span x:Name="DeletedCountSpan" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <StackLayout Style="{StaticResource PopUpButtonArea}"
+                                     Margin="20,0">
+                            <Button Text="{lang:L10n PopUp_Proofs_Deleted_Button}"
+                                    Style="{StaticResource AcceptButton}"
+                                    Clicked="OnPopUpAccepted" />
+                        </StackLayout>
+                    </StackLayout>
+                </ContentView>
+            </Frame>
+        </StackLayout>
+    </base:CustomPopUp.Content>
+</base:CustomPopUp>

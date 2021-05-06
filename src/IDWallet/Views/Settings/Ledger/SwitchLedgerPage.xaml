@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:iconize="clr-namespace:Plugin.Iconize;assembly=Plugin.Iconize"
+             xmlns:lang="clr-namespace:IDWallet.Extensions"
+             x:Class="IDWallet.Views.Settings.Ledger.SwitchLedgerPage"
+             x:Name="Root"
+             BackgroundColor="{StaticResource BackgroundColor}">
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="{lang:L10n Navigation_Back}"
+                   HorizontalOptions="StartAndExpand"
+                   VerticalOptions="CenterAndExpand"
+                   FontAttributes="Bold"
+                   FontSize="20" />
+            <Frame WidthRequest="30"
+                   HeightRequest="30"
+                   Margin="5"
+                   x:Name="NotificationsToolBarItem"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="End">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NotificationsClickedCommand, Source={x:Reference Root}}" />
+                </Frame.GestureRecognizers>
+                <Image Source="{Binding NotificationIconImage}"
+                       VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="CenterAndExpand"
+                       WidthRequest="20"
+                       HeightRequest="20" />
+            </Frame>
+            <Frame WidthRequest="30"
+                   HeightRequest="30"
+                   Margin="5"
+                   x:Name="SettingsToolBarItem"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="End">
+                <Image Source="{Binding SettingsIconImage, Source={x:Reference Root}}"
+                       VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="CenterAndExpand"
+                       WidthRequest="20"
+                       HeightRequest="20" />
+            </Frame>
+        </StackLayout>
+    </NavigationPage.TitleView>
+    <Grid>
+        <StackLayout Margin="0"
+                     Padding="0"
+                     Spacing="0">
+            <Frame CornerRadius="0"
+                   BackgroundColor="{StaticResource PageShadowColor}"
+                   HeightRequest="1" />
+            <Label Text="{lang:L10n ChangeLedgerPage_Title}"
+                   Margin="20"
+                   TextColor="{StaticResource AttributeValueColor}"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   VerticalTextAlignment="Center" />
+            <ScrollView>
+                <StackLayout BindableLayout.ItemsSource="{Binding Ledgers, Source={x:Reference Root}}"
+                             x:Name="LedgerStack"
+                             Spacing="0"
+                             Margin="0"
+                             Padding="0">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Spacing="0">
+                                <StackLayout BackgroundColor="White"
+                                             HeightRequest="40"
+                                             Padding="20,5"
+                                             Orientation="Horizontal">
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Command="{Binding LedgerTappedCommand, Source={x:Reference Root}}"
+                                            CommandParameter="{Binding .}" />
+                                    </StackLayout.GestureRecognizers>
+                                    <iconize:IconImage Icon="{Binding IconSource}"
+                                                       IconColor="{StaticResource PrimaryTextColor}"
+                                                       IconSize="20" />
+                                    <Label Text="{Binding PoolName}"
+                                           TextColor="{StaticResource PrimaryTextColor}"
+                                           FontAttributes="Bold"
+                                           Margin="20,0,0,0" />
+                                </StackLayout>
+                                <BoxView BackgroundColor="{StaticResource SeparatorColor}"
+                                         HeightRequest="1"
+                                         HorizontalOptions="FillAndExpand" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+        <BoxView Style="{StaticResource BlackLoadingScreen}"
+                 IsVisible="{Binding IsLoading, Source={x:Reference Root}}" />
+        <ActivityIndicator Style="{StaticResource BlackLoadingScreenActivityIndicator}"
+                           IsRunning="{Binding IsLoading, Source={x:Reference Root}}" />
+    </Grid>
+</ContentPage>

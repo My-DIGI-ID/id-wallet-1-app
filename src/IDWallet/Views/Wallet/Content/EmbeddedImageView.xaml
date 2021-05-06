@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             mc:Ignorable="d"
+             x:Class="IDWallet.Views.Wallet.Content.EmbeddedImageView">
+    <ContentView.Content>
+        <ff:CachedImage Source="{Binding Model.PortraitByteArray, Converter={StaticResource EmbeddedImageConverter}}"
+                        LoadingPlaceholder="empty_image.png"
+                        ErrorPlaceholder="empty_image.png"
+                        HeightRequest="100"
+                        WidthRequest="300"
+                        Aspect="AspectFit" />
+    </ContentView.Content>
+</ContentView>

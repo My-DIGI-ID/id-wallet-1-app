@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
+	<key>UIDeviceFamily</key>
+	<array>
+		<integer>1</integer>
+	</array>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+	<key>MinimumOSVersion</key>
+	<string>14.0</string>
+	<key>CFBundleDisplayName</key>
+	<string>ID Wallet</string>
+	<key>CFBundleVersion</key>
+	<string>10106</string>
+	<key>CFBundleName</key>
+	<string>ID Wallet</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>iconize-material.ttf</string>
+		<string>iconize-materialdesignicons.ttf</string>
+	</array>
+	<key>com.apple.developer.nfc.readersession.iso7816.select-identifiers</key>
+	<array>
+		<string>E80704007F00070302</string>
+	</array>
+	<key>NFCReaderUsageDescription</key>
+	<string>AusweisApp2 needs NFC to access the ID card.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>ID Wallet wants to access your Camera for scanning of QR code invitations and login purposes</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>ID Wallet needs this access for backup and recovery</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>ID Wallet needs this access for nearby devices via Bluetooth</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>ID Wallet needs this access for nearby devices via Bluetooth</string>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>ID Wallet needs this access for nearby devices via Bluetooth</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>id-wallet</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>id-wallet</string>
+			</array>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+		</dict>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>didcomm</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>didcomm</string>
+			</array>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+		</dict>
+	</array>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Authenticate access to your identity</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.digitalenabling.idw</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.1</string>
+	<key>XSAppIconAssets</key>
+	<string>Assets.xcassets/AppIcons.appiconset</string>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
+</dict>
+</plist>

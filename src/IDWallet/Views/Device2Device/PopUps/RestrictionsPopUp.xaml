@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<base:CustomPopUp xmlns="http://xamarin.com/schemas/2014/forms"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                  xmlns:base="clr-namespace:IDWallet.Views.Customs.PopUps;assembly=IDWallet"
+                  xmlns:lang="clr-namespace:IDWallet.Extensions"
+                  mc:Ignorable="d"
+                  x:Class="IDWallet.Views.Proofs.Device2Device.PopUps.RestrictionsPopUp">
+    <base:CustomPopUp.Content>
+        <StackLayout Style="{StaticResource PopUpStackLayout}">
+            <Frame Style="{StaticResource PopUpFrame}">
+                <ContentView>
+                    <StackLayout Margin="0,20">
+                        <Label Style="{StaticResource LabelHeader}"
+                               MaxLines="100"
+                               LineBreakMode="WordWrap"
+                               Margin="20,0">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{lang:L10n PopUp_Restriction_Header}" />
+                                    <Span Text=" " />
+                                    <Span Text="{Binding Name, Converter={StaticResource LabelTextConverter}}" />
+                                    <Span Text=":" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <BoxView BackgroundColor="{StaticResource PopUpHeaderSeparatorColor}"
+                                 HeightRequest="1"
+                                 HorizontalOptions="FillAndExpand" />
+                        <StackLayout Spacing="0"
+                                     BindableLayout.ItemsSource="{Binding Restrictions}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout>
+                                        <StackLayout Spacing="0"
+                                                     BindableLayout.ItemsSource="{Binding RestrictionContent}">
+                                            <BindableLayout.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackLayout>
+                                                        <Grid Margin="20,0">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="4*" />
+                                                                <ColumnDefinition Width="6*" />
+                                                            </Grid.ColumnDefinitions>
+                                                            <Label Text="{Binding RestrictionType}"
+                                                                   Style="{StaticResource LabelMultiLine}" />
+                                                            <Label Grid.Column="1"
+                                                                   Text="{Binding RestrictionValue}"
+                                                                   Style="{StaticResource LabelMultiLine}" />
+                                                        </Grid>
+                                                        <BoxView HeightRequest="1"
+                                                                 BackgroundColor="{StaticResource SeparatorColor}" />
+                                                    </StackLayout>
+                                                </DataTemplate>
+                                            </BindableLayout.ItemTemplate>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
+                        <StackLayout Style="{StaticResource PopUpButtonArea}"
+                                     Margin="20,10,20,0">
+                            <Button Text="{lang:L10n PopUp_Restriction_Button}"
+                                    Style="{StaticResource CancelButton}"
+                                    Clicked="OnPopUpAccepted" />
+                        </StackLayout>
+                    </StackLayout>
+                </ContentView>
+            </Frame>
+        </StackLayout>
+    </base:CustomPopUp.Content>
+</base:CustomPopUp>

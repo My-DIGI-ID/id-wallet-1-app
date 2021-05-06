@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:lang="clr-namespace:IDWallet.Extensions"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:contentViews="clr-namespace:IDWallet.Views.Wallet.Content"
+             x:Class="IDWallet.Views.History.HistoryPage"
+             BackgroundColor="{StaticResource BackgroundColor}"
+             x:Name="Root">
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal">
+            <Label Text=""
+                   HorizontalOptions="StartAndExpand"
+                   VerticalOptions="StartAndExpand"
+                   FontAttributes="Bold"
+                   FontSize="20" />
+            <Frame WidthRequest="30"
+                   HeightRequest="30"
+                   Margin="5"
+                   x:Name="NotificationsToolBarItem"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="End">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NotificationsClickedCommand, Source={x:Reference Root}}" />
+                </Frame.GestureRecognizers>
+                <Image Source="{Binding NotificationIconImage}"
+                       VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="CenterAndExpand"
+                       WidthRequest="20"
+                       HeightRequest="20" />
+            </Frame>
+            <Frame WidthRequest="30"
+                   HeightRequest="30"
+                   Margin="5"
+                   x:Name="SettingsToolBarItem"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="End">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SettingsClickedCommand, Source={x:Reference Root}}" />
+                </Frame.GestureRecognizers>
+                <Image Source="{Binding SettingsIconImage, Source={x:Reference Root}}"
+                       VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="CenterAndExpand"
+                       WidthRequest="20"
+                       HeightRequest="20" />
+            </Frame>
+        </StackLayout>
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+        <StackLayout Spacing="0">
+            <ScrollView>
+                <StackLayout Spacing="0">
+                    <Label Text="{lang:L10n HistoryPage_Title}"
+                           Margin="20,20,20,0"
+                           FontAttributes="Bold"
+                           FontSize="18"
+                           TextColor="{StaticResource AttributeValueColor}" />
+                    <StackLayout BindableLayout.ItemsSource="{Binding HistoryElements}"
+                                 Spacing="0">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout>
+                                    <Label Text="{Binding Name}"
+                                           FontAttributes="Bold"
+                                           FontSize="14"
+                                           Margin="20,10"
+                                           TextColor="{StaticResource AttributeNameColor}" />
+                                    <StackLayout BindableLayout.ItemsSource="{Binding HistorySubElements}"
+                                                 BackgroundColor="{StaticResource BarBackgroundColor}">
+                                        <BindableLayout.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackLayout Padding="0"
+                                                             Margin="0">
+                                                    <StackLayout.GestureRecognizers>
+                                                        <TapGestureRecognizer Command="{Binding HistorySubElementTappedCommand, Source={x:Reference Root}}"
+                                                                              CommandParameter="{Binding .}"/>
+                                                    </StackLayout.GestureRecognizers>
+                                                    <contentViews:CredentialHistoryListElement />
+                                                </StackLayout>
+                                            </DataTemplate>
+                                        </BindableLayout.ItemTemplate>
+                                    </StackLayout>
+                                </StackLayout>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

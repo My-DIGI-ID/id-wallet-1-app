@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:views="clr-namespace:IDWallet.Views.Inbox.Content"
+             xmlns:lang="clr-namespace:IDWallet.Extensions"
+             NavigationPage.BackButtonTitle=""
+             mc:Ignorable="d"
+             x:Class="IDWallet.Views.Inbox.InboxPage">
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="{lang:L10n Navigation_Back}"
+                   HorizontalOptions="StartAndExpand"
+                   VerticalOptions="CenterAndExpand"
+                   FontAttributes="Bold"
+                   FontSize="20" />
+        </StackLayout>
+    </NavigationPage.TitleView>
+    <StackLayout>
+        <ScrollView>
+            <StackLayout Spacing="0">
+                <Label Text="{lang:L10n InboxPage_Title}"
+                       Grid.Row="1"
+                       Margin="20,20,20,20"
+                       FontAttributes="Bold"
+                       FontSize="18"
+                       TextColor="{StaticResource AttributeValueColor}" />
+
+                <StackLayout BindableLayout.ItemsSource="{Binding InboxMessages}"
+                             Spacing="0"
+                             x:Name="InBoxStack">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout BackgroundColor="{StaticResource BarBackgroundColor}">
+                                <views:InboxListElement />
+                                <BoxView HorizontalOptions="FillAndExpand"
+                                         BackgroundColor="{StaticResource SeparatorColor}"
+                                         HeightRequest="1" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </StackLayout>
+</ContentPage>

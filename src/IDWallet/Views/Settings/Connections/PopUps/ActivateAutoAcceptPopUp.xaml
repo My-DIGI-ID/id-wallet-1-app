@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<base:CustomPopUp xmlns="http://xamarin.com/schemas/2014/forms"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                  xmlns:base="clr-namespace:IDWallet.Views.Customs.PopUps;assembly=IDWallet"
+                  xmlns:iconize="clr-namespace:Plugin.Iconize;assembly=Plugin.Iconize"
+                  xmlns:lang="clr-namespace:IDWallet.Extensions"
+                  mc:Ignorable="d"
+                  x:Class="IDWallet.Views.Settings.Connections.PopUps.ActivateAutoAcceptPopUp"
+                  x:Name="Root">
+    <base:CustomPopUp.Content>
+        <StackLayout Style="{StaticResource PopUpStackLayout}">
+            <Frame Style="{StaticResource PopUpFrame}"
+                   Padding="0,20">
+                <ContentView>
+                    <StackLayout>
+                        <Label Text="{lang:L10n PopUp_ActivateAutoAccept_Title}"
+                               Style="{StaticResource LabelHeader}"
+                               MaxLines="100"
+                               LineBreakMode="WordWrap"
+                               Margin="20,0" />
+                        <BoxView BackgroundColor="{StaticResource PopUpHeaderSeparatorColor}"
+                                 HeightRequest="1"
+                                 HorizontalOptions="FillAndExpand" />
+                        <Label Style="{StaticResource LabelMultiLine}"
+                               TextColor="{StaticResource AttributeValueColor}"
+                               Margin="20,0">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span x:Name="TextSpan1" />
+                                    <Span x:Name="TextSpan2" />
+                                    <Span x:Name="TextSpan3" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                        <StackLayout Margin="30,10,20,0">
+                            <StackLayout Orientation="Horizontal"
+                                         HeightRequest="40"
+                                         HorizontalOptions="FillAndExpand">
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding ItemClicked, Source={x:Reference Root}}"
+                                                          CommandParameter="AutoAccept" />
+                                </StackLayout.GestureRecognizers>
+                                <Label Text="{lang:L10n PopUp_ActivateAutoAccept_Activate_Button}"
+                                       VerticalOptions="Center" />
+                                <Frame BackgroundColor="Transparent"
+                                       HorizontalOptions="EndAndExpand"
+                                       VerticalOptions="Center"
+                                       HeightRequest="30"
+                                       WidthRequest="30">
+                                    <iconize:IconImage Icon="mdi-checkbox-blank-circle-outline"
+                                                       IconColor="{StaticResource PrimaryTextColor}"
+                                                       IconSize="30"
+                                                       Aspect="AspectFit"
+                                                       x:Name="AutoAcceptIconImage" />
+                                </Frame>
+                            </StackLayout>
+
+                            <StackLayout x:Name="CheckBoxStack"
+                                         IsVisible="False"
+                                         Orientation="Horizontal"
+                                         Margin="10,0">
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding CheckBoxTappedCommand, Source={x:Reference Root}}"
+                                        CommandParameter="{x:Reference CheckBox}" />
+                                </StackLayout.GestureRecognizers>
+                                <Label x:Name="CheckBoxText"
+                                       Style="{StaticResource LabelMultiLine}" />
+                                <CheckBox x:Name="CheckBox"
+                                          IsChecked="False"
+                                          HorizontalOptions="EndAndExpand"
+                                          Color="{StaticResource PrimaryTextColor}" />
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal"
+                                         HeightRequest="40"
+                                         HorizontalOptions="FillAndExpand">
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding ItemClicked, Source={x:Reference Root}}"
+                                                          CommandParameter="AskLater" />
+                                </StackLayout.GestureRecognizers>
+                                <Label Text="{lang:L10n PopUp_ActivateAutoAccept_Later_Button}"
+                                       VerticalOptions="Center" />
+                                <Frame BackgroundColor="Transparent"
+                                       HorizontalOptions="EndAndExpand"
+                                       VerticalOptions="Center"
+                                       HeightRequest="30"
+                                       WidthRequest="30">
+                                    <iconize:IconImage Icon="mdi-circle-slice-8"
+                                                       IconColor="{StaticResource PrimaryTextColor}"
+                                                       IconSize="30"
+                                                       Aspect="AspectFit"
+                                                       x:Name="AskLaterIconImage" />
+                                </Frame>
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal"
+                                         HeightRequest="40"
+                                         HorizontalOptions="FillAndExpand">
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding ItemClicked, Source={x:Reference Root}}"
+                                                          CommandParameter="AskNever" />
+                                </StackLayout.GestureRecognizers>
+                                <Label Text="{lang:L10n PopUp_ActivateAutoAccept_Never_Button}"
+                                       VerticalOptions="Center" />
+                                <Frame BackgroundColor="Transparent"
+                                       HorizontalOptions="EndAndExpand"
+                                       VerticalOptions="Center"
+                                       HeightRequest="30"
+                                       WidthRequest="30">
+                                    <iconize:IconImage Icon="mdi-checkbox-blank-circle-outline"
+                                                       IconColor="{StaticResource PrimaryTextColor}"
+                                                       IconSize="30"
+                                                       Aspect="AspectFit"
+                                                       x:Name="AskNeverIconImage" />
+                                </Frame>
+                            </StackLayout>
+                        </StackLayout>
+
+                        <StackLayout Style="{StaticResource PopUpButtonArea}"
+                                     Margin="20,0">
+                            <Button Text="{lang:L10n PopUp_ActivateAutoAccept_Save_Button}"
+                                    Style="{StaticResource AcceptButton}"
+                                    Clicked="Button_Clicked"
+                                    x:Name="SaveButton" />
+                        </StackLayout>
+                    </StackLayout>
+                </ContentView>
+            </Frame>
+        </StackLayout>
+    </base:CustomPopUp.Content>
+</base:CustomPopUp>

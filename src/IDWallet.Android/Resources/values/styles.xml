@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<style name="MainTheme" parent="MainTheme.Base">
+		<item name="android:textCursorDrawable">@color/textCursorColor</item>
+		<item name="colorControlNormal">@color/textCursorColor</item>
+		<item name="colorControlActivated">@color/textCursorColor</item>
+	</style>
+	<style name="SplashScreenTheme" parent ="Theme.AppCompat.Light.NoActionBar">
+		<item name="android:windowBackground">@drawable/splashScreen</item>
+		<item name="android:windowTranslucentNavigation">true</item>
+		<item name="android:windowDrawsSystemBarBackgrounds">true</item>
+		<item name="android:statusBarColor">@android:color/transparent</item>
+		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+	</style>
+</resources>

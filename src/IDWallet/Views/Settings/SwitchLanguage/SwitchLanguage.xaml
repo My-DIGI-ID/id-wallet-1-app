@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:lang="clr-namespace:IDWallet.Extensions"
+             xmlns:iconize="clr-namespace:Plugin.Iconize;assembly=Plugin.Iconize"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="IDWallet.Views.Settings.SwitchLanguage.SwitchLanguagePage"
+             x:Name="Root">
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="{lang:L10n Navigation_Back}"
+                   HorizontalOptions="StartAndExpand"
+                   VerticalOptions="CenterAndExpand"
+                   FontAttributes="Bold"
+                   FontSize="20" />
+            <Frame WidthRequest="30"
+                   HeightRequest="30"
+                   Margin="5"
+                   x:Name="NotificationsToolBarItem"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="End">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NotificationsClickedCommand, Source={x:Reference Root}}" />
+                </Frame.GestureRecognizers>
+                <Image Source="{Binding NotificationIconImage}"
+                       VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="CenterAndExpand"
+                       WidthRequest="20"
+                       HeightRequest="20" />
+            </Frame>
+            <Frame WidthRequest="30"
+                   HeightRequest="30"
+                   Margin="5"
+                   x:Name="SettingsToolBarItem"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="End">
+                <Image Source="{Binding SettingsIconImage, Source={x:Reference Root}}"
+                       VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="CenterAndExpand"
+                       WidthRequest="20"
+                       HeightRequest="20" />
+            </Frame>
+        </StackLayout>
+    </NavigationPage.TitleView>
+    <Grid>
+        <StackLayout Margin="0"
+                     Padding="0"
+                     Spacing="0">
+            <Frame CornerRadius="0"
+                   BackgroundColor="{StaticResource PageShadowColor}"
+                   HeightRequest="1" />
+            <Label Text="{lang:L10n ChangeLanguagePage_Choose_Label}"
+                   Margin="20"
+                   TextColor="{StaticResource AttributeValueColor}"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   VerticalTextAlignment="Center" />
+            <ScrollView>
+                <StackLayout BindableLayout.ItemsSource="{Binding Languages, Source={x:Reference Root}}"
+                             x:Name="LanguageStack"
+                             Spacing="0"
+                             Margin="0"
+                             Padding="0">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Spacing="0">
+                                <StackLayout BackgroundColor="White"
+                                             HeightRequest="40"
+                                             Padding="20,5"
+                                             Orientation="Horizontal">
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Command="{Binding LanguageTappedCommand, Source={x:Reference Root}}"
+                                            CommandParameter="{Binding .}" />
+                                    </StackLayout.GestureRecognizers>
+                                    <iconize:IconImage Icon="{Binding IconSource}"
+                                                       IconColor="{StaticResource PrimaryTextColor}"
+                                                       IconSize="20" />
+                                    <Label Text="{Binding Name}"
+                                           TextColor="{StaticResource PrimaryTextColor}"
+                                           FontAttributes="Bold"
+                                           Margin="20,0,0,0" />
+                                </StackLayout>
+                                <BoxView BackgroundColor="{StaticResource SeparatorColor}"
+                                         HeightRequest="1"
+                                         HorizontalOptions="FillAndExpand" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+        <BoxView Style="{StaticResource BlackLoadingScreen}"
+                 IsVisible="{Binding IsLoading}" />
+        <ActivityIndicator Style="{StaticResource BlackLoadingScreenActivityIndicator}"
+                           IsRunning="{Binding IsLoading}" />
+    </Grid>
+</ContentPage>

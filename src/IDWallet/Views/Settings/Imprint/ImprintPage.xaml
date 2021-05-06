@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:lang="clr-namespace:IDWallet.Extensions"
+             x:Class="IDWallet.Views.Settings.Imprint.ImprintPage"
+             Title="{lang:L10n LegalNoticePage_Title}"
+             x:Name="Root">
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="{lang:L10n Navigation_Back}"
+                   HorizontalOptions="StartAndExpand"
+                   VerticalOptions="CenterAndExpand"
+                   FontAttributes="Bold"
+                   FontSize="20" />
+            <Frame WidthRequest="30"
+                   HeightRequest="30"
+                   Margin="5"
+                   x:Name="NotificationsToolBarItem"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="End">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NotificationsClickedCommand, Source={x:Reference Root}}" />
+                </Frame.GestureRecognizers>
+                <Image Source="{Binding NotificationIconImage}"
+                       VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="CenterAndExpand"
+                       WidthRequest="20"
+                       HeightRequest="20" />
+            </Frame>
+            <Frame WidthRequest="30"
+                   HeightRequest="30"
+                   Margin="5"
+                   x:Name="SettingsToolBarItem"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="End">
+                <Image Source="{Binding SettingsIconImage, Source={x:Reference Root}}"
+                       VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="CenterAndExpand"
+                       WidthRequest="20"
+                       HeightRequest="20" />
+            </Frame>
+        </StackLayout>
+    </NavigationPage.TitleView>
+    <StackLayout Spacing="0">
+        <Frame
+            CornerRadius="0"
+            BackgroundColor="{StaticResource PageShadowColor}"
+            HeightRequest="1"
+            Grid.Row="0" />
+
+        <StackLayout Padding="20">
+            <Label HorizontalOptions="Start"
+                   VerticalOptions="Start">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{lang:L10n LegalNoticePage_Version}" />
+                        <Span Text=": " />
+                        <Span x:Name="AppVersionLabel" />
+                        <Span Text=" (" />
+                        <Span Text="{lang:L10n LegalNoticePage_Build}" />
+                        <Span Text=" " />
+                        <Span x:Name="BuildVersionLabel" />
+                        <Span Text=")" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+            <StackLayout HorizontalOptions="Start"
+                         VerticalOptions="Start"
+                         Margin="0,15"
+                         Spacing="0">
+                <Label Text="{lang:L10n LegalNoticePage_Company}"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Start" />
+                <Label HorizontalOptions="Start"
+                       VerticalOptions="Start">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{lang:L10n LegalNoticePage_Street}" />
+                            <Span Text=" " />
+                            <Span Text="{lang:L10n LegalNoticePage_Street_Number}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label HorizontalOptions="Start"
+                       VerticalOptions="Start">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{lang:L10n LegalNoticePage_ZIP}" />
+                            <Span Text=" " />
+                            <Span Text="{lang:L10n LegalNoticePage_City}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label Text="{lang:L10n LegalNoticePage_Country}"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Start" />
+                <Label HorizontalOptions="Start"
+                       VerticalOptions="Start">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{lang:L10n LegalNoticePage_Phone}" />
+                            <Span Text=": " />
+                            <Span Text="{lang:L10n LegalNoticePage_Phone_Number}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label HorizontalOptions="Start"
+                       VerticalOptions="Start">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{lang:L10n LegalNoticePage_E_Mail}" />
+                            <Span Text=": " />
+                            <Span Text="{lang:L10n LegalNoticePage_E_Mail_Address}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label HorizontalOptions="Start"
+                       VerticalOptions="Start"
+                       x:Name="LinkLabel">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{lang:L10n LegalNoticePage_Website}" />
+                            <Span Text=": " />
+                            <Span Text="{lang:L10n LegalNoticePage_Web_Address}"
+                                  TextColor="{StaticResource LinkColor}"
+                                  TextDecorations="Underline">
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding LinkClickedCommand, Source={x:Reference Root}}" />
+                                </Span.GestureRecognizers>
+                            </Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </StackLayout>
+
+            <StackLayout Spacing="0"
+                         HorizontalOptions="Start"
+                         VerticalOptions="Start">
+                <Label Text="{lang:L10n LegalNoticePage_Executive_Board}"
+                       Style="{StaticResource LabelMultiLine}" />
+                <Label Text="{lang:L10n LegalNoticePage_Commercial_Register}"
+                       Style="{StaticResource LabelMultiLine}" />
+                <Label Text="{lang:L10n LegalNoticePage_VAT}"
+                       Style="{StaticResource LabelMultiLine}" />
+            </StackLayout>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

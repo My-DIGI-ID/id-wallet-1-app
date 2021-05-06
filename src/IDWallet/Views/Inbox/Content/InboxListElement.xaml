@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:lang="clr-namespace:IDWallet.Extensions"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             mc:Ignorable="d"
+             x:Class="IDWallet.Views.Inbox.Content.InboxListElement">
+    <Grid ColumnSpacing="0"
+          RowSpacing="0"
+          Padding="20"
+          BackgroundColor="{StaticResource BarBackgroundColor}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="1" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="40" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Frame Style="{StaticResource ImageFrame}"
+               HeightRequest="30"
+               WidthRequest="30"
+               Padding="0"
+               Margin="0,0,10,0"
+               CornerRadius="0"
+               Grid.Row="0"
+               Grid.Column="0">
+            <ff:CachedImage Source="{Binding MessageImageSource}"
+                            Aspect="AspectFit" />
+        </Frame>
+
+        <StackLayout Spacing="0"
+                     Grid.Row="0"
+                     Grid.Column="1">
+            <Label Text="{Binding Description}"
+                   FontSize="14" />
+            <Label x:Name="TitleLabel"
+                   FontSize="18"
+                   FontAttributes="Bold" />
+            <Label FontSize="12"
+                   TextColor="{StaticResource AttributeNameColor}"
+                   BindingContextChanged="ConnectionAliasLabel_BindingContextChanged">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{lang:L10n NotificationsPage_From}" />
+                        <Span Text=" " />
+                        <Span Text="{Binding ConnectionAlias}"
+                              x:Name="ConnectionAliasLabel" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+        </StackLayout>
+
+        <Label Grid.Row="1"
+               Grid.Column="1"
+               FontSize="12"
+               TextColor="{StaticResource AttributeNameColor}">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span
+                        Text="{Binding CreatedAtUtc, Converter={StaticResource DateTimeConverter}, ConverterParameter=Date}" />
+                    <Span Text=" • " />
+                    <Span
+                        Text="{Binding CreatedAtUtc, Converter={StaticResource DateTimeConverter}, ConverterParameter=Time}" />
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+
+        <StackLayout Style="{StaticResource PopUpButtonArea}"
+                     Grid.Row="2"
+                     Grid.Column="0"
+                     Grid.ColumnSpan="2"
+                     HorizontalOptions="FillAndExpand"
+                     Margin="0,10,0,0">
+            <Button Text="{lang:L10n NotificationsPage_View_Request_Button}"
+                    Style="{StaticResource AcceptButton}"
+                    HorizontalOptions="FillAndExpand"
+                    Clicked="OnViewRequest" />
+            <Button Text="{lang:L10n NotificationsPage_Reject_Button}"
+                    Style="{StaticResource DeleteButton}"
+                    HorizontalOptions="FillAndExpand"
+                    Clicked="OnInboxDeleted" />
+        </StackLayout>
+    </Grid>
+</ContentView>

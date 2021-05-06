@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:pin="clr-namespace:IDWallet.Packages.FormsPinView"
+             xmlns:lang="clr-namespace:IDWallet.Extensions"
+             mc:Ignorable="d"
+             x:Class="IDWallet.Views.Settings.ChangePin.ChangePinPage"
+             x:Name="Root">
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="{lang:L10n Navigation_Back}"
+                   HorizontalOptions="StartAndExpand"
+                   VerticalOptions="CenterAndExpand"
+                   FontAttributes="Bold"
+                   FontSize="20" />
+            <Frame WidthRequest="30"
+                   HeightRequest="30"
+                   Margin="5"
+                   x:Name="NotificationsToolBarItem"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="End">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NotificationsClickedCommand, Source={x:Reference Root}}" />
+                </Frame.GestureRecognizers>
+                <Image Source="{Binding NotificationIconImage}"
+                       VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="CenterAndExpand"
+                       WidthRequest="20"
+                       HeightRequest="20" />
+            </Frame>
+            <Frame WidthRequest="30"
+                   HeightRequest="30"
+                   Margin="5"
+                   x:Name="SettingsToolBarItem"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="End">
+                <Image Source="{Binding SettingsIconImage, Source={x:Reference Root}}"
+                       VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="CenterAndExpand"
+                       WidthRequest="20"
+                       HeightRequest="20" />
+            </Frame>
+        </StackLayout>
+    </NavigationPage.TitleView>
+    <StackLayout>
+        <Frame
+            CornerRadius="0"
+            BackgroundColor="{StaticResource PageShadowColor}"
+            HeightRequest="1" />
+        <StackLayout HorizontalOptions="FillAndExpand"
+                     VerticalOptions="FillAndExpand"
+                     Padding="20">
+
+            <ActivityIndicator x:Name="indicatorLogin"
+                               VerticalOptions="Start"
+                               IsVisible="{Binding IndicatorVisible}"
+                               IsRunning="{Binding IndicatorRunning}"
+                               Color="{StaticResource PrimaryTextColor}"
+                               Margin="0,50,0,0" Scale="2" />
+
+            <Label x:Name="lblPinMessage"
+                   VerticalOptions="Center"
+                   IsVisible="{Binding PinMessageVisible}"
+                   Text="{Binding PinText}"
+                   FontSize="Large"
+                   TextColor="{StaticResource PrimaryTextColor}"
+                   HorizontalOptions="Center"
+                   Margin="0,50,0,0" />
+
+            <pin:PinView x:Name="pinView"
+                         IsVisible="{Binding PinPadVisible, Mode=TwoWay}"
+                         HorizontalOptions="Center"
+                         Margin="0,0,0,50"
+                         VerticalOptions="CenterAndExpand"
+                         PinLength="{ Binding PinLength}"
+                         Validator="{Binding Validator}"
+                         ErrorCommand="{Binding ErrorCommand}"
+                         SuccessCommand="{Binding SuccessCommand}"
+                         Color="{StaticResource PrimaryTextColor}"
+                         BorderColor="{StaticResource PrimaryTextColor}"
+                         RippleColor="{StaticResource PrimaryTextColor}" />
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

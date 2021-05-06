@@ -1,0 +1,281 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Application
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:iconize="clr-namespace:Plugin.Iconize;assembly=Plugin.Iconize"
+    xmlns:utils="clr-namespace:IDWallet.Utils.Converter;assembly=IDWallet"
+    mc:Ignorable="d"
+    x:Class="IDWallet.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <Color x:Key="PrimaryTextColor">#18188e</Color>
+            <Color x:Key="SecondaryTextColor">#545455</Color>
+            <Color x:Key="BackgroundColor">#f2f2f9</Color>
+            <Color x:Key="PrimaryButtonColor">#e6e5f3</Color>
+            <Color x:Key="AttributeValueColor">#242424</Color>
+            <Color x:Key="AttributeNameColor">#8C8C8C</Color>
+            <Color x:Key="FontBlackColor">#000000</Color>
+
+            <Color x:Key="TertiaryTextColor">#e8e8e8</Color>
+            <Color x:Key="BarBackgroundColor">#ffffff</Color>
+
+            <Color x:Key="CancelPrimaryColor">#666666</Color>
+            <Color x:Key="CancelSecondaryColor">#dedede</Color>
+            <Color x:Key="EntryFrameColor">#dedede</Color>
+            <Color x:Key="EntryStackColor">#dedede</Color>
+
+            <Color x:Key="SettingsTextColor">#000000</Color>
+            <Color x:Key="SwitchDeactivatedColor">#D3D3D3</Color>
+            <Color x:Key="HorizontalItemBackgroundColor">#FFFFFF</Color>
+
+            <Color x:Key="PinRippleColor">#e6e5f3</Color>
+            <Color x:Key="PinOpenSlotBorderColor">#AAA8D8</Color>
+            <Color x:Key="PinCurrentSlotBorderColor">#25A149</Color>
+            <Color x:Key="DeletePrimaryColor">#da1e28</Color>
+            <Color x:Key="DeleteSecondaryColor">#fbe8e8</Color>
+            <Color x:Key="SeparatorColor">#e8e8e8</Color>
+            <Color x:Key="BorderColor">#99bfbfbf</Color>
+            <Color x:Key="PageShadowColor">#DDDDDD</Color>
+            <Color x:Key="UnselectedTabColor">#000000</Color>
+            <Color x:Key="EntryPlaceholderColor">#D8D8D8</Color>
+            <Color x:Key="LinkColor">#0000FF</Color>
+            <Color x:Key="PopUpHeaderSeparatorColor">#00000000</Color>
+            <Color x:Key="DeactivatedButtonPrimaryColor">#F8F8F8</Color>
+            <Color x:Key="DeactivatedButtonSecondaryColor">#E0E0E0</Color>
+            <Color x:Key="ProofRequestGroupingColor">#C9C9C9</Color>
+
+            <CornerRadius x:Key="DefaultCornerRadius">5</CornerRadius>
+
+            <Style TargetType="NavigationPage">
+                <Setter Property="BarBackgroundColor" Value="{StaticResource BarBackgroundColor}" />
+                <Setter Property="BarTextColor" Value="{StaticResource PrimaryTextColor}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource BackgroundColor}" />
+            </Style>
+
+            <Style TargetType="ContentPage">
+                <Setter Property="BackgroundColor" Value="{StaticResource BackgroundColor}" />
+            </Style>
+
+            <Style TargetType="StackLayout">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+            </Style>
+
+            <Style TargetType="ScrollView">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+            </Style>
+
+            <Style TargetType="Grid">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+            </Style>
+
+            <Style TargetType="ListView">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+            </Style>
+
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+                <Setter Property="FontSize" Value="15" />
+                <Setter Property="LineBreakMode" Value="TailTruncation" />
+                <Setter Property="MaxLines" Value="1" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+
+            <Style TargetType="Button">
+                <Setter Property="Padding" Value="{x:OnPlatform Android=5, iOS=10}" />
+                <Setter Property="CornerRadius" Value="10" />
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+
+            <Style TargetType="Frame">
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="CornerRadius" Value="10" />
+                <Setter Property="IsClippedToBounds" Value="True" />
+                <Setter Property="HasShadow" Value="False" />
+                <Setter Property="BackgroundColor" Value="Transparent" />
+            </Style>
+
+            <Style TargetType="ff:CachedImage">
+                <Setter Property="CacheDuration" Value="1" />
+                <Setter Property="Aspect" Value="AspectFit" />
+                <Setter Property="Margin" Value="0" />
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="LoadingPlaceholder" Value="default_logo.png" />
+                <Setter Property="ErrorPlaceholder" Value="default_logo.png" />
+            </Style>
+
+            <Style x:Key="LabelHeader" TargetType="Label">
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="FontSize" Value="18" />
+            </Style>
+
+            <Style x:Key="LabelListViewBig" TargetType="Label">
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+            </Style>
+
+            <Style x:Key="LabelListViewSmall" TargetType="Label">
+                <Setter Property="Opacity" Value=".5" />
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+                <Setter Property="TextColor" Value="{StaticResource AttributeValueColor}" />
+            </Style>
+
+            <Style TargetType="Label" x:Key="BaseIDHeaderLabel">
+                <Setter Property="FontSize" Value="30"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="MaxLines" Value="3"/>
+                <Setter Property="LineBreakMode" Value="WordWrap"/>
+                <Setter Property="Margin" Value="0,10"/>
+            </Style>
+
+            <Style TargetType="Label" x:Key="BaseIDLinkLabel">
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}"/>
+                <Setter Property="MaxLines" Value="20"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="LineBreakMode" Value="WordWrap"/>
+                <Setter Property="Margin" Value="0"/>
+            </Style>
+            
+            <Style TargetType="Label" x:Key="BaseIDBodyLabel">
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="TextColor" Value="{StaticResource SecondaryTextColor}"/>
+                <Setter Property="MaxLines" Value="20"/>
+                <Setter Property="LineBreakMode" Value="WordWrap"/>
+                <Setter Property="Margin" Value="0"/>
+            </Style>
+
+            <Style TargetType="Label" x:Key="BaseID_Link_Label">
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}"/>
+                <Setter Property="MaxLines" Value="20"/>
+                <Setter Property="LineBreakMode" Value="WordWrap"/>
+                <Setter Property="Margin" Value="0"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+            </Style>
+
+            <Style x:Key="LabelMultiLine" TargetType="Label">
+                <Setter Property="MaxLines" Value="100" />
+                <Setter Property="LineBreakMode" Value="WordWrap" />
+            </Style>
+
+            <Style x:Key="BlackLoadingScreenActivityIndicator" TargetType="ActivityIndicator">
+                <Setter Property="Color" Value="{StaticResource TertiaryTextColor}" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+
+            <Style x:Key="HorizontalSeparator" TargetType="BoxView">
+                <Setter Property="HeightRequest" Value=".5" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="BackgroundColor" Value="{StaticResource SeparatorColor}" />
+            </Style>
+
+            <Style x:Key="BlackLoadingScreen" TargetType="BoxView">
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="VerticalOptions" Value="FillAndExpand" />
+                <Setter Property="Color" Value="Black" />
+                <Setter Property="Opacity" Value="0.7" />
+            </Style>
+
+            <Style x:Key="CancelButton" TargetType="Button">
+                <Setter Property="Text" Value="Cancel" />
+                <Setter Property="TextColor" Value="{StaticResource SecondaryTextColor}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource CancelSecondaryColor}" />
+            </Style>
+
+            <Style x:Key="AcceptButton" TargetType="Button">
+                <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource PrimaryButtonColor}" />
+            </Style>
+
+            <Style x:Key="DeactivatedButton" TargetType="Button">
+                <Setter Property="TextColor" Value="{StaticResource DeactivatedButtonPrimaryColor}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource DeactivatedButtonSecondaryColor}" />
+            </Style>
+
+            <Style x:Key="DeleteButton" TargetType="Button">
+                <Setter Property="Text" Value="Delete" />
+                <Setter Property="TextColor" Value="{StaticResource DeletePrimaryColor}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource DeleteSecondaryColor}" />
+            </Style>
+
+            <Style x:Key="PrimaryButtonStyle" TargetType="Button">
+                <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource TertiaryTextColor}" />
+            </Style>
+
+            <Style x:Key="PopUpFrame" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="{StaticResource BarBackgroundColor}" />
+                <Setter Property="Padding" Value="0" />
+            </Style>
+
+            <Style x:Key="ImageFrame" TargetType="Frame">
+                <Setter Property="HeightRequest" Value="41" />
+                <Setter Property="WidthRequest" Value="41" />
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="BorderColor" Value="Transparent" />
+            </Style>
+
+            <Style x:Key="FramedImage" TargetType="Image">
+                <Setter Property="Margin" Value="0" />
+                <Setter Property="Aspect" Value="AspectFit" />
+            </Style>
+
+            <Style x:Key="PopUpStackLayout" TargetType="StackLayout">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="Margin" Value="10" />
+            </Style>
+
+            <Style x:Key="PopUpHeaderLabel" TargetType="Label">
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}"/>
+                <Setter Property="MaxLines" Value="100"/>
+                <Setter Property="LineBreakMode" Value="WordWrap"/>
+            </Style>
+
+            <Style x:Key="PopUpBodyLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource AttributeValueColor}"/>
+                <Setter Property="LineBreakMode" Value="WordWrap"/>
+                <Setter Property="MaxLines" Value="100"/>
+            </Style>
+
+            <Style x:Key="PopUpButtonArea" TargetType="StackLayout">
+                <Setter Property="Spacing" Value="20" />
+                <Setter Property="Margin" Value="0,10,0,0" />
+                <Setter Property="Orientation" Value="Horizontal" />
+                <Setter Property="HorizontalOptions" Value="End" />
+            </Style>
+
+            <Thickness x:Key="DefaultEdgeMargin">21, 0</Thickness>
+            <Thickness x:Key="DefaultEdgeMarginTop">21, 11, 21, 0</Thickness>
+            <Thickness x:Key="DefaultEdgeMarginTopDown">21, 11</Thickness>
+            <OnPlatform x:Key="ListViewSeparatorFixOuter"
+                        x:TypeArguments="Thickness"
+                        iOS="-20, 0, 0, 0" />
+            <OnPlatform x:Key="ListViewSeparatorFixInner"
+                        x:TypeArguments="Thickness"
+                        iOS="20, 0, 0, 0" />
+
+            <utils:LocalDateTimeConverter x:Key="DateTimeConverter" />
+            <utils:EmbeddedImageConverter x:Key="EmbeddedImageConverter" />
+            <utils:ProofDeletionStatusConverter x:Key="ProofDeletionStatusConverter" />
+            <utils:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+            <utils:BoolToChevronConverter x:Key="BoolToChevronConverter" />
+            <utils:BaseIdButtonConverter x:Key="BaseIdButtonConverter" />
+            <utils:ConnectionStateConnectedConverter x:Key="ConnectionStateConnectedConverter" />
+            <utils:ConnectionStateNotConnectedConverter x:Key="ConnectionStateNotConnectedConverter" />
+            <utils:LabelTextConverter x:Key="LabelTextConverter" />
+            <utils:ValueVisibilityConverter x:Key="ValueVisibilityConverter" />
+            <utils:ProgressBarColorConverter x:Key="ProgressBarColorConverter" /> 
+            <utils:HistoryElementConverter x:Key="HistoryElementConverter" />
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

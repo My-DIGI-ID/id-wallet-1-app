@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<base:CustomPage
+    xmlns:base="clr-namespace:IDWallet.Views.Customs.Pages"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:connections="clr-namespace:IDWallet.Views.Settings.Connections.Content"
+    xmlns:lang="clr-namespace:IDWallet.Extensions"
+    mc:Ignorable="d"
+    x:Class="IDWallet.Views.Settings.Connections.ConnectionsPage"
+    x:Name="Root">
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="{lang:L10n Navigation_Back}"
+                   HorizontalOptions="StartAndExpand"
+                   VerticalOptions="CenterAndExpand"
+                   FontAttributes="Bold"
+                   FontSize="20" />
+            <Frame WidthRequest="30"
+                   HeightRequest="30"
+                   Margin="5"
+                   x:Name="NotificationsToolBarItem"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="End">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NotificationsClickedCommand, Source={x:Reference Root}}" />
+                </Frame.GestureRecognizers>
+                <Image Source="{Binding NotificationIconImage}"
+                       VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="CenterAndExpand"
+                       WidthRequest="20"
+                       HeightRequest="20" />
+            </Frame>
+            <Frame WidthRequest="30"
+                   HeightRequest="30"
+                   Margin="5"
+                   x:Name="SettingsToolBarItem"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="End">
+                <Image Source="{Binding SettingsIconImage, Source={x:Reference Root}}"
+                       VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="CenterAndExpand"
+                       WidthRequest="20"
+                       HeightRequest="20" />
+            </Frame>
+        </StackLayout>
+    </NavigationPage.TitleView>
+    <Grid BackgroundColor="{StaticResource BackgroundColor}"
+          Padding="{StaticResource ListViewSeparatorFixOuter}"
+          RowSpacing="1">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Label Text="{lang:L10n ConnectionsPage_Title}"
+               Grid.Row="1"
+               Margin="20,20,20,20"
+               FontAttributes="Bold"
+               FontSize="18"
+               TextColor="{StaticResource AttributeValueColor}" />
+
+        <Frame
+            CornerRadius="0"
+            BackgroundColor="{StaticResource PageShadowColor}"
+            HeightRequest="1"
+            Grid.Row="0" />
+        <ListView
+            x:Name="ItemsListView"
+            ItemsSource="{Binding Connections}"
+            HasUnevenRows="True"
+            ItemTapped="OnItemTapped"
+            SelectionMode="None"
+            VerticalOptions="FillAndExpand"
+            Grid.Row="2"
+            IsEnabled="{Binding ElementsEnabled, Source={x:Reference Root}}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Spacing="0"
+                                     Padding="{StaticResource ListViewSeparatorFixInner}">
+                            <connections:ConnectionsListElement />
+                            <BoxView HeightRequest="1" Color="{StaticResource SeparatorColor}" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <StackLayout IsVisible="{Binding EmptyLayoutVisible}"
+                     HorizontalOptions="FillAndExpand"
+                     VerticalOptions="FillAndExpand"
+                     Grid.Row="1"
+                     Grid.RowSpan="2"
+                     Spacing="0"
+                     BackgroundColor="{StaticResource BackgroundColor}" />
+    </Grid>
+</base:CustomPage>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="20px" height="20px" viewbox="0 0 20 20" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="filter_1">
+      <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0.039215688 0 0 0 0 0 0 0 0 0 0.5568628 0 0 0 1 0" />
+    </filter>
+  </defs>
+  <g id="push">
+    <g id="Actions--Operations--repeat--20" filter="url(#filter_1)">
+      <path d="M15 3.125L2.39375 3.125L4.63125 0.88125L3.75 0L0 3.75L3.75 7.5L4.63125 6.61875L2.39375 4.375L15 4.375L15 8.75L16.25 8.75L16.25 4.375C16.25 3.68464 15.6904 3.125 15 3.125ZM12.8687 12.1313L15.1062 14.375L2.5 14.375L2.5 10L1.25 10L1.25 14.375C1.25 15.0654 1.80964 15.625 2.5 15.625L15.1062 15.625L12.8687 17.8687L13.75 18.75L17.5 15L13.75 11.25L12.8687 12.1313Z" transform="translate(1.25 0.625)" id="Fill" fill="#0A008E" fill-rule="evenodd" stroke="none" />
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:lang="clr-namespace:IDWallet.Extensions"
+             mc:Ignorable="d"
+             x:Class="IDWallet.Views.QRScanner.Content.ScanningPage"
+             xmlns:iconize="clr-namespace:Plugin.Iconize;assembly=Plugin.Iconize">
+    <ContentPage.Content>
+        <Grid x:Name="gridLayout"
+              HorizontalOptions="FillAndExpand"
+              VerticalOptions="FillAndExpand">
+            <Grid x:Name="scanningGrid"
+                  HorizontalOptions="FillAndExpand"
+                  VerticalOptions="FillAndExpand" />
+            <Grid RowSpacing="0"
+                  HorizontalOptions="FillAndExpand"
+                  VerticalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="100" />
+                </Grid.RowDefinitions>
+                <StackLayout Grid.Row="1"
+                             Padding="0,10,0,10"
+                             VerticalOptions="CenterAndExpand"
+                             HorizontalOptions="CenterAndExpand">
+                    <iconize:IconImage Icon="mdi-qrcode-scan"
+                                       IconColor="White"
+                                       IconSize="32"
+                                       HorizontalOptions="CenterAndExpand"
+                                       VerticalOptions="CenterAndExpand" />
+                    <Label Text="{lang:L10n ScanPage_Camera_Icon_Label}"
+                           Style="{StaticResource LabelMultiLine}"
+                           TextColor="White"
+                           FontSize="18"
+                           HorizontalOptions="CenterAndExpand"
+                           HorizontalTextAlignment="Center"
+                           VerticalOptions="StartAndExpand" />
+                </StackLayout>
+                <Frame x:Name="frameIndicator"
+                       CornerRadius="10"
+                       BackgroundColor="{StaticResource PrimaryButtonColor}"
+                       HorizontalOptions="CenterAndExpand"
+                       VerticalOptions="CenterAndExpand"
+                       Opacity=".9"
+                       IsVisible="False"
+                       Grid.Row="0">
+                    <ActivityIndicator x:Name="scanningIndicator"
+                                       HorizontalOptions="CenterAndExpand"
+                                       VerticalOptions="CenterAndExpand"
+                                       IsVisible="False"
+                                       IsRunning="True"
+                                       Color="{StaticResource PrimaryTextColor}"
+                                       Opacity="1"
+                                       Margin="60"
+                                       Scale="2"
+                                       Grid.Row="0" />
+                </Frame>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

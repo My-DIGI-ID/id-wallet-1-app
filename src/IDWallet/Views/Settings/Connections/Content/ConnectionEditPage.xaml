@@ -1,0 +1,334 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:svg="clr-namespace:Xamarin.Forms.Svg;assembly=SvgImageSource"
+             xmlns:lang="clr-namespace:IDWallet.Extensions"
+             xmlns:iconize="clr-namespace:Plugin.Iconize;assembly=Plugin.Iconize"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Name="Root"
+             NavigationPage.BackButtonTitle=""
+             mc:Ignorable="d"
+             x:Class="IDWallet.Views.Settings.Connections.Content.ConnectionEditPage">
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="{lang:L10n Navigation_Back}"
+                   HorizontalOptions="StartAndExpand"
+                   VerticalOptions="CenterAndExpand"
+                   FontAttributes="Bold"
+                   FontSize="20" />
+            <Frame WidthRequest="30"
+                   HeightRequest="30"
+                   Margin="5"
+                   x:Name="NotificationsToolBarItem"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="End">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NotificationsClickedCommand, Source={x:Reference Root}}" />
+                </Frame.GestureRecognizers>
+                <Image Source="{Binding NotificationIconImage}"
+                       VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="CenterAndExpand"
+                       WidthRequest="20"
+                       HeightRequest="20" />
+            </Frame>
+            <Frame WidthRequest="30"
+                   HeightRequest="30"
+                   Margin="5"
+                   x:Name="SettingsToolBarItem"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="End">
+                <Image Source="{Binding SettingsIconImage, Source={x:Reference Root}}"
+                       VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="CenterAndExpand"
+                       WidthRequest="20"
+                       HeightRequest="20" />
+            </Frame>
+        </StackLayout>
+    </NavigationPage.TitleView>
+    <StackLayout Padding="0"
+                 Spacing="0">
+        <Frame CornerRadius="0"
+               BackgroundColor="{StaticResource PageShadowColor}"
+               HeightRequest="1" />
+        <ScrollView Padding="20"
+                    VerticalOptions="FillAndExpand">
+            <StackLayout Spacing="10">
+                <Grid RowSpacing="0"
+                      ColumnSpacing="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="35" />
+                        <ColumnDefinition Width="35" />
+                    </Grid.ColumnDefinitions>
+
+                    <Frame Grid.Row="0"
+                           Grid.Column="0"
+                           HorizontalOptions="CenterAndExpand"
+                           VerticalOptions="CenterAndExpand"
+                           Margin="5"
+                           Style="{StaticResource ImageFrame}"
+                           BorderColor="{StaticResource BorderColor}">
+                        <ff:CachedImage Source="{Binding ConnectionImage}" />
+                    </Frame>
+
+                    <Label x:Name="ConnectionAliasLabel"
+                           Text="{Binding ConnectionName}"
+                           Style="{StaticResource LabelMultiLine}"
+                           HorizontalOptions="StartAndExpand"
+                           VerticalOptions="Center"
+                           Margin="5"
+                           FontAttributes="Bold"
+                           FontSize="22"
+                           Grid.Column="1"
+                           Grid.ColumnSpan="2"
+                           Grid.Row="0"
+                           Grid.RowSpan="2"
+                           IsVisible="True" />
+
+                    <Entry x:Name="ConnectionAliasEntry"
+                           IsVisible="False"
+                           Grid.Column="1"
+                           Grid.Row="0"
+                           HorizontalOptions="FillAndExpand"
+                           VerticalOptions="Center"
+                           Margin="5"
+                           BackgroundColor="{StaticResource EntryFrameColor}"
+                           TextColor="{StaticResource PrimaryTextColor}"
+                           Text="{Binding ConnectionName}" />
+
+                    <iconize:IconButton x:Name="EditButton"
+                                        Text="mdi-pencil"
+                                        Margin="2,9"
+                                        Grid.Column="3"
+                                        Grid.Row="0"
+                                        BackgroundColor="Transparent"
+                                        BorderColor="{StaticResource TertiaryTextColor}"
+                                        BorderWidth="1"
+                                        CornerRadius="10"
+                                        HorizontalOptions="CenterAndExpand"
+                                        VerticalOptions="CenterAndExpand"
+                                        TextColor="{StaticResource PrimaryTextColor}"
+                                        Padding="0"
+                                        FontSize="20"
+                                        Clicked="Edit_Clicked" />
+                    <iconize:IconButton x:Name="CheckButton"
+                                        Text="mdi-check"
+                                        Margin="0,9,3,9"
+                                        Grid.Column="2"
+                                        Grid.Row="0"
+                                        IsVisible="False"
+                                        CornerRadius="10"
+                                        BackgroundColor="Transparent"
+                                        BorderColor="{StaticResource TertiaryTextColor}"
+                                        BorderWidth="1"
+                                        HorizontalOptions="CenterAndExpand"
+                                        VerticalOptions="CenterAndExpand"
+                                        TextColor="{StaticResource PrimaryTextColor}"
+                                        Padding="0"
+                                        FontSize="20"
+                                        Clicked="Check_Clicked" />
+                    <iconize:IconButton x:Name="CrossButton"
+                                        Text="mdi-close"
+                                        Margin="3,9,0,9"
+                                        Grid.Column="3"
+                                        Grid.Row="0"
+                                        IsVisible="False"
+                                        CornerRadius="10"
+                                        BackgroundColor="Transparent"
+                                        BorderColor="{StaticResource TertiaryTextColor}"
+                                        BorderWidth="1"
+                                        HorizontalOptions="CenterAndExpand"
+                                        VerticalOptions="CenterAndExpand"
+                                        TextColor="{StaticResource PrimaryTextColor}"
+                                        Padding="0"
+                                        FontSize="20"
+                                        Clicked="Cross_Clicked" />
+                </Grid>
+                <Label Text="{lang:L10n ConnectionEditPage_Preferences}"
+                       Margin="0,15,0,0"
+                       TextColor="{StaticResource AttributeValueColor}"
+                       FontSize="18"
+                       FontAttributes="Bold" />
+                <StackLayout Padding="11,0,0,0"
+                             Spacing="0">
+
+                    <StackLayout Orientation="Horizontal"
+                                 Margin="0,5,0,0">
+                        <Label Text="{lang:L10n ConnectionEditPage_Auto_Accept_Credential}"
+                               Style="{StaticResource LabelMultiLine}"
+                               FontAttributes="Bold" />
+                        <Switch x:Name="CredentialSwitch"
+                                IsToggled="{Binding AutoCredential}"
+                                OnColor="{StaticResource PrimaryTextColor}"
+                                ThumbColor="{StaticResource SecondaryTextColor}"
+                                HorizontalOptions="EndAndExpand"
+                                Toggled="Credential_Toggled" />
+                    </StackLayout>
+                    <StackLayout x:Name="CredentialStack"
+                                 IsVisible="False"
+                                 Orientation="Horizontal"
+                                 Margin="10,5">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding CheckBoxTappedCommand, Source={x:Reference Root}}"
+                                                  CommandParameter="{x:Reference CredentialCheckBox}" />
+                        </StackLayout.GestureRecognizers>
+                        <Label Text="{lang:L10n ConnectionEditPage_Auto_Notification_Credential}"
+                               Style="{StaticResource LabelMultiLine}" />
+                        <CheckBox x:Name="CredentialCheckBox"
+                                  IsChecked="{Binding NoteCredential}"
+                                  HorizontalOptions="EndAndExpand"
+                                  Color="{StaticResource PrimaryTextColor}" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal"
+                                 Margin="0,15,0,0">
+                        <Label Text="{lang:L10n ConnectionEditPage_Auto_Accept_Proof}"
+                               Style="{StaticResource LabelMultiLine}"
+                               FontAttributes="Bold" />
+                        <Switch x:Name="ProofSwitch"
+                                IsToggled="{Binding AutoProof}"
+                                OnColor="{StaticResource PrimaryTextColor}"
+                                ThumbColor="{StaticResource SecondaryTextColor}"
+                                HorizontalOptions="EndAndExpand"
+                                Toggled="Proof_Toggled" />
+                    </StackLayout>
+                    <StackLayout x:Name="ProofStack"
+                                 IsVisible="False"
+                                 Orientation="Horizontal"
+                                 Margin="10,5">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding CheckBoxTappedCommand, Source={x:Reference Root}}"
+                                                  CommandParameter="{x:Reference ProofCheckBox}" />
+                        </StackLayout.GestureRecognizers>
+                        <Label Text="{lang:L10n ConnectionEditPage_Auto_Notification_Proof}"
+                               Style="{StaticResource LabelMultiLine}" />
+                        <CheckBox x:Name="ProofCheckBox"
+                                  IsChecked="{Binding NoteProof}"
+                                  HorizontalOptions="EndAndExpand"
+                                  Color="{StaticResource PrimaryTextColor}" />
+                    </StackLayout>
+                    <StackLayout x:Name="ProofAdvancedOptionsLabel"
+                                 IsVisible="False"
+                                 Margin="10,0"
+                                 Orientation="Horizontal">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding ProofAdvancedOptionsTapped, Source={x:Reference Root}}" />
+                        </StackLayout.GestureRecognizers>
+                        <Label Text="{lang:L10n ConnectionEditPage_Advanced_Options_Label}"
+                               TextColor="{StaticResource AttributeValueColor}"
+                               FontSize="12" />
+                        <iconize:IconImage x:Name="ProofAdvancedOptionsIcon"
+                                           Icon="mdi-chevron-right"
+                                           IconColor="{StaticResource CancelPrimaryColor}"
+                                           IconSize="20" />
+                    </StackLayout>
+                    <StackLayout x:Name="ProofAdvancedOptionsStack"
+                                 IsVisible="False"
+                                 Margin="10,5,0,5">
+                        <StackLayout Orientation="Horizontal"
+                                     Margin="0,5">
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding CheckBoxTappedCommand, Source={x:Reference Root}}"
+                                    CommandParameter="{x:Reference OnlyKnownCheckBox}" />
+                            </StackLayout.GestureRecognizers>
+                            <Label Text="{lang:L10n ConnectionEditPage_Only_Known_Proofs}"
+                                   Style="{StaticResource LabelMultiLine}" />
+                            <CheckBox x:Name="OnlyKnownCheckBox"
+                                      IsChecked="{Binding OnlyKnownProofs}"
+                                      HorizontalOptions="EndAndExpand"
+                                      Color="{StaticResource PrimaryTextColor}" />
+                        </StackLayout>
+                        <StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding RadioButtonClicked, Source={x:Reference Root}}"
+                                        CommandParameter="Take Newest" />
+                                </StackLayout.GestureRecognizers>
+                                <Grid HorizontalOptions="FillAndExpand">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="30" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Text="{lang:L10n ConnectionEditPage_Take_Newest_Credential}"
+                                           VerticalOptions="Center"
+                                           Style="{StaticResource LabelMultiLine}" />
+                                    <Frame BackgroundColor="Transparent"
+                                           Grid.Column="1"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center"
+                                           HeightRequest="25"
+                                           WidthRequest="25">
+                                        <iconize:IconImage Icon="{Binding TakeNewestIcon}"
+                                                           IconColor="{StaticResource PrimaryTextColor}"
+                                                           IconSize="25"
+                                                           Aspect="AspectFit"
+                                                           x:Name="TakeNewestIcon" />
+                                    </Frame>
+                                </Grid>
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal"
+                                         HorizontalOptions="FillAndExpand">
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding RadioButtonClicked, Source={x:Reference Root}}"
+                                        CommandParameter="Take Last" />
+                                </StackLayout.GestureRecognizers>
+                                <Grid HorizontalOptions="FillAndExpand">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="30" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Text="{lang:L10n ConnectionEditPage_Take_Last_Credential}"
+                                           Style="{StaticResource LabelMultiLine}"
+                                           VerticalOptions="Center" />
+                                    <Frame BackgroundColor="Transparent"
+                                           Grid.Column="1"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center"
+                                           HeightRequest="25"
+                                           WidthRequest="30">
+                                        <iconize:IconImage Icon="{Binding TakeLastUsedIcon}"
+                                                           IconColor="{StaticResource PrimaryTextColor}"
+                                                           IconSize="25"
+                                                           Aspect="AspectFit"
+                                                           x:Name="TakeLastUsedIcon" />
+                                    </Frame>
+                                </Grid>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout VerticalOptions="EndAndExpand"
+                             Margin="20"
+                             HorizontalOptions="FillAndExpand">
+                    <Image Aspect="AspectFit"
+                           HorizontalOptions="CenterAndExpand"
+                           WidthRequest="48"
+                           HeightRequest="48">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding DeleteTappedCommand, Source={x:Reference Root}}" />
+                        </Image.GestureRecognizers>
+                        <Image.Source>
+                            <svg:SvgImageSource Source="imagesources.Trash_Icon.svg" Width="48" Height="48" />
+                        </Image.Source>
+                    </Image>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </StackLayout>
+</ContentPage>

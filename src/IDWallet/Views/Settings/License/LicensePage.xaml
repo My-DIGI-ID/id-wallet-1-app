@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:iconize="clr-namespace:Plugin.Iconize;assembly=Plugin.Iconize"
+             xmlns:lang="clr-namespace:IDWallet.Extensions"
+             mc:Ignorable="d"
+             x:Class="IDWallet.Views.Settings.License.LicensePage"
+             x:Name="Root">
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="{lang:L10n Navigation_Back}"
+                   HorizontalOptions="StartAndExpand"
+                   VerticalOptions="CenterAndExpand"
+                   FontAttributes="Bold"
+                   FontSize="20" />
+            <Frame WidthRequest="30"
+                   HeightRequest="30"
+                   Margin="5"
+                   x:Name="NotificationsToolBarItem"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="End">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NotificationsClickedCommand, Source={x:Reference Root}}" />
+                </Frame.GestureRecognizers>
+                <Image Source="{Binding NotificationIconImage}"
+                       VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="CenterAndExpand"
+                       WidthRequest="20"
+                       HeightRequest="20" />
+            </Frame>
+            <Frame WidthRequest="30"
+                   HeightRequest="30"
+                   Margin="5"
+                   x:Name="SettingsToolBarItem"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="End">
+                <Image Source="{Binding SettingsIconImage, Source={x:Reference Root}}"
+                       VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="CenterAndExpand"
+                       WidthRequest="20"
+                       HeightRequest="20" />
+            </Frame>
+        </StackLayout>
+    </NavigationPage.TitleView>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style
+                x:Key="IconRight"
+                TargetType="iconize:IconImage">
+                <Setter Property="HorizontalOptions" Value="End" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="IconSize" Value="30" />
+                <Setter Property="IconColor" Value="{StaticResource AttributeValueColor}" />
+                <Setter Property="Icon" Value="md-keyboard-arrow-right" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout Spacing="0"
+                 Padding="0"
+                 Margin="0">
+        <Frame CornerRadius="0"
+               BackgroundColor="{StaticResource PageShadowColor}"
+               HeightRequest="1"
+               Grid.Row="0" />
+        <ScrollView>
+            <StackLayout>
+                <Label Text="{lang:L10n LicensePage_Title}"
+                       Margin="20"
+                       FontAttributes="Bold"
+                       FontSize="18"
+                       TextColor="{StaticResource AttributeValueColor}" />
+                <StackLayout BindableLayout.ItemsSource="{Binding Licenses}"
+                             Spacing="0"
+                             Padding="0"
+                             Margin="0"
+                             x:Name="LicenseStack">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ColumnSpacing="0"
+                                  RowSpacing="0"
+                                  Margin="0"
+                                  Padding="0"
+                                  BackgroundColor="{StaticResource BarBackgroundColor}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="1" />
+                                </Grid.RowDefinitions>
+
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding LicenseTappedCommand, Source={x:Reference Root}}"
+                                        CommandParameter="{Binding Text}" />
+                                </Grid.GestureRecognizers>
+                                <Label Text="{Binding Name}"
+                                       Grid.Column="0"
+                                       Style="{StaticResource LabelMultiLine}"
+                                       HorizontalOptions="Start"
+                                       VerticalOptions="Center"
+                                       Margin="20,10,10,5" />
+                                <Label Text="{Binding Version}"
+                                       Grid.Column="0"
+                                       Grid.ColumnSpan="2"
+                                       Grid.Row="1"
+                                       FontSize="12"
+                                       VerticalOptions="Center"
+                                       Margin="20,0,10,10" />
+                                <iconize:IconImage Style="{StaticResource IconRight}"
+                                                   Grid.Column="1"
+                                                   Grid.RowSpan="2"
+                                                   Margin="0,0,20,0" />
+
+                                <BoxView HorizontalOptions="FillAndExpand"
+                                         Grid.Column="0"
+                                         Grid.ColumnSpan="2"
+                                         Grid.Row="2"
+                                         BackgroundColor="{StaticResource SeparatorColor}" />
+                            </Grid>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </StackLayout>
+</ContentPage>

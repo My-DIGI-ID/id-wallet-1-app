@@ -1,0 +1,161 @@
+{
+  "images": [
+    {
+      "scale": "3x",
+      "size": "60x60",
+      "idiom": "iphone",
+      "filename": "180.png",
+      "expected-size": "180",
+      "folder": "Assets.xcassets/AppIcons.appiconset/"
+    },
+    {
+      "scale": "2x",
+      "size": "40x40",
+      "idiom": "iphone",
+      "filename": "80.png",
+      "expected-size": "80",
+      "folder": "Assets.xcassets/AppIcons.appiconset/"
+    },
+    {
+      "scale": "3x",
+      "size": "40x40",
+      "idiom": "iphone",
+      "filename": "120.png",
+      "expected-size": "120",
+      "folder": "Assets.xcassets/AppIcons.appiconset/"
+    },
+    {
+      "scale": "2x",
+      "size": "60x60",
+      "idiom": "iphone",
+      "filename": "120.png",
+      "expected-size": "120",
+      "folder": "Assets.xcassets/AppIcons.appiconset/"
+    },
+    {
+      "scale": "2x",
+      "size": "29x29",
+      "idiom": "iphone",
+      "filename": "58.png",
+      "expected-size": "58",
+      "folder": "Assets.xcassets/AppIcons.appiconset/"
+    },
+    {
+      "scale": "3x",
+      "size": "29x29",
+      "idiom": "iphone",
+      "filename": "87.png",
+      "expected-size": "87",
+      "folder": "Assets.xcassets/AppIcons.appiconset/"
+    },
+    {
+      "scale": "2x",
+      "size": "20x20",
+      "idiom": "iphone",
+      "filename": "40.png",
+      "expected-size": "40",
+      "folder": "Assets.xcassets/AppIcons.appiconset/"
+    },
+    {
+      "scale": "3x",
+      "size": "20x20",
+      "idiom": "iphone",
+      "filename": "60.png",
+      "expected-size": "60",
+      "folder": "Assets.xcassets/AppIcons.appiconset/"
+    },
+    {
+      "scale": "1x",
+      "size": "1024x1024",
+      "idiom": "ios-marketing",
+      "filename": "1024.png",
+      "expected-size": "1024",
+      "folder": "Assets.xcassets/AppIcons.appiconset/"
+    },
+    {
+      "scale": "2x",
+      "size": "40x40",
+      "idiom": "ipad",
+      "filename": "80.png",
+      "expected-size": "80",
+      "folder": "Assets.xcassets/AppIcons.appiconset/"
+    },
+    {
+      "scale": "2x",
+      "size": "76x76",
+      "idiom": "ipad",
+      "filename": "152.png",
+      "expected-size": "152",
+      "folder": "Assets.xcassets/AppIcons.appiconset/"
+    },
+    {
+      "scale": "2x",
+      "size": "29x29",
+      "idiom": "ipad",
+      "filename": "58.png",
+      "expected-size": "58",
+      "folder": "Assets.xcassets/AppIcons.appiconset/"
+    },
+    {
+      "scale": "1x",
+      "size": "76x76",
+      "idiom": "ipad",
+      "filename": "76.png",
+      "expected-size": "76",
+      "folder": "Assets.xcassets/AppIcons.appiconset/"
+    },
+    {
+      "scale": "1x",
+      "size": "29x29",
+      "idiom": "ipad",
+      "filename": "29.png",
+      "expected-size": "29",
+      "folder": "Assets.xcassets/AppIcons.appiconset/"
+    },
+    {
+      "scale": "1x",
+      "size": "40x40",
+      "idiom": "ipad",
+      "filename": "40.png",
+      "expected-size": "40",
+      "folder": "Assets.xcassets/AppIcons.appiconset/"
+    },
+    {
+      "scale": "2x",
+      "size": "83.5x83.5",
+      "idiom": "ipad",
+      "filename": "167.png",
+      "expected-size": "167",
+      "folder": "Assets.xcassets/AppIcons.appiconset/"
+    },
+    {
+      "scale": "1x",
+      "size": "20x20",
+      "idiom": "ipad",
+      "filename": "20.png",
+      "expected-size": "20",
+      "folder": "Assets.xcassets/AppIcons.appiconset/"
+    },
+    {
+      "scale": "2x",
+      "size": "20x20",
+      "idiom": "ipad",
+      "filename": "40.png",
+      "expected-size": "40",
+      "folder": "Assets.xcassets/AppIcons.appiconset/"
+    },
+    {
+      "scale": "1x",
+      "size": "1024x1024",
+      "idiom": "watch-marketing",
+      "filename": "1024.png",
+      "expected-size": "1024",
+      "folder": "Assets.xcassets/AppIcons.appiconset/"
+    }
+  ],
+  "properties": {},
+  "info": {
+    "version": 1,
+    "author": "xamarin"
+  }
+}

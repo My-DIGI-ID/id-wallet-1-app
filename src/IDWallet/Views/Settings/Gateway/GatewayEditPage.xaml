@@ -1,0 +1,235 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<base:CustomPage
+    xmlns:base="clr-namespace:IDWallet.Views.Customs.Pages"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:iconize="clr-namespace:Plugin.Iconize;assembly=Plugin.Iconize"
+    xmlns:lang="clr-namespace:IDWallet.Extensions"
+    mc:Ignorable="d"
+    x:Class="IDWallet.Views.Settings.Gateway.GatewayEditPage"
+    x:Name="Root">
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="{lang:L10n Navigation_Back}"
+                   HorizontalOptions="StartAndExpand"
+                   VerticalOptions="CenterAndExpand"
+                   FontAttributes="Bold"
+                   FontSize="20" />
+            <Frame WidthRequest="30"
+                   HeightRequest="30"
+                   Margin="5"
+                   x:Name="NotificationsToolBarItem"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="End">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NotificationsClickedCommand, Source={x:Reference Root}}" />
+                </Frame.GestureRecognizers>
+                <Image Source="{Binding NotificationIconImage}"
+                       VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="CenterAndExpand"
+                       WidthRequest="20"
+                       HeightRequest="20" />
+            </Frame>
+            <Frame WidthRequest="30"
+                   HeightRequest="30"
+                   Margin="5"
+                   x:Name="SettingsToolBarItem"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="End">
+                <Image Source="{Binding SettingsIconImage, Source={x:Reference Root}}"
+                       VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="CenterAndExpand"
+                       WidthRequest="20"
+                       HeightRequest="20" />
+            </Frame>
+        </StackLayout>
+    </NavigationPage.TitleView>
+    <StackLayout Spacing="0"
+                 Padding="0"
+                 Margin="0">
+        <Frame
+            CornerRadius="0"
+            BackgroundColor="{StaticResource PageShadowColor}"
+            HeightRequest="1"
+            Grid.Row="0" />
+        <ScrollView>
+            <StackLayout>
+                <Grid Margin="20"
+                      ColumnSpacing="20"
+                      RowSpacing="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="50" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Text="{lang:L10n GatewayEditPage_Name_Label}"
+                           Grid.Column="0"
+                           Grid.Row="0"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Center"
+                           VerticalTextAlignment="Center"
+                           MinimumHeightRequest="30"
+                           HeightRequest="30"
+                           Style="{StaticResource LabelMultiLine}" />
+
+                    <iconize:IconButton x:Name="NameBackButton"
+                                        HeightRequest="30"
+                                        WidthRequest="30"
+                                        Grid.Column="1"
+                                        Grid.Row="0"
+                                        Margin="5,0"
+                                        CornerRadius="10"
+                                        FontSize="25"
+                                        Padding="0"
+                                        IsVisible="False"
+                                        Text="mdi-undo"
+                                        TextColor="{StaticResource PrimaryTextColor}"
+                                        BackgroundColor="{StaticResource TertiaryTextColor}"
+                                        Command="{Binding NameBackCommand, Source={x:Reference Root}}"
+                                        IsEnabled="{Binding ElementsEnabled, Source={x:Reference Root}}" />
+
+                    <Frame BackgroundColor="{StaticResource EntryFrameColor}"
+                           CornerRadius="10"
+                           Padding="10,0"
+                           Margin="10,0"
+                           Grid.Column="0"
+                           Grid.Row="1"
+                           Grid.ColumnSpan="2">
+                        <Entry x:Name="GatewayNameEntry"
+                               TextChanged="GatewayNameEntry_TextChanged"
+                               HorizontalOptions="FillAndExpand"
+                               VerticalOptions="Center"
+                               Margin="5"
+                               BackgroundColor="{StaticResource EntryFrameColor}"
+                               Text="{Binding NewName}"
+                               TextColor="{StaticResource PrimaryTextColor}"
+                               IsEnabled="{Binding ElementsEnabled, Source={x:Reference Root}}" />
+                    </Frame>
+
+                    <Label Text="{lang:L10n GatewayEditPage_Address_Label}"
+                           Grid.Column="0"
+                           Grid.Row="2"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Center"
+                           VerticalTextAlignment="Center"
+                           MinimumHeightRequest="30"
+                           HeightRequest="30"
+                           Style="{StaticResource LabelMultiLine}" />
+
+                    <iconize:IconButton x:Name="AddressBackButton"
+                                        HeightRequest="30"
+                                        WidthRequest="30"
+                                        Grid.Column="1"
+                                        Grid.Row="2"
+                                        Margin="5,0"
+                                        CornerRadius="10"
+                                        FontSize="25"
+                                        Padding="0"
+                                        IsVisible="False"
+                                        Text="mdi-undo"
+                                        TextColor="{StaticResource PrimaryTextColor}"
+                                        BackgroundColor="{StaticResource TertiaryTextColor}"
+                                        Command="{Binding AddressBackCommand, Source={x:Reference Root}}"
+                                        IsEnabled="{Binding ElementsEnabled, Source={x:Reference Root}}" />
+
+                    <Frame BackgroundColor="{StaticResource EntryFrameColor}"
+                           CornerRadius="10"
+                           Padding="10,0"
+                           Margin="10,0"
+                           Grid.Column="0"
+                           Grid.ColumnSpan="2"
+                           Grid.Row="3">
+                        <Entry x:Name="GatewayAddressEntry"
+                               TextChanged="GatewayAddressEntry_TextChanged"
+                               HorizontalOptions="FillAndExpand"
+                               VerticalOptions="Center"
+                               Margin="5"
+                               BackgroundColor="{StaticResource EntryFrameColor}"
+                               Text="{Binding NewAddress}"
+                               TextColor="{StaticResource PrimaryTextColor}"
+                               IsEnabled="{Binding ElementsEnabled, Source={x:Reference Root}}" />
+                    </Frame>
+
+                    <Label Text="{lang:L10n GatewayEditPage_Key_Label}"
+                           Grid.Column="0"
+                           Grid.Row="4"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Center"
+                           VerticalTextAlignment="Center"
+                           MinimumHeightRequest="30"
+                           HeightRequest="30"
+                           Style="{StaticResource LabelMultiLine}" />
+
+                    <iconize:IconButton x:Name="KeyBackButton"
+                                        HeightRequest="30"
+                                        WidthRequest="30"
+                                        Grid.Column="1"
+                                        Grid.Row="4"
+                                        Margin="5,0"
+                                        CornerRadius="10"
+                                        FontSize="25"
+                                        Padding="0"
+                                        IsVisible="False"
+                                        Text="mdi-undo"
+                                        TextColor="{StaticResource PrimaryTextColor}"
+                                        BackgroundColor="{StaticResource TertiaryTextColor}"
+                                        Command="{Binding KeyBackCommand, Source={x:Reference Root}}"
+                                        IsEnabled="{Binding ElementsEnabled, Source={x:Reference Root}}" />
+
+                    <Frame BackgroundColor="{StaticResource EntryFrameColor}"
+                           CornerRadius="10"
+                           Padding="10,0"
+                           Margin="10,0"
+                           Grid.Column="0"
+                           Grid.Row="5"
+                           Grid.ColumnSpan="2">
+                        <Entry x:Name="GatewayKeyEntry"
+                               TextChanged="GatewayKeyEntry_TextChanged"
+                               HorizontalOptions="FillAndExpand"
+                               VerticalOptions="Center"
+                               Margin="5"
+                               IsPassword="True"
+                               BackgroundColor="{StaticResource EntryFrameColor}"
+                               Text="{Binding NewKey}"
+                               TextColor="{StaticResource PrimaryTextColor}"
+                               IsEnabled="{Binding ElementsEnabled, Source={x:Reference Root}}" />
+                    </Frame>
+
+                    <StackLayout Grid.Column="0"
+                                 Grid.ColumnSpan="2"
+                                 Grid.Row="6"
+                                 Margin="20"
+                                 Orientation="Horizontal"
+                                 HorizontalOptions="EndAndExpand">
+                        <Button x:Name="CancelButton"
+                                Style="{StaticResource CancelButton}"
+                                HorizontalOptions="End"
+                                Text="{lang:L10n GatewayEditPage_Cancel_Button}"
+                                Clicked="Cancel_Button_Clicked"
+                                IsEnabled="{Binding ElementsEnabled, Source={x:Reference Root}}" />
+                        <Button x:Name="SendButton"
+                                Style="{StaticResource AcceptButton}"
+                                HorizontalOptions="End"
+                                IsVisible="{Binding ReadyToSend}"
+                                Text="{lang:L10n GatewayEditPage_Save_Button}"
+                                Clicked="Save_Button_Clicked"
+                                IsEnabled="{Binding ElementsEnabled, Source={x:Reference Root}}" />
+                    </StackLayout>
+                </Grid>
+            </StackLayout>
+        </ScrollView>
+    </StackLayout>
+</base:CustomPage>

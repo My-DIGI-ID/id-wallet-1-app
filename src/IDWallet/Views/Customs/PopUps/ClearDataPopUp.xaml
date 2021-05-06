@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<base:CustomPopUp xmlns="http://xamarin.com/schemas/2014/forms"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:base="clr-namespace:IDWallet.Views.Customs.PopUps;assembly=IDWallet"
+                  x:Class="IDWallet.Views.Customs.PopUps.ClearDataPopUp">
+    <base:CustomPopUp.Content>
+        <StackLayout Style="{StaticResource PopUpStackLayout}">
+            <Frame Style="{StaticResource PopUpFrame}"
+                   Padding="20">
+                <ContentView>
+                    <StackLayout>
+                        <Label x:Name="TitleLabel"
+                               Style="{StaticResource LabelHeader}"
+                               MaxLines="100"
+                               LineBreakMode="WordWrap" />
+                        <Label x:Name="TextLabel"
+                               Style="{StaticResource LabelMultiLine}"
+                               TextColor="{StaticResource AttributeValueColor}" />
+
+                        <StackLayout Style="{StaticResource PopUpButtonArea}">
+                            <Button x:Name="CancelButtonLabel"
+                                    Style="{StaticResource CancelButton}"
+                                    Clicked="OnPopUpCanceled" />
+                            <Button x:Name="AcceptButtonLabel"
+                                    Style="{StaticResource AcceptButton}"
+                                    Clicked="OnPopUpAccepted" />
+                        </StackLayout>
+                    </StackLayout>
+                </ContentView>
+            </Frame>
+        </StackLayout>
+    </base:CustomPopUp.Content>
+</base:CustomPopUp>

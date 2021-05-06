@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:lang="clr-namespace:IDWallet.Extensions"
+             xmlns:iconize="clr-namespace:Plugin.Iconize;assembly=Plugin.Iconize"
+             mc:Ignorable="d"
+             x:Class="IDWallet.Views.Settings.Gateway.GatewaysPage"
+             x:Name="Root">
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="{lang:L10n Navigation_Back}"
+                   HorizontalOptions="StartAndExpand"
+                   VerticalOptions="CenterAndExpand"
+                   FontAttributes="Bold"
+                   FontSize="20" />
+            <Frame WidthRequest="30"
+                   HeightRequest="30"
+                   Margin="5"
+                   x:Name="NotificationsToolBarItem"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="End">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NotificationsClickedCommand, Source={x:Reference Root}}" />
+                </Frame.GestureRecognizers>
+                <Image Source="{Binding NotificationIconImage}"
+                       VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="CenterAndExpand"
+                       WidthRequest="20"
+                       HeightRequest="20" />
+            </Frame>
+            <Frame WidthRequest="30"
+                   HeightRequest="30"
+                   Margin="5"
+                   x:Name="SettingsToolBarItem"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="End">
+                <Image Source="{Binding SettingsIconImage, Source={x:Reference Root}}"
+                       VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="CenterAndExpand"
+                       WidthRequest="20"
+                       HeightRequest="20" />
+            </Frame>
+        </StackLayout>
+    </NavigationPage.TitleView>
+    <StackLayout Spacing="0"
+                 Padding="0"
+                 Margin="0">
+        <Frame
+            CornerRadius="0"
+            BackgroundColor="{StaticResource PageShadowColor}"
+            HeightRequest="1"
+            Grid.Row="0" />
+        <ScrollView>
+            <StackLayout BindableLayout.ItemsSource="{Binding Gateways}"
+                         Spacing="0"
+                         Padding="0"
+                         Margin="0"
+                         x:Name="LicenseStack">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnSpacing="0"
+                              RowSpacing="0"
+                              Margin="0"
+                              Padding="0"
+                              x:Name="GatewayGrid">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="110" />
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="1" />
+                            </Grid.RowDefinitions>
+                            <Label Text="{Binding Name}"
+                                   Grid.Column="0"
+                                   Grid.Row="0"
+                                   FontAttributes="Bold"
+                                   Style="{StaticResource LabelMultiLine}"
+                                   HorizontalOptions="StartAndExpand"
+                                   VerticalOptions="Center"
+                                   Margin="20,10" />
+                            <Grid Margin="20,0"
+                                  Grid.Column="1"
+                                  Grid.Row="0"
+                                  HorizontalOptions="End"
+                                  WidthRequest="70"
+                                  ColumnSpacing="10"
+                                  BindingContext="{Binding .}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="30" />
+                                    <ColumnDefinition Width="30" />
+                                </Grid.ColumnDefinitions>
+
+                                <Frame Grid.Column="0"
+                                       Grid.Row="0"
+                                       HeightRequest="5"
+                                       MinimumHeightRequest="5" />
+
+                                <iconize:IconButton Text="mdi-pencil"
+                                                    Style="{StaticResource AcceptButton}"
+                                                    Padding="3"
+                                                    WidthRequest="30"
+                                                    CornerRadius="10"
+                                                    FontSize="20"
+                                                    Grid.Column="0"
+                                                    Grid.Row="1"
+                                                    Command="{Binding EditClickedCommand, Source={x:Reference Root}}"
+                                                    CommandParameter="{Binding .}" />
+
+                                <iconize:IconButton Text="mdi-delete"
+                                                    Style="{StaticResource DeleteButton}"
+                                                    Padding="3"
+                                                    WidthRequest="30"
+                                                    CornerRadius="10"
+                                                    FontSize="20"
+                                                    Grid.Column="1"
+                                                    Grid.Row="1"
+                                                    Command="{Binding DeleteClickedCommand, Source={x:Reference Root}}"
+                                                    CommandParameter="{Binding .}" />
+
+                                <Frame Grid.Column="0"
+                                       Grid.Row="2"
+                                       HeightRequest="5"
+                                       MinimumHeightRequest="5" />
+                            </Grid>
+                            <Label Style="{StaticResource LabelMultiLine}"
+                                   Grid.Column="0"
+                                   Grid.ColumnSpan="2"
+                                   Grid.Row="1"
+                                   VerticalOptions="Center"
+                                   Margin="20,0,20,10">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{lang:L10n GatewaysPage_Address_Label}" />
+                                        <Span Text=": " />
+                                        <Span Text="{Binding Address}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+
+                            <BoxView HorizontalOptions="FillAndExpand"
+                                     Grid.Column="0"
+                                     Grid.ColumnSpan="2"
+                                     Grid.Row="3"
+                                     BackgroundColor="{StaticResource SeparatorColor}" />
+                        </Grid>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
+        </ScrollView>
+    </StackLayout>
+</ContentPage>

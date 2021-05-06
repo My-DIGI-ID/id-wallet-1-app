@@ -1,0 +1,2048 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AddGatewayPage_Address_Label" xml:space="preserve">
+    <value>Adresse</value>
+  </data>
+  <data name="AddGatewayPage_Cancel_Button" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="AddGatewayPage_Key_Label" xml:space="preserve">
+    <value>Schlüssel</value>
+  </data>
+  <data name="AddGatewayPage_Name_Label" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="AddGatewayPage_Save_Button" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="AddGatewayPage_Title" xml:space="preserve">
+    <value>Gateway hinzufügen</value>
+  </data>
+  <data name="AddLedgerPage_Create_Ledger_Button" xml:space="preserve">
+    <value>Ledger erstellen</value>
+  </data>
+  <data name="AddLedgerPage_Entry_Placeholder" xml:space="preserve">
+    <value>Name des Ledgers eingeben</value>
+  </data>
+  <data name="AddLedgerPage_First_Task" xml:space="preserve">
+    <value>1. Bitte wählen Sie eine Genesis-Transaktionsdatei aus:</value>
+  </data>
+  <data name="AddLedgerPage_Second_Task" xml:space="preserve">
+    <value>2. Bitte Ledger mit eindeutigem Namen benennen:</value>
+  </data>
+  <data name="AddLedgerPage_Select_Genesis_Button" xml:space="preserve">
+    <value>Genesis auswählen</value>
+  </data>
+  <data name="AddLedgerPage_Title" xml:space="preserve">
+    <value>Ledger hinzufügen</value>
+  </data>
+  <data name="ChangeLanguagePage_Cancel_Button" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="ChangeLanguagePage_Choose_Label" xml:space="preserve">
+    <value>Sprache wählen</value>
+  </data>
+  <data name="ChangeLanguagePage_Save_Button" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="ChangeLanguagePage_Title" xml:space="preserve">
+    <value>Sprache wechseln</value>
+  </data>
+  <data name="ChangeLedgerPage_BCGov" xml:space="preserve">
+    <value>BCGov Test Ledger</value>
+  </data>
+  <data name="ChangeLedgerPage_builder" xml:space="preserve">
+    <value>Sovrin BuilderNet</value>
+  </data>
+  <data name="ChangeLedgerPage_DEVLEDGER" xml:space="preserve">
+    <value>DEV Ledger</value>
+  </data>
+  <data name="ChangeLedgerPage_Disclaimer" xml:space="preserve">
+    <value>Achtung:</value>
+  </data>
+  <data name="ChangeLedgerPage_EESDI" xml:space="preserve">
+    <value>EESDI Pilot Ledger</value>
+  </data>
+  <data name="ChangeLedgerPage_Esatus" xml:space="preserve">
+    <value>esatus Test Ledger</value>
+  </data>
+  <data name="ChangeLedgerPage_IDunionTest" xml:space="preserve">
+    <value>IDunion Test Ledger</value>
+  </data>
+  <data name="ChangeLedgerPage_Live" xml:space="preserve">
+    <value>Sovrin MainNet</value>
+  </data>
+  <data name="ChangeLedgerPage_Staging" xml:space="preserve">
+    <value>Sovrin StagingNet</value>
+  </data>
+  <data name="ChangeLedgerPage_Title" xml:space="preserve">
+    <value>Ledger wechseln</value>
+  </data>
+  <data name="ChangeLedgerPage_Warning" xml:space="preserve">
+    <value>Von häufigem Wechseln zwischen Ledgern wird abgeraten, da Nachrichten verloren gehen können. Backups sind nur für den aktiven Ledger gültig.</value>
+  </data>
+  <data name="ChangePasscodePage_First_Label" xml:space="preserve">
+    <value>Alten PIN eingeben:</value>
+  </data>
+  <data name="ChangePasscodePage_Second_Label" xml:space="preserve">
+    <value>Neuen PIN eingeben:</value>
+  </data>
+  <data name="ChangePasscodePage_Third_Label" xml:space="preserve">
+    <value>Neuen PIN wiederholen:</value>
+  </data>
+  <data name="ChangePasscodePage_Title" xml:space="preserve">
+    <value>PIN ändern</value>
+  </data>
+  <data name="Connection_Not_Known_Label" xml:space="preserve">
+    <value>Unbekannt</value>
+  </data>
+  <data name="ConnectionDetailsPage_Status_Issued" xml:space="preserve">
+    <value>Ausgestellt</value>
+  </data>
+  <data name="ConnectionDetailsPage_Status_Shared" xml:space="preserve">
+    <value>Geteilt</value>
+  </data>
+  <data name="ConnectionDetailsPage_Title" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="ConnectionEditPage_Advanced_Options_Label" xml:space="preserve">
+    <value>Erweiterte Optionen</value>
+  </data>
+  <data name="ConnectionEditPage_Auto_Accept_Credential" xml:space="preserve">
+    <value>Alle Credentials akzeptieren</value>
+  </data>
+  <data name="ConnectionEditPage_Auto_Accept_Proof" xml:space="preserve">
+    <value>Alle Proof-Anfragen beantworten</value>
+  </data>
+  <data name="ConnectionEditPage_Auto_Notification_Credential" xml:space="preserve">
+    <value>Benachrichtigung bei Akzeptieren eines Credentials erstellen</value>
+  </data>
+  <data name="ConnectionEditPage_Auto_Notification_Proof" xml:space="preserve">
+    <value>Benachrichtigung bei Beantwortung einer Proof-Anfrage erstellen</value>
+  </data>
+  <data name="ConnectionEditPage_Cancel_Button" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="ConnectionEditPage_Only_Known_Proofs" xml:space="preserve">
+    <value>Nur beantworten, wenn die Information vorher schon einmal geteilt wurde</value>
+  </data>
+  <data name="ConnectionEditPage_Preferences" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
+  <data name="ConnectionEditPage_Save_Button" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="ConnectionEditPage_Take_Last_Credential" xml:space="preserve">
+    <value>Immer die Credentials vom letzten Mal benutzen</value>
+  </data>
+  <data name="ConnectionEditPage_Take_Newest_Credential" xml:space="preserve">
+    <value>Immer die neuesten Credentials benutzen</value>
+  </data>
+  <data name="ConnectionEditPage_Title" xml:space="preserve">
+    <value>Bearbeiten</value>
+  </data>
+  <data name="ConnectionsPage_Empty_Wallet_Label1" xml:space="preserve">
+    <value>Willkommen im ID Wallet,</value>
+  </data>
+  <data name="ConnectionsPage_Empty_Wallet_Label2" xml:space="preserve">
+    <value>Sie haben noch keine Verbindung.</value>
+  </data>
+  <data name="ConnectionsPage_Empty_Wallet_Label3" xml:space="preserve">
+    <value>Bitte scannen Sie eine Verbindung, um Informationen auszutauschen</value>
+  </data>
+  <data name="ConnectionsPage_Search_Page_Entry_Placeholder" xml:space="preserve">
+    <value>Verbindungen suchen</value>
+  </data>
+  <data name="ConnectionsPage_Search_Page_Title" xml:space="preserve">
+    <value>Suchen</value>
+  </data>
+  <data name="ConnectionsPage_Title" xml:space="preserve">
+    <value>Verbindungen</value>
+  </data>
+  <data name="CreateBackupPage_Copied_To_Clipboard" xml:space="preserve">
+    <value>Erfolgreich kopiert</value>
+  </data>
+  <data name="CreateBackupPage_Default_Button_Text" xml:space="preserve">
+    <value>Zurück</value>
+  </data>
+  <data name="CreateBackupPage_First_Page_BoldInstructionLabel" xml:space="preserve">
+    <value>Backup verschlüsselt</value>
+  </data>
+  <data name="CreateBackupPage_First_Page_Button" xml:space="preserve">
+    <value>Weiter</value>
+  </data>
+  <data name="CreateBackupPage_First_Page_Info" xml:space="preserve">
+    <value>Achtung: Nur das aktive Wallet zum derzeit ausgewählten Ledger wird gesichert!</value>
+  </data>
+  <data name="CreateBackupPage_First_Page_InstructionLabel" xml:space="preserve">
+    <value>Bitte notieren sie sich die folgenden Wiederherstellungsworte.</value>
+  </data>
+  <data name="CreateBackupPage_Second_Page_BoldInstructionLabel" xml:space="preserve">
+    <value>Erneute Eingabe der Wiederherstellungsworte (separiert durch Leerzeichen)</value>
+  </data>
+  <data name="CreateBackupPage_Second_Page_Button" xml:space="preserve">
+    <value>Weiter</value>
+  </data>
+  <data name="CreateBackupPage_Second_Page_InstructionLabel" xml:space="preserve">
+    <value>Bitte geben Sie die Wiederherstellungsworte ein.</value>
+  </data>
+  <data name="CreateBackupPage_Separator_Label" xml:space="preserve">
+    <value>Wiederherstellungsworte:</value>
+  </data>
+  <data name="CreateBackupPage_Third_Page_BoldInstructionLabel" xml:space="preserve">
+    <value>Backup exportieren</value>
+  </data>
+  <data name="CreateBackupPage_Third_Page_Button" xml:space="preserve">
+    <value>Exportieren</value>
+  </data>
+  <data name="CreateBackupPage_Third_Page_InstructionLabel" xml:space="preserve">
+    <value>Name des Backups</value>
+  </data>
+  <data name="CreateBackupPage_Title" xml:space="preserve">
+    <value>Backup erstellen</value>
+  </data>
+  <data name="CreateProofPage_Loading_Text" xml:space="preserve">
+    <value>Bitte warten Sie bis der Vorgang abgeschlossen ist.</value>
+  </data>
+  <data name="CreateProofPage_Loading_Title" xml:space="preserve">
+    <value>Ladevorgang</value>
+  </data>
+  <data name="CreateProofPage_Network_Error_Text" xml:space="preserve">
+    <value>Bitte überprüfen Sie Ihre Internetverbindung.</value>
+  </data>
+  <data name="CreateProofPage_Network_Error_Title" xml:space="preserve">
+    <value>Netzwerkfehler</value>
+  </data>
+  <data name="CreateProofPage_No_Gateways_Text" xml:space="preserve">
+    <value>Bitte überprüfen Sie Ihre Gateways in den Einstellungen.</value>
+  </data>
+  <data name="CreateProofPage_No_Gateways_Title" xml:space="preserve">
+    <value>Keine Gateways gefunden</value>
+  </data>
+  <data name="CreateProofPage_No_Proofs_Text" xml:space="preserve">
+    <value>Es konnten keine Proofs auf den Gateways gefunden werden.</value>
+  </data>
+  <data name="CreateProofPage_No_Proofs_Title" xml:space="preserve">
+    <value>Keine Proofs gefunden</value>
+  </data>
+  <data name="CreateProofPage_Title" xml:space="preserve">
+    <value>Proof erstellen</value>
+  </data>
+  <data name="CredentialHistoryListElement_To" xml:space="preserve">
+    <value>An</value>
+  </data>
+  <data name="WalletPage_Empty_Wallet_Title" xml:space="preserve">
+    <value>Ihre Wallet ist noch leer</value>
+  </data>
+  <data name="WalletPage_Empty_Wallet_Text" xml:space="preserve">
+    <value>Oder scannen Sie einen QR-Code um Ihre Wallet zu befüllen</value>
+  </data>
+  <data name="WalletPage_Empty_Wallet_BaseID_Text" xml:space="preserve">
+    <value>Erstellen Sie eine Basis-ID:</value>
+  </data>
+  <data name="WalletPage_History_Label" xml:space="preserve">
+    <value>Verlauf</value>
+  </data>
+  <data name="WalletPage_History_Panel_Status_Shared" xml:space="preserve">
+    <value>Geteilt</value>
+  </data>
+  <data name="WalletPage_Info_Label" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="WalletPage_Info_Panel_Deleted" xml:space="preserve">
+    <value>gelöscht</value>
+  </data>
+  <data name="WalletPage_Info_Panel_Issue_Time" xml:space="preserve">
+    <value>Ausgestellt am</value>
+  </data>
+  <data name="WalletPage_Info_Panel_No_Origin" xml:space="preserve">
+    <value>Unbekannt</value>
+  </data>
+  <data name="WalletPage_Info_Panel_Origin" xml:space="preserve">
+    <value>Ausgestellt von</value>
+  </data>
+  <data name="WalletPage_Revocation_Label" xml:space="preserve">
+    <value>WIDERRUFEN</value>
+  </data>
+  <data name="GatewayEditPage_Address_Label" xml:space="preserve">
+    <value>Adresse</value>
+  </data>
+  <data name="GatewayEditPage_Cancel_Button" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="GatewayEditPage_Key_Label" xml:space="preserve">
+    <value>Schlüssel</value>
+  </data>
+  <data name="GatewayEditPage_Name_Label" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="GatewayEditPage_Save_Button" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="GatewayEditPage_Title" xml:space="preserve">
+    <value>Bearbeiten</value>
+  </data>
+  <data name="GatewaysPage_Address_Label" xml:space="preserve">
+    <value>Adresse</value>
+  </data>
+  <data name="GatewaysPage_Key_Label" xml:space="preserve">
+    <value>Schlüssel</value>
+  </data>
+  <data name="GatewaysPage_Title" xml:space="preserve">
+    <value>Gateways</value>
+  </data>
+  <data name="HistoryPage_Title" xml:space="preserve">
+    <value>Verlauf</value>
+  </data>
+  <data name="HistoryPage_Today_Label" xml:space="preserve">
+    <value>Heute</value>
+  </data>
+  <data name="HistoryPage_Yesterday_Label" xml:space="preserve">
+    <value>Gestern</value>
+  </data>
+  <data name="InboxPage_Title" xml:space="preserve">
+    <value>Benachrichtigungen</value>
+  </data>
+  <data name="IntroPage_Text" xml:space="preserve">
+    <value>Verwernden Sie Ihr Handy, um Ihre persönlichen Nachweise zu verwalten.</value>
+  </data>
+  <data name="IntroPage_Title" xml:space="preserve">
+    <value>Erstellen Sie Ihre eigene digitale ID</value>
+  </data>
+  <data name="LegalNoticePage_Build" xml:space="preserve">
+    <value>Build</value>
+  </data>
+  <data name="LegalNoticePage_City" xml:space="preserve">
+    <value>Arnstorf</value>
+  </data>
+  <data name="LegalNoticePage_Commercial_Register" xml:space="preserve">
+    <value>Handelsregister: Amtsgericht Landshut – HRB 12637</value>
+  </data>
+  <data name="LegalNoticePage_Company" xml:space="preserve">
+    <value>Digital Enabling GmbH</value>
+  </data>
+  <data name="LegalNoticePage_Country" xml:space="preserve">
+    <value>Deutschland</value>
+  </data>
+  <data name="LegalNoticePage_E_Mail" xml:space="preserve">
+    <value>E-Mail</value>
+  </data>
+  <data name="LegalNoticePage_E_Mail_Address" xml:space="preserve">
+    <value>info@digital-enabling.com</value>
+  </data>
+  <data name="LegalNoticePage_Executive_Board" xml:space="preserve">
+    <value>Geschäftsführer: Jürgen Eichhöfer, Dr. André Kudra</value>
+  </data>
+  <data name="LegalNoticePage_Phone" xml:space="preserve">
+    <value>Rufnummer</value>
+  </data>
+  <data name="LegalNoticePage_Phone_Number" xml:space="preserve">
+    <value>+49 6103 9029-0</value>
+  </data>
+  <data name="LegalNoticePage_Street" xml:space="preserve">
+    <value>Bahnhofstr.</value>
+  </data>
+  <data name="LegalNoticePage_Street_Number" xml:space="preserve">
+    <value>29</value>
+  </data>
+  <data name="LegalNoticePage_Title" xml:space="preserve">
+    <value>Rechtlicher Hinweis</value>
+  </data>
+  <data name="LegalNoticePage_Version" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="LegalNoticePage_Web_Address" xml:space="preserve">
+    <value>https://digital-enabling.com</value>
+  </data>
+  <data name="LegalNoticePage_Website" xml:space="preserve">
+    <value>Website</value>
+  </data>
+  <data name="LegalNoticePage_ZIP" xml:space="preserve">
+    <value>94424</value>
+  </data>
+  <data name="LicensePage_Title" xml:space="preserve">
+    <value>Lizenzen</value>
+  </data>
+  <data name="LoginPage_Biometrics_Cancel_Button" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="LoginPage_Biometrics_Label" xml:space="preserve">
+    <value>Bitte authentifizieren Sie sich</value>
+  </data>
+  <data name="LoginPage_Biometrics_Title" xml:space="preserve">
+    <value>Authentifizieren</value>
+  </data>
+  <data name="LoginPage_Confirm_PIN_Label" xml:space="preserve">
+    <value>Wiederholen Sie bitte Ihre PIN. Ein Reset ist derzeit nicht möglich.</value>
+  </data>
+  <data name="LoginPage_Locked_PIN_Pad_Label" xml:space="preserve">
+    <value>Wallet gesperrt</value>
+  </data>
+  <data name="LoginPage_New_PIN_Label" xml:space="preserve">
+    <value>Neue PIN eingeben</value>
+  </data>
+  <data name="LoginPage_PIN_Label" xml:space="preserve">
+    <value>Geben Sie bitte Ihre PIN ein</value>
+  </data>
+  <data name="Native_Notification_Message" xml:space="preserve">
+    <value>In Ihrem Wallet liegen neue Nachrichten für Sie vor.</value>
+  </data>
+  <data name="Native_Notification_Title" xml:space="preserve">
+    <value>Neue Nachricht</value>
+  </data>
+  <data name="Navigation_Back" xml:space="preserve">
+    <value>Zurück</value>
+  </data>
+  <data name="NotificationsPage_Credential_Auto_Accept_Text" xml:space="preserve">
+    <value>Automatisch angenommen</value>
+  </data>
+  <data name="NotificationsPage_Credential_Offer_Text" xml:space="preserve">
+    <value>Nachweis erhalten</value>
+  </data>
+  <data name="NotificationsPage_From" xml:space="preserve">
+    <value>von</value>
+  </data>
+  <data name="NotificationsPage_Proof_Auto_Accept_Text" xml:space="preserve">
+    <value>Automatisch beantwortet</value>
+  </data>
+  <data name="NotificationsPage_Proof_Request_Text" xml:space="preserve">
+    <value>Anfrage erhalten</value>
+  </data>
+  <data name="NotificationsPage_Reject_Button" xml:space="preserve">
+    <value>Verwerfen</value>
+  </data>
+  <data name="NotificationsPage_Title" xml:space="preserve">
+    <value>Benachrichtigungen</value>
+  </data>
+  <data name="NotificationsPage_View_Request_Button" xml:space="preserve">
+    <value>Nachricht anzeigen</value>
+  </data>
+  <data name="PopUp_ActivateAutoAccept_Activate_Button" xml:space="preserve">
+    <value>Ja, Auto-Funktion aktivieren</value>
+  </data>
+  <data name="PopUp_ActivateAutoAccept_Credential_Notification" xml:space="preserve">
+    <value>Nach automatischer Annahme eine Benachrichtigung erstellen</value>
+  </data>
+  <data name="PopUp_ActivateAutoAccept_Credential_Text_After_Alias" xml:space="preserve">
+    <value>automatisch annehmen</value>
+  </data>
+  <data name="PopUp_ActivateAutoAccept_Credential_Text_Before_Alias" xml:space="preserve">
+    <value>Möchten Sie Credentials von</value>
+  </data>
+  <data name="PopUp_ActivateAutoAccept_Later_Button" xml:space="preserve">
+    <value>Später nachfragen</value>
+  </data>
+  <data name="PopUp_ActivateAutoAccept_Never_Button" xml:space="preserve">
+    <value>Nie mehr nachfragen</value>
+  </data>
+  <data name="PopUp_ActivateAutoAccept_Proof_Notification" xml:space="preserve">
+    <value>Nach automatischer Antwort eine Benachrichtigung erstellen</value>
+  </data>
+  <data name="PopUp_ActivateAutoAccept_Proof_Text_After_Alias" xml:space="preserve">
+    <value>automatisch beantworten</value>
+  </data>
+  <data name="PopUp_ActivateAutoAccept_Proof_Text_Before_Alias" xml:space="preserve">
+    <value>Möchten Sie Proof Anfragen von</value>
+  </data>
+  <data name="PopUp_ActivateAutoAccept_Save_Button" xml:space="preserve">
+    <value>Einstellung speichern</value>
+  </data>
+  <data name="PopUp_ActivateAutoAccept_Title" xml:space="preserve">
+    <value>Verbindungseinstellungen</value>
+  </data>
+  <data name="PopUp_Add_GW_Button_Cancel" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="PopUp_Add_GW_Button_Ok" xml:space="preserve">
+    <value>Hinzufügen</value>
+  </data>
+  <data name="PopUp_Add_GW_Message" xml:space="preserve">
+    <value>Möchten Sie ein neues Gateway hinzufügen?</value>
+  </data>
+  <data name="PopUp_Add_GW_Success_Button" xml:space="preserve">
+    <value>Okay</value>
+  </data>
+  <data name="PopUp_Add_GW_Success_Message" xml:space="preserve">
+    <value>Gateway erfolgreich hinzugefügt!</value>
+  </data>
+  <data name="PopUp_Add_GW_Success_Title" xml:space="preserve">
+    <value>Neues Gateway</value>
+  </data>
+  <data name="PopUp_Add_GW_Title" xml:space="preserve">
+    <value>Neues Gateway</value>
+  </data>
+  <data name="PopUp_Backup_Created_Button" xml:space="preserve">
+    <value>Weiter</value>
+  </data>
+  <data name="PopUp_Backup_Created_Text" xml:space="preserve">
+    <value>Ihr Backup ist vollständig</value>
+  </data>
+  <data name="PopUp_Biometrics_Activation" xml:space="preserve">
+    <value>Bitte authentifizieren Sie sich.</value>
+  </data>
+  <data name="PopUp_Biometrics_Not_Available_Button" xml:space="preserve">
+    <value>Okay</value>
+  </data>
+  <data name="PopUp_Biometrics_Not_Available_Text" xml:space="preserve">
+    <value>Sie haben die maximale Anzahl von Versuchen für Ihr Gerät erreicht. Bitte versuchen Sie es später noch einmal.</value>
+  </data>
+  <data name="PopUp_Biometrics_Not_Available_Title" xml:space="preserve">
+    <value>Biometrie-Nachweis fehlgeschlagen</value>
+  </data>
+  <data name="PopUp_Biometrics_Not_Configured_Button" xml:space="preserve">
+    <value>Okay</value>
+  </data>
+  <data name="PopUp_Biometrics_Not_Configured_Text" xml:space="preserve">
+    <value>Biometrie ist derzeit nicht für Ihr Gerät konfiguriert.</value>
+  </data>
+  <data name="PopUp_Biometrics_Not_Configured_Title" xml:space="preserve">
+    <value>Biometrie</value>
+  </data>
+  <data name="PopUp_Biometrics_Too_Many_Attempts_Android_Text" xml:space="preserve">
+    <value>Sie haben die maximale Anzahl von Versuchen für Ihr Gerät erreicht. Bitte versuchen Sie es später noch einmal.</value>
+  </data>
+  <data name="PopUp_Biometrics_Too_Many_Attempts_Button" xml:space="preserve">
+    <value>Okay</value>
+  </data>
+  <data name="PopUp_Biometrics_Too_Many_Attempts_iOS_Text" xml:space="preserve">
+    <value>Bitte nutzen Sie Ihren PIN oder prüfen Sie die Zugriffseinstellungen Ihres Geräts.</value>
+  </data>
+  <data name="PopUp_Biometrics_Too_Many_Attempts_Title" xml:space="preserve">
+    <value>Biometrie-Nachweis fehlgeschlagen</value>
+  </data>
+  <data name="PopUp_Change_Ledger_Accept_Button" xml:space="preserve">
+    <value>Akzeptieren</value>
+  </data>
+  <data name="PopUp_Change_Ledger_Cancel_Button" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="PopUp_Change_Ledger_CheckBox_Text" xml:space="preserve">
+    <value>Ich habe verstanden, dass meine existierenden Verbindungen und Credentials nicht mit einem anderen Ledger kompatibel sind.</value>
+  </data>
+  <data name="PopUp_Change_Ledger_Text" xml:space="preserve">
+    <value>Sind Sie sicher, dass Sie den Ledger wechseln wollen zu</value>
+  </data>
+  <data name="PopUp_Change_Ledger_Title" xml:space="preserve">
+    <value>Ledger wechseln</value>
+  </data>
+  <data name="PopUp_Change_Passcode_Button" xml:space="preserve">
+    <value>Okay</value>
+  </data>
+  <data name="PopUp_Change_Passcode_Text" xml:space="preserve">
+    <value>Die PIN wurde erfolgreich geändert</value>
+  </data>
+  <data name="PopUp_Change_Passcode_Title" xml:space="preserve">
+    <value>PIN geändert</value>
+  </data>
+  <data name="PopUp_Clear_Data_Accept_Button" xml:space="preserve">
+    <value>Daten löschen</value>
+  </data>
+  <data name="PopUp_Clear_Data_Cancel_Button" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="PopUp_Clear_Data_Message" xml:space="preserve">
+    <value>Bitte beachten Sie: All Ihre Daten werden unwiderruflich gelöscht!</value>
+  </data>
+  <data name="PopUp_Clear_Data_Title" xml:space="preserve">
+    <value>Alle Daten löschen</value>
+  </data>
+  <data name="PopUp_Connection_Deletion_Cancel_Button" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="PopUp_Connection_Deletion_Delete_Button" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="PopUp_Connection_Deletion_Text_1" xml:space="preserve">
+    <value>Verbindung</value>
+  </data>
+  <data name="PopUp_Connection_Deletion_Text_2" xml:space="preserve">
+    <value>unwiderruflich löschen?</value>
+  </data>
+  <data name="PopUp_Connection_Deletion_Title" xml:space="preserve">
+    <value>Verbindung löschen</value>
+  </data>
+  <data name="PopUp_Connection_Does_Not_Exist_Button" xml:space="preserve">
+    <value>Okay</value>
+    <comment>Okay</comment>
+  </data>
+  <data name="PopUp_Connection_Does_Not_Exist_Text" xml:space="preserve">
+    <value>Die Verbindung zu dieser Benachrichtigung existiert nicht mehr.</value>
+  </data>
+  <data name="PopUp_Connection_Does_Not_Exist_Title" xml:space="preserve">
+    <value>Verbindung nicht gefunden</value>
+  </data>
+  <data name="PopUp_Connection_Ledger_Change_Active_Ledger" xml:space="preserve">
+    <value>Aktiver Ledger</value>
+  </data>
+  <data name="PopUp_Connection_Ledger_Change_Change_Button" xml:space="preserve">
+    <value>Wechseln</value>
+  </data>
+  <data name="PopUp_Connection_Ledger_Change_Recommended_Ledger" xml:space="preserve">
+    <value>Vorgeschlagener Ledger</value>
+  </data>
+  <data name="PopUp_Connection_Ledger_Change_Stay_Button" xml:space="preserve">
+    <value>Ignorieren</value>
+  </data>
+  <data name="PopUp_Connection_Ledger_Change_Text" xml:space="preserve">
+    <value>Sie haben eine Einladung für eine Connection erhalten, die auf einem anderen Ledger empfohlen wird.</value>
+  </data>
+  <data name="PopUp_Connection_Ledger_Change_Title" xml:space="preserve">
+    <value>Neue Connection-Einladung</value>
+  </data>
+  <data name="PopUp_Connection_Needed_Button" xml:space="preserve">
+    <value>Okay</value>
+  </data>
+  <data name="PopUp_Connection_Needed_Text" xml:space="preserve">
+    <value>Keine Verbindung zu diesem Endpunkt, bitte erst verbinden.</value>
+  </data>
+  <data name="PopUp_Connection_Needed_Title" xml:space="preserve">
+    <value>Keine Verbindung</value>
+  </data>
+  <data name="PopUp_Connection_Offer_Accept_Button" xml:space="preserve">
+    <value>Verbinden</value>
+  </data>
+  <data name="PopUp_Connection_Offer_Deny_Button" xml:space="preserve">
+    <value>Ablehnen</value>
+  </data>
+  <data name="PopUp_Connection_Offer_Text" xml:space="preserve">
+    <value>möchte sich mit Ihnen verbinden.</value>
+  </data>
+  <data name="PopUp_Connection_Response_Button" xml:space="preserve">
+    <value>Schließen</value>
+  </data>
+  <data name="PopUp_Connection_Response_Text" xml:space="preserve">
+    <value>wurde erfolgreich zu Ihren Verbindungen hinzugefügt.</value>
+  </data>
+  <data name="PopUp_Create_Inbox_Error_Button" xml:space="preserve">
+    <value>Okay</value>
+  </data>
+  <data name="PopUp_Create_Inbox_Error_Message" xml:space="preserve">
+    <value>Fehler beim Hinzufügen eines Posteingangs</value>
+  </data>
+  <data name="PopUp_Create_Inbox_Error_Title" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
+  <data name="PopUp_Credential_Deletion_Cancel_Button" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="PopUp_Credential_Deletion_CheckBox_Text" xml:space="preserve">
+    <value>Ich verstehe, Credential unwiderruflich löschen.</value>
+  </data>
+  <data name="PopUp_Credential_Deletion_Delete_Button" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="PopUp_Credential_Deletion_Text" xml:space="preserve">
+    <value>Sind Sie sicher, dass Sie dieses Credential löschen wollen?</value>
+  </data>
+  <data name="PopUp_Credential_Deletion_Title" xml:space="preserve">
+    <value>Credential löschen</value>
+  </data>
+  <data name="PopUp_Credential_Details_Cancel_Button" xml:space="preserve">
+    <value>Schließen</value>
+  </data>
+  <data name="PopUp_Credential_Details_Delete_Button" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="PopUp_Credential_Error_Button" xml:space="preserve">
+    <value>Okay</value>
+    <comment>Okay</comment>
+  </data>
+  <data name="PopUp_Credential_Error_Message" xml:space="preserve">
+    <value>Beim Akzeptieren eines neuen Credentials ist ein Fehler aufgetreten, vielleicht sind Sie mit dem falschen Ledger verbunden oder die Verbindung von welcher Sie die Nachricht erhalten haben, ist nicht mehr vorhanden.</value>
+  </data>
+  <data name="PopUp_Credential_Error_Title" xml:space="preserve">
+    <value>Es ist etwas schiefgegangen</value>
+  </data>
+  <data name="PopUp_Credential_New_Offer_Accept_Button" xml:space="preserve">
+    <value>Ja</value>
+  </data>
+  <data name="PopUp_Credential_New_Offer_Delete_Button" xml:space="preserve">
+    <value>Später</value>
+  </data>
+  <data name="PopUp_Credential_Offer_Accept_Button" xml:space="preserve">
+    <value>Zur Wallet hinzufügen</value>
+  </data>
+  <data name="PopUp_Credential_Offer_Delete_Button" xml:space="preserve">
+    <value>Ablehnen</value>
+  </data>
+  <data name="PopUp_Credential_Offer_First_Text" xml:space="preserve">
+    <value>Möchten Sie den Nachweis von </value>
+  </data>
+  <data name="PopUp_Credential_Offer_Second_Text" xml:space="preserve">
+    <value> zu Ihrem Wallet hinzufügen?</value>
+  </data>
+  <data name="PopUp_Credential_Offer_Status_Offered" xml:space="preserve">
+    <value>Angeboten</value>
+  </data>
+  <data name="PopUp_Credential_Offer_Title" xml:space="preserve">
+    <value>Neuer Nachweis</value>
+  </data>
+  <data name="PopUp_Credential_Received_Button" xml:space="preserve">
+    <value>Angebot anzeigen</value>
+  </data>
+  <data name="PopUp_Credential_Received_Text" xml:space="preserve">
+    <value>Sie haben ein neues Credential-Angebot von</value>
+  </data>
+  <data name="PopUp_Credential_Received_Title" xml:space="preserve">
+    <value>Neues Credential</value>
+  </data>
+  <data name="PopUp_Credential_Stored_Response_Button" xml:space="preserve">
+    <value>Schließen</value>
+  </data>
+  <data name="PopUp_Credential_Stored_Response_Text" xml:space="preserve">
+    <value>wurde erfolgreich zu Ihren Credentials hinzugefügt.</value>
+  </data>
+  <data name="PopUp_Credential_Stored_Response_Title" xml:space="preserve">
+    <value>Erfolgreich gespeichert</value>
+  </data>
+  <data name="PopUp_DeepLink_Connection_Fail_Button" xml:space="preserve">
+    <value>Okay</value>
+  </data>
+  <data name="PopUp_DeepLink_Connection_Fail_Text" xml:space="preserve">
+    <value>Dieser Link stellt keine Verbindung dar.</value>
+  </data>
+  <data name="PopUp_DeepLink_Connection_Fail_Title" xml:space="preserve">
+    <value>Ungültiger Link</value>
+  </data>
+  <data name="PopUp_Delete_Shared_Info_Cancel_Button" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="PopUp_Delete_Shared_Info_CheckBox_Text" xml:space="preserve">
+    <value>Ich verstehe, Löschung beantragen.</value>
+  </data>
+  <data name="PopUp_Delete_Shared_Info_Delete_Button" xml:space="preserve">
+    <value>Bestätigen</value>
+  </data>
+  <data name="PopUp_Delete_Shared_Info_Disclaimer_Text" xml:space="preserve">
+    <value>Nach Art. 17 DSGVO haben Sie ein Recht auf die Löschung ihrer Daten. Die Digital Enabling GmbH (App Herausgeber) kann nicht gewährleisten, dass der Empfänger des Antrags die Löschung tatsächlich durchführt.</value>
+  </data>
+  <data name="PopUp_Delete_Shared_Info_Text" xml:space="preserve">
+    <value>Sind Sie sicher, dass Sie die Löschung beantragen wollen?</value>
+  </data>
+  <data name="PopUp_Delete_Shared_Info_Title" xml:space="preserve">
+    <value>Löschung beantragen</value>
+  </data>
+  <data name="PopUp_Device_Add_Error_Button" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
+  <data name="PopUp_Device_Add_Error_Message" xml:space="preserve">
+    <value>Fehler beim Hinzufügen eines Gerätes</value>
+  </data>
+  <data name="PopUp_Device_Add_Error_Title" xml:space="preserve">
+    <value>Okay</value>
+  </data>
+  <data name="PopUp_Error_Pns_Button" xml:space="preserve">
+    <value>Okay</value>
+  </data>
+  <data name="PopUp_Error_Pns_Message" xml:space="preserve">
+    <value>Es gab einen Fehler bei der Einrichtung des Push Service.</value>
+  </data>
+  <data name="PopUp_Error_Pns_Title" xml:space="preserve">
+    <value>Push Service Fehler</value>
+  </data>
+  <data name="PopUp_Finished_Button" xml:space="preserve">
+    <value>Okay</value>
+  </data>
+  <data name="PopUp_Finished_Close_Message" xml:space="preserve">
+    <value>Der Push-Token wurde erfolgreich erneuert.  Nachdem Sie die App neu gestartet haben, sollten Sie wieder bereit sein, Push-Benachrichtigungen zu erhalten.</value>
+  </data>
+  <data name="PopUp_Finished_Message" xml:space="preserve">
+    <value>Der Push-Token wurde erfolgreich erneuert. Sie sollten bereit sein, wieder Push-Benachrichtigungen zu erhalten.</value>
+  </data>
+  <data name="PopUp_Finished_Title" xml:space="preserve">
+    <value>Push-Token erneuert</value>
+  </data>
+  <data name="PopUp_Gateway_Deletion_Cancel_Button" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="PopUp_Gateway_Deletion_CheckBox_Text" xml:space="preserve">
+    <value>Ich verstehe, Gateway unwiderruflich löschen.</value>
+  </data>
+  <data name="PopUp_Gateway_Deletion_Delete_Button" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="PopUp_Gateway_Deletion_Text" xml:space="preserve">
+    <value>Sind Sie sicher, dass Sie dieses Gateway löschen wollen?</value>
+  </data>
+  <data name="PopUp_Gateway_Deletion_Title" xml:space="preserve">
+    <value>Gateway löschen</value>
+  </data>
+  <data name="PopUp_Invalid_Invitation_Accept_Button" xml:space="preserve">
+    <value>Ja</value>
+  </data>
+  <data name="PopUp_Invalid_Invitation_Cancel_Button" xml:space="preserve">
+    <value>Nein</value>
+  </data>
+  <data name="PopUp_Invalid_Invitation_Question" xml:space="preserve">
+    <value>Möchten Sie die erstellte Verbindung löschen?</value>
+  </data>
+  <data name="PopUp_Invalid_Invitation_Text" xml:space="preserve">
+    <value>Diese Einladung ist ungültig. Vielleicht wurde sie schon benutzt.</value>
+  </data>
+  <data name="PopUp_Invalid_Invitation_Title" xml:space="preserve">
+    <value>Ungültige Einladung</value>
+  </data>
+  <data name="PopUp_Language_Changed_Button" xml:space="preserve">
+    <value>Okay</value>
+  </data>
+  <data name="PopUp_Language_Changed_Text" xml:space="preserve">
+    <value>Die Änderung der Sprache wird nach dem Neustart der App wirksam.</value>
+  </data>
+  <data name="PopUp_Language_Changed_Title" xml:space="preserve">
+    <value>Sprache geändert</value>
+  </data>
+  <data name="PopUp_Ledger_Change_Failed_Button" xml:space="preserve">
+    <value>Schließen</value>
+  </data>
+  <data name="PopUp_Ledger_Change_Failed_Text" xml:space="preserve">
+    <value>Wechsel des Ledgers fehlgeschlagen.</value>
+  </data>
+  <data name="PopUp_Ledger_Change_Failed_Title" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
+  <data name="PopUp_Ledger_Invalid_Structure_Button" xml:space="preserve">
+    <value>Schließen</value>
+  </data>
+  <data name="PopUp_Ledger_Invalid_Structure_Text" xml:space="preserve">
+    <value>Die ausgewählte Datei ist ungültig.</value>
+  </data>
+  <data name="PopUp_Ledger_Invalid_Structure_Title" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
+  <data name="PopUp_Ledger_Name_Used_Button" xml:space="preserve">
+    <value>Schließen</value>
+  </data>
+  <data name="PopUp_Ledger_Name_Used_Text" xml:space="preserve">
+    <value>Angegebener Name ist bereits in Benutzung.</value>
+  </data>
+  <data name="PopUp_Ledger_Name_Used_Title" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
+  <data name="PopUp_Login_Failed_Button" xml:space="preserve">
+    <value>Okay</value>
+  </data>
+  <data name="PopUp_Login_Failed_Text" xml:space="preserve">
+    <value>Falscher PIN</value>
+  </data>
+  <data name="PopUp_Login_Failed_Title" xml:space="preserve">
+    <value>PIN Überprüfung fehlgeschlagen</value>
+  </data>
+  <data name="PopUp_Login_Ultimately_Failed_Button" xml:space="preserve">
+    <value>Beenden</value>
+  </data>
+  <data name="PopUp_Login_Ultimately_Failed_Text" xml:space="preserve">
+    <value>Zu viele fehlgeschlagene Versuche, Ihr Wallet ist jetzt nicht mehr nutzbar.</value>
+  </data>
+  <data name="PopUp_Login_Ultimately_Failed_Title" xml:space="preserve">
+    <value>PIN Überprüfung fehlgeschlagen</value>
+  </data>
+  <data name="PopUp_Mediator_Images_Accept_Button" xml:space="preserve">
+    <value>Akzeptieren</value>
+  </data>
+  <data name="PopUp_Mediator_Images_Cancel_Button" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="PopUp_Mediator_Images_CheckBox_Text" xml:space="preserve">
+    <value>Ich verstehe, Mediator Bilder benutzen.</value>
+  </data>
+  <data name="PopUp_Mediator_Images_Link" xml:space="preserve">
+    <value>Datenschutzerklärung</value>
+  </data>
+  <data name="PopUp_Mediator_Images_Text_1" xml:space="preserve">
+    <value>Bitte beachten Sie, dass die IP-Adresse Ihres Geräts genutzt wird, um entsprechende Bilder zur Verfügung zu stellen. Informationen finden Sie in unserer</value>
+  </data>
+  <data name="PopUp_Mediator_Images_Text_2" xml:space="preserve">
+    <value>, insb. in Punkt 2.2.</value>
+  </data>
+  <data name="PopUp_Mediator_Images_Title" xml:space="preserve">
+    <value>Mediator Bilder benutzen</value>
+  </data>
+  <data name="PopUp_Migration_Later" xml:space="preserve">
+    <value>Später</value>
+  </data>
+  <data name="PopUp_Migration_Message" xml:space="preserve">
+    <value>Aufgrund größerer Veränderungen in der verwendeten Technologie muss Ihr Wallet migriert werden. Dies wird nach dem Klicken auf Start automatisch durchgeführt. Wir empfehlen, zunächst ein Backup durchzuführen.</value>
+  </data>
+  <data name="PopUp_Migration_Start" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="PopUp_Migration_Title" xml:space="preserve">
+    <value>Migration erforderlich</value>
+  </data>
+  <data name="PopUp_Network_Error_Button" xml:space="preserve">
+    <value>Okay</value>
+  </data>
+  <data name="PopUp_Network_Error_Text" xml:space="preserve">
+    <value>Bitte Internetverbindung prüfen und wieder versuchen.</value>
+  </data>
+  <data name="PopUp_Network_Error_Title" xml:space="preserve">
+    <value>Netzwerkfehler</value>
+  </data>
+  <data name="PopUp_New_Connection_Name_Failed_Button" xml:space="preserve">
+    <value>Okay</value>
+  </data>
+  <data name="PopUp_New_Connection_Name_Failed_Text" xml:space="preserve">
+    <value>Der neue Name darf nicht leer sein oder</value>
+  </data>
+  <data name="PopUp_New_Connection_Name_Failed_Title" xml:space="preserve">
+    <value>Ungültiger Name</value>
+  </data>
+  <data name="PopUp_New_PIN_Failed_Button" xml:space="preserve">
+    <value>Okay</value>
+  </data>
+  <data name="PopUp_New_PIN_Failed_Text" xml:space="preserve">
+    <value>Die eingegebenen PINs stimmen nicht überein, bitte versuchen Sie es noch einmal.</value>
+  </data>
+  <data name="PopUp_New_PIN_Failed_Title" xml:space="preserve">
+    <value>PINs stimmen nicht überein</value>
+  </data>
+  <data name="PopUp_New_PIN_No_Match_Button" xml:space="preserve">
+    <value>Okay</value>
+  </data>
+  <data name="PopUp_New_PIN_No_Match_Text" xml:space="preserve">
+    <value>Die eingegebenen PINs stimmen nicht überein, bitte versuchen Sie es noch einmal.</value>
+  </data>
+  <data name="PopUp_New_PIN_No_Match_Title" xml:space="preserve">
+    <value>PINs stimmen nicht überein</value>
+  </data>
+  <data name="PopUp_No_Network_Button" xml:space="preserve">
+    <value>Okay</value>
+  </data>
+  <data name="PopUp_No_Network_Text" xml:space="preserve">
+    <value>Sie haben keine Verbindung zum Internet, Ihre Wallet ist nur eingeschränkt nutzbar.</value>
+  </data>
+  <data name="PopUp_No_Network_Title" xml:space="preserve">
+    <value>Kein Internet</value>
+  </data>
+  <data name="PopUp_Old_PIN_Wrong_Button" xml:space="preserve">
+    <value>Okay</value>
+  </data>
+  <data name="PopUp_Old_PIN_Wrong_Text" xml:space="preserve">
+    <value>Falsche PIN eingegeben</value>
+  </data>
+  <data name="PopUp_Old_PIN_Wrong_Title" xml:space="preserve">
+    <value>Falsche PIN</value>
+  </data>
+  <data name="PopUp_PIN_Changed_Button" xml:space="preserve">
+    <value>Okay</value>
+  </data>
+  <data name="PopUp_PIN_Changed_Text" xml:space="preserve">
+    <value>PIN erfolgreich geändert.</value>
+  </data>
+  <data name="PopUp_PIN_Changed_Title" xml:space="preserve">
+    <value>PIN geändert</value>
+  </data>
+  <data name="PopUp_Pns_Polling_Button" xml:space="preserve">
+    <value>Okay</value>
+  </data>
+  <data name="PopUp_Pns_Polling_Message" xml:space="preserve">
+    <value>Es konnte leider keine Verbindung mit dem Push-Dienst hergestellt werden. Neue Nachrichten werden bei geöffneter App alle 30 Sekunden abgerufen.</value>
+  </data>
+  <data name="PopUp_Pns_Polling_Title" xml:space="preserve">
+    <value>Push Service Fehler</value>
+  </data>
+  <data name="PopUp_Presentation_Request_Accept_Button" xml:space="preserve">
+    <value>Anfrage anzeigen</value>
+  </data>
+  <data name="PopUp_Presentation_Request_Cancel_Button" xml:space="preserve">
+    <value>Später</value>
+  </data>
+  <data name="PopUp_Presentation_Request_Received_Text" xml:space="preserve">
+    <value>Sie haben eine neue Proof-Anfrage von </value>
+  </data>
+  <data name="PopUp_Presentation_Request_Title" xml:space="preserve">
+    <value>Neue Anfrage</value>
+  </data>
+  <data name="PopUp_Presented_Details_Cancel_Button" xml:space="preserve">
+    <value>Schließen</value>
+  </data>
+  <data name="PopUp_Presented_Details_CheckBox_Label" xml:space="preserve">
+    <value>Ich verstehe, Löschung beantragen.</value>
+  </data>
+  <data name="PopUp_Presented_Details_Claim_Back_Button" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="PopUp_Presented_Details_Claim_Back_Cancel_Button" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="PopUp_Presented_Details_Claim_Back_Confirmed_Button" xml:space="preserve">
+    <value>Bestätigen</value>
+  </data>
+  <data name="PopUp_Presented_Details_Deleted_Label" xml:space="preserve">
+    <value>GELÖSCHT</value>
+  </data>
+  <data name="PopUp_Presented_Details_Disclaimer_Label" xml:space="preserve">
+    <value>Nach Art. 17 DSGVO haben Sie ein Recht auf die Löschung ihrer Daten. Die Digital Enabling GmbH (App Herausgeber) kann nicht gewährleisten, dass der Empfänger des Antrags die Löschung tatsächlich durchführt.</value>
+  </data>
+  <data name="PopUp_Presented_Details_Info_Label" xml:space="preserve">
+    <value>Sind Sie sicher, dass Sie die Löschung ihrer geteilten Informationen beantragen wollen?</value>
+  </data>
+  <data name="PopUp_Presented_Details_NonRevealed_Label" xml:space="preserve">
+    <value>NonRevealed</value>
+  </data>
+  <data name="PopUp_Presented_Details_Predicate_Label" xml:space="preserve">
+    <value>Predicate</value>
+  </data>
+  <data name="PopUp_Presented_Details_Revealed_Label" xml:space="preserve">
+    <value>Revealed</value>
+  </data>
+  <data name="PopUp_Presented_Details_SelfAttested_Label" xml:space="preserve">
+    <value>SelfAttested</value>
+  </data>
+  <data name="PopUp_Presented_Details_Undeletable_Disclaimer" xml:space="preserve">
+    <value>Die automatische Löschung geteilter Informationen kann nur beantragt werden, wenn die Gegenseite diese Funktion unterstützt. Die Löschung sonstiger Proof Anfragen muss  direkt beim Empfänger beantragt werden.</value>
+  </data>
+  <data name="PopUp_Proof_Request_NoConnection_Received_Text" xml:space="preserve">
+    <value>Sie haben eine neue Proof-Anfrage</value>
+  </data>
+  <data name="PopUp_Proof_Request_Received_Button" xml:space="preserve">
+    <value>Anfrage anzeigen</value>
+  </data>
+  <data name="PopUp_Proof_Request_Received_Text" xml:space="preserve">
+    <value>Sie haben eine neue Proof-Anfrage von</value>
+  </data>
+  <data name="PopUp_Proof_Request_Received_Title" xml:space="preserve">
+    <value>Neue Anfrage</value>
+  </data>
+  <data name="PopUp_Proof_Sending_Error_Button" xml:space="preserve">
+    <value>Okay</value>
+    <comment>Okay</comment>
+  </data>
+  <data name="PopUp_Proof_Sending_Error_Message" xml:space="preserve">
+    <value>Senden des Proof fehlgeschlagen, bitte versuchen Sie es erneut.</value>
+  </data>
+  <data name="PopUp_Proof_Sending_Error_Title" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
+  <data name="PopUp_Proof_Sending_Failed_Button" xml:space="preserve">
+    <value>Schließen</value>
+  </data>
+  <data name="PopUp_Proof_Sending_Failed_Text" xml:space="preserve">
+    <value>Senden des Proof fehlgeschlagen.</value>
+  </data>
+  <data name="PopUp_Proof_Sending_Failed_Title" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
+  <data name="PopUp_Proof_Sending_Response_Button" xml:space="preserve">
+    <value>Schließen</value>
+  </data>
+  <data name="PopUp_Proof_Sending_Response_CheckBox_Text" xml:space="preserve">
+    <value>Diese Nachricht künftig nicht mehr anzeigen.</value>
+  </data>
+  <data name="PopUp_Proof_Sending_Response_Text_1" xml:space="preserve">
+    <value>Sie können die geteilte Information im</value>
+  </data>
+  <data name="PopUp_Proof_Sending_Response_Text_2" xml:space="preserve">
+    <value>Verlauf</value>
+  </data>
+  <data name="PopUp_Proof_Sending_Response_Text_3" xml:space="preserve">
+    <value>einsehen.</value>
+  </data>
+  <data name="PopUp_Proof_Sending_Response_Title" xml:space="preserve">
+    <value>Teilen erfolgreich</value>
+  </data>
+  <data name="PopUp_ProofRequest_Accept_Button" xml:space="preserve">
+    <value>Teilen</value>
+  </data>
+  <data name="PopUp_ProofRequest_Delete_Button" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="PopUp_ProofRequest_Header_AfterName" xml:space="preserve">
+    <value>teilen?</value>
+  </data>
+  <data name="PopUp_ProofRequest_Header_BeforeName" xml:space="preserve">
+    <value>Möchten Sie diese Nachweise mit</value>
+  </data>
+  <data name="PopUp_ProofRequest_ItemText" xml:space="preserve">
+    <value>Bitte nur eine Bescheinigung wählen</value>
+  </data>
+  <data name="PopUp_ProofRequest_Privacy_Policy_Label1" xml:space="preserve">
+    <value>Bitte nehmen Sie unsere Datenschutzerklärung zur Kenntnis</value>
+  </data>
+  <data name="PopUp_ProofRequest_Privacy_Policy_Label2" xml:space="preserve">
+    <value>besonders Abschnitt 2.2</value>
+  </data>
+  <data name="PopUp_ProofRequest_Privacy_Policy_Label3" xml:space="preserve">
+    <value>Mit "Senden" bestätigen Sie, dass die ausgewählten Daten übertragen werden an</value>
+  </data>
+  <data name="PopUp_ProofRequest_Text" xml:space="preserve">
+    <value>Bitte prüfen Sie, ob Sie all diese Daten teilen möchten.</value>
+  </data>
+  <data name="PopUp_Proofs_Deleted_Button" xml:space="preserve">
+    <value>Okay</value>
+  </data>
+  <data name="PopUp_Proofs_Deleted_Count_Text" xml:space="preserve">
+    <value>Anzahl gelöschter Proofs: </value>
+  </data>
+  <data name="PopUp_Proofs_Deleted_Text" xml:space="preserve">
+    <value> hat ihre Anfrage erhalten und die geteilten Informationen gelöscht.</value>
+  </data>
+  <data name="PopUp_Proofs_Deleted_Title" xml:space="preserve">
+    <value>Löschanfrage erfolgreich</value>
+  </data>
+  <data name="PopUp_QR_Fail_Button" xml:space="preserve">
+    <value>Okay</value>
+  </data>
+  <data name="PopUp_QR_Fail_Text" xml:space="preserve">
+    <value>Der QR-Code stellt keine Verbindung oder Transaktion dar.</value>
+  </data>
+  <data name="PopUp_QR_Fail_Title" xml:space="preserve">
+    <value>Kein gültiger QR-Code</value>
+  </data>
+  <data name="PopUp_Recovery_Common_Invalid_State_Button" xml:space="preserve">
+    <value>Schließen</value>
+  </data>
+  <data name="PopUp_Recovery_Common_Invalid_State_Text" xml:space="preserve">
+    <value>Konnte Wallet nicht wiederherstellen, bitte installieren Sie die App neu.</value>
+  </data>
+  <data name="PopUp_Recovery_Common_Invalid_State_Title" xml:space="preserve">
+    <value>Wiederherstellung nicht möglich.</value>
+  </data>
+  <data name="PopUp_Recovery_Common_Invalid_Structure_Button" xml:space="preserve">
+    <value>Schließen</value>
+  </data>
+  <data name="PopUp_Recovery_Common_Invalid_Structure_Text" xml:space="preserve">
+    <value>Bitte stellen Sie sicher, dass Sie die korrekte Backup-Datei hochladen und geben Sie die Seed-Phrase erneut ein.</value>
+  </data>
+  <data name="PopUp_Recovery_Common_Invalid_Structure_Title" xml:space="preserve">
+    <value>Falsche Backup-Datei oder Seed-Phrase</value>
+  </data>
+  <data name="PopUp_Recovery_Import_Failed_Button" xml:space="preserve">
+    <value>Schließen</value>
+  </data>
+  <data name="PopUp_Recovery_Import_Failed_Text" xml:space="preserve">
+    <value>Problem bei der Wiederherstellung. Bitte versuchen Sie es noch einmal.</value>
+  </data>
+  <data name="PopUp_Recovery_Import_Failed_Title" xml:space="preserve">
+    <value>Importieren fehlgeschlagen</value>
+  </data>
+  <data name="PopUp_Recovery_Invalid_Mnenomic_Button" xml:space="preserve">
+    <value>Schließen</value>
+  </data>
+  <data name="PopUp_Recovery_Invalid_Mnenomic_Text" xml:space="preserve">
+    <value>Bitte versuchen Sie es noch einmal.</value>
+  </data>
+  <data name="PopUp_Recovery_Invalid_Mnenomic_Title" xml:space="preserve">
+    <value>Falsche Seed-Phrase</value>
+  </data>
+  <data name="PopUp_RenewPush_Accept" xml:space="preserve">
+    <value>Okay</value>
+  </data>
+  <data name="PopUp_RenewPush_Cancel" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="PopUp_RenewPush_Message" xml:space="preserve">
+    <value>Durch die Bestätigung wird der Push-Token für Ihr Gerät erneuert. Führen Sie diesen Schritt bitte durch, falls Sie Probleme beim Erhalt von Nachrichten haben.</value>
+  </data>
+  <data name="PopUp_RenewPush_Title" xml:space="preserve">
+    <value>Push-Token erneuern</value>
+  </data>
+  <data name="PopUp_Restriction_Button" xml:space="preserve">
+    <value>Schließen</value>
+  </data>
+  <data name="PopUp_Restriction_Header" xml:space="preserve">
+    <value>Restriktionen</value>
+  </data>
+  <data name="PopUp_Save_Changes_Dont_Save_Button" xml:space="preserve">
+    <value>Nicht speichern</value>
+  </data>
+  <data name="PopUp_Save_Changes_Save_Button" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="PopUp_Save_Changes_Text" xml:space="preserve">
+    <value>Manche Änderungen wurden nicht gespeichert. Möchten Sie sie speichern?</value>
+  </data>
+  <data name="PopUp_Save_Changes_Title" xml:space="preserve">
+    <value>Nicht gespeicherte Änderungen</value>
+  </data>
+  <data name="PopUp_Scanner_Permission_Button" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="PopUp_Scanner_Permission_Text" xml:space="preserve">
+    <value>ID Wallet benötigt Zugriff auf die Kamera Ihres Geräts, um den Scanner verwenden zu können.</value>
+  </data>
+  <data name="PopUp_Scanner_Permission_Title" xml:space="preserve">
+    <value>Freigabe benötigt</value>
+  </data>
+  <data name="PopUp_Seed_Phrase_Wrong_Button" xml:space="preserve">
+    <value>Okay</value>
+  </data>
+  <data name="PopUp_Seed_Phrase_Wrong_Text" xml:space="preserve">
+    <value>Bitte schreiben Sie diese Wörter sorgfältig auf und versuchen Sie es noch einmal.</value>
+  </data>
+  <data name="PopUp_Seed_Phrase_Wrong_Title" xml:space="preserve">
+    <value>Falsche Seed-Phrase</value>
+  </data>
+  <data name="PopUp_Storage_Permission_Needed_Credential_Button" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="PopUp_Storage_Permission_Needed_Credential_Text" xml:space="preserve">
+    <value>ID Wallet benötigt Zugriff auf den Speicher Ihres Geräts, um dieses Credential annehmen zu können.</value>
+  </data>
+  <data name="PopUp_Storage_Permission_Needed_Credential_Title" xml:space="preserve">
+    <value>Freigabe benötigt</value>
+  </data>
+  <data name="PopUp_Storage_Permission_Needed_Proof_Button" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="PopUp_Storage_Permission_Needed_Proof_Text" xml:space="preserve">
+    <value>ID Wallet hat versucht, eine Anfrage automatisch zu beantworten, benötigt dazu aber Erlaubnis, den Speicher des Geräts zu nutzen.</value>
+  </data>
+  <data name="PopUp_Storage_Permission_Needed_Proof_Title" xml:space="preserve">
+    <value>Freigabe benötigt</value>
+  </data>
+  <data name="PopUp_Transaction_Error_Button" xml:space="preserve">
+    <value>Okay</value>
+    <comment>Okay</comment>
+  </data>
+  <data name="PopUp_Transaction_Error_Message" xml:space="preserve">
+    <value>Diese Sitzung wurde bereits verwendet.</value>
+  </data>
+  <data name="PopUp_Transaction_Error_Title" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
+  <data name="PopUp_Transaction_Ledger_Change_Message" xml:space="preserve">
+    <value>Sie befinden sich nicht auf dem vorgeschlagenen Ledger.</value>
+  </data>
+  <data name="PopUp_Transaction_Ledger_Change_Title" xml:space="preserve">
+    <value>Falscher Ledger</value>
+  </data>
+  <data name="PopUp_Undefined_Error_Add_Credential_Page_Item_Message" xml:space="preserve">
+    <value>Beim Hinzufügen eines neuen Elements der Credential Page ist ein Fehler aufgetreten</value>
+  </data>
+  <data name="PopUp_Undefined_Error_Add_Credential_Page_Pop_Up_Item_Message" xml:space="preserve">
+    <value>Ein Fehler ist beim Hinzufügen eines neuen Credential Page History Item aufgetreten</value>
+  </data>
+  <data name="PopUp_Undefined_Error_Button" xml:space="preserve">
+    <value>Okay</value>
+    <comment>Okay</comment>
+  </data>
+  <data name="PopUp_Undefined_Error_Connections_Added_Message" xml:space="preserve">
+    <value>Beim Hinzufügen einer neuen Verbindung zum Modell der Views ist ein Fehler aufgetreten</value>
+  </data>
+  <data name="PopUp_Undefined_Error_Connections_Processed_Message" xml:space="preserve">
+    <value>Bei der Verarbeitung einer neuen Nachricht im Connection View Model ist ein Fehler aufgetreten</value>
+  </data>
+  <data name="PopUp_Undefined_Error_Create_Cred_Detail_Message" xml:space="preserve">
+    <value>Bei der Deserialisierung von Credential-Details ist ein Fehler aufgetreten</value>
+  </data>
+  <data name="PopUp_Undefined_Error_Create_Proof_Title_Message" xml:space="preserve">
+    <value>Bei der Deserialisierung des Proof-Titels ist ein Fehler aufgetreten</value>
+  </data>
+  <data name="PopUp_Undefined_Error_Execute_Notifications_Add_Message" xml:space="preserve">
+    <value>Beim Hinzufügen einer neuen Auto-Accept-Benachrichtigung ist ein Fehler aufgetreten</value>
+  </data>
+  <data name="PopUp_Undefined_Error_Execute_Notifications_Message" xml:space="preserve">
+    <value>Ein Fehler ist bei der Deserialisierung der Credential-Benachrichtigung aufgetreten</value>
+  </data>
+  <data name="PopUp_Undefined_Error_Execute_Notifications_Proof_Message" xml:space="preserve">
+    <value>Bei der Deserialisierung der Proof-Benachrichtigung ist ein Fehler aufgetreten</value>
+  </data>
+  <data name="PopUp_Undefined_Error_Load_Shared_Message" xml:space="preserve">
+    <value>Ein Fehler ist bei der Deserialisierung freigegebener Credentials aufgetreten</value>
+  </data>
+  <data name="PopUp_Undefined_Error_Message" xml:space="preserve">
+    <value>Ein unbekannter Fehler ist aufgetreten, bitte versuchen Sie es erneut.</value>
+  </data>
+  <data name="PopUp_Undefined_Error_Save_Message" xml:space="preserve">
+    <value>Bei der Serialisierung eines Sitzungswertes ist ein Fehler aufgetreten</value>
+  </data>
+  <data name="PopUp_Undefined_Error_Title" xml:space="preserve">
+    <value>Es ist ein Fehler aufgetreten</value>
+  </data>
+  <data name="ProofRequestDetailsPage_Create_Button" xml:space="preserve">
+    <value>Erstellen</value>
+  </data>
+  <data name="ProofRequestDetailsPage_Details_Label" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="ProofRequestDetailsPage_Revealed_Label" xml:space="preserve">
+    <value>Geteilte Informationen</value>
+  </data>
+  <data name="ProofRequestPage_Cancel_Button" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="ProofRequestPage_CredDefInfo_Text" xml:space="preserve">
+    <value>Die Kombination mehrerer Credentials zur gleichen Credential Definition ist nicht möglich.</value>
+  </data>
+  <data name="ProofRequestPage_Entry_Placeholder" xml:space="preserve">
+    <value>Selbst wählen</value>
+  </data>
+  <data name="ProofRequestPage_Head_Label" xml:space="preserve">
+    <value>erbittet die folgenden Informationen von Ihnen</value>
+  </data>
+  <data name="ProofRequestPage_Send_Button" xml:space="preserve">
+    <value>Senden</value>
+  </data>
+  <data name="ProofRequestPage_Unknown_Connection_Alias" xml:space="preserve">
+    <value>Unbekannt</value>
+  </data>
+  <data name="RecoverBackupPage_Choose_File" xml:space="preserve">
+    <value>Wählen Sie eine Datei, aus der Sie Ihr Wallet wiederherstellen möchten</value>
+  </data>
+  <data name="RecoverBackupPage_Enter_Phrase" xml:space="preserve">
+    <value>Bitte geben Sie die Wiederherstellungsworte getrennt durch Leerzeichen ein:</value>
+  </data>
+  <data name="RecoverBackupPage_Entry_Placeholder" xml:space="preserve">
+    <value>Wiederherstellungsworte eingeben</value>
+  </data>
+  <data name="RecoverBackupPage_Open_File_Button" xml:space="preserve">
+    <value>Datei öffnen</value>
+  </data>
+  <data name="RecoverBackupPage_Recover_Button" xml:space="preserve">
+    <value>Backup wiederherstellen</value>
+  </data>
+  <data name="RecoverBackupPage_Title" xml:space="preserve">
+    <value>Wiederherstellung</value>
+  </data>
+  <data name="RecoverBackupPage_Warning" xml:space="preserve">
+    <value>Achtung: Die Wiederherstellung eines Wallets überschreibt das derzeitig aktive Wallet. Alle Daten werden unwiderruflich gelöscht.</value>
+  </data>
+  <data name="ScanPage_Camera_Icon_Label" xml:space="preserve">
+    <value>Scannen Sie einen QR-Code</value>
+  </data>
+  <data name="SettingsPage_Legal" xml:space="preserve">
+    <value>Rechtliches</value>
+  </data>
+  <data name="SettingsPage_Advanced_Settings" xml:space="preserve">
+    <value>Erweiterte Einstellungen</value>
+  </data>
+  <data name="SettingsPage_Biometrics" xml:space="preserve">
+    <value>Biometrie verwenden</value>
+  </data>
+  <data name="SettingsPage_Change_Language" xml:space="preserve">
+    <value>Sprache wechseln</value>
+  </data>
+  <data name="SettingsPage_Change_Ledger" xml:space="preserve">
+    <value>Ledger wechseln</value>
+  </data>
+  <data name="SettingsPage_Change_Passcode" xml:space="preserve">
+    <value>PIN ändern</value>
+  </data>
+  <data name="SettingsPage_ClearData" xml:space="preserve">
+    <value>Alle Daten löschen</value>
+  </data>
+  <data name="SettingsPage_Connections" xml:space="preserve">
+    <value>Verbindungen</value>
+  </data>
+  <data name="SettingsPage_Create_Backup" xml:space="preserve">
+    <value>Backup erstellen</value>
+  </data>
+  <data name="SettingsPage_First_Category" xml:space="preserve">
+    <value>SICHERHEIT</value>
+  </data>
+  <data name="SettingsPage_ForceFocus" xml:space="preserve">
+    <value>Autofokus erzwingen</value>
+  </data>
+  <data name="SettingsPage_Gateways" xml:space="preserve">
+    <value>Gateways</value>
+  </data>
+  <data name="SettingsPage_Legal_Notice" xml:space="preserve">
+    <value>Impressum</value>
+  </data>
+  <data name="SettingsPage_Licenses" xml:space="preserve">
+    <value>Lizenzen</value>
+  </data>
+  <data name="SettingsPage_Options" xml:space="preserve">
+    <value>Optionen</value>
+  </data>
+  <data name="SettingsPage_Privacy_Policy" xml:space="preserve">
+    <value>Datenschutzerklärung</value>
+  </data>
+  <data name="SettingsPage_Recover_Backup" xml:space="preserve">
+    <value>Aus Backup wiederherstellen</value>
+  </data>
+  <data name="SettingsPage_Renew_Push" xml:space="preserve">
+    <value>Push erneuern</value>
+  </data>
+  <data name="SettingsPage_RenewPush" xml:space="preserve">
+    <value>Push erneuern</value>
+  </data>
+  <data name="SettingsPage_Second_Category" xml:space="preserve">
+    <value>OPTIONEN</value>
+  </data>
+  <data name="SettingsPage_Security" xml:space="preserve">
+    <value>Sicherheit</value>
+  </data>
+  <data name="SettingsPage_ShowMediator" xml:space="preserve">
+    <value>Mediator Connection anzeigen</value>
+  </data>
+  <data name="SettingsPage_ShowMigrationLog" xml:space="preserve">
+    <value>Migrationslog anzeigen</value>
+  </data>
+  <data name="SettingsPage_StartMigration" xml:space="preserve">
+    <value>Starte Migration</value>
+  </data>
+  <data name="SettingsPage_Title" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
+  <data name="Start_Scan" xml:space="preserve">
+    <value>Scan starten</value>
+  </data>
+  <data name="Tabbar_Connections" xml:space="preserve">
+    <value>Verbindungen</value>
+  </data>
+  <data name="Tabbar_Credentials" xml:space="preserve">
+    <value>Credentials</value>
+  </data>
+  <data name="Tabbar_History" xml:space="preserve">
+    <value>Verlauf</value>
+  </data>
+  <data name="Tabbar_Proofs" xml:space="preserve">
+    <value>Proofs</value>
+  </data>
+  <data name="Tabbar_Scan" xml:space="preserve">
+    <value>Scan</value>
+  </data>
+  <data name="Tabbar_Wallet" xml:space="preserve">
+    <value>Wallet</value>
+  </data>
+  <data name="WalletPage_Title" xml:space="preserve">
+    <value>Wallet</value>
+  </data>
+  <data name="CredentialHistoryListElement_From" xml:space="preserve">
+    <value>Von</value>
+  </data>
+  <data name="PopUp_Credential_Offer_Embedded_Document" xml:space="preserve">
+    <value>embeddedImage</value>
+  </data>
+  <data name="PopUp_Credential_Offer_Embedded_Image" xml:space="preserve">
+    <value>embeddedDocument</value>
+  </data>
+  <data name="PopUp_Credential_New_Offer_Title" xml:space="preserve">
+    <value>Neuer Nachweis</value>
+  </data>
+  <data name="PopUp_Credential_New_Offer_First_Text" xml:space="preserve">
+    <value>Möchten Sie den Nachweis von </value>
+  </data>
+  <data name="PopUp_Credential_New_Offer_Second_Text" xml:space="preserve">
+    <value> zu Ihrem Wallet hinzufügen?</value>
+  </data>
+  <data name="LabelTextConvert_addressCity" xml:space="preserve">
+    <value>Stadt</value>
+  </data>
+  <data name="LabelTextConvert_familyName" xml:space="preserve">
+    <value>Familienname</value>
+  </data>
+  <data name="LabelTextConvert_placeOfBirth" xml:space="preserve">
+    <value>Geburtsort</value>
+  </data>
+  <data name="LabelTextConvert_birthName" xml:space="preserve">
+    <value>(eventuell) Geburtsname</value>
+  </data>
+  <data name="LabelTextConvert_firstName" xml:space="preserve">
+    <value>Vorname</value>
+  </data>
+  <data name="LabelTextConvert_dateOfBirth" xml:space="preserve">
+    <value>Geburtsdatum</value>
+  </data>
+  <data name="LabelTextConvert_addressStreet" xml:space="preserve">
+    <value>Straße</value>
+  </data>
+  <data name="LabelTextConvert_addressCountry" xml:space="preserve">
+    <value>Land</value>
+  </data>
+  <data name="LabelTextConvert_dateOfExpiry" xml:space="preserve">
+    <value>Ablaufdatum</value>
+  </data>
+  <data name="LabelTextConvert_academicTitle" xml:space="preserve">
+    <value>Akademischer Titel</value>
+  </data>
+  <data name="LabelTextConvert_addressZipCode" xml:space="preserve">
+    <value>PLZ</value>
+  </data>
+  <data name="LabelTextConvert_firmName" xml:space="preserve">
+    <value>Firma</value>
+  </data>
+  <data name="LabelTextConvert_firmSubject" xml:space="preserve">
+    <value>Betreff</value>
+  </data>
+  <data name="LabelTextConvert_firmStreet" xml:space="preserve">
+    <value>Straße</value>
+  </data>
+  <data name="LabelTextConvert_firmCity" xml:space="preserve">
+    <value>Stadt</value>
+  </data>
+  <data name="LabelTextConvert_firmPostalcode" xml:space="preserve">
+    <value>PLZ</value>
+  </data>
+  <data name="BaseIDPage_Connecting_Title" xml:space="preserve">
+    <value>Ausweisvorgang wird durchgeführt</value>
+  </data>
+  <data name="BaseIDPage_Connecting_Text" xml:space="preserve">
+    <value>Bitte den Ausweis nicht bewegen.</value>
+  </data>
+  <data name="BaseIDPage_Connecting_Bar_Text_2" xml:space="preserve">
+    <value>Karte wird geprüft</value>
+  </data>
+  <data name="BaseIDPage_Connecting_Bar_Text_1" xml:space="preserve">
+    <value>Anbieter wird geprüft</value>
+  </data>
+  <data name="BaseIDPage_Connecting_Bar_Text_3" xml:space="preserve">
+    <value>Daten werden gelesen</value>
+  </data>
+  <data name="BaseIDPage_Connecting_Bar_Text_4" xml:space="preserve">
+    <value>Ergebnisse werden verarbeitet</value>
+  </data>
+  <data name="PopUp_Missing_Credentials_Title" xml:space="preserve">
+    <value>Fehlende Nachweise</value>
+  </data>
+  <data name="PopUp_Missing_Credentials_Button" xml:space="preserve">
+    <value>Okay</value>
+  </data>
+  <data name="PopUp_Missing_Credentials_Text" xml:space="preserve">
+    <value>Ihnen fehlen die nötigen Nachweise um diese Anfrage zu beantworten.</value>
+  </data>
+  <data name="BaseIDPage_SuccessScreen_Button" xml:space="preserve">
+    <value>ID Anzeigen</value>
+  </data>
+  <data name="BaseIDPage_SuccessScreen_Text" xml:space="preserve">
+    <value>Ihre Basis-ID liegt jetzt in Ihrer Wallet bereit.</value>
+  </data>
+  <data name="BaseIDPage_SuccessScreen_Title" xml:space="preserve">
+    <value>Basis-ID wurde erfolgreich angelegt</value>
+  </data>
+  <data name="PopUp_BaseID_Lock_Button" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="PopUp_BaseID_Lock_Title" xml:space="preserve">
+    <value>Sperrkennwort erhalten</value>
+  </data>
+  <data name="PopUp_BaseID_Lock_Text" xml:space="preserve">
+    <value>Zu Ihrer Basis-ID erhalten Sie Ihr persönliches Sperrkennwort. Dieses benötigen Sie für das Sperren der Basis-ID (z.B. im Falle des Verlustes Ihres Personalausweises).</value>
+  </data>
+  <data name="BaseIDPage_PINScreen_Default_Header_Label" xml:space="preserve">
+    <value>Ausweis-PIN eingeben</value>
+  </data>
+  <data name="BaseIDPage_PINScreen_Transport_Label" xml:space="preserve">
+    <value>Nur Transport-PIN bekannt?</value>
+  </data>
+  <data name="BaseIDPage_ReadIdScreen_Header_Label" xml:space="preserve">
+    <value>Personalausweis auslesen</value>
+  </data>
+  <data name="BaseIDPage_ReadIdScreen_Body_Label" xml:space="preserve">
+    <value>Bitte halten Sie Ihren Personalausweis und die zugehörige Ausweis-PIN bereit.</value>
+  </data>
+  <data name="BaseIDPage_ReadIdScreen_Button_Label" xml:space="preserve">
+    <value>Personalausweis auslesen</value>
+  </data>
+  <data name="BaseIDPage_StartScreen_Header_Label" xml:space="preserve">
+    <value>Basis-ID anlegen</value>
+  </data>
+  <data name="BaseIDPage_StartScreen_Body_Label" xml:space="preserve">
+    <value>Die Bundesdruckerei GmbH stellt im Rahmen des Projekts „Europäisches Identitätsökosystem“ für das Bundeskanzleramt eine Basis-ID nach einer erfolgreichen Identifizierung mit Hilfe der Online-Ausweisfunktion des Personalausweises aus. Diese Basis-ID steht Ihnen im Rahmen eines Testbetriebs zur späteren Nutzung nach Maßgabe der nachfolgenden Bestimmungen zur Verfügung.</value>
+  </data>
+  <data name="BaseIDPage_StartScreen_Button_Label" xml:space="preserve">
+    <value>Los gehts</value>
+  </data>
+  <data name="BaseIDPage_StartScreen_User_Agreement_Label" xml:space="preserve">
+    <value>Nutzungsbedingungen</value>
+  </data>
+  <data name="BaseIDPage_StartScreen_Accept_After_Label" xml:space="preserve">
+    <value> zustimmen</value>
+  </data>
+  <data name="PopUp_BaseID_AccessRights_Text" xml:space="preserve">
+    <value>Bitte prüfen Sie, ob Sie diese Daten teilen möchten.</value>
+  </data>
+  <data name="PopUp_BaseID_AccessRights_Title" xml:space="preserve">
+    <value>Sie möchten sich für folgenden Vorgang ausweisen</value>
+  </data>
+  <data name="PopUp_BaseID_AccessRights_Continue_Button" xml:space="preserve">
+    <value>Teilen</value>
+  </data>
+  <data name="PopUp_BaseID_AccessRights_Cancel_Button" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="PopUp_BaseID_AccessRights_Provider_Label" xml:space="preserve">
+    <value>Anbieter</value>
+  </data>
+  <data name="PopUp_BaseID_AccessRights_Purpose_Label" xml:space="preserve">
+    <value>Zweck</value>
+  </data>
+  <data name="PopUp_BaseID_Offer_Accept_Button" xml:space="preserve">
+    <value>Annehmen</value>
+  </data>
+  <data name="PopUp_BaseID_Offer_Delete_Button" xml:space="preserve">
+    <value>Ablehnen</value>
+  </data>
+  <data name="PopUp_BaseID_Offer_Send_Label" xml:space="preserve">
+    <value> sendet Ihnen </value>
+  </data>
+  <data name="BaseIDPage_Create_Connection_Title" xml:space="preserve">
+    <value>Verbindung wird hergestellt</value>
+  </data>
+  <data name="BaseIDPage_Create_Connection_Text" xml:space="preserve">
+    <value>Bitte halten Sie Ihren Ausweis an die Rückseite Ihres Gerätes. Die genaue Position ist modellabhängig. Halten Sie jede Position einige Sekunden, bevor Sie eine andere ausprobieren. Bewegen Sie den Ausweis nicht mehr, sobald der Kontakt hergestellt wurde.</value>
+  </data>
+  <data name="WalletPage_Info_Panel_LockPIN" xml:space="preserve">
+    <value>Sperrkennwort</value>
+  </data>
+  <data name="BaseIDPage_StartScreen_Privacy_Policy_Label" xml:space="preserve">
+    <value>Datenschutzbestimmungen</value>
+  </data>
+  <data name="BaseIDPage_PINScreen_Transport_Body_Label" xml:space="preserve">
+    <value>Diese PIN haben Sie zusammen mit der PUK postalisch von Ihrer zuständigen Meldebehörde erhalten.</value>
+  </data>
+  <data name="BaseIDPage_PINScreen_Transport_Header_Label" xml:space="preserve">
+    <value>Transport-PIN eingeben</value>
+  </data>
+  <data name="WalletPage_BaseID" xml:space="preserve">
+    <value>Basis-ID</value>
+  </data>
+  <data name="WalletPage_Empty_Wallet_BaseID_Button" xml:space="preserve">
+    <value>Basis-ID anlegen</value>
+  </data>
+  <data name="BaseIDPage_PINScreen_Confirm_Body_Label" xml:space="preserve">
+    <value>Bitte bestätigen Sie Ihre neue Ausweis-PIN durch erneute Eingabe.</value>
+  </data>
+  <data name="BaseIDPage_PINScreen_New_Body_Label" xml:space="preserve">
+    <value>Bitte geben Sie nun Ihre neue, individuelle sechsstellige Ausweis-PIN ein.</value>
+  </data>
+  <data name="BaseIDPage_PINScreen_Confirm_Header_Label" xml:space="preserve">
+    <value>Neue PIN bestätigen</value>
+  </data>
+  <data name="BaseIDPage_PINScreen_New_Header_Label" xml:space="preserve">
+    <value>Neue Ausweis-PIN eingeben</value>
+  </data>
+  <data name="BaseIDPage_PINSuccess_Button_Text" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="BaseIDPage_PINSuccess_Header_Label" xml:space="preserve">
+    <value>Sie haben Ihre PIN erfolgreich geändert.</value>
+  </data>
+  <data name="PopUp_LockBaseID_Cancel_Button" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="PopUp_LockBaseID_Delete_Button" xml:space="preserve">
+    <value>Basis-ID sperren</value>
+  </data>
+  <data name="PopUp_LockBaseID_Entry_Placeholder" xml:space="preserve">
+    <value>Sperrkennwort</value>
+  </data>
+  <data name="PopUp_LockBaseID_Hotline" xml:space="preserve">
+    <value>Hotline 555-55555</value>
+  </data>
+  <data name="PopUp_LockBaseID_Text" xml:space="preserve">
+    <value>Hiermit sperren Sie Ihre Basis-ID. Dazu geben Sie bitte Ihr Sperrkennwort an. Sollten Sie dieses nicht mehr wissen, dann melden Sie sich bitte umgehend beim nächsten Bürgeramt oder wenden Sie sich an die</value>
+  </data>
+  <data name="PopUp_LockBaseID_Title" xml:space="preserve">
+    <value>Basis-ID sperren</value>
+  </data>
+  <data name="PopUp_BaseID_ReadyToScan_Cancel_Button" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="PopUp_BaseID_ReadyToScan_Text" xml:space="preserve">
+    <value>Bitte halten Sie Ihren Ausweis an die Rückseite Ihres Gerätes.</value>
+  </data>
+  <data name="PopUp_BaseID_ReadyToScan_Title" xml:space="preserve">
+    <value>Bereit zum Scannen</value>
+  </data>
+  <data name="PopUp_BaseID_Enter_CAN_Button" xml:space="preserve">
+    <value>CAN eingeben</value>
+  </data>
+  <data name="PopUp_BaseID_Enter_CAN_Text_1" xml:space="preserve">
+    <value>Sie haben zweimal eine falsche, Ausweis-PIN eingegeben.</value>
+  </data>
+  <data name="PopUp_BaseID_Enter_CAN_Title" xml:space="preserve">
+    <value>Ihre Kartenzugangsnummer (CAN)</value>
+  </data>
+  <data name="PopUp_BaseID_Wrong_PIN_Bold_Text_1" xml:space="preserve">
+    <value>einen weiteren Versuch,</value>
+  </data>
+  <data name="PopUp_BaseID_Wrong_PIN_Bold_Text_2" xml:space="preserve">
+    <value>zwei weitere Versuche,</value>
+  </data>
+  <data name="PopUp_BaseID_Wrong_PIN_Bold_Text_3" xml:space="preserve">
+    <value>drei weitere Versuche,</value>
+  </data>
+  <data name="PopUp_BaseID_Wrong_PIN_Bold_Text_4" xml:space="preserve">
+    <value>vier weitere Versuche,</value>
+  </data>
+  <data name="PopUp_BaseID_Wrong_PIN_Button" xml:space="preserve">
+    <value>PIN erneut eingeben</value>
+  </data>
+  <data name="PopUp_BaseID_Wrong_PIN_Post_Text" xml:space="preserve">
+    <value>die richtige PIN einzugeben.</value>
+  </data>
+  <data name="PopUp_BaseID_Wrong_PIN_Pre_Text" xml:space="preserve">
+    <value>Sie haben den falschen sechsstelligen PIN eingegeben. Sie haben </value>
+  </data>
+  <data name="PopUp_BaseID_Wrong_PIN_Title" xml:space="preserve">
+    <value>PIN falsch</value>
+  </data>
+  <data name="BaseIDPage_PINScreen_CAN_Body_Label" xml:space="preserve">
+    <value>Bitte geben Sie die sechsstellige Zugangsnummer (CAN) ein. Diese finden Sie unten rechts auf der Vorderseite des Ausweises.</value>
+  </data>
+  <data name="BaseIDPage_PINScreen_CAN_Header_Label" xml:space="preserve">
+    <value>CAN eingeben</value>
+  </data>
+  <data name="PopUp_BaseID_Enter_PUK_Button" xml:space="preserve">
+    <value>PUK eingeben</value>
+  </data>
+  <data name="PopUp_BaseID_Enter_PUK_Text" xml:space="preserve">
+    <value>Sie haben dreimal eine falsche, Ausweis-PIN eingegeben. Um Ihre Ausweis-PIN zu entsperren muss zunächst die zehnstellige Entsperrnummer (PUK) eingegeben werden. Diese finden Sie in Ihrem PIN-Brief.</value>
+  </data>
+  <data name="PopUp_BaseID_Enter_PUK_Title" xml:space="preserve">
+    <value>Ausweis-PIN gesperrt</value>
+  </data>
+  <data name="PopUp_BaseID_Inoperative_PUK_Button" xml:space="preserve">
+    <value>Okay</value>
+  </data>
+  <data name="PopUp_BaseID_Inoperative_PUK_Text" xml:space="preserve">
+    <value>Ihr PUK wurde bereits 10 mal verwendet. Wenden Sie sich bitte an Ihre zuständige Behörde um eine neue PUK zu beantragen. Ihre Basis-ID kann nicht erstellt werden.</value>
+  </data>
+  <data name="PopUp_BaseID_Inoperative_PUK_Title" xml:space="preserve">
+    <value>PUK außer Betrieb</value>
+  </data>
+  <data name="BaseIDPage_PINScreen_PUK_Body_Label" xml:space="preserve">
+    <value>Die PIN Ihres Ausweises ist nach dreimaliger Fehleingabe gesperrt. Bitte geben Sie zur Aufhebung der Sperrung die zehnstellige Entsperrnummer (PUK) ein.</value>
+  </data>
+  <data name="BaseIDPage_PINScreen_PUK_Header_Label" xml:space="preserve">
+    <value>PUK eingeben</value>
+  </data>
+  <data name="PopUp_BaseID_AccessRights_Provider_Label_2" xml:space="preserve">
+    <value>Bundesdruckerei GmbH</value>
+  </data>
+  <data name="PopUp_BaseID_AccessRights_Purpose_Label_2" xml:space="preserve">
+    <value>AusweisIDent - Online Ausweis Identifizierungsservice der Bundesdruckerei GmbH</value>
+  </data>
+  <data name="PopUp_BaseID_PUK_Info_Button" xml:space="preserve">
+    <value>PUK erneut eingeben</value>
+  </data>
+  <data name="PopUp_BaseID_PUK_Info_Text" xml:space="preserve">
+    <value>Die zehnstellige Entsperrnummer (PUK) finden Sie in Ihrem PIN-Brief. Sie können die PUK zehn mal eingeben, danach wird diese ungültig. In diesem Fall wenden Sie sich bitte an Ihre zuständige Behörde um eine neue PUK zu beantragen.</value>
+  </data>
+  <data name="PopUp_BaseID_PUK_Info_Title" xml:space="preserve">
+    <value>Entsperrnummer (PUK)</value>
+  </data>
+  <data name="PopUp_BaseID_Wrong_CAN_Button" xml:space="preserve">
+    <value>CAN erneut eingeben</value>
+  </data>
+  <data name="PopUp_BaseID_Wrong_CAN_Text" xml:space="preserve">
+    <value>Sie haben eine falsche sechsstellige CAN eingegeben. Sie finden diese unten rechts auf der Vorderseite Ihres Ausweises.</value>
+  </data>
+  <data name="PopUp_BaseID_Wrong_CAN_Title" xml:space="preserve">
+    <value>CAN falsch</value>
+  </data>
+  <data name="PopUp_BaseID_Wrong_PUK_Button" xml:space="preserve">
+    <value>PUK erneut eingeben</value>
+  </data>
+  <data name="PopUp_BaseID_Wrong_PUK_Text" xml:space="preserve">
+    <value>Sie haben eine falsche PUK eingegeben. Bitte versuchen Sie es erneut.</value>
+  </data>
+  <data name="PopUp_BaseID_Wrong_PUK_Title" xml:space="preserve">
+    <value>PUK falsch</value>
+  </data>
+  <data name="PopUp_BaseID_CAN_Info_Button" xml:space="preserve">
+    <value>CAN eingeben</value>
+  </data>
+  <data name="PopUp_BaseID_CAN_Info_Text" xml:space="preserve">
+    <value>Sie finden Ihre Kartenzugangsnummer (CAN) unten rechts auf der Vorderseite Ihres Ausweises.</value>
+  </data>
+  <data name="PopUp_BaseID_CAN_Info_Title" xml:space="preserve">
+    <value>Ihre Kartenzugangsnummer (CAN)</value>
+  </data>
+  <data name="BaseIDPage_PINScreen_Forgot_Your_PIN" xml:space="preserve">
+    <value>Ausweis-PIN vergessen?</value>
+  </data>
+  <data name="BaseIDPage_PINScreen_More_Information" xml:space="preserve">
+    <value>Mehr Informationen</value>
+  </data>
+  <data name="PopUp_BaseID_Enter_CAN_Text_2" xml:space="preserve">
+    <value>Für den dritten Versuch muss zunächst die sechsstellige Kartenzugangsnummer (CAN) eingegeben werden.</value>
+  </data>
+  <data name="PopUp_BaseID_Enter_CAN_Text_3" xml:space="preserve">
+    <value>Sie finden diese unten rechts auf der Vorderseite Ihres Ausweises.</value>
+  </data>
+  <data name="PopUp_BaseID_Forgot_My_PIN_Button" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="PopUp_BaseID_Forgot_My_PIN_Text" xml:space="preserve">
+    <value>Um Ihre Ausweis-PIN zurücksetzen zu lassen, melden Sie sich bitte bei Ihrer zuständigen Meldebehörde.</value>
+  </data>
+  <data name="PopUp_BaseID_Forgot_My_PIN_Title" xml:space="preserve">
+    <value>Ausweis-PIN vergessen</value>
+  </data>
+  <data name="PopUp_BaseID_Offer_Text" xml:space="preserve">
+    <value>Bitte prüfen Sie, ob Sie diese Daten erhalten möchten.</value>
+  </data>
+  <data name="BaseIDPage_PINScreen_Transport_Cancel" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="LoginPage_Title" xml:space="preserve">
+    <value>ID Wallet</value>
+  </data>
+  <data name="BaseIDPage_StartScreen_Accept_Before_Label" xml:space="preserve">
+    <value />
+  </data>
+  <data name="BaseIDPage_PINScreen_ChangePIN_Body_Label" xml:space="preserve">
+    <value>Bitte geben Sie nun Ihre aktuelle Ausweis-PIN ein.</value>
+  </data>
+  <data name="BaseIDPage_PINScreen_ChangePIN_Header_Label" xml:space="preserve">
+    <value>Aktuelle Ausweis-PIN eingeben</value>
+  </data>
+  <data name="PopUp_DataAccess_Cancel_Button" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="PopUp_DataAccess_Continue_Button" xml:space="preserve">
+    <value>Weiter</value>
+  </data>
+  <data name="PopUp_DataAccess_Text" xml:space="preserve">
+    <value>Lesezugriff</value>
+  </data>
+  <data name="PopUp_DataAccess_Title" xml:space="preserve">
+    <value>Auf folgende Daten wird zugegriffen</value>
+  </data>
+  <data name="PopUp_BaseID_AccessRights_DataAccess_Text" xml:space="preserve">
+    <value>Auf folgende Daten wird zugegriffen (Lesezugriff)</value>
+  </data>
+  <data name="BaseIDPage_PINScreen_Selection_Body_Text" xml:space="preserve">
+    <value>Haben Sie die Möglichkeit, die PIN Ihres Ausweises zu setzen oder zu ändern?</value>
+  </data>
+  <data name="BaseIDPage_PINScreen_Selection_Bold_Text" xml:space="preserve">
+    <value>Was für eine PIN haben Sie?</value>
+  </data>
+  <data name="BaseIDPage_PINScreen_Selection_Default_Button" xml:space="preserve">
+    <value>Sechsstellige PIN</value>
+  </data>
+  <data name="BaseIDPage_PINScreen_Selection_Forgot_Button" xml:space="preserve">
+    <value>Ausweis-PIN vergessen</value>
+  </data>
+  <data name="BaseIDPage_PINScreen_Selection_Transport_Button" xml:space="preserve">
+    <value>Fünfstellige Transport-PIN</value>
+  </data>
+  <data name="PopUp_NFC_Not_Enabled_Button" xml:space="preserve">
+    <value>Okay</value>
+  </data>
+  <data name="PopUp_NFC_Not_Enabled_Text" xml:space="preserve">
+    <value>Um eine Basis-ID zu erstellen, müssen Sie NFC auf ihrem Mobilgerät aktivieren.</value>
+  </data>
+  <data name="PopUp_NFC_Not_Enabled_Title" xml:space="preserve">
+    <value>NFC nicht aktiviert</value>
+  </data>
+  <data name="PopUp_BaseID_Auth_Error_Button" xml:space="preserve">
+    <value>Okay</value>
+  </data>
+  <data name="PopUp_BaseID_Auth_Error_Text" xml:space="preserve">
+    <value>Beim Verbinden mit der Bundesdruckerei ist etwas schief gelaufen. Bitte starten Sie den Prozess erneut.</value>
+  </data>
+  <data name="PopUp_BaseID_Auth_Error_Title" xml:space="preserve">
+    <value>Verbindungsaufbau fehlgeschlagen</value>
+  </data>
+  <data name="PopUp_HistoryDetails_Text1" xml:space="preserve">
+    <value>Am</value>
+  </data>
+  <data name="PopUp_HistoryDetails_Text2" xml:space="preserve">
+    <value>haben Sie folgende Informationen geteilt.</value>
+  </data>
+  <data name="PopUp_HistoryDetails_Title" xml:space="preserve">
+    <value>Geteilte Informationen</value>
+  </data>
+  <data name="PopUp_HistoryDetails_Button" xml:space="preserve">
+    <value>Schließen</value>
+  </data>
+  <data name="PopUp_HistoryDetails_NonRevealed" xml:space="preserve">
+    <value>Nicht Offengelegt</value>
+  </data>
+  <data name="PopUp_HistoryDetails_Predicates" xml:space="preserve">
+    <value>Indirekte Information</value>
+  </data>
+  <data name="PopUp_HistoryDetails_Revealed" xml:space="preserve">
+    <value>Offengelegt</value>
+  </data>
+  <data name="PopUp_HistoryDetails_SelfAttested" xml:space="preserve">
+    <value>Ohne Nachweis</value>
+  </data>
+  <data name="PopUp_HistoryCredential_Button" xml:space="preserve">
+    <value>Schließen</value>
+  </data>
+  <data name="PopUp_HistoryCredential_Text1" xml:space="preserve">
+    <value>Am</value>
+  </data>
+  <data name="PopUp_HistoryCredential_Text2" xml:space="preserve">
+    <value>haben Sie folgenden Nachweis erhalten.</value>
+  </data>
+  <data name="PopUp_HistoryCredential_Title" xml:space="preserve">
+    <value>Erhaltener Nachweis</value>
+  </data>
+  <data name="LabelTextConvert_Address" xml:space="preserve">
+    <value>Adresse</value>
+  </data>
+  <data name="LabelTextConvert_DoctoralDegree" xml:space="preserve">
+    <value>Akademischer Titel</value>
+  </data>
+  <data name="LabelTextConvert_Documenttype" xml:space="preserve">
+    <value>Dokumentenart</value>
+  </data>
+  <data name="LabelTextConvert_GivenNames" xml:space="preserve">
+    <value>Vorname</value>
+  </data>
+  <data name="LabelTextConvert_Nationality" xml:space="preserve">
+    <value>Nationalität</value>
+  </data>
+  <data name="LabelTextConvert_Pseudonym" xml:space="preserve">
+    <value>Pseudonym</value>
+  </data>
+  <data name="LabelTextConvert_ValidUntil" xml:space="preserve">
+    <value>Ablaufdatum des Personalausweises</value>
+  </data>
+  <data name="PopUp_BaseID_Lock_PIN_Label" xml:space="preserve">
+    <value>Sperrkennwort</value>
+  </data>
+  <data name="PopUp_BaseID_PUK_Success_Button" xml:space="preserve">
+    <value>Okay</value>
+  </data>
+  <data name="PopUp_BaseID_PUK_Success_Text" xml:space="preserve">
+    <value>Ihre PUK Eingabe war erfolgreich. Nach Neustart des Prozesses erhalten Sie 3 neue Versuche Ihre PIN korrekt einzugeben.</value>
+  </data>
+  <data name="PopUp_BaseID_PUK_Success_Title" xml:space="preserve">
+    <value>PUK Eingabe erfolgreich</value>
+  </data>
+  <data name="PopUp_BaseID_Enter_CAN_Text_4" xml:space="preserve">
+    <value>Sie haben zweimal eine falsche Transport-PIN eingegeben.</value>
+  </data>
+  <data name="PopUp_BaseID_Wrong_PIN_Pre_Text_2" xml:space="preserve">
+    <value>Sie haben eine falsche Transport-PIN eingegeben. Sie haben </value>
+  </data>
+  <data name="PopUp_Vitual_Device_Title" xml:space="preserve">
+    <value>Warnung</value>
+  </data>
+  <data name="PopUp_Vitual_Device_Message" xml:space="preserve">
+    <value>Diese App läuft nicht auf virtuellen Geräten!</value>
+  </data>
+  <data name="PopUp_Vitual_Device_Button" xml:space="preserve">
+    <value>Schließen</value>
+  </data>
+  <data name="PopUp_New_App_Title" xml:space="preserve">
+    <value>Achtung!</value>
+  </data>
+  <data name="PopUp_New_App_Message" xml:space="preserve">
+    <value>Diese App wurde im Zuge eines Updates in "ID Wallet ALT" umbenannt. Der offizielle Herausgeber der App wird nochmal geändert, weshalb die ID Wallet App in den enstprechenden Stores neu veröffentlicht werden muss. Es handelt sich dabei nicht um ein Update, sondern um eine neue App, die heruntergeladen werden muss (bis auf den Herausgeber wird in dieser App alles identisch zur bisherigen App sein, inkl. der Name ID Wallet). Bitte suchen Sie in den entsprechenden Stores von Zeit zu Zeit nach dieser neuen App “ID Wallet” und laden sie herunter.</value>
+  </data>
+  <data name="PopUp_New_App_Button" xml:space="preserve">
+    <value>Okay</value>
+  </data>
+  <data name="PopUp_Login_Last_Try_Label" xml:space="preserve">
+    <value>Sie haben 4 Mal eine falsche PIN eingegeben. Wenn Sie erneut eine falsche PIN eingeben, wird Ihre Wallet unbrauchbar.</value>
+  </data>
+  <data name="PopUp_Proof_Auth_Title" xml:space="preserve">
+    <value>Bitte geben Sie Ihre Wallet-PIN ein.</value>
+  </data>
+</root>

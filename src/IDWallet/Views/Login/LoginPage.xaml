@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:lang="clr-namespace:IDWallet.Extensions"
+             xmlns:pin="clr-namespace:IDWallet.Packages.FormsPinView"
+             mc:Ignorable="d"
+             x:Class="IDWallet.Views.Login.LoginPage"
+             BackgroundColor="{StaticResource BackgroundColor}">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="FillAndExpand"
+                     Padding="20,0,20,20">
+
+            <StackLayout.Margin>
+                <OnPlatform
+                    x:TypeArguments="Thickness"
+                    iOS="0, 40, 0, 0" />
+            </StackLayout.Margin>
+
+            <Label x:Name="pinHeader"
+                   Text="{lang:L10n LoginPage_Title}"
+                   FontSize="50"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Start"
+                   Margin="0,75,0,0" />
+
+            <ActivityIndicator x:Name="indicatorLogin"
+                               VerticalOptions="Start"
+                               IsVisible="{Binding IndicatorVisible, Mode=TwoWay}"
+                               IsRunning="{Binding IndicatorRunning, Mode=TwoWay}"
+                               Color="{StaticResource PrimaryTextColor}"
+                               Margin="0,50,0,0"
+                               Scale="2" />
+
+            <Label x:Name="lblPinMessage"
+                   IsVisible="{Binding PinMessageVisible, Mode=TwoWay}"
+                   Text="{Binding PinText}"
+                   FontSize="17"
+                   LineBreakMode="WordWrap"
+                   HorizontalTextAlignment="Center"
+                   MaxLines="10"
+                   TextColor="{StaticResource SecondaryTextColor}"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Start"
+                   Margin="0,0,0,0" />
+
+            <pin:PinView x:Name="pinView"
+                         Margin="0,50,0,50"
+                         IsVisible="{Binding PinPadVisible, Mode=TwoWay}"
+                         ItemScale="0.9"
+                         HorizontalOptions="Center"
+                         VerticalOptions="CenterAndExpand"
+                         PinLength="{ Binding PinLength}"
+                         Validator="{Binding Validator}"
+                         ErrorCommand="{Binding ErrorCommand}"
+                         SuccessCommand="{Binding SuccessCommand}"
+                         Color="{StaticResource PrimaryTextColor}"
+                         BorderColor="{StaticResource SecondaryTextColor}"
+                         RippleColor="{StaticResource PinRippleColor}" />
+
+            <Label x:Name="timerMessage"
+                   IsVisible="{Binding TimerVisible, Mode=TwoWay}"
+                   FontSize="Large"
+                   Text="{Binding LeftTime, StringFormat='{0:m:ss}'}"
+                   TextColor="{StaticResource PrimaryTextColor}"
+                   HorizontalOptions="CenterAndExpand"
+                   VerticalOptions="StartAndExpand"
+                   Margin="0,50,0,250" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

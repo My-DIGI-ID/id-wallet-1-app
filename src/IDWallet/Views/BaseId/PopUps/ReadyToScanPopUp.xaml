@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<base:CustomPopUp xmlns="http://xamarin.com/schemas/2014/forms" 
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:base="clr-namespace:IDWallet.Views.Customs.PopUps"
+                  xmlns:lang="clr-namespace:IDWallet.Extensions" xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+                  x:Class="IDWallet.Views.BaseId.PopUps.ReadyToScanPopUp"
+                  x:Name="Root">
+    <base:CustomPopUp.Resources>
+        <ResourceDictionary>
+            <Style x:Key="PopUpButtonArea" TargetType="StackLayout">
+                <Setter Property="Spacing" Value="20" />
+                <Setter Property="Margin" Value="0,20,0,0" />
+                <Setter Property="Orientation" Value="Horizontal" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+            </Style>
+        </ResourceDictionary>
+    </base:CustomPopUp.Resources>
+    <base:CustomPopUp.Content>
+        <StackLayout Style="{StaticResource PopUpStackLayout}">
+            <Frame Style="{StaticResource PopUpFrame}"
+                   Padding="20">
+                <ContentView>
+                    <StackLayout Spacing="0">
+                        <Label FontSize="20"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource PrimaryTextColor}"
+                               MaxLines="100"
+                               LineBreakMode="WordWrap"
+                               Text="{lang:L10n PopUp_BaseID_ReadyToScan_Title}"/>
+
+                        <forms:AnimationView x:Name="AnimationView"
+                             Animation="nfc-animation.json"
+                             RepeatMode="Infinite"
+                             AutoPlay="True"
+                             HorizontalOptions="FillAndExpand"
+                             HeightRequest="150"/>
+
+                        <Label FontSize="14"
+                               TextColor="{StaticResource SecondaryTextColor}"
+                               MaxLines="100"
+                               LineBreakMode="WordWrap"
+                               Margin="0,10"
+                               Text="{lang:L10n PopUp_BaseID_ReadyToScan_Text}" />
+
+                        <StackLayout Style="{StaticResource PopUpButtonArea}">
+                            <Button Text="{lang:L10n PopUp_BaseID_ReadyToScan_Cancel_Button}"
+                                    Style="{StaticResource AcceptButton}"
+                                    HorizontalOptions="FillAndExpand"
+                                    Margin="70,0"
+                                    Clicked="OnPopUpCanceled"/>
+                        </StackLayout>
+                    </StackLayout>
+                </ContentView>
+            </Frame>
+        </StackLayout>
+    </base:CustomPopUp.Content>
+</base:CustomPopUp>

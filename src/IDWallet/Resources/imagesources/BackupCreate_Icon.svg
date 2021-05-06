@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="20px" height="20px" viewbox="0 0 20 20" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="filter_1">
+      <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0.039215688 0 0 0 0 0 0 0 0 0 0.5568628 0 0 0 1 0" />
+    </filter>
+  </defs>
+  <g id="Sprache">
+    <g id="Actions--Formatting--save--20" filter="url(#filter_1)">
+      <path d="M15.8 3.5L12.5 0.2C12.3 0.1 12.2 0 12 0L1.3 0C0.6 0 0 0.6 0 1.3L0 14.6C0 15.4 0.6 16 1.3 16L14.6 16C15.3 16 16 15.5 16 14.8L16 4.1C16 3.7 15.9 3.7 15.8 3.5ZM5.3 1.3L10.6 1.3L10.6 4.6L5.3 4.6L5.3 1.3ZM10.7 14.7L5.3 14.7L5.3 9.4L10.6 9.4L10.7 14.7ZM12 14.7L12 9.4C12 8.7 11.4 8.1 10.7 8.1L5.3 8.1C4.6 8 4 8.6 4 9.3L4 14.6L1.3 14.6L1.3 1.3L4 1.3L4 4.6C4 5.4 4.6 6 5.3 6L10.6 6C11.4 6 12 5.4 12 4.7L12 1.7L14.7 4.4L14.7 14.8L12 14.7Z" transform="translate(2 2)" id="Fill" fill="#0A008E" fill-rule="evenodd" stroke="none" />
+    </g>
+  </g>
+</svg>

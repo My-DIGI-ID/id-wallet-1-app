@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<base:CustomPopUp xmlns="http://xamarin.com/schemas/2014/forms"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+                  xmlns:lang="clr-namespace:IDWallet.Extensions"
+                  xmlns:base="clr-namespace:IDWallet.Views.Customs.PopUps"
+                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                  mc:Ignorable="d"
+                  x:Class="IDWallet.Views.Proof.PopUps.ProofSentPopUp"
+                  x:Name="Root">
+    <base:CustomPopUp.Content>
+        <StackLayout Style="{StaticResource PopUpStackLayout}">
+            <Frame Style="{StaticResource PopUpFrame}"
+                   Padding="0,20">
+                <ContentView>
+                    <StackLayout Spacing="10">
+                        <Label Text="{lang:L10n PopUp_Proof_Sending_Response_Title}"
+                               TextColor="{StaticResource PrimaryTextColor}"
+                               FontAttributes="Bold"
+                               FontSize="18"
+                               Margin="20,0" />
+
+                        <Label Style="{StaticResource LabelMultiLine}"
+                               TextColor="{StaticResource SecondaryTextColor}"
+                               Margin="20,0">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{lang:L10n PopUp_Proof_Sending_Response_Text_1}" />
+                                    <Span Text=" " />
+                                    <Span Text="{lang:L10n PopUp_Proof_Sending_Response_Text_2}"
+                                          FontAttributes="Bold" />
+                                    <Span Text=" " />
+                                    <Span Text="{lang:L10n PopUp_Proof_Sending_Response_Text_3}" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                        <BoxView BackgroundColor="{StaticResource SeparatorColor}"
+                                 HeightRequest="1"
+                                 Margin="20,0"
+                                 HorizontalOptions="FillAndExpand" />
+
+                        <StackLayout Orientation="Horizontal"
+                                     Margin="20,0">
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding CheckBoxTappedCommand, Source={x:Reference Root}}" />
+                            </StackLayout.GestureRecognizers>
+
+                            <CheckBox x:Name="checkBox"
+                                      Color="{StaticResource AttributeNameColor}"
+                                      IsChecked="False" />
+
+                            <Label Text="{lang:L10n PopUp_Proof_Sending_Response_CheckBox_Text}"
+                                   Style="{StaticResource LabelMultiLine}"
+                                   TextColor="{StaticResource SecondaryTextColor}" />
+                        </StackLayout>
+                        <StackLayout Style="{StaticResource PopUpButtonArea}"
+                                     HorizontalOptions="FillAndExpand"
+                                     Margin="20,10,20,0">
+                            <BoxView Color="Transparent"
+                                     HorizontalOptions="FillAndExpand" />
+                            <Button Text="{lang:L10n PopUp_Proof_Sending_Response_Button}"
+                                    Style="{StaticResource AcceptButton}"
+                                    HorizontalOptions="FillAndExpand"
+                                    Clicked="Button_Clicked" />
+                        </StackLayout>
+                    </StackLayout>
+                </ContentView>
+            </Frame>
+        </StackLayout>
+    </base:CustomPopUp.Content>
+</base:CustomPopUp>

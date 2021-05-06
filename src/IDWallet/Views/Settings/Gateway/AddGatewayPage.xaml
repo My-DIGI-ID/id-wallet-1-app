@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<base:CustomPage
+    xmlns:base="clr-namespace:IDWallet.Views.Customs.Pages"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:lang="clr-namespace:IDWallet.Extensions"
+    x:Class="IDWallet.Views.Settings.Gateway.AddGatewayPage"
+    x:Name="Root">
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="{lang:L10n Navigation_Back}"
+                   HorizontalOptions="StartAndExpand"
+                   VerticalOptions="CenterAndExpand"
+                   FontAttributes="Bold"
+                   FontSize="20" />
+            <Frame WidthRequest="30"
+                   HeightRequest="30"
+                   Margin="5"
+                   x:Name="NotificationsToolBarItem"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="End">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NotificationsClickedCommand, Source={x:Reference Root}}" />
+                </Frame.GestureRecognizers>
+                <Image Source="{Binding NotificationIconImage}"
+                       VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="CenterAndExpand"
+                       WidthRequest="20"
+                       HeightRequest="20" />
+            </Frame>
+            <Frame WidthRequest="30"
+                   HeightRequest="30"
+                   Margin="5"
+                   x:Name="SettingsToolBarItem"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="End">
+                <Image Source="{Binding SettingsIconImage, Source={x:Reference Root}}"
+                       VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="CenterAndExpand"
+                       WidthRequest="20"
+                       HeightRequest="20" />
+            </Frame>
+        </StackLayout>
+    </NavigationPage.TitleView>
+    <StackLayout Spacing="0"
+                 Padding="0"
+                 Margin="0">
+        <Frame
+            CornerRadius="0"
+            BackgroundColor="{StaticResource PageShadowColor}"
+            HeightRequest="1"
+            Grid.Row="0" />
+        <ScrollView>
+            <StackLayout>
+                <Grid Margin="20"
+                      ColumnSpacing="20"
+                      RowSpacing="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="50" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Text="{lang:L10n AddGatewayPage_Name_Label}"
+                           Grid.Column="0"
+                           Grid.Row="0"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Center"
+                           VerticalTextAlignment="Center"
+                           MinimumHeightRequest="30"
+                           HeightRequest="30"
+                           Style="{StaticResource LabelMultiLine}" />
+
+                    <Frame BackgroundColor="{StaticResource EntryFrameColor}"
+                           CornerRadius="10"
+                           Padding="10,0"
+                           Margin="10,0"
+                           Grid.Column="0"
+                           Grid.Row="1"
+                           Grid.ColumnSpan="2">
+                        <Entry x:Name="GatewayNameEntry"
+                               HorizontalOptions="FillAndExpand"
+                               VerticalOptions="Center"
+                               Margin="5"
+                               BackgroundColor="{StaticResource EntryFrameColor}"
+                               Text="{Binding Name, Source={x:Reference Root}}"
+                               TextColor="{StaticResource PrimaryTextColor}"
+                               IsEnabled="{Binding ElementsEnabled, Source={x:Reference Root}}" />
+                    </Frame>
+
+                    <Label Text="{lang:L10n AddGatewayPage_Address_Label}"
+                           Grid.Column="0"
+                           Grid.Row="2"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Center"
+                           VerticalTextAlignment="Center"
+                           MinimumHeightRequest="30"
+                           HeightRequest="30"
+                           Style="{StaticResource LabelMultiLine}" />
+
+                    <Frame BackgroundColor="{StaticResource EntryFrameColor}"
+                           CornerRadius="10"
+                           Padding="10,0"
+                           Margin="10,0"
+                           Grid.Column="0"
+                           Grid.ColumnSpan="2"
+                           Grid.Row="3">
+                        <Entry x:Name="GatewayAddressEntry"
+                               HorizontalOptions="FillAndExpand"
+                               VerticalOptions="Center"
+                               Margin="5"
+                               BackgroundColor="{StaticResource EntryFrameColor}"
+                               Text="{Binding Address, Source={x:Reference Root}}"
+                               TextColor="{StaticResource PrimaryTextColor}"
+                               IsEnabled="{Binding ElementsEnabled, Source={x:Reference Root}}" />
+                    </Frame>
+
+                    <Label Text="{lang:L10n AddGatewayPage_Key_Label}"
+                           Grid.Column="0"
+                           Grid.Row="4"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Center"
+                           VerticalTextAlignment="Center"
+                           MinimumHeightRequest="30"
+                           HeightRequest="30"
+                           Style="{StaticResource LabelMultiLine}" />
+
+                    <Frame BackgroundColor="{StaticResource EntryFrameColor}"
+                           CornerRadius="10"
+                           Padding="10,0"
+                           Margin="10,0"
+                           Grid.Column="0"
+                           Grid.Row="5"
+                           Grid.ColumnSpan="2">
+                        <Entry x:Name="GatewayKeyEntry"
+                               HorizontalOptions="FillAndExpand"
+                               VerticalOptions="Center"
+                               Margin="5"
+                               BackgroundColor="{StaticResource EntryFrameColor}"
+                               Text="{Binding Key, Source={x:Reference Root}}"
+                               TextColor="{StaticResource PrimaryTextColor}"
+                               IsEnabled="{Binding ElementsEnabled, Source={x:Reference Root}}" />
+                    </Frame>
+
+                    <StackLayout Grid.Column="0"
+                                 Grid.ColumnSpan="2"
+                                 Grid.Row="6"
+                                 Margin="20"
+                                 Orientation="Horizontal"
+                                 HorizontalOptions="EndAndExpand">
+                        <Button x:Name="CancelButton"
+                                Style="{StaticResource CancelButton}"
+                                HorizontalOptions="End"
+                                Text="{lang:L10n AddGatewayPage_Cancel_Button}"
+                                Clicked="Cancel_Button_Clicked"
+                                IsEnabled="{Binding ElementsEnabled, Source={x:Reference Root}}" />
+                        <Button x:Name="SendButton"
+                                Style="{StaticResource AcceptButton}"
+                                HorizontalOptions="End"
+                                IsVisible="{Binding ReadyToSend, Source={x:Reference Root}}"
+                                Text="{lang:L10n AddGatewayPage_Save_Button}"
+                                Clicked="Save_Button_Clicked"
+                                IsEnabled="{Binding ElementsEnabled, Source={x:Reference Root}}" />
+                    </StackLayout>
+                </Grid>
+            </StackLayout>
+        </ScrollView>
+    </StackLayout>
+</base:CustomPage>

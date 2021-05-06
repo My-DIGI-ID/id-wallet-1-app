@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<Grid xmlns="http://xamarin.com/schemas/2014/forms"
+      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+      xmlns:iconize="clr-namespace:Plugin.Iconize;assembly=Plugin.Iconize"
+      xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+      xmlns:svg="clr-namespace:Xamarin.Forms.Svg;assembly=SvgImageSource"
+      HeightRequest="41"
+      Padding="21, 11"
+      BackgroundColor="{StaticResource BarBackgroundColor}"
+      x:Class="IDWallet.Views.Settings.Connections.Content.ConnectionsListElement"
+      ColumnSpacing="0"
+      x:Name="Root">
+
+    <Grid.Resources>
+        <ResourceDictionary>
+            <Style
+                x:Key="IconRight"
+                TargetType="iconize:IconImage">
+                <Setter Property="HorizontalOptions" Value="End" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="IconSize" Value="30" />
+                <Setter Property="IconColor" Value="{StaticResource TertiaryTextColor}" />
+                <Setter Property="Icon" Value="md-keyboard-arrow-right" />
+            </Style>
+        </ResourceDictionary>
+    </Grid.Resources>
+
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="51" />
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="20" />
+        <ColumnDefinition Width="30" />
+    </Grid.ColumnDefinitions>
+
+    <Frame
+        Style="{StaticResource ImageFrame}"
+        HorizontalOptions="Start"
+        VerticalOptions="Center">
+        <ff:CachedImage LoadingPlaceholder="default_logo.png"
+                        ErrorPlaceholder="default_logo.png"
+                        Source="{Binding ImageUrl}"
+                        x:Name="ConnectionImage"
+                        Style="{StaticResource FramedImage}" />
+    </Frame>
+
+    <Label
+        Grid.Column="1"
+        Style="{StaticResource LabelListViewBig}"
+        Text="{Binding Name}" />
+
+    <Image Grid.Column="2"
+           VerticalOptions="Center"
+           HorizontalOptions="End"
+           HeightRequest="15"
+           WidthRequest="15"
+           IsVisible="{Binding State, Converter={StaticResource ConnectionStateConnectedConverter}}">
+        <Image.Source>
+            <svg:SvgImageSource Source="imagesources.ConnectionConnected_Icon.svg"
+                                Width="15" Height="15" />
+        </Image.Source>
+    </Image>
+
+    <Image Grid.Column="2"
+           VerticalOptions="Center"
+           HorizontalOptions="End"
+           HeightRequest="15"
+           WidthRequest="15"
+           IsVisible="{Binding State, Converter={StaticResource ConnectionStateNotConnectedConverter}}">
+        <Image.Source>
+            <svg:SvgImageSource Source="imagesources.ConnectionNotConnected_Icon.svg"
+                                Width="15" Height="15" />
+        </Image.Source>
+    </Image>
+
+    <iconize:IconImage Style="{StaticResource IconRight}"
+                       IsVisible="{Binding HasDetails}"
+                       IconSize="30"
+                       Grid.Column="3"
+                       Margin="0,0,0,0"
+                       IconColor="{StaticResource PrimaryTextColor}" />
+</Grid>

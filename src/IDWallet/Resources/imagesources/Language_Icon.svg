@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="20px" height="20px" viewbox="0 0 20 20" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="filter_1">
+      <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0.039215688 0 0 0 0 0 0 0 0 0 0.5568628 0 0 0 1 0" />
+    </filter>
+  </defs>
+  <g id="Sprache">
+    <g id="Actions--Operations--chat--20" filter="url(#filter_1)">
+      <path d="M11.0875 18.75L10 18.125L12.5 13.75L16.25 13.75C16.9404 13.75 17.5 13.1904 17.5 12.5L17.5 5C17.5 4.30964 16.9404 3.75 16.25 3.75L3.75 3.75C3.05964 3.75 2.5 4.30964 2.5 5L2.5 12.5C2.5 13.1904 3.05964 13.75 3.75 13.75L9.375 13.75L9.375 15L3.75 15C2.36929 15 1.25 13.8807 1.25 12.5L1.25 5C1.25 3.61929 2.36929 2.5 3.75 2.5L16.25 2.5C17.6307 2.5 18.75 3.61929 18.75 5L18.75 12.5C18.75 13.8807 17.6307 15 16.25 15L13.225 15L11.0875 18.75ZM5 6.25L15 6.25L15 7.5L5 7.5L5 6.25ZM5 10L11.25 10L11.25 11.25L5 11.25L5 10Z" id="Fill" fill="#0A008E" fill-rule="evenodd" stroke="none" />
+    </g>
+  </g>
+</svg>

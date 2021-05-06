@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<base:CustomPopUp xmlns="http://xamarin.com/schemas/2014/forms"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                  xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                  xmlns:base="clr-namespace:IDWallet.Views.Customs.PopUps;assembly=IDWallet"
+                  xmlns:lang="clr-namespace:IDWallet.Extensions"
+                  mc:Ignorable="d"
+                  x:Class="IDWallet.Views.Settings.Connections.PopUps.ConnectionLedgerChangePopUp">
+    <base:CustomPopUp.Content>
+        <StackLayout Style="{StaticResource PopUpStackLayout}">
+            <Frame Style="{StaticResource PopUpFrame}"
+                   Padding="0,20">
+                <ContentView>
+                    <StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <AbsoluteLayout Margin="20,0,30,0"
+                                            IsVisible="False"
+                                            x:Name="ImageFrame">
+                                <Frame AbsoluteLayout.LayoutBounds="0,0,41,41"
+                                       Style="{StaticResource ImageFrame}"
+                                       AbsoluteLayout.LayoutFlags="None">
+                                    <ff:CachedImage x:Name="ConnectionImage"
+                                                    LoadingPlaceholder="default_logo.png"
+                                                    ErrorPlaceholder="default_logo.png" />
+                                </Frame>
+                            </AbsoluteLayout>
+                            <StackLayout HorizontalOptions="FillAndExpand">
+                                <Label x:Name="PopUpTitle"
+                                       Text="{lang:L10n PopUp_Connection_Ledger_Change_Title}"
+                                       Style="{StaticResource LabelHeader}"
+                                       LineBreakMode="WordWrap"
+                                       MaxLines="2"
+                                       Margin="20,0" />
+                                <BoxView BackgroundColor="{StaticResource PopUpHeaderSeparatorColor}"
+                                         HeightRequest="1"
+                                         HorizontalOptions="FillAndExpand" />
+                                <Label x:Name="PopUpText"
+                                       Margin="20,0"
+                                       Text="{lang:L10n PopUp_Connection_Ledger_Change_Text}"
+                                       Style="{StaticResource LabelMultiLine}"
+                                       TextColor="{StaticResource AttributeValueColor}" />
+                                <Grid x:Name="ActiveLedgerGrid"
+                                      ColumnSpacing="15"
+                                      Margin="20,10">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Text="{lang:L10n PopUp_Connection_Ledger_Change_Active_Ledger}"
+                                           Grid.Column="0"
+                                           Grid.Row="0"
+                                           Style="{StaticResource LabelMultiLine}"
+                                           TextColor="{StaticResource AttributeNameColor}" />
+                                    <Label Text="{lang:L10n PopUp_Connection_Ledger_Change_Recommended_Ledger}"
+                                           Grid.Column="0"
+                                           Grid.Row="1"
+                                           Style="{StaticResource LabelMultiLine}"
+                                           TextColor="{StaticResource AttributeNameColor}" />
+
+                                    <Label x:Name="ActiveLedgerName"
+                                           Grid.Column="1"
+                                           Grid.Row="0"
+                                           Style="{StaticResource LabelMultiLine}"
+                                           TextColor="{StaticResource AttributeValueColor}" />
+                                    <Label x:Name="RecommendedLedgerName"
+                                           Grid.Column="1"
+                                           Grid.Row="1"
+                                           Style="{StaticResource LabelMultiLine}"
+                                           TextColor="{StaticResource AttributeValueColor}" />
+                                </Grid>
+
+                                <ActivityIndicator x:Name="LedgerIndicator"
+                                                   HorizontalOptions="CenterAndExpand"
+                                                   VerticalOptions="CenterAndExpand"
+                                                   IsVisible="False"
+                                                   IsRunning="False"
+                                                   Color="{StaticResource PrimaryTextColor}"
+                                                   Opacity=".7"
+                                                   Margin="20,40"
+                                                   Scale="1.5" />
+                            </StackLayout>
+                        </StackLayout>
+
+                        <StackLayout x:Name="FirstButtonStack"
+                                     Style="{StaticResource PopUpButtonArea}"
+                                     IsVisible="True"
+                                     Margin="20,0">
+                            <Button Style="{StaticResource CancelButton}"
+                                    x:Name="StayButton"
+                                    Clicked="Stay_Button_Clicked" />
+                            <Button x:Name="ChangeButton"
+                                    Style="{StaticResource AcceptButton}"
+                                    Clicked="Change_Button_Clicked" />
+                        </StackLayout>
+
+                        <StackLayout x:Name="SecondButtonStack"
+                                     Style="{StaticResource PopUpButtonArea}"
+                                     IsVisible="False"
+                                     Margin="20,0">
+                            <Button Style="{StaticResource CancelButton}"
+                                    Text="{lang:L10n PopUp_Connection_Offer_Deny_Button}"
+                                    Clicked="OnPopUpCanceled" />
+                            <Button Text="{lang:L10n PopUp_Connection_Offer_Accept_Button}"
+                                    Style="{StaticResource AcceptButton}"
+                                    Clicked="OnPopUpAccepted" />
+                        </StackLayout>
+                    </StackLayout>
+                </ContentView>
+            </Frame>
+        </StackLayout>
+    </base:CustomPopUp.Content>
+</base:CustomPopUp>

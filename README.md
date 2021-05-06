@@ -57,9 +57,15 @@ Some configuration needs to be set:
       - MobileSecret
       - MobileToken
       - AusweisHost
+	  - TeamId
+	  - PushServiceName
 
 ### PNS Android
 - src/IDWallet.Android/google-services.json
+
+### BDR API
+Set public keys hashes (key pinning) and API-Key of Bundesdruckerei API
+- src/IDWallet/Services/SDKMessageService.cs
 
 ## App Build
 It is recommended to build the project directly from a Xamarin compatible IDE (e.g. Visual Studio or JetBrains Rider). For building and running the iOS app you will need to be on or to be connected to a Mac with the macOS operating system with all necessary Xamarin dependencies (https://docs.microsoft.com/de-de/xamarin/ios/) installed.

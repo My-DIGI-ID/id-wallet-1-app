@@ -1,0 +1,408 @@
+<ContentPage
+    x:Class="IDWallet.Views.Settings.SettingsPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:lang="clr-namespace:IDWallet.Extensions"
+    xmlns:iconize="clr-namespace:Plugin.Iconize;assembly=Plugin.Iconize"
+    xmlns:svg="clr-namespace:Xamarin.Forms.Svg;assembly=SvgImageSource"
+    NavigationPage.BackButtonTitle=""
+    BackgroundColor="{StaticResource BackgroundColor}"
+    x:Name="Root">
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="{lang:L10n Navigation_Back}"
+                   HorizontalOptions="StartAndExpand"
+                   VerticalOptions="CenterAndExpand"
+                   FontAttributes="Bold"
+                   FontSize="20" />
+            <Frame WidthRequest="30"
+                   HeightRequest="30"
+                   Margin="5"
+                   x:Name="NotificationsToolBarItem"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="End">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NotificationsClickedCommand, Source={x:Reference Root}}" />
+                </Frame.GestureRecognizers>
+                <Image Source="{Binding NotificationIconImage}"
+                       VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="CenterAndExpand"
+                       WidthRequest="20"
+                       HeightRequest="20" />
+            </Frame>
+            <Frame WidthRequest="30"
+                   HeightRequest="30"
+                   Margin="5"
+                   x:Name="SettingsToolBarItem"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="End">
+                <Image Source="{Binding SettingsIconImage, Source={x:Reference Root}}"
+                       VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="CenterAndExpand"
+                       WidthRequest="20"
+                       HeightRequest="20" />
+            </Frame>
+        </StackLayout>
+    </NavigationPage.TitleView>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="HorizontalItem"
+                   TargetType="StackLayout">
+                <Setter Property="Orientation" Value="Horizontal" />
+                <Setter Property="BackgroundColor" Value="{StaticResource HorizontalItemBackgroundColor}" />
+                <Setter Property="HeightRequest" Value="51" />
+                <Setter Property="Padding" Value="15,5,10,5" />
+            </Style>
+
+            <Style x:Key="SettingsSectionHeader"
+                   TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource SecondaryTextColor}" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="HeightRequest" Value="50" />
+                <Setter Property="VerticalTextAlignment" Value="End" />
+                <Setter Property="Padding" Value="20,5,10,5" />
+            </Style>
+
+            <Style x:Key="IconLeft"
+                   TargetType="Image">
+                <Setter Property="HorizontalOptions" Value="Start" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HeightRequest" Value="21" />
+                <Setter Property="WidthRequest" Value="21" />
+                <Setter Property="Margin" Value="9" />
+                <Setter Property="Aspect" Value="AspectFit" />
+            </Style>
+
+            <Style
+                x:Key="IconRight"
+                TargetType="iconize:IconImage">
+                <Setter Property="HorizontalOptions" Value="End" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="IconSize" Value="30" />
+                <Setter Property="IconColor" Value="{StaticResource SettingsTextColor}" />
+                <Setter Property="Icon" Value="md-keyboard-arrow-right" />
+            </Style>
+
+            <Style
+                x:Key="ItemLabel"
+                TargetType="Label">
+                <Setter Property="HorizontalOptions" Value="StartAndExpand" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="TextColor" Value="{StaticResource SettingsTextColor}" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="Margin" Value="20, 0, 0, 0" />
+            </Style>
+
+            <Style
+                x:Key="IconBorder"
+                TargetType="Frame">
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="CornerRadius" Value="9" />
+                <Setter Property="BackgroundColor" Value="{StaticResource PrimaryTextColor}" />
+                <Setter Property="Margin" Value="0" />
+            </Style>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <StackLayout CompressedLayout.IsHeadless="true"
+                     Spacing="0">
+            <Label Text="{lang:L10n SettingsPage_Title}"
+                   Margin="20,20,20,0"
+                   FontAttributes="Bold"
+                   FontSize="18"
+                   TextColor="{StaticResource AttributeValueColor}" />
+            <StackLayout Spacing="0">
+                <Label Style="{StaticResource SettingsSectionHeader}"
+                       Text="{lang:L10n SettingsPage_Security}" />
+                <!--<StackLayout x:Name="CreateBackupStack"
+                             Style="{StaticResource HorizontalItem}">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Tapped_CreateBackup" />
+                    </StackLayout.GestureRecognizers>
+                    <Image Style="{StaticResource IconLeft}">
+                        <Image.Source>
+                            <svg:SvgImageSource Source="imagesources.BackupCreate_Icon.svg" />
+                        </Image.Source>
+                    </Image>
+                    <Label
+                        Style="{StaticResource ItemLabel}"
+                        Text="{lang:L10n SettingsPage_Create_Backup}" />
+                    <iconize:IconImage Style="{StaticResource IconRight}" />
+                </StackLayout>
+
+                <BoxView HeightRequest="1"
+                         Color="{StaticResource BorderColor}" />
+
+                <StackLayout Style="{StaticResource HorizontalItem}"
+                             x:Name="RecoverBackupStack">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Tapped_RecoverAccount" />
+                    </StackLayout.GestureRecognizers>
+                    <Image Style="{StaticResource IconLeft}">
+                        <Image.Source>
+                            <svg:SvgImageSource Source="imagesources.BackupRecover_Icon.svg" />
+                        </Image.Source>
+                    </Image>
+                    <Label
+                        Style="{StaticResource ItemLabel}"
+                        Text="{lang:L10n SettingsPage_Recover_Backup}" />
+                    <iconize:IconImage Style="{StaticResource IconRight}" />
+                </StackLayout>-->
+
+                <BoxView HeightRequest="1"
+                         Color="{StaticResource BorderColor}" />
+
+                <StackLayout Style="{StaticResource HorizontalItem}"
+                             x:Name="ChangePasscodeStack">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Tapped_ChangePasscode" />
+                    </StackLayout.GestureRecognizers>
+                    <Image Style="{StaticResource IconLeft}">
+                        <Image.Source>
+                            <svg:SvgImageSource Source="imagesources.ChangePin_Icon.svg" />
+                        </Image.Source>
+                    </Image>
+                    <Label
+                        Style="{StaticResource ItemLabel}"
+                        Text="{lang:L10n SettingsPage_Change_Passcode}" />
+                    <iconize:IconImage Style="{StaticResource IconRight}" />
+                </StackLayout>
+
+                <!--<BoxView HeightRequest="1"
+                         Color="{StaticResource BorderColor}" />
+
+                <StackLayout Style="{StaticResource HorizontalItem}"
+                             x:Name="BiometricsStack">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Tapped_BiometricsToggle" />
+                    </StackLayout.GestureRecognizers>
+                    <Image Style="{StaticResource IconLeft}">
+                        <Image.Source>
+                            <svg:SvgImageSource Source="imagesources.Biometry_Icon.svg" />
+                        </Image.Source>
+                    </Image>
+                    <Label
+                        Style="{StaticResource ItemLabel}"
+                        Text="{lang:L10n SettingsPage_Biometrics}" />
+                    <Switch
+                        x:Name="BiometricsToggle"
+                        OnColor="{StaticResource PrimaryTextColor}"
+                        ThumbColor="{StaticResource SecondaryTextColor}"
+                        HorizontalOptions="End"
+                        VerticalOptions="Center"
+                        Toggled="OnBiometricsToggled" />
+                </StackLayout>-->
+            </StackLayout>
+
+            <StackLayout Spacing="0">
+                <Label Style="{StaticResource SettingsSectionHeader}"
+                       Text="{lang:L10n SettingsPage_Options}" />
+                <StackLayout Style="{StaticResource HorizontalItem}"
+                             x:Name="ChangeLanguageStack">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Tapped_ChangeLanguage" />
+                    </StackLayout.GestureRecognizers>
+                    <Image Style="{StaticResource IconLeft}">
+                        <Image.Source>
+                            <svg:SvgImageSource Source="imagesources.Language_Icon.svg" />
+                        </Image.Source>
+                    </Image>
+                    <Label
+                        Style="{StaticResource ItemLabel}"
+                        Text="{lang:L10n SettingsPage_Change_Language}" />
+                    <iconize:IconImage Style="{StaticResource IconRight}" />
+                </StackLayout>
+
+                <BoxView HeightRequest="1"
+                         Color="{StaticResource BorderColor}" />
+
+                <StackLayout Style="{StaticResource HorizontalItem}"
+                             x:Name="ForceFocusStack">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Tapped_ForceFocusToggle" />
+                    </StackLayout.GestureRecognizers>
+                    <Image Style="{StaticResource IconLeft}">
+                        <Image.Source>
+                            <svg:SvgImageSource Source="imagesources.Autofocus_Icon.svg" />
+                        </Image.Source>
+                    </Image>
+                    <Label
+                        Style="{StaticResource ItemLabel}"
+                        Text="{lang:L10n SettingsPage_ForceFocus}" />
+                    <Switch
+                        x:Name="ForceFocusToggle"
+                        OnColor="{StaticResource PrimaryTextColor}"
+                        ThumbColor="{StaticResource SecondaryTextColor}"
+                        HorizontalOptions="End"
+                        VerticalOptions="Center"
+                        Toggled="OnForceFocusToggled" />
+                </StackLayout>
+            </StackLayout>
+
+            <StackLayout Spacing="0">
+                <Label Style="{StaticResource SettingsSectionHeader}"
+                       Text="{lang:L10n SettingsPage_Legal}" />
+                <StackLayout x:Name="LegalNoticeStack"
+                             Style="{StaticResource HorizontalItem}">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Tapped_LegalNotice" />
+                    </StackLayout.GestureRecognizers>
+                    <Image Style="{StaticResource IconLeft}">
+                        <Image.Source>
+                            <svg:SvgImageSource Source="imagesources.Info_Icon.svg" />
+                        </Image.Source>
+                    </Image>
+                    <Label
+                        Style="{StaticResource ItemLabel}"
+                        Text="{lang:L10n SettingsPage_Legal_Notice}" />
+                    <iconize:IconImage Style="{StaticResource IconRight}" />
+                </StackLayout>
+
+                <BoxView HeightRequest="1"
+                         Color="{StaticResource BorderColor}" />
+
+				<StackLayout x:Name="LiabilityStack"
+                             Style="{StaticResource HorizontalItem}">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Tapped_Liability" />
+                    </StackLayout.GestureRecognizers>
+                    <Image Style="{StaticResource IconLeft}">
+                        <Image.Source>
+                            <svg:SvgImageSource Source="imagesources.PrivacyPolicy_Icon.svg" />
+                        </Image.Source>
+                    </Image>
+                    <Label
+                        Style="{StaticResource ItemLabel}"
+                        Text="{lang:L10n LiabilityPage_Title}" />
+                    <iconize:IconImage Style="{StaticResource IconRight}" />
+                </StackLayout>
+
+                <BoxView HeightRequest="1"
+                         Color="{StaticResource BorderColor}" />
+
+                <StackLayout x:Name="PrivacyPolicyStack"
+                             Style="{StaticResource HorizontalItem}">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Tapped_PrivacyPolicy" />
+                    </StackLayout.GestureRecognizers>
+                    <Image Style="{StaticResource IconLeft}">
+                        <Image.Source>
+                            <svg:SvgImageSource Source="imagesources.PrivacyPolicy_Icon.svg" />
+                        </Image.Source>
+                    </Image>
+                    <Label
+                        Style="{StaticResource ItemLabel}"
+                        Text="{lang:L10n SettingsPage_Privacy_Policy}" />
+                    <iconize:IconImage Style="{StaticResource IconRight}" />
+                </StackLayout>
+
+                <BoxView HeightRequest="1"
+                         Color="{StaticResource BorderColor}" />
+
+                <StackLayout x:Name="LicensesStack"
+                             Style="{StaticResource HorizontalItem}">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Tapped_Licenses" />
+                    </StackLayout.GestureRecognizers>
+                    <Image Style="{StaticResource IconLeft}">
+                        <Image.Source>
+                            <svg:SvgImageSource Source="imagesources.Licenses_Icon.svg" />
+                        </Image.Source>
+                    </Image>
+                    <Label
+                        Style="{StaticResource ItemLabel}"
+                        Text="{lang:L10n SettingsPage_Licenses}" />
+                    <iconize:IconImage Style="{StaticResource IconRight}" />
+                </StackLayout>
+            </StackLayout>
+
+
+            <StackLayout Spacing="0">
+                <Label Style="{StaticResource SettingsSectionHeader}"
+                       Text="{lang:L10n SettingsPage_Advanced_Settings}" />
+
+                <StackLayout Style="{StaticResource HorizontalItem}"
+                             x:Name="ConnectionsStack">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Tapped_Connections" />
+                    </StackLayout.GestureRecognizers>
+                    <Image Style="{StaticResource IconLeft}">
+                        <Image.Source>
+                            <svg:SvgImageSource Source="imagesources.Connection_Icon.svg" />
+                        </Image.Source>
+                    </Image>
+                    <Label
+                        Style="{StaticResource ItemLabel}"
+                        Text="{lang:L10n SettingsPage_Connections}" />
+                    <iconize:IconImage Style="{StaticResource IconRight}" />
+                </StackLayout>
+
+                <BoxView HeightRequest="1"
+                         Color="{StaticResource BorderColor}" />
+
+                <StackLayout Style="{StaticResource HorizontalItem}"
+                             x:Name="ChangeLedgerStack">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Tapped_ChangeLedger" />
+                    </StackLayout.GestureRecognizers>
+                    <Image Style="{StaticResource IconLeft}">
+                        <Image.Source>
+                            <svg:SvgImageSource Source="imagesources.LedgerSwitch_Icon.svg" />
+                        </Image.Source>
+                    </Image>
+                    <Label
+                        Style="{StaticResource ItemLabel}"
+                        Text="{lang:L10n SettingsPage_Change_Ledger}" />
+                    <iconize:IconImage Style="{StaticResource IconRight}" />
+                </StackLayout>
+
+                <BoxView HeightRequest="1"
+                         Color="{StaticResource BorderColor}" />
+
+                <StackLayout Style="{StaticResource HorizontalItem}"
+                             x:Name="RenewPushStack">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Tapped_RenewPush" />
+                    </StackLayout.GestureRecognizers>
+                    <Image Style="{StaticResource IconLeft}">
+                        <Image.Source>
+                            <svg:SvgImageSource Source="imagesources.PushRenew_Icon.svg" />
+                        </Image.Source>
+                    </Image>
+                    <Label
+                        Style="{StaticResource ItemLabel}"
+                        Text="{lang:L10n SettingsPage_Renew_Push}" />
+                    <iconize:IconImage Style="{StaticResource IconRight}" />
+                </StackLayout>
+
+                <BoxView HeightRequest="1"
+                         Color="{StaticResource BorderColor}" />
+
+                <StackLayout Style="{StaticResource HorizontalItem}"
+                             x:Name="ShowMediatorStack">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Tapped_ShowMediatorToggle" />
+                    </StackLayout.GestureRecognizers>
+                    <Image Style="{StaticResource IconLeft}">
+                        <Image.Source>
+                            <svg:SvgImageSource Source="imagesources.MediatorConnection_Icon.svg" />
+                        </Image.Source>
+                    </Image>
+                    <Label
+                        Style="{StaticResource ItemLabel}"
+                        Text="{lang:L10n SettingsPage_ShowMediator}" />
+                    <Switch x:Name="ShowMediatorToggle"
+                            OnColor="{StaticResource PrimaryTextColor}"
+                            ThumbColor="{StaticResource SecondaryTextColor}"
+                            HorizontalOptions="End"
+                            VerticalOptions="Center"
+                            Toggled="OnShowMediatorToggled" />
+                </StackLayout>
+            </StackLayout>
+
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

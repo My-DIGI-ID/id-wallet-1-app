@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<base:CustomPopUp xmlns="http://xamarin.com/schemas/2014/forms"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+                  xmlns:base="clr-namespace:IDWallet.Views.Customs.PopUps;assembly=IDWallet"
+                  xmlns:lang="clr-namespace:IDWallet.Extensions"
+                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                  mc:Ignorable="d"
+                  x:Class="IDWallet.Views.Settings.Gateway.GatewayDeletionPopUp">
+    <base:CustomPopUp.Content>
+        <StackLayout Style="{StaticResource PopUpStackLayout}">
+            <Frame Style="{StaticResource PopUpFrame}"
+                   Padding="0,20">
+                <ContentView>
+                    <StackLayout>
+                        <Label Text="{lang:L10n PopUp_Gateway_Deletion_Title}"
+                               Margin="20,0"
+                               Style="{StaticResource LabelHeader}" />
+                        <BoxView BackgroundColor="{StaticResource PopUpHeaderSeparatorColor}"
+                                 HeightRequest="1"
+                                 HorizontalOptions="FillAndExpand" />
+                        <Label Text="{lang:L10n PopUp_Gateway_Deletion_Text}"
+                               Margin="20,0"
+                               Style="{StaticResource LabelMultiLine}"
+                               TextColor="{StaticResource AttributeValueColor}" />
+                        <Grid Margin="20,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <StackLayout Orientation="Horizontal">
+                                <CheckBox x:Name="CheckBox"
+                                          Color="{StaticResource PrimaryTextColor}"
+                                          IsChecked="False"
+                                          CheckedChanged="CheckBox_CheckedChanged" />
+                                <Label Text="{lang:L10n PopUp_Gateway_Deletion_CheckBox_Text}"
+                                       MaxLines="3"
+                                       Style="{StaticResource LabelListViewBig}"
+                                       LineBreakMode="WordWrap"
+                                       VerticalOptions="Center" />
+                            </StackLayout>
+                            <Button BackgroundColor="Transparent"
+                                    Clicked="Button_Clicked" />
+                        </Grid>
+                        <StackLayout Style="{StaticResource PopUpButtonArea}"
+                                     Margin="20,0">
+                            <Button Style="{StaticResource CancelButton}"
+                                    Clicked="OnPopUpCanceled"
+                                    Text="{lang:L10n PopUp_Gateway_Deletion_Cancel_Button}" />
+                            <Button x:Name="DeleteButton"
+                                    Text="{lang:L10n PopUp_Gateway_Deletion_Delete_Button}"
+                                    Style="{StaticResource DeleteButton}"
+                                    IsVisible="False"
+                                    Clicked="OnPopUpAccepted" />
+                        </StackLayout>
+                    </StackLayout>
+                </ContentView>
+            </Frame>
+        </StackLayout>
+    </base:CustomPopUp.Content>
+</base:CustomPopUp>

@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<base:CustomPopUp xmlns="http://xamarin.com/schemas/2014/forms"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:base="clr-namespace:IDWallet.Views.Customs.PopUps;assembly=IDWallet"
+                  xmlns:lang="clr-namespace:IDWallet.Extensions"
+                  x:Class="IDWallet.Views.Proof.PopUps.PresentationRequestPopUp"
+                  x:Name="Root">
+    <base:CustomPopUp.Content>
+        <StackLayout Style="{StaticResource PopUpStackLayout}">
+            <Frame Style="{StaticResource PopUpFrame}">
+                <ContentView>
+                    <StackLayout Spacing="0">
+                        <StackLayout Padding="21">
+                            <Label FontSize="20"
+                                   FontAttributes="Bold"
+                                   TextColor="{StaticResource PrimaryTextColor}"
+                                   MaxLines="100"
+                                   Text="{lang:L10n PopUp_Presentation_Request_Title}"
+                                   LineBreakMode="WordWrap" />
+
+                            <Label TextColor="{StaticResource SecondaryTextColor}"
+                                   LineBreakMode="WordWrap" MaxLines="100">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span x:Name="PresentationRequestText" />
+                                        <Span Text=" " />
+                                        <Span x:Name="Alias"
+                                              FontAttributes="Bold" />
+                                        <Span Text="."/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal"
+                                     Spacing="10"
+                                     HorizontalOptions="FillAndExpand"
+                                     Margin="20,0,20,20">
+                            <Button Style="{StaticResource AcceptButton}"
+                                    HorizontalOptions="FillAndExpand"
+                                    Clicked="OnPopUpCanceled"
+                                    Text="{lang:L10n PopUp_Presentation_Request_Cancel_Button}" />
+                            <Button Style="{StaticResource AcceptButton}"
+                                    HorizontalOptions="FillAndExpand"
+                                    Clicked="OnPopUpAccepted"
+                                    Text="{lang:L10n PopUp_Presentation_Request_Accept_Button}" />
+                        </StackLayout>
+
+                    </StackLayout>
+                </ContentView>
+            </Frame>
+        </StackLayout>
+    </base:CustomPopUp.Content>
+</base:CustomPopUp>

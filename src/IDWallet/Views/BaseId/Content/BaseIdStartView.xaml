@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:lang="clr-namespace:IDWallet.Extensions" xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             x:Class="IDWallet.Views.BaseId.Content.BaseIdStartView"
+             BackgroundColor="{StaticResource BackgroundColor}"
+             x:Name="Root">
+
+    <StackLayout>
+        <Label Style="{StaticResource BaseIDHeaderLabel}"
+               Text="{lang:L10n BaseIDPage_StartScreen_Header_Label}"/>
+        <Label Style="{StaticResource BaseIDBodyLabel}"
+               Text="{lang:L10n BaseIDPage_StartScreen_Body_Label}"
+               IsVisible="{Binding IsStartEnabled}"/>
+        <forms:AnimationView x:Name="AnimationView"
+                         Animation="loader.json"
+                         RepeatMode="Infinite"
+                         AutoPlay="True"
+                         HorizontalOptions="FillAndExpand"
+                         HeightRequest="150"
+                         IsVisible="{Binding IsStartEnabled, Converter={StaticResource InverseBooleanConverter}}"/>
+
+        <StackLayout Orientation="Horizontal"
+                     IsVisible="{Binding IsStartEnabled}">
+            <CheckBox Color="{StaticResource PrimaryTextColor}"
+                      x:Name="PrivacyCheckbox"
+                      CheckedChanged="CheckboxChecked"/>
+            <Label Style="{StaticResource BaseIDBodyLabel}">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer x:Name="privacyClick" Command="{Binding LinkTappedCommand, Source={x:Reference Root}}" />
+                </Label.GestureRecognizers>
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{lang:L10n BaseIDPage_StartScreen_Accept_Before_Label}"/>
+                        <Span Text="{lang:L10n BaseIDPage_StartScreen_Privacy_Policy_Label}"
+                              TextColor="{StaticResource PrimaryTextColor}"
+                              FontAttributes="Bold">
+                        </Span>
+                        <Span Text="{lang:L10n BaseIDPage_StartScreen_Accept_After_Label}"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+        </StackLayout>
+        <StackLayout Orientation="Horizontal"
+                     IsVisible="{Binding IsStartEnabled}">
+            <CheckBox Color="{StaticResource PrimaryTextColor}"
+                      x:Name="UserAgreementCheckbox"
+                      CheckedChanged="CheckboxChecked"/>
+            <Label Style="{StaticResource BaseIDBodyLabel}">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer x:Name="termsClick" Command="{Binding LinkTappedCommand, Source={x:Reference Root}}" />
+                </Label.GestureRecognizers>
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{lang:L10n BaseIDPage_StartScreen_Accept_Before_Label}"/>
+                        <Span Text="{lang:L10n BaseIDPage_StartScreen_User_Agreement_Label}"
+                              TextColor="{StaticResource PrimaryTextColor}"
+                              FontAttributes="Bold"/>
+                        <Span Text="{lang:L10n BaseIDPage_StartScreen_Accept_After_Label}"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+        </StackLayout>
+        
+        <Button VerticalOptions="EndAndExpand"
+                IsVisible="{Binding IsStartEnabled}"
+                Style="{StaticResource AcceptButton}"
+                Text="{lang:L10n BaseIDPage_StartScreen_Button_Label}"
+                Clicked="Button_Clicked"
+                HorizontalOptions="FillAndExpand"
+                Margin="70,0"
+                x:Name="GoToNextButton"/>
+    </StackLayout>
+</ContentView>

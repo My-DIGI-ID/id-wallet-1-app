@@ -1,0 +1,519 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="ViewModels\PlaceholderViewModel.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
+    <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie" Version="4.0.8" />
+    <PackageReference Include="dotnetstandard-bip39" Version="1.0.2" />
+    <PackageReference Include="Hyperledger.Aries" Version="1.5.5" />
+    <PackageReference Include="Hyperledger.Aries.Routing.Edge" Version="1.5.5" />
+    <PackageReference Include="Hyperledger.Indy.Sdk" Version="1.11.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
+    <PackageReference Include="PCLStorage" Version="1.0.2" />
+    <PackageReference Include="Plugin.Fingerprint" Version="2.1.3" />
+    <PackageReference Include="Plugin.Permissions" Version="6.0.1" />
+    <PackageReference Include="Rg.Plugins.Popup" Version="2.0.0.10" />
+    <PackageReference Include="SimpleBase" Version="3.0.2" />
+    <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
+    <PackageReference Include="Xam.Plugin.Iconize" Version="3.5.0.129" />
+    <PackageReference Include="Xam.Plugin.Iconize.Material" Version="3.5.0.129" />
+    <PackageReference Include="Xam.Plugin.Iconize.MaterialDesignIcons" Version="3.5.0.129" />
+    <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
+    <PackageReference Include="Xamarin.Forms.Svg" Version="1.0.3" />
+    <PackageReference Include="ZXing.Net.Mobile" Version="3.1.0-beta2" />
+    <PackageReference Include="ZXing.Net.Mobile.Forms" Version="3.1.0-beta2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\genesis\idw_bcgov" />
+    <None Remove="Resources\genesis\idw_builder" />
+    <None Remove="Resources\genesis\idw_eesdi" />
+    <None Remove="Resources\genesis\idw_esatus" />
+    <None Remove="Resources\genesis\idw_iduniontest" />
+    <None Remove="Resources\genesis\idw_live" />
+    <None Remove="Resources\genesis\idw_staging" />
+    <None Remove="Resources\imagesources\ConnectionConnected_Icon.svg" />
+    <None Remove="Resources\imagesources\ConnectionNotConnected_Icon.svg" />
+    <None Remove="Resources\imagesources\InfoProof_Icon.svg" />
+    <None Remove="Resources\imagesources\Autofocus_Icon.svg" />
+    <None Remove="Resources\imagesources\BackupCreate_Icon.svg" />
+    <None Remove="Resources\imagesources\BackupRecover_Icon.svg" />
+    <None Remove="Resources\imagesources\Biometry_Icon.svg" />
+    <None Remove="Resources\imagesources\ChangePin_Icon.svg" />
+    <None Remove="Resources\imagesources\ConnectionAdd_Icon.svg" />
+    <None Remove="Resources\imagesources\ConnectionDelete_Icon.svg" />
+    <None Remove="Resources\imagesources\ConnectionEdit_Icon.svg" />
+    <None Remove="Resources\imagesources\Connection_Icon.svg" />
+    <None Remove="Resources\imagesources\EmptyWalletArrow_Image.svg" />
+    <None Remove="Resources\imagesources\EmptyWallet_Image.svg" />
+    <None Remove="Resources\imagesources\EmptyWallet_Image_New.svg" />
+    <None Remove="Resources\imagesources\Gatewasy_Icon.svg" />
+    <None Remove="Resources\imagesources\HistoryNotOpen_Icon.svg" />
+    <None Remove="Resources\imagesources\HistoryOpen_Icon.svg" />
+    <None Remove="Resources\imagesources\InfoSmall_Icon.svg" />
+    <None Remove="Resources\imagesources\Info_Icon.svg" />
+    <None Remove="Resources\imagesources\Language_Icon.svg" />
+    <None Remove="Resources\imagesources\LedgerSwitch_Icon.svg" />
+    <None Remove="Resources\imagesources\Licenses_Icon.svg" />
+    <None Remove="Resources\imagesources\MediatorConnection_Icon.svg" />
+    <None Remove="Resources\imagesources\NFC_Icon.svg" />
+    <None Remove="Resources\imagesources\NotificationOff_Icon.png" />
+    <None Remove="Resources\imagesources\NotificationOff_Icon.svg" />
+    <None Remove="Resources\imagesources\NotificationOn_Icon.png" />
+    <None Remove="Resources\imagesources\NotificationOn_Icon.svg" />
+    <None Remove="Resources\imagesources\OnboardingForward_Icon.svg" />
+    <None Remove="Resources\imagesources\Onboarding_Image.svg" />
+    <None Remove="Resources\imagesources\PrivacyPolicy_Icon.svg" />
+    <None Remove="Resources\imagesources\PushRenew_Icon.svg" />
+    <None Remove="Resources\imagesources\ScanNotOpen_Icon.svg" />
+    <None Remove="Resources\imagesources\ScanOpen_Icon.svg" />
+    <None Remove="Resources\imagesources\Search_Icon.svg" />
+    <None Remove="Resources\imagesources\SettingNotOpen_Icon.png" />
+    <None Remove="Resources\imagesources\SettingNotOpen_Icon.svg" />
+    <None Remove="Resources\imagesources\SettingOpen_Icon.png" />
+    <None Remove="Resources\imagesources\SettingOpen_Icon.svg" />
+    <None Remove="Resources\imagesources\Trash_Icon.svg" />
+    <None Remove="Resources\imagesources\WalletNotOpen_Icon.svg" />
+    <None Remove="Resources\imagesources\WalletOpen_Icon.svg" />
+    <None Remove="Resources\licenses\Apache_2_0.txt" />
+    <None Remove="Resources\licenses\Apache_Iconize.txt" />
+    <None Remove="Resources\licenses\Apache_MicExtDI.txt" />
+	<None Remove="Resources\licenses\EUPLv1-2.txt" />
+    <None Remove="Resources\licenses\Fingerprint.txt" />
+    <None Remove="Resources\licenses\FormsPinView.txt" />
+    <None Remove="Resources\licenses\MIT.txt" />
+    <None Remove="Resources\licenses\MIT_Autofac.txt" />
+    <None Remove="Resources\licenses\MIT_dagger.txt" />
+    <None Remove="Resources\licenses\MIT_Essentials.txt" />
+    <None Remove="Resources\licenses\MIT_FFImage.txt" />
+    <None Remove="Resources\licenses\MIT_FilePicker.txt" />
+    <None Remove="Resources\licenses\MIT_Google_Play.txt" />
+    <None Remove="Resources\licenses\MIT_Microsoft_Azure.txt" />
+    <None Remove="Resources\licenses\MIT_Net_Contributors.txt" />
+    <None Remove="Resources\licenses\MIT_Permissions.txt" />
+    <None Remove="Resources\licenses\MIT_Svg.txt" />
+    <None Remove="Resources\licenses\Ms-PL.txt" />
+    <None Remove="Resources\licenses\NLog.txt" />
+    <None Remove="Resources\licenses\UserAgreement.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\genesis\idw_builder">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\genesis\idw_esatus">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\genesis\idw_live">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\genesis\idw_staging">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\genesis\idw_bcgov">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+	<EmbeddedResource Include="Resources\genesis\idw_iduniontest">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+	<EmbeddedResource Include="Resources\genesis\idw_eesdi">
+		<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	</EmbeddedResource>
+	<EmbeddedResource Include="Resources\genesis\idw_devledger">
+		<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	</EmbeddedResource>
+	<EmbeddedResource Include="Resources\imagesources\ConnectionConnected_Icon.svg" />
+	<EmbeddedResource Include="Resources\imagesources\ConnectionNotConnected_Icon.svg" />
+    <EmbeddedResource Include="Resources\imagesources\InfoProof_Icon.svg" />
+    <EmbeddedResource Include="Resources\imagesources\Autofocus_Icon.svg" />
+    <EmbeddedResource Include="Resources\imagesources\BackupCreate_Icon.svg" />
+    <EmbeddedResource Include="Resources\imagesources\BackupRecover_Icon.svg" />
+    <EmbeddedResource Include="Resources\imagesources\Biometry_Icon.svg" />
+    <EmbeddedResource Include="Resources\imagesources\ChangePin_Icon.svg" />
+    <EmbeddedResource Include="Resources\imagesources\ConnectionAdd_Icon.svg" />
+    <EmbeddedResource Include="Resources\imagesources\ConnectionDelete_Icon.svg" />
+    <EmbeddedResource Include="Resources\imagesources\ConnectionEdit_Icon.svg" />
+    <EmbeddedResource Include="Resources\imagesources\Connection_Icon.svg" />
+    <EmbeddedResource Include="Resources\imagesources\EmptyWalletArrow_Image.svg" />
+    <EmbeddedResource Include="Resources\imagesources\EmptyWallet_Image.svg" />
+    <EmbeddedResource Include="Resources\imagesources\Gatewasy_Icon.svg" />
+    <EmbeddedResource Include="Resources\imagesources\HistoryNotOpen_Icon.svg" />
+    <EmbeddedResource Include="Resources\imagesources\HistoryOpen_Icon.svg" />
+    <EmbeddedResource Include="Resources\imagesources\InfoSmall_Icon.svg" />
+    <EmbeddedResource Include="Resources\imagesources\Info_Icon.svg" />
+    <EmbeddedResource Include="Resources\imagesources\Language_Icon.svg" />
+    <EmbeddedResource Include="Resources\imagesources\LedgerSwitch_Icon.svg" />
+    <EmbeddedResource Include="Resources\imagesources\Licenses_Icon.svg" />
+    <EmbeddedResource Include="Resources\imagesources\MediatorConnection_Icon.svg" />
+    <EmbeddedResource Include="Resources\imagesources\NFC_Icon.svg" />
+    <EmbeddedResource Include="Resources\imagesources\NotificationOff_Icon.svg" />
+    <EmbeddedResource Include="Resources\imagesources\NotificationOn_Icon.svg" />
+    <EmbeddedResource Include="Resources\imagesources\OnboardingForward_Icon.svg" />
+    <EmbeddedResource Include="Resources\imagesources\Onboarding_Image.svg" />
+    <EmbeddedResource Include="Resources\imagesources\PrivacyPolicy_Icon.svg" />
+    <EmbeddedResource Include="Resources\imagesources\PushRenew_Icon.svg" />
+    <EmbeddedResource Include="Resources\imagesources\ScanNotOpen_Icon.svg" />
+    <EmbeddedResource Include="Resources\imagesources\ScanOpen_Icon.svg" />
+    <EmbeddedResource Include="Resources\imagesources\Search_Icon.svg" />
+    <EmbeddedResource Include="Resources\imagesources\SettingNotOpen_Icon.svg" />
+    <EmbeddedResource Include="Resources\imagesources\SettingOpen_Icon.svg" />
+    <EmbeddedResource Include="Resources\imagesources\Trash_Icon.svg" />
+    <EmbeddedResource Include="Resources\imagesources\WalletNotOpen_Icon.svg" />
+    <EmbeddedResource Include="Resources\imagesources\WalletOpen_Icon.svg" />
+	<EmbeddedResource Include="Resources\licenses\EUPLv1-2.txt" />
+    <EmbeddedResource Include="Resources\licenses\FormsPinView.txt" />
+    <EmbeddedResource Include="Resources\licenses\Apache_2_0.txt" />
+    <EmbeddedResource Include="Resources\licenses\Apache_Iconize.txt" />
+    <EmbeddedResource Include="Resources\licenses\Apache_MicExtDI.txt" />
+    <EmbeddedResource Include="Resources\licenses\Fingerprint.txt" />
+    <EmbeddedResource Include="Resources\licenses\MIT.txt" />
+    <EmbeddedResource Include="Resources\licenses\MIT_Autofac.txt" />
+    <EmbeddedResource Include="Resources\licenses\MIT_dagger.txt" />
+    <EmbeddedResource Include="Resources\licenses\MIT_Essentials.txt" />
+    <EmbeddedResource Include="Resources\licenses\MIT_FFImage.txt" />
+    <EmbeddedResource Include="Resources\licenses\MIT_FilePicker.txt" />
+    <EmbeddedResource Include="Resources\licenses\MIT_Google_Play.txt" />
+    <EmbeddedResource Include="Resources\licenses\MIT_Microsoft_Azure.txt" />
+    <EmbeddedResource Include="Resources\licenses\MIT_Net_Contributors.txt" />
+    <EmbeddedResource Include="Resources\licenses\MIT_Permissions.txt" />
+    <EmbeddedResource Include="Resources\licenses\MIT_Svg.txt" />
+    <EmbeddedResource Include="Resources\licenses\Ms-PL.txt" />
+    <EmbeddedResource Include="Resources\licenses\NLog.txt" />
+    <EmbeddedResource Include="Resources\licenses\UserAgreement.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources\Lang.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Lang.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Views\BaseId\Content\BaseIdConnectingView.xaml.cs">
+      <DependentUpon>BaseIdConnectingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\BaseId\Content\BaseIdCreateConnectionView.xaml.cs">
+      <DependentUpon>BaseIdCreateConnectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\BaseId\Content\BaseIdPINSuccessView.xaml.cs">
+      <DependentUpon>BaseIdPINSuccessView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\BaseId\Content\BaseIdPINView.xaml.cs">
+      <DependentUpon>BaseIdPINView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\BaseId\Content\BaseIdReadView.xaml.cs">
+      <DependentUpon>BaseIdReadView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\BaseId\Content\BaseIdStartView.xaml.cs">
+      <DependentUpon>BaseIdStartView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\BaseId\BaseIdPage.xaml.cs">
+      <DependentUpon>BaseIdPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\BaseId\Content\BaseIdSuccessView.xaml.cs">
+      <DependentUpon>BaseIdSuccessView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\BaseId\PopUps\EnterCANPopUp.xaml.cs">
+      <DependentUpon>EnterCANPopUp.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\BaseId\PopUps\AccessRightsPopUp.xaml.cs">
+      <DependentUpon>AccessRightsPopUp.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\BaseId\PopUps\LockBaseIdPopUp.xaml.cs">
+      <DependentUpon>LockBaseIdPopUp.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\BaseId\PopUps\BaseIdBasicPopUp.xaml.cs">
+      <DependentUpon>BaseIdBasicPopUp.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\BaseId\PopUps\BaseIdOfferPopUp.xaml.cs">
+      <DependentUpon>BaseIdOfferPopUp.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\History\PopUps\HistoryProofPopUp.xaml.cs">
+      <DependentUpon>HistoryProofPopUp.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Proof\ProofPopUp.xaml.cs">
+      <DependentUpon>ProofPopUp.xaml</DependentUpon>
+    </Compile>
+	<Compile Update="Views\Settings\Liability\LiabilityPage.xaml.cs">
+      <DependentUpon>LiabilityPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Wallet\WalletPage.xaml.cs">
+      <DependentUpon>WalletPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Wallet\PopUps\OfferCredentialPopUp.xaml.cs">
+      <DependentUpon>OfferCredentialPopUp.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Wallet\PopUps\DeleteCredentialPopUp.xaml.cs">
+      <DependentUpon>DeleteCredentialPopUp.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Wallet\PopUps\CredentialInfoPopUp.xaml.cs">
+      <DependentUpon>CredentialInfoPopUp.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Customs\PopUps\BasicPopUp.xaml.cs">
+      <DependentUpon>BasicPopUp.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Customs\PopUps\MigrationPopUp.xaml.cs">
+      <DependentUpon>MigrationPopUp.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Customs\PopUps\ClearDataPopUp.xaml.cs">
+      <DependentUpon>ClearDataPopUp.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Wallet\Content\CredentialHistoryListElement.xaml.cs">
+      <DependentUpon>CredentialHistoryListElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Login\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Customs\PopUps\CredentialAddedPopUp.xaml.cs">
+      <DependentUpon>CredentialAddedPopUp.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\CustomTabbedPage.xaml.cs">
+      <DependentUpon>CustomTabbedPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Proof\Content\ProofPopUpListElement.xaml.cs">
+      <DependentUpon>ProofPopUpListElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Proof\PopUps\ProofSentPopUp.xaml.cs">
+      <DependentUpon>ProofSentPopUp.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Settings\BackupHandling\BackupRecoveryPage.xaml.cs">
+      <DependentUpon>BackupRecoveryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Settings\BackupHandling\NewBackupPage.xaml.cs">
+      <DependentUpon>NewBackupPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Settings\ChangePin\ChangePinPage.xaml.cs">
+      <DependentUpon>ChangePinPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Settings\Connections\Content\ConnectionsListElement.xaml.cs">
+      <DependentUpon>ConnectionsListElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Settings\Connections\PopUps\ConnectionAddedPopUp.xaml.cs">
+      <DependentUpon>ConnectionAddedPopUp.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Settings\Connections\PopUps\NewConnectionPopUp.xaml.cs">
+      <DependentUpon>NewConnectionPopUp.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Settings\Connections\PopUps\DeleteConnectionPopUp.xaml.cs">
+      <DependentUpon>DeleteConnectionPopUp.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Settings\Connections\PopUps\DeleteSharedInfoPopUp.xaml.cs">
+      <DependentUpon>DeleteSharedInfoPopUp.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Wallet\PopUps\NewCredentialOfferPopUp.xaml.cs">
+      <DependentUpon>NewCredentialOfferPopUp.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Device2Device\CreateProofPage.xaml.cs">
+      <DependentUpon>CreateProofPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\QRScanner\PopUps\TransactionLedgerChangePopUp.xaml.cs">
+      <DependentUpon>TransactionLedgerChangePopUp.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Settings\Ledger\SwitchLedgerPage.xaml.cs">
+      <DependentUpon>SwitchLedgerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Settings\Ledger\PopUps\SwitchLedgerPopUp.xaml.cs">
+      <DependentUpon>SwitchLedgerPopUp.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Settings\SwitchLanguage\SwitchLanguage.xaml.cs">
+      <DependentUpon>SwitchLanguage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Settings\Gateway\GatewayEditPage.xaml.cs">
+      <DependentUpon>GatewayEditPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\Lang.de.resx">
+      <Generator></Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\BaseId\Content\BaseIdConnectingView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\BaseId\Content\BaseIdCreateConnectionView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\BaseId\Content\BaseIdPINSuccessView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\BaseId\Content\BaseIdPINView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\BaseId\Content\BaseIdReadView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\BaseId\Content\BaseIdStartView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\BaseId\Content\BaseIdSuccessView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\BaseId\BaseIdPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\BaseId\PopUps\CANInfoPopUp.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\BaseId\PopUps\EnterPUKPopUp.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\BaseId\PopUps\LockBaseIdPopUp.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\BaseId\PopUps\LockPINPopUp.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\BaseId\PopUps\BaseIdBasicPopUp.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\BaseId\PopUps\AccessRightsPopUp.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\BaseId\PopUps\BaseIdOfferPopUp.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\BaseId\PopUps\ReadyToScanPopUp.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\BaseId\PopUps\EnterCANPopUp.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\BaseId\PopUps\WrongPINPopUp.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\History\PopUps\HistoryCredentialPopUp.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\History\PopUps\HistoryProofPopUp.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Proof\PopUps\ProofAuthenticationPopUp.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Proof\PopUps\ProofMissingCredentialsPopUp.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Settings\Connections\PopUps\DeleteConnectionPopUp.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Settings\Connections\PopUps\ActivateAutoAcceptPopUp.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Settings\Connections\Content\ConnectionEditPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Settings\Connections\PopUps\InvalidInvitationPopUp.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Settings\Connections\PopUps\ProofsDeletedPopUp.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Settings\Connections\PopUps\SaveChangesPopUp.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Settings\Connections\PopUps\ConnectionLedgerChangePopUp.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\History\HistoryPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Intro\IntroPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\NotificationsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Inbox\Content\InboxListElement.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Wallet\PopUps\DeleteCredentialPopUp.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Wallet\Content\CredentialCarouselElement.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Wallet\PopUps\CredentialInfoPopUp.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Customs\PopUps\CredentialAddedPopUp.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\ConnectionDetailsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Settings\Connections\Content\ConnectionsListElement.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Device2Device\CreateProofPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Device2Device\Content\ProofRequestDetailsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Device2Device\PopUps\RestrictionsPopUp.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Lang.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Lang.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Proof\PopUps\PresentationRequestPopUp.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Proof\ProofPopUp.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Proof\Content\ProofPopUpListElement.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\QRScanner\PopUps\SaveNewGatewayPopUp.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Settings\SwitchLanguage\SwitchLanguage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Settings\Gateway\AddGatewayPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Settings\Gateway\GatewayDeletionPopUp.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Settings\Gateway\GatewayEditPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Settings\Gateway\GatewaysPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Settings\License\Content\LicenseContentPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Settings\License\LicensePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Settings\Mediator\PopUps\MediatorImagesPopUp.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Compile Update="Views\Inbox\Content\InboxListElement.xaml.cs">
+      <DependentUpon>InboxListElement.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+</Project>

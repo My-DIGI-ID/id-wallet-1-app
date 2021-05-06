@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<base:CustomPopUp xmlns="http://xamarin.com/schemas/2014/forms" 
+                  xmlns:base="clr-namespace:IDWallet.Views.Customs.PopUps"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+                  xmlns:pin="clr-namespace:IDWallet.Packages.FormsPinView"
+                  xmlns:lang="clr-namespace:IDWallet.Extensions"
+                  x:Class="IDWallet.Views.Proof.PopUps.ProofAuthenticationPopUp">
+    <base:CustomPopUp.Resources>
+        <ResourceDictionary>
+            <Style x:Key="PopUpButtonArea" TargetType="StackLayout">
+                <Setter Property="Spacing" Value="20" />
+                <Setter Property="Margin" Value="20,0,20,20" />
+                <Setter Property="Orientation" Value="Horizontal" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+            </Style>
+        </ResourceDictionary>
+    </base:CustomPopUp.Resources>
+    <base:CustomPopUp.Content>
+        <StackLayout Style="{StaticResource PopUpStackLayout}">
+            <Frame Style="{StaticResource PopUpFrame}"
+                   Padding="20">
+                <ContentView>
+                    <StackLayout Spacing="0">
+                        <Label FontSize="20"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource PrimaryTextColor}"
+                               LineBreakMode="WordWrap"
+                               Margin="0,0,0,15"
+                               Text="{lang:L10n PopUp_Proof_Auth_Title}"/>
+                        <Label IsVisible="{Binding PinMessageVisible}"
+                               Text="{Binding PinText}"
+                               TextColor="{StaticResource SecondaryTextColor}"
+                               MaxLines="100"
+                               LineBreakMode="WordWrap"/>
+                        <pin:PinView x:Name="pinView"
+                                     Margin="0,50,0,25"
+                                     IsVisible="{Binding PinPadVisible, Mode=TwoWay}"
+                                     ItemScale="0.75"
+                                     HorizontalOptions="Center"
+                                     VerticalOptions="CenterAndExpand"
+                                     PinLength="{Binding PinLength}"
+                                     Validator="{Binding Validator}"
+                                     ErrorCommand="{Binding ErrorCommand}"
+                                     SuccessCommand="{Binding SuccessCommand}"
+                                     Color="{StaticResource PrimaryTextColor}"
+                                     BorderColor="{StaticResource SecondaryTextColor}"
+                                     RippleColor="{StaticResource PinRippleColor}"/>
+                        <StackLayout Style="{StaticResource PopUpButtonArea}">
+                            <BoxView HorizontalOptions="FillAndExpand"
+                                     BackgroundColor="{StaticResource PopUpHeaderSeparatorColor}"/>
+                            <Button Text="{lang:L10n PopUp_ProofRequest_Delete_Button}"
+                                    Style="{StaticResource DeleteButton}"
+                                    HorizontalOptions="FillAndExpand"
+                                    Clicked="OnAuthCanceled" 
+                                    x:Name="CancelAuthButton"/>
+                        </StackLayout>
+                    </StackLayout>
+                </ContentView>
+            </Frame>
+        </StackLayout>
+        
+    </base:CustomPopUp.Content>
+</base:CustomPopUp>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<base:CustomPopUp xmlns="http://xamarin.com/schemas/2014/forms"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                  xmlns:base="clr-namespace:IDWallet.Views.Customs.PopUps;assembly=IDWallet"
+                  xmlns:lang="clr-namespace:IDWallet.Extensions"
+                  x:Class=" IDWallet.Views.Settings.Connections.PopUps.NewConnectionPopUp">
+
+    <base:CustomPopUp.Resources>
+        <ResourceDictionary>
+            <Style x:Key="PopUpButtonArea" TargetType="StackLayout">
+                <Setter Property="Spacing" Value="20" />
+                <Setter Property="Margin" Value="20,0,20,20" />
+                <Setter Property="Orientation" Value="Horizontal" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+            </Style>
+        </ResourceDictionary>
+    </base:CustomPopUp.Resources>
+    
+    <base:CustomPopUp.Content>
+        <StackLayout Style="{StaticResource PopUpStackLayout}">
+            <Frame Style="{StaticResource PopUpFrame}">
+                <ContentView>
+                    <StackLayout Spacing="0">
+                        <StackLayout Margin="20">
+                            <StackLayout Orientation="Horizontal">
+                                <AbsoluteLayout Margin="0,0,10,0">
+                                    <Frame AbsoluteLayout.LayoutBounds="0,0,41,41"
+                                           Style="{StaticResource ImageFrame}"
+                                           AbsoluteLayout.LayoutFlags="None">
+                                        <ff:CachedImage x:Name="ConnectionImage"
+                                                    LoadingPlaceholder="default_logo.png"
+                                                    ErrorPlaceholder="default_logo.png" />
+                                    </Frame>
+                                </AbsoluteLayout>
+                                <StackLayout>
+                                    <Label x:Name="ConnectionCompany"
+                                           Style="{StaticResource PopUpHeaderLabel}"
+                                           LineBreakMode="WordWrap"
+                                           MaxLines="2" />
+                                </StackLayout>
+                            </StackLayout>
+
+                            <BoxView BackgroundColor="{StaticResource PopUpHeaderSeparatorColor}"
+                                     HeightRequest="1"
+                                     HorizontalOptions="FillAndExpand" />
+                            <Label Text="{lang:L10n PopUp_Connection_Offer_Text}"
+                                   Style="{StaticResource PopUpBodyLabel}" />
+                        </StackLayout>                                             
+
+                        <StackLayout Style="{StaticResource PopUpButtonArea}">
+                            <Button Style="{StaticResource AcceptButton}"
+                                    HorizontalOptions="FillAndExpand"
+                                    Text="{lang:L10n PopUp_Connection_Offer_Deny_Button}"
+                                    Clicked="OnPopUpCanceled" />
+                            <Button Text="{lang:L10n PopUp_Connection_Offer_Accept_Button}"
+                                    Style="{StaticResource AcceptButton}"
+                                    HorizontalOptions="FillAndExpand"
+                                    Clicked="OnPopUpAccepted" />
+                        </StackLayout>
+                    </StackLayout>
+                </ContentView>
+            </Frame>
+        </StackLayout>
+    </base:CustomPopUp.Content>
+</base:CustomPopUp>

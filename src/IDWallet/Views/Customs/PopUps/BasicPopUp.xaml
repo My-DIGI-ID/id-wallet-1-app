@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<base:CustomPopUp xmlns="http://xamarin.com/schemas/2014/forms"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+                  xmlns:base="clr-namespace:IDWallet.Views.Customs.PopUps;assembly=IDWallet"
+                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                  mc:Ignorable="d"
+                  x:Class="IDWallet.Views.Customs.PopUps.BasicPopUp">
+    <base:CustomPopUp.Content>
+        <StackLayout Style="{StaticResource PopUpStackLayout}">
+            <Frame Style="{StaticResource PopUpFrame}"
+                   Padding="0,20">
+                <ContentView>
+                    <StackLayout>
+                        <Label x:Name="TitleLabel"
+                               Style="{StaticResource LabelHeader}"
+                               MaxLines="100"
+                               LineBreakMode="WordWrap"
+                               Margin="20,0" />
+                        <BoxView BackgroundColor="{StaticResource PopUpHeaderSeparatorColor}"
+                                 HeightRequest="1"
+                                 HorizontalOptions="FillAndExpand" />
+                        <Label x:Name="TextLabel"
+                               Margin="20,0"
+                               Style="{StaticResource LabelMultiLine}"
+                               TextColor="{StaticResource AttributeValueColor}" />
+                        <StackLayout Style="{StaticResource PopUpButtonArea}"
+                                     Margin="20,0" 
+                                     HorizontalOptions="FillAndExpand">
+                                <BoxView BackgroundColor="Transparent"
+                                      HorizontalOptions="FillAndExpand"/>
+                                <Button x:Name="ButtonLabel"
+                                    Style="{StaticResource AcceptButton}"
+                                    HorizontalOptions="FillAndExpand"
+                                    Clicked="OnPopUpAccepted" />
+                        </StackLayout>
+                    </StackLayout>
+                </ContentView>
+            </Frame>
+        </StackLayout>
+    </base:CustomPopUp.Content>
+</base:CustomPopUp>

@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<base:CustomPopUp xmlns="http://xamarin.com/schemas/2014/forms"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:base="clr-namespace:IDWallet.Views.Customs.PopUps"
+                  xmlns:views="clr-namespace:IDWallet.Views.Proof.Content"
+                  xmlns:lang="clr-namespace:IDWallet.Extensions"
+                  xmlns:pin="clr-namespace:IDWallet.Packages.FormsPinView"
+                  x:Class="IDWallet.Views.Proof.ProofPopUp"
+                  x:Name="Root">
+    <base:CustomPopUp.Resources>
+        <ResourceDictionary>
+            <Style x:Key="PopUpButtonArea" TargetType="StackLayout">
+                <Setter Property="Spacing" Value="20" />
+                <Setter Property="Margin" Value="20,0,20,20" />
+                <Setter Property="Orientation" Value="Horizontal" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+            </Style>
+        </ResourceDictionary>
+    </base:CustomPopUp.Resources>
+    <base:CustomPopUp.Content>
+        <StackLayout Style="{StaticResource PopUpStackLayout}">
+            <Frame Style="{StaticResource PopUpFrame}"
+                   Padding="20">
+                <ContentView>
+                    <StackLayout>
+                        <StackLayout Spacing="0">
+                            <Label FontSize="20"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource PrimaryTextColor}"
+                               MaxLines="100"
+                               LineBreakMode="WordWrap">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{lang:L10n PopUp_ProofRequest_Header_BeforeName}" />
+                                        <Span Text=" " />
+                                        <Span x:Name="ConnectionAliasSpan" />
+                                        <Span Text=" " />
+                                        <Span Text="{lang:L10n PopUp_ProofRequest_Header_AfterName}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <Label FontSize="14"
+                               TextColor="{StaticResource SecondaryTextColor}"
+                               MaxLines="100"
+                               LineBreakMode="WordWrap"
+                               Margin="0,10"
+                               Text="{lang:L10n PopUp_ProofRequest_Text}" />
+                            <BoxView BackgroundColor="{StaticResource SeparatorColor}"
+                                 HeightRequest="1"
+                                 HorizontalOptions="FillAndExpand" />
+                            <ScrollView>
+                                <StackLayout BindableLayout.ItemsSource="{Binding Requests}"
+                                         Spacing="0">
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate>
+                                            <views:ProofPopUpListElement />
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </StackLayout>
+                            </ScrollView>
+                            <Label Style="{StaticResource LabelMultiLine}"
+                               FontSize="10"
+                               Margin="0,10">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{lang:L10n PopUp_ProofRequest_Privacy_Policy_Label1}" />
+                                    <Span Text=" (" />
+                                    <Span Text="https://digital-enabling.com/datenschutzerklaerung"
+                                          TextColor="{StaticResource LinkColor}"
+                                          TextDecorations="Underline">
+                                            <Span.GestureRecognizers>
+                                                <TapGestureRecognizer
+                                                Command="{Binding LinkClickedCommand, Source={x:Reference Root}}" />
+                                            </Span.GestureRecognizers>
+                                        </Span>
+                                        <Span Text="), " />
+                                        <Span Text="{lang:L10n PopUp_ProofRequest_Privacy_Policy_Label2}" />
+                                        <Span Text=". " />
+                                        <Span Text="{lang:L10n PopUp_ProofRequest_Privacy_Policy_Label3}" />
+                                        <Span Text=" " />
+                                        <Span x:Name="ConnectionAliasSpan2" />
+                                        <Span Text="." />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <StackLayout Style="{StaticResource PopUpButtonArea}">
+                                <Button Text="{lang:L10n PopUp_ProofRequest_Delete_Button}"
+                                    Style="{StaticResource DeleteButton}"
+                                    HorizontalOptions="FillAndExpand"
+                                    Clicked="OnPopUpCanceled" 
+                                    x:Name="CancelButton"/>
+                                <Button Text="{lang:L10n PopUp_ProofRequest_Accept_Button}"
+                                    Style="{StaticResource AcceptButton}"
+                                    HorizontalOptions="FillAndExpand"
+                                    Clicked="OnSend" 
+                                    x:Name="SendButton"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>                   
+                </ContentView>
+            </Frame>
+        </StackLayout>
+    </base:CustomPopUp.Content>
+</base:CustomPopUp>

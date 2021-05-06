@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:svg="clr-namespace:Xamarin.Forms.Svg;assembly=SvgImageSource"
+             xmlns:lang="clr-namespace:IDWallet.Extensions"
+             x:Class="IDWallet.Views.Intro.IntroPage"
+             BackgroundColor="{StaticResource BackgroundColor}">
+    <ContentPage.Content>
+        <Grid Padding="40">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Frame Grid.Row="0"
+                   HorizontalOptions="FillAndExpand"
+                   VerticalOptions="FillAndExpand">
+                <Image Aspect="AspectFit">
+                    <Image.Source>
+                        <svg:SvgImageSource Source="imagesources.Onboarding_Image.svg" Width="150" Height="150" />
+                    </Image.Source>
+                </Image>
+            </Frame>
+
+            <StackLayout Grid.Row="1"
+                         Spacing="0">
+                <Label Text="{lang:L10n IntroPage_Title}"
+                       FontAttributes="Bold"
+                       FontSize="30"
+                       LineBreakMode="WordWrap"
+                       MaxLines="4"
+                       HorizontalTextAlignment="Center"
+                       TextColor="{StaticResource PrimaryTextColor}"
+                       HorizontalOptions="CenterAndExpand" />
+                <Label Text="{lang:L10n IntroPage_Text}"
+                       Margin="0,10,0,0"
+                       HorizontalTextAlignment="Center"
+                       FontSize="16"
+                       TextColor="{StaticResource SecondaryTextColor}"
+                       MaxLines="5"
+                       LineBreakMode="WordWrap"
+                       HorizontalOptions="CenterAndExpand" />
+                <Frame BackgroundColor="Transparent"
+                       VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="Center"
+                       HeightRequest="50"
+                       WidthRequest="50"
+                       CornerRadius="25"
+                       Padding="0">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding FinishButtonTappedCommand}" />
+                    </Frame.GestureRecognizers>
+                    <Image Aspect="AspectFit">
+                        <Image.Source>
+                            <svg:SvgImageSource Source="imagesources.OnboardingForward_Icon.svg" Width="40" Height="40" />
+                        </Image.Source>
+                    </Image>
+                </Frame>
+            </StackLayout>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
