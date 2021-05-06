@@ -48,17 +48,17 @@ To use the Governikus AusweisApp2 SDK it requires two binding subprojects for bo
 Some configuration needs to be set:
 
 ### Wallet Parameters
-- src/IDWallet/WalletParams.cs
-      - MediatorEndpoint
-      - MediatorConnectionAliasName
-      - SafetyNetApiKey
-      - NotificationHubName
-      - ListenConnectionString
-      - MobileSecret
-      - MobileToken
-      - AusweisHost
-	  - TeamId
-	  - PushServiceName
+- src/IDWallet/WalletParams.cs  
+      - MediatorEndpoint  
+      - MediatorConnectionAliasName  
+      - SafetyNetApiKey  
+      - NotificationHubName  
+      - ListenConnectionString  
+      - MobileSecret  
+      - MobileToken  
+      - AusweisHost  
+	  - TeamId  
+	  - PushServiceName  
 
 ### PNS Android
 - src/IDWallet.Android/google-services.json
