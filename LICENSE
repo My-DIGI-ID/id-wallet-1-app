@@ -1,1 +1,77 @@
-TODO
+# Lizenzbestimmungen 
+
+## Quellprogramme ID Wallet 
+
+Digital Enabling GmbH 
+94424 Arnstorf 
+info@digital-enabling.com 
+
+## Präambel 
+
+Die ID-Wallet ist ein Programm zur Speicherung von Daten über Identitätsmerkmalen auf elektronischen Geräten (App). Die App ist auf verschiedenen Betriebssystemen lauffähig. 
+
+Transparenz und Sicherheit der App sind von hoher Bedeutung für die Nutzerinnen und Nutzer. Aus diesem Grunde möchte der Lizenzgeber die Quellprogramme der App offenlegen und Nutzerinnen und Nutzer die Prüfung und Analyse der Quellprogramme ermöglichen. 
+
+Die Bearbeitung, Weiterentwicklung, Verbreitung oder sonstige Nutzung der Quellprogramme ist nicht gestattet. Eine diesbezügliche Freigabe behält sich der Lizenzgeber in der Zukunft vor, wie auch die Beendigung der Offenlegung. 
+
+Die gesetzlichen oder vertraglichen Regelungen zur Nutzung der App und die weiteren Lizenzbestimmungen der App bleiben unberührt von den nachfolgenden Bestimmungen. 
+
+## Lizenzgegenstand 
+
+Lizenzgegenstand sind ausschließlich die im Verzeichnis https://github.com/Digital-Enabling/ID-Wallet bestimmten Quellprogramme. Quellprogramme und App werden nachfolgen gemeinsam auch „Lizenz-Programme“ genannt. Gegenstand der Lizenz sind die Quellprogramme nur im aktuellen Stand am Ort der Bereitstellung durch den Lizenzgeber. Der Lizenzgeber ist berechtigt, die Quellprogramme jederzeit beliebig zu bearbeiten oder sonst zu ändern. Eine Verpflichtung, solche Veränderungen ebenfalls dieser Lizenz zu unterstellen besteht für den Lizenzgeber nicht. Der Lizenzgeber ist auch jederzeit berechtigt, die Quellprogramme ganz oder teilweise nicht mehr bereitzustellen und die Lizenzierung zu beenden. 
+
+Nicht Lizenzgegenstand sind Drittprogramme, insbesondere Entwicklungswerkzeuge, Bibliotheken Dritter, mit der App interagierende Programme und Betriebssystemprogramme, die von der App genutzt oder vorausgesetzt werden. Drittprogramme sind auch Programme, für die in der App oder in den Quellprogrammen eigene Lizenzbestimmungen mitgeteilt werden oder für die ein anderer Rechteinhaber ausgewiesen ist, beispielsweise durch Benennung in Quellprogrammen. 
+
+Die Lizenz wird nur eingeräumt an Quellprogrammen, die unmittelbar von der vom Lizenzgeber bestimmten Ressource bezogenen werden. 
+
+## Lizenz 
+
+Dem Lizenznehmer wird am Lizenzgegenstand ein einfaches und beschränktes Recht zur Nutzung für die in dieser Lizenzvereinbarung bestimmten Zwecke eingeräumt. 
+
+Als Zweck der Nutzung ist ausschließlich die Überprüfung, Testung und Analyse der Lizenz-Programme auf Fehlverhalten, schädliche Bestandteile, Angriffsmöglichkeiten oder sonstige Aspekte der Sicherheit der App sowie auf Übereinstimmung mit den datenschutzrechtlichen Anforderungen bei Verwendung der App gestattet. 
+
+Soweit dies für die Zwecke der Nutzung erforderlich ist, umfasst das Recht zur Nutzung die Speicherung der Quellprogramme auf einem Datenträger, das Anzeigen und Prüfen auch mittels Software-Werkzeugen, das Erstellen des Binärprogrammes aus den Quellprogrammen, die Installation der App und deren Ausführung. 
+
+Unbeschadet etwaiger gesetzlicher Befugnisse ist der Lizenznehmer berechtigt, aus den Quellprogrammen zum Bericht über die Ergebnisse einer Prüfung nach Ziffer 2.2. zu zitieren und hierfür Bestandteile der Quellprogramme zu vervielfältigen, verbreiten oder öffentlich wiederzugeben, soweit die Nutzung in ihrem Umfang durch den besonderen Zweck gerechtfertigt ist. Diese Berechtigung steht unter der aufschiebenden Bedingung, dass der Lizenznehmer dem Lizenzgeber zuvor über die beabsichtigte Nutzung unter Darlegung des konkreten Zitats und Zitatszwecks informiert. 
+
+## Unzulässige Nutzungen 
+
+Nicht erlaubt ist die Nutzung der Lizenz-Programme für andere als die in dieser Lizenz bestimmten Zwecke. 
+
+Unzulässig sind insbesondere die Bearbeitung, Modifizierung, Weiterentwicklung oder sonstige Umänderung der Lizenz-Programme insgesamt oder von Teilen davon, die Integrierung in andere Programme oder der Aufruf aus anderen Programmen.  
+
+Unzulässig ist es in Bezug auf die Lizenz-Programme, Dritten die Nutzung zu gestatten, Dritten Rechte einzuräumen, Rechte auf Dritte zu übertragen, Unterlizenzen einzuräumen oder Lizenz-Programme sonst an Dritte weiterzugeben oder zu verbreiten. Unzulässig ist die ganze oder teilweise öffentliche Wiedergabe oder Zugänglichmachung der Lizenz-Programme, soweit diese nicht ausdrücklich nach dieser Lizenz oder durch Gesetz erlaubt ist. 
+
+## Laufzeit und Kündigung 
+
+Die Lizenz endet mit Ablauf des Jahres 2021. 
+
+Der Lizenzgeber behält sich vor, die Rechte zur Nutzung nach dieser Lizenz jederzeit ohne Angabe eines Grundes mit sofortiger Wirkung zu kündigen.  
+
+Gesetzliche Rechte zur fristlosen Kündigung bleiben unberührt. 
+
+Mit dem Ende der Lizenz ist die weitere Nutzung der Lizenz-Programme einschließlich des Ladens in den Arbeitsspeicher eines Computers unzulässig und die Lizenz-Programme sind unverzüglich zu löschen. 
+
+## Haftung 
+
+Die Bereitstellung der Quellprogramme zur Prüfung stellt keine vertragliche Leistung des Lizenzgebers an den Lizenznehmer dar. Vertragliche Gewährleistungs- oder Haftungsansprüche bestehen daher insoweit nicht. 
+
+Die Nutzung der Lizenz-Programme wird unentgeltlich und auf begrenzte Zeit gestattet. Es wird daher die Anwendung des Rechts der Leihe gegebenenfalls analog vereinbart: Der Lizenzgeber hat nur Vorsatz und grobe Fahrlässigkeit zu vertreten. Soweit gesetzliche Mängelhaftung besteht, ist sie darauf beschränkt, dass der Lizenzgeber bei arglistigem Verschweigen eines Mangels im Recht oder eines Fehlers der Lizenz-Programme verpflichtet ist, dem Nutzer den daraus entstehenden Schaden zu ersetzen. Der Lizenzgeber haftet nicht für leichte oder einfache Fahrlässigkeit. Der Lizenzgeber übernimmt gegenüber dem Lizenznehmer keine Verhaltenspflichten, für deren fahrlässige Verletzung der Lizenzgeber einsteht. 
+
+Eine verschuldensunabhängige Haftung für bereits bei Vertragsabschluss vorhandene Fehler wird ausdrücklich ausgeschlossen. 
+
+Die Einschränkungen der Haftung aus dieser Ziffer gelten auch zugunsten von Erfüllungsgehilfen und Organen des Lizenzgebers. 
+
+Die vorstehenden Einschränkungen der Haftung gelten nicht für gesetzliche Ansprüche des Lizenznehmers wegen Schäden aus der Verletzung von Leben, Körper und Gesundheit, bei arglistigem Verschweigen eines Mangels oder wegen Fehlens einer Beschaffenheit, für die der Lizenzgeber eine Garantie übernommen hat, nach dem Produkthaftungsgesetz oder die von § 44 oder § 44a TKG erfasst werden.  
+
+## Allgemeine Bestimmungen 
+
+Die Bereitstellung der Quellprogramme erfolgt ohne Rechtspflicht. Der Lizenzgeber möchte durch die Bereitstellung auch keine Verbindlichkeiten gegenüber dem Lizenznehmer eingehen oder begründen. Eine etwaige Tätigkeit des Lizenznehmers im Hinblick auf die Zwecke dieser Lizenz begründet kein Vertragsverhältnis oder vertragsähnliches Rechtsverhältnis über diese Tätigkeiten mit dem Lizenzgeber. Dies gilt auch dann, wenn der Lizenznehmer seine Ergebnisse dem Lizenzgeber mitteilt oder diesem sonst bereitstellt.  
+
+Dieser Lizenzvertrag und alle außervertraglichen Ansprüche, Rechte und Pflichten, die sich im Zusammenhang mit der Nutzung des Lizenzgegenstands ergeben, unterliegen dem Recht der Bundesrepublik Deutschland und sind nach deutschem Recht auszulegen. Das Übereinkommen der Vereinten Nationen über Verträge über den internationalen Warenkauf (UN-Kaufrecht) sowie die Kollisionsregeln des Internationalen Privatrechts finden dabei keine Anwendung. Ansprüche aus verbraucherschützenden Normen kann der Lizenznehmer nach deutschem Recht oder nach dem Recht des EU-Mitgliedstaates in dem er lebt geltend machen.  
+
+Ausschließlicher Gerichtsstand für alle Ansprüche aus oder im Zusammenhang mit dieser Lizenz ist Berlin (i) sofern der Lizenznehmer im Inland keinen allgemeinen Gerichtsstand hat, (ii) sein Wohnsitz oder gewöhnlicher Aufenthaltsort nach Vertragsschluss ins Ausland verlegt wurde oder bei Klageerhebung unbekannt ist oder (iii) der Lizenznehmer Unternehmer im Sinne des § 14 BGB ist. Unberührt bleibt ein gesetzlich abweichend bestimmter ausschließlicher Gerichtsstand bestehen. Die Klage des Lizenzgebers gegen den Lizenznehmer an dessen allgemeinen Gerichtsstand bleibt zulässig. 
+
+ 
+
+Stand 26.05.2021 
