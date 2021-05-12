@@ -12,6 +12,10 @@ The app's transparency and security are of great importance to users. For this r
 
 Detailed license conditions can be found in the [LICENSE](https://github.com/Digital-Enabling/ID-Wallet/blob/main/LICENSE) file.
 
+## Releases
+
+Source code for releases of the ID Wallet will be provided in a timely manner and for each major and minor version change. Patch and bug fix releases are excluded. 
+
 ## Libraries
 
 The ID Wallet requires libraries that are not included in this repository:
