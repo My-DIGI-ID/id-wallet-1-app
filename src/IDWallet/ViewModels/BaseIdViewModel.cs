@@ -34,6 +34,7 @@ namespace IDWallet.ViewModels
         private int _carouselPosition;
         private bool _progressBarIsVisible;
         private bool _isStartEnabled;
+		private bool _isInfoVisible;
         private int _idPinLength;
         private string _idPinHeaderLabel;
         private string _idPinBoldLabel;
@@ -79,6 +80,12 @@ namespace IDWallet.ViewModels
         {
             get => _isStartEnabled;
             set => SetProperty(ref _isStartEnabled, value);
+        }
+		
+		public bool IsInfoVisible
+        {
+            get => _isInfoVisible;
+            set => SetProperty(ref _isInfoVisible, value);
         }
 
         public int IdPinLength
@@ -188,6 +195,15 @@ namespace IDWallet.ViewModels
             IdPinLinkIsVisible = false;
             ForgotPINLinkIsVisible = false;
             MoreInformationLinkIsVisible = false;
+			
+			if (WalletParams.PackageName.Equals("com.digitalenabling.idw"))
+            {
+                IsInfoVisible = true;
+            }
+            else
+            {
+                IsInfoVisible = false;
+            }
 
             IdPinHeaderLabel = Lang.BaseIDPage_PINScreen_Default_Header_Label;
             IdPinBoldLabel = Lang.BaseIDPage_PINScreen_Selection_Bold_Text;
@@ -606,6 +622,7 @@ namespace IDWallet.ViewModels
                         }
                         break;
                     case 1:
+						IsInfoVisible = false;
                         _sdkService.SendRunAuth();
                         BaseIdProcessType = BaseIdProcessType.Authentication;
                         IsActivityIndicatorVisible = true;
@@ -798,7 +815,6 @@ namespace IDWallet.ViewModels
 
 		private void UseTransportPinNoCancel()
         {
-            IsActivityIndicatorVisible = true;
             ProgressBarIsVisible = false;
             IdPinBoldIsVisible = false;
             PinPadIsVisible = true;
@@ -909,6 +925,15 @@ namespace IDWallet.ViewModels
 
         public void GoToStart()
         {
+			if (WalletParams.PackageName.Equals("com.digitalenabling.idw"))
+            {
+                IsInfoVisible = true;
+            }
+            else
+            {
+                IsInfoVisible = false;
+            }
+			
             App.PopUpIsOpen = false;
             ActiveMessageType = SdkMessageType.UNKNOWN_COMMAND;
             BaseIdProcessType = BaseIdProcessType.None;

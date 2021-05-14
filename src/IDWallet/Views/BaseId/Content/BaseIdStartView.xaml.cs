@@ -15,13 +15,6 @@ namespace IDWallet.Views.BaseId.Content
             privacyClick.CommandParameter = $"https://{WalletParams.AusweisHost}/ssi/privacy.html";
             termsClick.CommandParameter = $"https://{WalletParams.AusweisHost}/ssi/terms.html";
             GoToNextButton.IsEnabled = false;
-			
-			if (WalletParams.PackageName.Equals("com.digitalenabling.idw"))
-                infoLabel.IsVisible = true;
-            else
-            {
-                infoLabel.IsVisible = false;
-            }
         }
 
         private Command<string> _linkTappedCommand;
