@@ -9,6 +9,23 @@
     <StackLayout>
         <Label Style="{StaticResource BaseIDHeaderLabel}"
                Text="{lang:L10n BaseIDPage_StartScreen_Header_Label}"/>
+		<Label  Style="{StaticResource LabelMultiLine}"
+                FontAttributes="Bold"
+                x:Name="infoLabel">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="{lang:L10n BaseIDPage_Info_Label_1}" />
+                    <Span Text="{lang:L10n BaseIDPage_Info_Label_2}"
+                                          TextColor="{StaticResource LinkColor}"
+                                          TextDecorations="Underline">
+                        <Span.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding LinkClickedCommand, Source={x:Reference Root}}" />
+                        </Span.GestureRecognizers>
+                    </Span>
+                    <Span Text="{lang:L10n BaseIDPage_Info_Label_3}" />
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
         <Label Style="{StaticResource BaseIDBodyLabel}"
                Text="{lang:L10n BaseIDPage_StartScreen_Body_Label}"
                IsVisible="{Binding IsStartEnabled}"/>

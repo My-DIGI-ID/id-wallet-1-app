@@ -2,7 +2,7 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:pin="clr-namespace:IDWallet.Packages.FormsPinView"
-             xmlns:lang="clr-namespace:IDWallet.Extensions"
+             xmlns:lang="clr-namespace:IDWallet.Extensions" xmlns:svg="clr-namespace:Xamarin.Forms.Svg;assembly=SvgImageSource"
              x:Class="IDWallet.Views.BaseId.Content.BaseIdPINView"
              BackgroundColor="{StaticResource BackgroundColor}"
              x:Name="Root">
@@ -28,7 +28,54 @@
                    FontAttributes="Bold"/>
             <Label x:Name="BodyLabel" 
                    Style="{StaticResource BaseIDBodyLabel}"
-                   Text="{Binding IdPinBodyLabel}"/>
+                   Text="{Binding IdPinBodyLabel}"
+                   IsVisible="{Binding IdPinLinkIsVisible, Converter={StaticResource InverseBooleanConverter}}"/>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Image Aspect="AspectFit"
+                       IsVisible="{Binding IdPinLinkIsVisible}"
+                       Grid.Row="0"
+                       Grid.Column="0">
+                    <Image.Source>
+                        <svg:SvgImageSource Source="imagesources.RoundClick_Icon.svg"  Width="20" Height="20" />
+                    </Image.Source>
+                </Image>
+                <Label x:Name="LinkLabel" 
+                       IsVisible="{Binding IdPinLinkIsVisible}"
+                       Style="{StaticResource BaseIDLinkLabel}" 
+                       Text="{lang:L10n BaseIDPage_PINScreen_Transport_Label}"
+                       Grid.Row="0"
+                       Grid.Column="1">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ChangeDigitsTappedCommand}"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Image Aspect="AspectFit"
+                       IsVisible="{Binding ForgotPINLinkIsVisible}"
+                       Grid.Row="1"
+                       Grid.Column="0">
+                    <Image.Source>
+                        <svg:SvgImageSource Source="imagesources.RoundClick_Icon.svg"  Width="20" Height="20" />
+                    </Image.Source>
+                </Image>
+                <Label IsVisible="{Binding ForgotPINLinkIsVisible}"
+                       Style="{StaticResource BaseIDLinkLabel}"  
+                       Text="{lang:L10n BaseIDPage_PINScreen_Forgot_Your_PIN}"
+                       Grid.Row="1"
+                       Grid.Column="1">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ForgotPINTappedCommand}"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
             
             <Label IsVisible="{Binding MoreInformationLinkIsVisible}"
                    Style="{StaticResource BaseIDLinkLabel}" 
@@ -52,7 +99,7 @@
                         BorderColor="{StaticResource SecondaryTextColor}"
                         RippleColor="{StaticResource PinRippleColor}" />
 
-            <Grid>
+            <!--<Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
@@ -71,7 +118,7 @@
                    Text="{lang:L10n BaseIDPage_PINScreen_Forgot_Your_PIN}"
                    Command="{Binding ForgotPINTappedCommand}"
                    Grid.Column="1"/>
-            </Grid>
+            </Grid>-->
 
             <StackLayout IsVisible="{Binding PinPadIsVisible, Converter={StaticResource InverseBooleanConverter}}"
                          VerticalOptions="EndAndExpand"

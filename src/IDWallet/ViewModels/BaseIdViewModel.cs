@@ -13,7 +13,6 @@ using Hyperledger.Aries.Features.IssueCredential;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -272,27 +271,53 @@ namespace IDWallet.ViewModels
                         {
                             _sdkService.SendCancel();
                             _sdkService.InitHttpClient();
-
-                            BaseIdBasicPopUp popUp = new BaseIdBasicPopUp(
-                                    Lang.PopUp_BaseID_Auth_Error_Title,
-                                    Lang.PopUp_BaseID_Auth_Error_Text,
-                                    Lang.PopUp_BaseID_Auth_Error_Button
-                                    );
-                            await popUp.ShowPopUp();
-                            await Navigation.PopAsync();
+							
+                            if (sdkMessage.Result.Message.Equals("The authenticity of your ID card could not be verified. Please make sure that you are using a genuine ID card. Please note that test applications require the use of a test ID card."))
+                            {
+                                BaseIdBasicPopUp popUp = new BaseIdBasicPopUp(
+                                        Lang.PopUp_BaseID_Auth_Error_Title,
+                                        Lang.PopUp_BaseID_Auth_Error_Card_Text,
+                                        Lang.PopUp_BaseID_Auth_Error_Button
+                                        );
+                                await popUp.ShowPopUp();
+                                await Navigation.PopAsync();
+                            }
+                            else
+                            {
+								BaseIdBasicPopUp popUp = new BaseIdBasicPopUp(
+										Lang.PopUp_BaseID_Auth_Error_Title,
+										Lang.PopUp_BaseID_Auth_Error_Text,
+										Lang.PopUp_BaseID_Auth_Error_Button
+										);
+								await popUp.ShowPopUp();
+								await Navigation.PopAsync();
+							}
                         }
                     }
                     else
                     {
                         _sdkService.SendCancel();
                         _sdkService.InitHttpClient();
-                        BaseIdBasicPopUp popUp = new BaseIdBasicPopUp(
-                        Lang.PopUp_BaseID_Auth_Error_Title,
-                        Lang.PopUp_BaseID_Auth_Error_Text,
-                        Lang.PopUp_BaseID_Auth_Error_Button
-                        );
-                        await popUp.ShowPopUp();
-                        await Navigation.PopAsync();
+						if (sdkMessage.Result.Message.Equals("The authenticity of your ID card could not be verified. Please make sure that you are using a genuine ID card. Please note that test applications require the use of a test ID card."))
+                        {
+							BaseIdBasicPopUp popUp = new BaseIdBasicPopUp(
+                                    Lang.PopUp_BaseID_Auth_Error_Title,
+                                    Lang.PopUp_BaseID_Auth_Error_Card_Text,
+                                    Lang.PopUp_BaseID_Auth_Error_Button
+                                    );
+                            await popUp.ShowPopUp();
+                            await Navigation.PopAsync();
+                        }
+						else
+                        {
+                            BaseIdBasicPopUp popUp = new BaseIdBasicPopUp(
+                                    Lang.PopUp_BaseID_Auth_Error_Title,
+                                    Lang.PopUp_BaseID_Auth_Error_Text,
+                                    Lang.PopUp_BaseID_Auth_Error_Button
+                                    );
+							await popUp.ShowPopUp();
+							await Navigation.PopAsync();
+						}
                     }
                 }
                 else if (BaseIdProcessType == BaseIdProcessType.TransportPIN)
@@ -385,20 +410,28 @@ namespace IDWallet.ViewModels
                 {
                     case BaseIdProcessType.Authentication:
                         await HandleAuthenticationEnterPin(sdkMessage);
+						ActiveMessageType = SdkMessageType.ENTER_PIN;
+						UseRegularPIN();
                         break;
                     case BaseIdProcessType.ChangePIN:
+						ActiveMessageType = SdkMessageType.ENTER_PIN;
                         await HandleChangePinEnterPin(sdkMessage);
                         break;
                     case BaseIdProcessType.TransportPIN:
+						if (ActiveMessageType == SdkMessageType.ENTER_CAN)
+                        {
+                            ActiveMessageType = SdkMessageType.ENTER_PIN;
+                            UseTransportPinNoCancel();
+                        }
+                        else
+                        {
+                            ActiveMessageType = SdkMessageType.ENTER_PIN;
+                        }
                         await HandleTransportPinEnterPin(sdkMessage);
                         break;
                     default:
                         break;
                 }
-
-                ActiveMessageType = SdkMessageType.ENTER_PIN;
-
-                UseRegularPIN();
             });
         }
 
@@ -421,6 +454,7 @@ namespace IDWallet.ViewModels
                 }
                 else if (ActiveMessageType == SdkMessageType.ENTER_PIN)
                 {
+					UseRegularPIN();
                     EnterCANPopUp canPopUp = new EnterCANPopUp(Lang.PopUp_BaseID_Enter_CAN_Text_1);
 
                     if (BaseIdProcessType == BaseIdProcessType.TransportPIN)
@@ -437,7 +471,6 @@ namespace IDWallet.ViewModels
                     ForgotPINLinkIsVisible = false;
                     MoreInformationLinkIsVisible = true;
                 }
-
                 ActiveMessageType = SdkMessageType.ENTER_CAN;
             });
         }
@@ -761,6 +794,45 @@ namespace IDWallet.ViewModels
 
             _sdkService.SendCancel();
             _sdkService.InitHttpClient();
+        }
+
+		private void UseTransportPinNoCancel()
+        {
+            IsActivityIndicatorVisible = true;
+            ProgressBarIsVisible = false;
+            IdPinBoldIsVisible = false;
+            PinPadIsVisible = true;
+
+            switch (ActiveMessageType)
+            {
+                case SdkMessageType.ENTER_PIN:
+                    IdPinHeaderLabel = Lang.BaseIDPage_PINScreen_Transport_Header_Label;
+                    IdPinBodyLabel = Lang.BaseIDPage_PINScreen_Transport_Body_Label;
+                    ForgotPINLinkIsVisible = false;
+                    IdPinLinkIsVisible = false;
+                    MoreInformationLinkIsVisible = false;
+                    IdPinLength = 5;
+                    break;
+                case SdkMessageType.ENTER_CAN:
+                    IdPinHeaderLabel = Lang.BaseIDPage_PINScreen_CAN_Header_Label;
+                    IdPinBodyLabel = Lang.BaseIDPage_PINScreen_CAN_Body_Label;
+                    ForgotPINLinkIsVisible = false;
+                    IdPinLinkIsVisible = false;
+                    MoreInformationLinkIsVisible = true;
+                    IdPinLength = 6;
+                    break;
+                case SdkMessageType.ENTER_PUK:
+                    IdPinHeaderLabel = Lang.BaseIDPage_PINScreen_PUK_Header_Label;
+                    IdPinBodyLabel = Lang.BaseIDPage_PINScreen_PUK_Body_Label;
+                    ForgotPINLinkIsVisible = false;
+                    IdPinLinkIsVisible = false;
+                    MoreInformationLinkIsVisible = true;
+                    IdPinLength = 10;
+                    break;
+            }
+
+            BaseIdProcessType = BaseIdProcessType.TransportPIN;
+            ActiveMessageType = SdkMessageType.UNKNOWN_COMMAND;
         }
 
         private void UseRegularPIN()

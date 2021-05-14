@@ -83,15 +83,12 @@ namespace IDWallet.Services
                             {
                                 string queryMessage = uri.Query.Remove(0, 3).FromBase64();
 
-                                RequestPresentationMessage requestPresentationMessage =
-                                    queryMessage.ToObject<RequestPresentationMessage>();
+                                CustomRequestPresentationMessage requestPresentationMessage =
+                                    queryMessage.ToObject<CustomRequestPresentationMessage>();
 
                                 IAgentContext agentContext = await _agentProvider.GetContextAsync();
 
-                                JToken serviceJToken = JObject.Parse(queryMessage)
-                                    .SelectToken($"~{DecoratorNames.ServiceDecorator}");
-
-                                CustomServiceDecorator service = serviceJToken.ToObject<CustomServiceDecorator>();
+                                CustomServiceDecorator service = requestPresentationMessage.Service;
 
                                 ProofRecord proofRecord =
                                     await _proofService.ProcessRequestAsync(agentContext, requestPresentationMessage,
@@ -156,15 +153,12 @@ namespace IDWallet.Services
 
                                 string basedecodedMessage = message.FromBase64();
 
-                                RequestPresentationMessage requestPresentationMessage =
-                                    basedecodedMessage.ToObject<RequestPresentationMessage>();
+                                CustomRequestPresentationMessage requestPresentationMessage =
+                                    basedecodedMessage.ToObject<CustomRequestPresentationMessage>();
 
                                 IAgentContext agentContext = await _agentProvider.GetContextAsync();
 
-                                JToken serviceJToken = JObject.Parse(basedecodedMessage)
-                                    .SelectToken($"~{DecoratorNames.ServiceDecorator}");
-
-                                CustomServiceDecorator service = serviceJToken.ToObject<CustomServiceDecorator>();
+                                CustomServiceDecorator service = requestPresentationMessage.Service;
 
                                 ProofRecord proofRecord =
                                     await _proofService.ProcessRequestAsync(agentContext, requestPresentationMessage,

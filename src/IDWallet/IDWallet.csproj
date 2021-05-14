@@ -80,7 +80,8 @@
     <None Remove="Resources\imagesources\Onboarding_Image.svg" />
     <None Remove="Resources\imagesources\PrivacyPolicy_Icon.svg" />
     <None Remove="Resources\imagesources\PushRenew_Icon.svg" />
-    <None Remove="Resources\imagesources\ScanNotOpen_Icon.svg" />
+    <None Remove="Resources\imagesources\RoundClick_Icon.svg" />
+	<None Remove="Resources\imagesources\ScanNotOpen_Icon.svg" />
     <None Remove="Resources\imagesources\ScanOpen_Icon.svg" />
     <None Remove="Resources\imagesources\Search_Icon.svg" />
     <None Remove="Resources\imagesources\SettingNotOpen_Icon.png" />
@@ -166,7 +167,8 @@
     <EmbeddedResource Include="Resources\imagesources\OnboardingForward_Icon.svg" />
     <EmbeddedResource Include="Resources\imagesources\Onboarding_Image.svg" />
     <EmbeddedResource Include="Resources\imagesources\PrivacyPolicy_Icon.svg" />
-    <EmbeddedResource Include="Resources\imagesources\PushRenew_Icon.svg" />
+	<EmbeddedResource Include="Resources\imagesources\PushRenew_Icon.svg" />
+	<EmbeddedResource Include="Resources\imagesources\RoundClick_Icon.svg" />
     <EmbeddedResource Include="Resources\imagesources\ScanNotOpen_Icon.svg" />
     <EmbeddedResource Include="Resources\imagesources\ScanOpen_Icon.svg" />
     <EmbeddedResource Include="Resources\imagesources\Search_Icon.svg" />
