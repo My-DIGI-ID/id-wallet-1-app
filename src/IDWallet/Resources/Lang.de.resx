@@ -421,7 +421,7 @@
     <value>Benachrichtigungen</value>
   </data>
   <data name="IntroPage_Text" xml:space="preserve">
-    <value>Verwernden Sie Ihr Handy, um Ihre persönlichen Nachweise zu verwalten.</value>
+    <value>Verwenden Sie Ihr Handy, um Ihre persönlichen Nachweise zu verwalten.</value>
   </data>
   <data name="IntroPage_Title" xml:space="preserve">
     <value>Erstellen Sie Ihre eigene digitale ID</value>
@@ -1611,7 +1611,7 @@
     <value>Ihnen fehlen die nötigen Nachweise um diese Anfrage zu beantworten.</value>
   </data>
   <data name="BaseIDPage_SuccessScreen_Button" xml:space="preserve">
-    <value>ID Anzeigen</value>
+    <value>ID anzeigen</value>
   </data>
   <data name="BaseIDPage_SuccessScreen_Text" xml:space="preserve">
     <value>Ihre Basis-ID liegt jetzt in Ihrer Wallet bereit.</value>
@@ -1940,11 +1940,11 @@
   <data name="PopUp_BaseID_Auth_Error_Button" xml:space="preserve">
     <value>Okay</value>
   </data>
-  <data name="PopUp_BaseID_Auth_Error_Text" xml:space="preserve">
-    <value>Beim Verbinden mit der Bundesdruckerei ist etwas schief gelaufen. Bitte starten Sie den Prozess erneut.</value>
+  <data name="PopUp_BaseID_Auth_Error_Card_Text" xml:space="preserve">
+    <value>Die Echtheit Ihres Ausweises konnte nicht überprüft werden. Bitte stellen Sie sicher, dass Sie einen echten Ausweis verwenden. Bitte beachten Sie, dass Testanwendungen die Verwendung eines Testausweises erfordern.</value>
   </data>
   <data name="PopUp_BaseID_Auth_Error_Title" xml:space="preserve">
-    <value>Verbindungsaufbau fehlgeschlagen</value>
+    <value>Basis-ID Fehler</value>
   </data>
   <data name="PopUp_HistoryDetails_Text1" xml:space="preserve">
     <value>Am</value>
@@ -2044,5 +2044,26 @@
   </data>
   <data name="PopUp_Proof_Auth_Title" xml:space="preserve">
     <value>Bitte geben Sie Ihre Wallet-PIN ein.</value>
+  </data>
+  <data name="LiabilityPage_Text" xml:space="preserve">
+    <value>Dem Benutzer ist bewusst, dass es bei der Nutzung der App zu technischen Störungen und anderen Komplikationen kommen kann. Etwaige Haftungsansprüche richten sich nach den §§ 516 ff. BGB. Die Haftung des Betreibers ist auf Vorsatz und grobe Fahrlässigkeit beschränkt (§ 521 BGB). Darüber haftet der Betreiber für Rechtsmängel und Sachmängel nur bei arglistigem Verschweigen des Mangels (§ 523 Abs. 1, § 524 Abs. 1 BGB). Etwaige andere einschlägige Vorschriften bleiben unberührt.</value>
+  </data>
+  <data name="LiabilityPage_Title" xml:space="preserve">
+    <value>Haftung</value>
+  </data>
+  <data name="LiabilityPage_Jurisdiction" xml:space="preserve">
+    <value>Gerichtsstand: Arnstorf</value>
+  </data>
+  <data name="PopUp_BaseID_Auth_Error_Text" xml:space="preserve">
+    <value>Bei der Ausstellung ihrer Basis-ID ist etwas schief gelaufen. Bitte starten Sie den Prozess erneut.</value>
+  </data>
+  <data name="BaseIDPage_Info_Label_1" xml:space="preserve">
+    <value>Funktioniert für Sie derzeit nur mit Testausweisen (weitere Infos </value>
+  </data>
+  <data name="BaseIDPage_Info_Label_2" xml:space="preserve">
+    <value>hier</value>
+  </data>
+  <data name="BaseIDPage_Info_Label_3" xml:space="preserve">
+    <value>). Später im Jahr auch für Ihren Personalausweis verfügbar.</value>
   </data>
 </root>

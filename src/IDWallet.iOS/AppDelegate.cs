@@ -1,6 +1,5 @@
 ﻿using AusweisApp2Adapters;
 using Autofac;
-using CoreFoundation;
 using CoreNFC;
 using IDWallet.Interfaces;
 using IDWallet.Models.AusweisSDK;
@@ -20,7 +19,7 @@ namespace IDWallet.iOS
     [Register("AppDelegate")]
     public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate, IAusweisApp2Delegate
     {
-        public static AusweisApp2Adapter AusweisApp2Adapter;
+        public static AusweisApp2Adapter AusweisApp2Adapter = null;
 
         private static AppDelegate appDelegate;
 
@@ -130,11 +129,14 @@ namespace IDWallet.iOS
 
         public static void BindSdk()
         {
-            if (NFCNdefReaderSession.ReadingAvailable)
+			if (AusweisApp2Adapter == null)
             {
-                NSError error;
-                AusweisApp2Adapter = new AusweisApp2Adapter(appDelegate, out error);
-            }
+				if (NFCNdefReaderSession.ReadingAvailable)
+				{
+					NSError error;
+					AusweisApp2Adapter = new AusweisApp2Adapter(appDelegate, out error);
+				}
+			}
         }
 
         public override bool OpenUrl(UIApplication app, NSUrl url, NSDictionary options)

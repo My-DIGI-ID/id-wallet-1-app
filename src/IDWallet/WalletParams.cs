@@ -50,8 +50,8 @@ namespace IDWallet
         public const string WalletSaltByteTag = "WalletSalt";
 
         //Change per Version
-        public const string AppVersion = "1.1";
-        public const string BuildVersion = "10106";
+        public const string AppVersion = "1.2";
+        public const string BuildVersion = "10203";
         public const string WalletName = "ID Wallet";
         public const string SafetyNetApiKey = "";
         public const string NotificationHubName = "";

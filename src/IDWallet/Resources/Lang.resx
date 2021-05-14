@@ -421,7 +421,7 @@
     <value>Messages</value>
   </data>
   <data name="IntroPage_Text" xml:space="preserve">
-    <value>Use your mobile phone to scan your personal documents and access them on your mobile phone</value>
+    <value>Use your mobile phone to manage your personal documents.</value>
   </data>
   <data name="IntroPage_Title" xml:space="preserve">
     <value>Create your own digital ID</value>
@@ -1800,7 +1800,7 @@
     <value>left to enter the correct PIN.</value>
   </data>
   <data name="PopUp_BaseID_Wrong_PIN_Pre_Text" xml:space="preserve">
-    <value>You have entered the wrong six digit PIN. You have</value>
+    <value>You have entered the wrong six digit PIN. You have </value>
   </data>
   <data name="PopUp_BaseID_Wrong_PIN_Title" xml:space="preserve">
     <value>Wrong PIN</value>
@@ -1949,11 +1949,11 @@
   <data name="PopUp_BaseID_Auth_Error_Button" xml:space="preserve">
     <value>Okay</value>
   </data>
-  <data name="PopUp_BaseID_Auth_Error_Text" xml:space="preserve">
-    <value>Something went wrong when connecting to the Bundesdruckerei. Please restart the process.</value>
+  <data name="PopUp_BaseID_Auth_Error_Card_Text" xml:space="preserve">
+    <value>The authenticity of your ID card could not be verified. Please make sure that you are using a genuine ID card. Please note that test applications require the use of a test ID card.</value>
   </data>
   <data name="PopUp_BaseID_Auth_Error_Title" xml:space="preserve">
-    <value>Connection establishment failed</value>
+    <value>Basis-ID error</value>
   </data>
   <data name="PopUp_HistoryDetails_Text1" xml:space="preserve">
     <value>On</value>
@@ -2028,7 +2028,7 @@
     <value>You have entered an incorrect Transport-PIN twice.</value>
   </data>
   <data name="PopUp_BaseID_Wrong_PIN_Pre_Text_2" xml:space="preserve">
-    <value>You have entered the wrong Transport-PIN. You have</value>
+    <value>You have entered the wrong Transport-PIN. You have </value>
   </data>
   <data name="PopUp_Vitual_Device_Title" xml:space="preserve">
     <value>Warning</value>
@@ -2071,5 +2071,26 @@
   </data>
   <data name="PopUp_BaseID_ReadyToScan_Cancel_Button" xml:space="preserve">
     <value>Cancel</value>
+  </data>
+  <data name="LiabilityPage_Title" xml:space="preserve">
+    <value>Liability</value>
+  </data>
+  <data name="LiabilityPage_Text" xml:space="preserve">
+    <value>The user is aware that technical malfunctions and other complications may occur when using the app. Any liability claims are governed by §§ 516 ff. BGB. The liability of the operator is limited to intent and gross negligence (§ 521 BGB). In addition, the operator shall only be liable for defects of law and defects of quality in the event of fraudulent concealment of the defects (§ 523 para. 1, § 524 para. 1 BGB). Any other relevant provisions shall remain unaffected.</value>
+  </data>
+  <data name="LiabilityPage_Jurisdiction" xml:space="preserve">
+    <value>Place of jurisdiction: Arnstorf</value>
+  </data>
+  <data name="PopUp_BaseID_Auth_Error_Text" xml:space="preserve">
+    <value>Something went wrong while issuing your Basis-ID. Please restart the process.</value>
+  </data>
+  <data name="BaseIDPage_Info_Label_1" xml:space="preserve">
+    <value>Currently only works for you with test ID cards (more info </value>
+  </data>
+  <data name="BaseIDPage_Info_Label_2" xml:space="preserve">
+    <value>here</value>
+  </data>
+  <data name="BaseIDPage_Info_Label_3" xml:space="preserve">
+    <value>). Later in the year also available for your ID card.</value>
   </data>
 </root>

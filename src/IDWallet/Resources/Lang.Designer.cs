@@ -240,6 +240,33 @@ namespace IDWallet.Resources {
             }
         }
         
+		/// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Currently only works for you with test ID cards (more info  ähnelt.
+        /// </summary>
+        public static string BaseIDPage_Info_Label_1 {
+            get {
+                return ResourceManager.GetString("BaseIDPage_Info_Label_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die here ähnelt.
+        /// </summary>
+        public static string BaseIDPage_Info_Label_2 {
+            get {
+                return ResourceManager.GetString("BaseIDPage_Info_Label_2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die ). Later in the year also available for your ID card. ähnelt.
+        /// </summary>
+        public static string BaseIDPage_Info_Label_3 {
+            get {
+                return ResourceManager.GetString("BaseIDPage_Info_Label_3", resourceCulture);
+            }
+        }
+        
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Please enter the six-digit access number (CAN). This can be found at the bottom right of the front of the badge. ähnelt.
         /// </summary>
@@ -1303,7 +1330,7 @@ namespace IDWallet.Resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Use your mobile phone to scan your personal documents and access them on your mobile phone ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Use your mobile phone to manage your personal documents. ähnelt.
         /// </summary>
         public static string IntroPage_Text {
             get {
@@ -2212,7 +2239,16 @@ namespace IDWallet.Resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Something went wrong when connecting to the Bundesdruckerei. Please restart the process. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die The authenticity of your ID card could not be verified. Please make sure that you are using a genuine ID card. Please note that test applications require the use of a test ID card. ähnelt.
+        /// </summary>
+        public static string PopUp_BaseID_Auth_Error_Card_Text {
+            get {
+                return ResourceManager.GetString("PopUp_BaseID_Auth_Error_Card_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Something went wrong while issuing your Basis-ID. Please restart the process. ähnelt.
         /// </summary>
         public static string PopUp_BaseID_Auth_Error_Text {
             get {
@@ -2221,7 +2257,7 @@ namespace IDWallet.Resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Connection establishment failed ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Basis-ID error ähnelt.
         /// </summary>
         public static string PopUp_BaseID_Auth_Error_Title {
             get {
@@ -2626,7 +2662,7 @@ namespace IDWallet.Resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die You have entered the wrong six digit PIN. You have ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die You have entered the wrong six digit PIN. You have  ähnelt.
         /// </summary>
         public static string PopUp_BaseID_Wrong_PIN_Pre_Text {
             get {
@@ -2635,7 +2671,7 @@ namespace IDWallet.Resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die You have entered the wrong Transport-PIN. You have ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die You have entered the wrong Transport-PIN. You have  ähnelt.
         /// </summary>
         public static string PopUp_BaseID_Wrong_PIN_Pre_Text_2 {
             get {
@@ -5513,16 +5549,7 @@ namespace IDWallet.Resources {
                 return ResourceManager.GetString("ScanPage_Camera_Icon_Label", resourceCulture);
             }
         }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die About us ähnelt.
-        /// </summary>
-        public static string SettingsPage_About_Us {
-            get {
-                return ResourceManager.GetString("SettingsPage_About_Us", resourceCulture);
-            }
-        }
-        
+		
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Expert Settings ähnelt.
         /// </summary>
@@ -5619,6 +5646,15 @@ namespace IDWallet.Resources {
         public static string SettingsPage_Gateways {
             get {
                 return ResourceManager.GetString("SettingsPage_Gateways", resourceCulture);
+            }
+        }
+		
+		/// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Legal ähnelt.
+        /// </summary>
+        public static string SettingsPage_Legal {
+            get {
+                return ResourceManager.GetString("SettingsPage_Legal", resourceCulture);
             }
         }
         

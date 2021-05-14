@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="21px" height="21px" viewBox="0 0 21 21" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+  <g id="icon" transform="translate(0.25 0.25)">
+    <path d="M10 20C15.5228 20 20 15.5228 20 10C20 4.47715 15.5228 0 10 0C4.47715 0 0 4.47715 0 10C0 15.5228 4.47715 20 10 20Z" id="Oval" fill="#0A008E" fill-opacity="0.050980393" fill-rule="evenodd" stroke="none" />
+    <path d="M4.56 4L0.56 8L0 7.44L3.44 4L0 0.56L0.56 0L4.56 4Z" transform="translate(8.282715 6.25)" id="Fill" fill="#0A008E" fill-rule="evenodd" stroke="#0A008E" stroke-width="0.5" />
+  </g>
+</svg>

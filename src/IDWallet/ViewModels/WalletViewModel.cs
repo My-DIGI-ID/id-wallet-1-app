@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using IDWallet.Agent;
 using IDWallet.Agent.Interface;
+using IDWallet.Agent.Models;
 using IDWallet.Events;
 using IDWallet.Models;
 using IDWallet.Services;
@@ -11,6 +12,8 @@ using IDWallet.Views.Proof;
 using IDWallet.Views.Settings;
 using Hyperledger.Aries;
 using Hyperledger.Aries.Agents;
+using Hyperledger.Aries.Decorators;
+using Hyperledger.Aries.Extensions;
 using Hyperledger.Aries.Features.DidExchange;
 using Hyperledger.Aries.Features.IssueCredential;
 using Hyperledger.Aries.Features.PresentProof;
@@ -363,6 +366,15 @@ namespace IDWallet.ViewModels
                             Value = claim.PredicateType + " " + claim.Value,
                             PredicateType = claim.PredicateType
                         });
+                    }
+					
+					string serviceAlias = "";
+                    if (string.IsNullOrEmpty(presentedCredentials.ConnectionRecord?.Alias.Name))
+                    {
+                        CustomServiceDecorator service = proofRecord.GetTag(DecoratorNames.ServiceDecorator)
+                            .ToObject<CustomServiceDecorator>();
+                        var endpointUri = new Uri(service.ServiceEndpoint);
+                        serviceAlias = !string.IsNullOrEmpty(service.EndpointName) ? service.EndpointName + " - " + endpointUri.Host : service.ServiceEndpoint;
                     }
 
                     HistoryProofElement historyItem = new HistoryProofElement
@@ -773,7 +785,7 @@ namespace IDWallet.ViewModels
                 IEnumerable<WalletElement> credentialsPageItems =
                     from credentialPageItem in WalletElements
                     where presentedCredentials.CredentialRecordIds.Contains(credentialPageItem.CredentialRecord
-                        .CredentialId)
+                        .Id)
                     select credentialPageItem;
                 foreach (WalletElement credentialsPageItem in credentialsPageItems)
                 {
@@ -784,7 +796,7 @@ namespace IDWallet.ViewModels
                     else
                     {
                         List<CredentialClaim> revealedList = (from claim in presentedCredentials.RevealedClaims
-                                                              where claim.CredentialRecordId == credentialsPageItem.CredentialRecord.CredentialId
+                                                              where claim.CredentialRecordId == credentialsPageItem.CredentialRecord.Id
                                                               select claim).ToList().OrderBy(x => x.Name).ToList();
                         ObservableCollection<CredentialClaim> revealed = new ObservableCollection<CredentialClaim>();
                         foreach (CredentialClaim claim in revealedList)
@@ -793,7 +805,7 @@ namespace IDWallet.ViewModels
                         }
 
                         List<CredentialClaim> nonrevealedList = (from claim in presentedCredentials.NonRevealedClaims
-                                                                 where claim.CredentialRecordId == credentialsPageItem.CredentialRecord.CredentialId
+                                                                 where claim.CredentialRecordId == credentialsPageItem.CredentialRecord.Id
                                                                  select claim).ToList().OrderBy(x => x.Name).ToList();
                         ObservableCollection<CredentialClaim> nonrevealed = new ObservableCollection<CredentialClaim>();
                         foreach (CredentialClaim claim in nonrevealedList)
@@ -802,7 +814,7 @@ namespace IDWallet.ViewModels
                         }
 
                         List<CredentialClaim> selfAttestedList = (from claim in presentedCredentials.SelfAttestedClaims
-                                                                  where claim.CredentialRecordId == credentialsPageItem.CredentialRecord.CredentialId
+                                                                  where claim.CredentialRecordId == credentialsPageItem.CredentialRecord.Id
                                                                   select claim).ToList().OrderBy(x => x.Name).ToList();
                         ObservableCollection<CredentialClaim>
                             selfAttested = new ObservableCollection<CredentialClaim>();
@@ -812,7 +824,7 @@ namespace IDWallet.ViewModels
                         }
 
                         List<CredentialClaim> predicatesList = (from claim in presentedCredentials.PredicateClaims
-                                                                where claim.CredentialRecordId == credentialsPageItem.CredentialRecord.CredentialId
+                                                                where claim.CredentialRecordId == credentialsPageItem.CredentialRecord.Id
                                                                 select claim).ToList().OrderBy(x => x.Name).ToList();
                         ObservableCollection<CredentialClaim> predicates = new ObservableCollection<CredentialClaim>();
                         foreach (CredentialClaim claim in predicatesList)
@@ -826,12 +838,21 @@ namespace IDWallet.ViewModels
                             });
                         }
 
+                        string serviceAlias = "";
+                        if (string.IsNullOrEmpty(presentedCredentials.ConnectionRecord?.Alias.Name))
+                        {
+                            CustomServiceDecorator service = proofRecord.GetTag(DecoratorNames.ServiceDecorator)
+                                .ToObject<CustomServiceDecorator>();
+                            var endpointUri = new Uri(service.ServiceEndpoint);
+                            serviceAlias = !string.IsNullOrEmpty(service.EndpointName) ? service.EndpointName + " - " + endpointUri.Host : service.ServiceEndpoint;
+                        }
+
                         HistoryProofElement historyItem = new HistoryProofElement
                         {
                             CredentialName = credentialsPageItem.Name,
-                            ConnectionAlias = presentedCredentials.ConnectionRecord.Alias.Name,
+                            ConnectionAlias = serviceAlias,
                             ImageUri = string.IsNullOrEmpty(presentedCredentials.ConnectionRecord?.Alias.ImageUrl)
-                                ? null
+                                ? ImageSource.FromFile("default_logo.png")
                                 : new Uri(presentedCredentials.ConnectionRecord.Alias.ImageUrl),
                             UpdatedAtUtc = proofRecord.UpdatedAtUtc ?? proofRecord.CreatedAtUtc,
                             State = Resources.Lang.WalletPage_History_Panel_Status_Shared,
@@ -931,13 +952,22 @@ namespace IDWallet.ViewModels
                                 PredicateType = claim.PredicateType
                             });
                         }
+						
+	                    string serviceAlias = "";
+                        if (string.IsNullOrEmpty(presentedCredentials.ConnectionRecord?.Alias.Name))
+                        {
+                            CustomServiceDecorator service = proofRecord.GetTag(DecoratorNames.ServiceDecorator)
+                                .ToObject<CustomServiceDecorator>();
+                            var endpointUri = new Uri(service.ServiceEndpoint);
+                            serviceAlias = !string.IsNullOrEmpty(service.EndpointName) ? service.EndpointName + " - " + endpointUri.Host : service.ServiceEndpoint;
+                        }
 
                         HistoryProofElement historyItem = new HistoryProofElement
                         {
                             CredentialName = credentialsPageItem.Name,
                             ConnectionAlias = presentedCredentials.ConnectionRecord.Alias.Name,
                             ImageUri = string.IsNullOrEmpty(presentedCredentials.ConnectionRecord?.Alias.ImageUrl)
-                                ? null
+                                ? ImageSource.FromFile("default_logo.png")
                                 : new Uri(presentedCredentials.ConnectionRecord.Alias.ImageUrl),
                             UpdatedAtUtc = proofRecord.UpdatedAtUtc ?? proofRecord.CreatedAtUtc,
                             State = Resources.Lang.WalletPage_History_Panel_Status_Shared,

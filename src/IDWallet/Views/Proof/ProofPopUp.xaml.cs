@@ -103,7 +103,7 @@ namespace IDWallet.Views.Proof
                         try
                         {
                             await _viewModel.CreateAndSendProof(_service);
-                            MessagingCenter.Send(this, WalletEvents.SendProofRequest, _proofRecordId);
+                            MessagingCenter.Send(this, WalletEvents.SentProofRequest, _proofRecordId);
                             OnPopUpAccepted(sender, e);
                         }
                         catch (Exception ex)
