@@ -2,8 +2,8 @@
 
 ## Contact
 Digital Enabling GmbH  
-Rheinstr. 5
-63225 Langen
+Rheinstr. 5  
+63225 Langen  
 info@digital-enabling.com  
 
 ## License
