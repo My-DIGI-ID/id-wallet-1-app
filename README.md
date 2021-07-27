@@ -10,7 +10,7 @@ info@digital-enabling.com
 
 The app's transparency and security are of great importance to users. For this reason, the licensor would like to disclose the source programs of the app and enable users to check and analyze the source programs. Editing, further development, distribution or other use of the source programs is not permitted.
 
-Detailed license conditions can be found in the [LICENSE](https://github.com/Digital-Enabling/ID-Wallet/blob/main/LICENSE) file.
+Detailed license conditions can be found in the [LICENSE](https://github.com/My-DIGI-ID/ID-Wallet/blob/main/LICENSE) file.
 
 ## Releases
 
