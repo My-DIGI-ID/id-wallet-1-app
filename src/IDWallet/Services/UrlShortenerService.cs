@@ -2,6 +2,7 @@
 using IDWallet.Agent.Models;
 using IDWallet.Agent.Services;
 using IDWallet.Interfaces;
+using IDWallet.ViewModels;
 using Hyperledger.Aries.Agents;
 using Hyperledger.Aries.Contracts;
 using Hyperledger.Aries.Decorators;
@@ -14,6 +15,7 @@ using Hyperledger.Aries.Models.Events;
 using Hyperledger.Aries.Utils;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -83,18 +85,15 @@ namespace IDWallet.Services
                             {
                                 string queryMessage = uri.Query.Remove(0, 3).FromBase64();
 
-                                CustomRequestPresentationMessage requestPresentationMessage =
-                                    queryMessage.ToObject<CustomRequestPresentationMessage>();
 
                                 IAgentContext agentContext = await _agentProvider.GetContextAsync();
+                                ProofRecord proofRecord = null;
 
-                                CustomServiceDecorator service = requestPresentationMessage.Service;
+                                CustomRequestPresentationMessage requestPresentationMessage = await CheckMultiRequest(queryMessage, agentContext, proofRecord);
 
-                                ProofRecord proofRecord =
-                                    await _proofService.ProcessRequestAsync(agentContext, requestPresentationMessage,
-                                        service);
+                                proofRecord = await _proofService.ProcessRequestAsync(agentContext, requestPresentationMessage, requestPresentationMessage.Service);
 
-                                return (proofRecord, service, null, null);
+                                return (proofRecord, requestPresentationMessage.Service, null, null);
                             }
                             catch (Exception)
                             {
@@ -143,7 +142,7 @@ namespace IDWallet.Services
                         {
                             try
                             {
-                                System.Collections.Generic.Dictionary<string, string> arguments = uri.Query
+                                Dictionary<string, string> arguments = uri.Query
                                     .Substring(1)
                                     .Split('&')
                                     .Select(q => q.Split('='))
@@ -153,24 +152,21 @@ namespace IDWallet.Services
 
                                 string basedecodedMessage = message.FromBase64();
 
-                                CustomRequestPresentationMessage requestPresentationMessage =
-                                    basedecodedMessage.ToObject<CustomRequestPresentationMessage>();
-
                                 IAgentContext agentContext = await _agentProvider.GetContextAsync();
+                                ProofRecord proofRecord = null;
 
-                                CustomServiceDecorator service = requestPresentationMessage.Service;
 
-                                ProofRecord proofRecord =
-                                    await _proofService.ProcessRequestAsync(agentContext, requestPresentationMessage,
-                                        service);
+                                CustomRequestPresentationMessage requestPresentationMessage = await CheckMultiRequest(basedecodedMessage, agentContext, proofRecord);
 
-                                return (proofRecord, service, null, null);
+                                proofRecord = await _proofService.ProcessRequestAsync(agentContext, requestPresentationMessage, requestPresentationMessage.Service);
+
+                                return (proofRecord, requestPresentationMessage.Service, null, null);
                             }
                             catch (Exception)
                             {
                                 try
                                 {
-                                    System.Collections.Generic.Dictionary<string, string> arguments = uri.Query
+                                    Dictionary<string, string> arguments = uri.Query
                                         .Substring(1)
                                         .Split('&')
                                         .Select(q => q.Split('='))
@@ -203,7 +199,7 @@ namespace IDWallet.Services
                                 {
                                     try
                                     {
-                                        System.Collections.Generic.Dictionary<string, string> arguments = uri.Query
+                                        Dictionary<string, string> arguments = uri.Query
                                             .Substring(1)
                                             .Split('&')
                                             .Select(q => q.Split('='))
@@ -233,6 +229,92 @@ namespace IDWallet.Services
             }
 
             return (null, null, null, null);
+        }
+
+        private async Task<CustomRequestPresentationMessage> CheckMultiRequest(string basedecodedMessage, IAgentContext agentContext, ProofRecord proofRecord)
+        {
+            CustomRequestPresentationMessage requestPresentationMessage = null;
+            List<CustomRequestPresentationMessage> requestPresentationMessages = new List<CustomRequestPresentationMessage>();
+            try
+            {
+                requestPresentationMessage = basedecodedMessage.ToObject<CustomRequestPresentationMessage>();
+                return requestPresentationMessage;
+            }
+            catch (Exception)
+            {
+                requestPresentationMessages = basedecodedMessage.ToObject<List<CustomRequestPresentationMessage>>();
+            }
+
+            if (requestPresentationMessage == null && requestPresentationMessages.Count == 0)
+            {
+                throw new Exception("no proof");
+            }
+
+            Dictionary<CustomRequestPresentationMessage, ProofRecord> readyToSendProofs = new Dictionary<CustomRequestPresentationMessage, ProofRecord>();
+            Dictionary<CustomRequestPresentationMessage, ProofRecord> notReadyToSendProofs = new Dictionary<CustomRequestPresentationMessage, ProofRecord>();
+
+            if (requestPresentationMessages.Count == 1)
+            {
+                requestPresentationMessage = requestPresentationMessages.First();
+            }
+            else if (requestPresentationMessages.Count > 1)
+            {
+                foreach (CustomRequestPresentationMessage requestPresentation in requestPresentationMessages)
+                {
+
+                    ProofRequest request = new ProofRequest();
+                    try
+                    {
+                        request = proofRecord.RequestJson.ToObject<ProofRequest>();
+                    }
+                    catch (Exception)
+                    {
+                        //ignore
+                    }
+
+                    ProofRecord thisProofRecord = new ProofRecord
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        RequestJson = proofRecord.RequestJson,
+                        ConnectionId = null,
+                        State = ProofState.Requested
+                    };
+                    proofRecord.SetTag(TagConstants.LastThreadId, requestPresentation.GetThreadId());
+                    proofRecord.SetTag(TagConstants.Role, TagConstants.Holder);
+                    await _walletRecordService.AddAsync(agentContext.Wallet, proofRecord);
+
+                    ProofViewModel proofViewModel = new ProofViewModel(request, thisProofRecord.Id);
+                    proofViewModel.LoadItemsCommand.Execute(null);
+                    while (!proofViewModel.LoadCommandFinished)
+                    {
+                        await Task.Delay(100);
+                    }
+
+                    if (proofViewModel.ReadyToSend)
+                    {
+                        readyToSendProofs.Add(requestPresentation, thisProofRecord);
+                    }
+                    else
+                    {
+                        notReadyToSendProofs.Add(requestPresentation, thisProofRecord);
+                    }
+                }
+
+                //TODO: popup and select
+                requestPresentationMessage = requestPresentationMessages.First();
+            }
+
+            foreach (KeyValuePair<CustomRequestPresentationMessage, ProofRecord> notReadyToSendProof in notReadyToSendProofs)
+            {
+                await _walletRecordService.DeleteAsync<ProofRecord>(agentContext.Wallet, notReadyToSendProof.Value.Id);
+            }
+
+            foreach (KeyValuePair<CustomRequestPresentationMessage, ProofRecord> readyToSendProof in readyToSendProofs)
+            {
+                await _walletRecordService.DeleteAsync<ProofRecord>(agentContext.Wallet, readyToSendProof.Value.Id);
+            }
+
+            return requestPresentationMessage;
         }
 
         private async Task<string> ProcessOfferAsync(IAgentContext agentContext, CredentialOfferMessage credentialOffer,

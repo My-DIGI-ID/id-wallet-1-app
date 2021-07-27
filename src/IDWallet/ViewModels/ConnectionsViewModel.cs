@@ -186,7 +186,7 @@ namespace IDWallet.ViewModels
 
                 displayables =
                     new List<ConnectionRecord>(
-                        displayables.OrderByDescending(x => x.UpdatedAtUtc ?? x.CreatedAtUtc.Value));
+                        displayables.OrderByDescending(x => x.CreatedAtUtc.Value));
                 foreach (ConnectionRecord item in displayables)
                 {
                     if (item.Id == provisioning.GetTag(_mediatorConnectionIdTagName))

@@ -12,7 +12,7 @@ namespace IDWallet.Models
         public CredentialRecord CredentialRecord { get; set; }
         public string State { get; set; }
         public string Title { get; set; }
-        public DateTime? UpdatedAtUtc { get; set; }
+        public DateTime? CreatedAtUtc { get; set; }
     }
 
     public class CredentialContentAttribute

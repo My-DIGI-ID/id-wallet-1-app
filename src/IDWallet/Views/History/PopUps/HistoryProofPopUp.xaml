@@ -54,15 +54,14 @@
                                 <Frame WidthRequest="35"
                                        HeightRequest="35"
                                        CornerRadius="0"
-                                       VerticalOptions="CenterAndExpand"
-                                       BackgroundColor="{StaticResource BackgroundColor}">
+                                       VerticalOptions="CenterAndExpand">
                                     <Image Source="{Binding ImageUri}" 
                                            VerticalOptions="CenterAndExpand"
                                            HorizontalOptions="CenterAndExpand"/>
                                 </Frame>
 
                                 <StackLayout Spacing="0">
-                                    <Label Text="{Binding CredentialName}"
+                                    <Label Text="{Binding CredentialName, Converter={StaticResource CredDefNameConverter}}"
                                            FontSize="16"
                                            FontAttributes="Bold"
                                            VerticalOptions="CenterAndExpand"

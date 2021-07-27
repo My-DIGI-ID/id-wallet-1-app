@@ -1,8 +1,10 @@
 ﻿using IDWallet.Models;
+using IDWallet.Resources;
 using IDWallet.Views.Customs.PopUps;
 using Hyperledger.Aries.Features.IssueCredential;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using ZXing.Net.Mobile.Forms;
 
 namespace IDWallet.Views.History.PopUps
 {
@@ -16,7 +18,7 @@ namespace IDWallet.Views.History.PopUps
 
             try
             {
-                DateTimeSpan.Text = historyCredentialElement.UpdatedAtUtc.Value.ToLocalTime().ToString();
+                DateTimeSpan.Text = historyCredentialElement.CreatedAtUtc.Value.ToLocalTime().ToString();
             }
             catch
             {
@@ -78,6 +80,30 @@ namespace IDWallet.Views.History.PopUps
                     };
 
                     stackLayout.Children.Add(iconButton);
+                }
+                else if (nameLabel.Text == "QR-Code")
+                {
+                    HistoryCredentialTitle.Text = Lang.Qr_History_Message_1;
+                    HistoryCredentialText2.Text = Lang.Qr_History_Message_2;
+                    nameLabel.Text = "";
+                    ZXingBarcodeImageView cachedImage = new ZXingBarcodeImageView
+                    {
+                        BarcodeValue = claim.Value.ToString(),
+                        Aspect = Aspect.AspectFit,
+                        BarcodeFormat = ZXing.BarcodeFormat.QR_CODE,
+                        BarcodeOptions = new ZXing.Common.EncodingOptions { Width = 350, Height = 350 },
+                        HeightRequest = 350
+                    };
+                    Frame imageFrame = new Frame
+                    {
+                        CornerRadius = 0,
+                        HeightRequest = 350,
+                        WidthRequest = 350,
+                        HorizontalOptions = LayoutOptions.Center
+                    };
+
+                    imageFrame.Content = cachedImage;
+                    stackLayout.Children.Add(imageFrame);
                 }
                 else
                 {

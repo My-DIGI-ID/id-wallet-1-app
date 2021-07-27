@@ -42,7 +42,7 @@ namespace IDWallet.Models
         public string RecordId { get; set; }
         public string State { get; set; }
         public string Title { get; set; }
-        public DateTime? UpdatedAtUtc { get; set; }
+        public DateTime? CreatedAtUtc { get; set; }
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChangedEventHandler changed = PropertyChanged;

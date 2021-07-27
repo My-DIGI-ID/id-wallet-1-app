@@ -6,6 +6,7 @@ namespace IDWallet.Models
     public class CredentialClaim
     {
         public string CredentialRecordId { get; set; }
+        public string SchemaId { get; set; }
         public string Name { get; set; }
         public bool NoValidDate
         {

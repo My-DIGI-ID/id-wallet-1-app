@@ -144,8 +144,12 @@ namespace IDWallet.Services
                     return "iduniontest";
                 case "idw_eesdi":
                     return "eesdi";
+                case "idw_eesditest":
+                    return "eesditest";
                 case "idw_devledger":
                     return "devledger";
+                case "idw_dgcdev":
+                    return "dgcdevledger";
                 default:
                     return "live";
             }

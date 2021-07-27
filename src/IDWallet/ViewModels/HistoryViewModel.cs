@@ -30,6 +30,8 @@ namespace IDWallet.ViewModels
         private readonly ICredentialService _credentialService = App.Container.Resolve<ICredentialService>();
         private readonly IConnectionService _connectionService = App.Container.Resolve<IConnectionService>();
         private readonly IProofService _proofService = App.Container.Resolve<IProofService>();
+        private readonly ICustomWalletRecordService _walletRecordService =
+            App.Container.Resolve<ICustomWalletRecordService>();
 
         public HistoryViewModel()
         {
@@ -47,11 +49,13 @@ namespace IDWallet.ViewModels
             MessagingCenter.Subscribe<AutoAcceptViewModel, string>(this, WalletEvents.SentProofRequest, OnProofSent);
             MessagingCenter.Subscribe<LoginViewModel>(this, WalletEvents.AppStarted, OnAppStart);
             MessagingCenter.Subscribe<BaseIdViewModel>(this, WalletEvents.ReloadHistory, ReloadHistory);
+            MessagingCenter.Subscribe<AddVacService>(this, WalletEvents.ReloadHistory, ReloadHistory);
             MessagingCenter.Subscribe<CustomAgentProvider>(this, WalletEvents.AgentSwitched, ReloadHistory);
             MessagingCenter.Subscribe<ServiceMessageEventService, string>(this,
                 MessageTypes.IssueCredentialNames.IssueCredential, OnCredentialIssued);
             MessagingCenter.Subscribe<ServiceMessageEventService, string>(this,
                 MessageTypesHttps.IssueCredentialNames.IssueCredential, callback: OnCredentialIssued);
+            MessagingCenter.Subscribe<AddVacService, string>(this, WalletEvents.VacAdded, OnVacQrCredentialAdded);
         }
 
         private void ReloadHistory(object obj)
@@ -75,9 +79,10 @@ namespace IDWallet.ViewModels
                     IAgentContext agentContext = await _agentProvider.GetContextAsync();
 
                     List<HistoryCredentialElement> allIssuedCredentials = await GetAllIssuedCredentials();
+                    List<HistoryCredentialElement> allIssuedVacQrCredentials = await GetAllIssuedVacQrCredentials();
                     List<(HistoryProofElement, ProofRecord)> allPresentedCredentials = await GetAllPresentedCredentials();
-                    List<HistorySubElement> allHistorySubElements = await GetAllCredentialHistoryItems(agentContext, allIssuedCredentials, allPresentedCredentials);
-                    allHistorySubElements = allHistorySubElements.OrderByDescending(x => x.UpdatedAtUtc).ToList();
+                    List<HistorySubElement> allHistorySubElements = await GetAllCredentialHistoryItems(agentContext, allIssuedCredentials, allPresentedCredentials, allIssuedVacQrCredentials);
+                    allHistorySubElements = allHistorySubElements.OrderByDescending(x => x.CreatedAtUtc).ToList();
 
                     HistoryElement newHistoryPageItem = new HistoryElement
                     {
@@ -88,7 +93,7 @@ namespace IDWallet.ViewModels
                     {
                         try
                         {
-                            if (historySubElement.UpdatedAtUtc.Value.Date == newHistoryPageItem.Date)
+                            if (historySubElement.CreatedAtUtc.Value.Date == newHistoryPageItem.Date)
                             {
                                 newHistoryPageItem.HistorySubElements.Add(historySubElement);
                             }
@@ -115,7 +120,7 @@ namespace IDWallet.ViewModels
 
                                 newHistoryPageItem = new HistoryElement
                                 {
-                                    Date = historySubElement.UpdatedAtUtc.Value.Date,
+                                    Date = historySubElement.CreatedAtUtc.Value.Date,
                                     HistorySubElements = new ObservableCollection<HistorySubElement>()
                                 };
                                 newHistoryPageItem.HistorySubElements.Add(historySubElement);
@@ -157,7 +162,7 @@ namespace IDWallet.ViewModels
             }
         }
 
-        private async Task<List<HistorySubElement>> GetAllCredentialHistoryItems(IAgentContext agentContext, List<HistoryCredentialElement> allIssuedCredentials, List<(HistoryProofElement, ProofRecord)> allPresentedCredentials)
+        private async Task<List<HistorySubElement>> GetAllCredentialHistoryItems(IAgentContext agentContext, List<HistoryCredentialElement> allIssuedCredentials, List<(HistoryProofElement, ProofRecord)> allPresentedCredentials, List<HistoryCredentialElement> allIssuedVacQrCredentials)
         {
             List<HistorySubElement> allCredentialHistoryItems = new List<HistorySubElement>();
             try
@@ -167,6 +172,18 @@ namespace IDWallet.ViewModels
                     try
                     {
                         allCredentialHistoryItems.Add(issuedCredential);
+                    }
+                    catch (Exception)
+                    {
+                        //ignore
+                    }
+                }
+
+                foreach (HistoryCredentialElement issuedVacQrCredential in allIssuedVacQrCredentials)
+                {
+                    try
+                    {
+                        allCredentialHistoryItems.Add(issuedVacQrCredential);
                     }
                     catch (Exception)
                     {
@@ -241,7 +258,7 @@ namespace IDWallet.ViewModels
                                 ImageUri = string.IsNullOrEmpty(historyProofElement.ConnectionRecord?.Alias.ImageUrl)
                                     ? ImageSource.FromFile("default_logo.png")
                                     : new Uri(historyProofElement.ConnectionRecord.Alias.ImageUrl),
-                                UpdatedAtUtc = proofRecord.UpdatedAtUtc ?? proofRecord.CreatedAtUtc,
+                                CreatedAtUtc = proofRecord.CreatedAtUtc,
                                 RevealedClaims = revealed,
                                 NonRevealedClaims = nonrevealed,
                                 SelfAttestedClaims = selfAttested,
@@ -290,7 +307,7 @@ namespace IDWallet.ViewModels
                 {
                     ConnectionAlias = connectionRecord.Alias.Name,
                     CredentialName = record.CredentialDefinitionId.Split(':')[4],
-                    UpdatedAtUtc = record.UpdatedAtUtc,
+                    CreatedAtUtc = record.CreatedAtUtc,
                     Claims = new ObservableCollection<CredentialPreviewAttribute>()
                 };
 
@@ -316,11 +333,18 @@ namespace IDWallet.ViewModels
                     case "PsDLsaget7L9duoaxzC2DZ":
                         historyCredentialElement.ImageUri = ImageSource.FromFile("bwi_logo.png");
                         break;
-                    case "Deutsche Lufthansa":
+                    case "X2p16G1BeEceJauzqofjQW":
                         historyCredentialElement.ImageUri = ImageSource.FromFile("dlufthansa_logo.png");
                         break;
                     default:
-                        historyCredentialElement.ImageUri = ImageSource.FromFile("default_logo.png");
+                        if (record.CredentialDefinitionId.Equals("XnGEZ7gJxDNfxwnZpkkVcs:3:CL:988:Digitaler Führerschein"))
+                        {
+                            historyCredentialElement.ImageUri = ImageSource.FromFile("kba_logo.png");
+                        }
+                        else
+                        {
+                            historyCredentialElement.ImageUri = ImageSource.FromFile("default_logo.png");
+                        }
                         break;
                 }
 
@@ -334,6 +358,42 @@ namespace IDWallet.ViewModels
 
             return issuedCredentialHistoryElements;
         }
+        private async Task<List<HistoryCredentialElement>> GetAllIssuedVacQrCredentials(List<VacQrCredential> allVacQrCredentialRecords = null)
+        {
+            List<HistoryCredentialElement> issuedCredentialHistoryElements = new List<HistoryCredentialElement>();
+
+            IAgentContext agentContext = await _agentProvider.GetContextAsync();
+
+            List<VacQrCredential> allVacQrCredentials;
+            if (allVacQrCredentialRecords == null)
+            {
+                allVacQrCredentials = await _walletRecordService.SearchAsync<VacQrCredential>(agentContext.Wallet, null, null, 2147483647, false);
+            }
+            else
+            {
+                allVacQrCredentials = allVacQrCredentialRecords;
+            }
+
+            foreach (VacQrCredential record in allVacQrCredentials)
+            {
+                HistoryCredentialElement historyCredentialElement = new HistoryCredentialElement
+                {
+                    ConnectionAlias = "QR-Scan",
+                    CredentialName = record.Name,
+                    CreatedAtUtc = record.CreatedAtUtc,
+                    Claims = new ObservableCollection<CredentialPreviewAttribute>()
+                };
+
+                historyCredentialElement.ImageUri = ImageSource.FromFile("qr_code.png");
+
+                historyCredentialElement.Claims.Add(new CredentialPreviewAttribute() { Name = "QR-Code", Value = record.QrContent });
+
+                issuedCredentialHistoryElements.Add(historyCredentialElement);
+            }
+
+            return issuedCredentialHistoryElements;
+        }
+
 
         private async Task<List<(HistoryProofElement, ProofRecord)>> GetAllPresentedCredentials(List<ProofRecord> listOfRecords = null)
         {
@@ -372,70 +432,9 @@ namespace IDWallet.ViewModels
             LoadItemsCommand.Execute(null);
         }
 
-        private async void OnProofSent(AutoAcceptViewModel arg1, string proofRecordId)
+        private void OnProofSent(AutoAcceptViewModel arg1, string proofRecordId)
         {
-            App.HistoryLoaded = false;
-
-            IAgentContext agentContext = await _agentProvider.GetContextAsync();
-            List<HistoryCredentialElement> allIssuedCredentials = new List<HistoryCredentialElement>();
-            ProofRecord proofRecord = await _proofService.GetAsync(agentContext, proofRecordId);
-            List<(HistoryProofElement, ProofRecord)> allPresentedCredentials = await GetAllPresentedCredentials(new List<ProofRecord> { proofRecord });
-            List<HistorySubElement> allCredentialHistoryItems = await GetAllCredentialHistoryItems(agentContext, allIssuedCredentials, allPresentedCredentials);
-
-            try
-            {
-
-                HistoryElement historyPageItem =
-                    HistoryElements.First(x => x.Date == proofRecord.UpdatedAtUtc.Value.Date);
-                if (historyPageItem != null)
-                {
-                    foreach (HistorySubElement credentialHistoryItem in allCredentialHistoryItems)
-                    {
-                        historyPageItem.HistorySubElements.Add(credentialHistoryItem);
-                    }
-                }
-                else
-                {
-                    historyPageItem = new HistoryElement
-                    {
-                        Name = Resources.Lang.HistoryPage_Today_Label,
-                        Date = proofRecord.UpdatedAtUtc.Value.Date,
-                        HistorySubElements = new ObservableCollection<HistorySubElement>()
-                    };
-                    foreach (HistorySubElement credentialHistoryItem in allCredentialHistoryItems)
-                    {
-                        historyPageItem.HistorySubElements.Add(credentialHistoryItem);
-                    }
-
-                    HistoryElements.Add(historyPageItem);
-                }
-            }
-            catch
-            {
-                try
-                {
-                    HistoryElement historyPageItem = new HistoryElement
-                    {
-                        Name = Resources.Lang.HistoryPage_Today_Label,
-                        Date = proofRecord.UpdatedAtUtc.Value.Date,
-                        HistorySubElements = new ObservableCollection<HistorySubElement>()
-                    };
-                    foreach (HistorySubElement credentialHistoryItem in allCredentialHistoryItems)
-                    {
-                        historyPageItem.HistorySubElements.Add(credentialHistoryItem);
-                    }
-
-                    HistoryElements.Add(historyPageItem);
-                }
-                catch (Exception)
-                {
-                    //ignore
-                }
-            }
-            finally
-            {
-                App.HistoryLoaded = true;
-            }
+            LoadItemsCommand.Execute(null);
         }
 
         private void OnProofSent(ProofPopUp arg1, string proofRecordId)
@@ -444,6 +443,11 @@ namespace IDWallet.ViewModels
         }
 
         private void OnCredentialIssued(ServiceMessageEventService arg1, string credentialRecordId)
+        {
+            LoadItemsCommand.Execute(null);
+        }
+
+        private void OnVacQrCredentialAdded(AddVacService arg1, string vacQrRecordId)
         {
             LoadItemsCommand.Execute(null);
         }
