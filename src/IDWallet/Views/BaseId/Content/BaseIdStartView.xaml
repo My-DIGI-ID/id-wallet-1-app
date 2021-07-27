@@ -11,7 +11,8 @@
                Text="{lang:L10n BaseIDPage_StartScreen_Header_Label}"/>
 		<Label  Style="{StaticResource LabelMultiLine}"
                 FontAttributes="Bold"
-                x:Name="infoLabel">
+                x:Name="infoLabel"
+                IsVisible="{Binding IsInfoVisible, Mode=OneWay}">
             <Label.FormattedText>
                 <FormattedString>
                     <Span Text="{lang:L10n BaseIDPage_Info_Label_1}" />

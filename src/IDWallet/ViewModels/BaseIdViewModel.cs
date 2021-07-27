@@ -82,6 +82,12 @@ namespace IDWallet.ViewModels
             get => _isStartEnabled;
             set => SetProperty(ref _isStartEnabled, value);
         }
+		
+		public bool IsInfoVisible
+        {
+            get => _isInfoVisible;
+            set => SetProperty(ref _isInfoVisible, value);
+        }
 
         public bool IsInfoVisible
         {
@@ -203,6 +209,15 @@ namespace IDWallet.ViewModels
             IdPinLinkIsVisible = false;
             ForgotPINLinkIsVisible = false;
             MoreInformationLinkIsVisible = false;
+			
+			if (WalletParams.PackageName.Equals("com.digitalenabling.idw"))
+            {
+                IsInfoVisible = true;
+            }
+            else
+            {
+                IsInfoVisible = false;
+            }
 
             if (WalletParams.PackageName.Equals("com.digitalenabling.idw"))
             {
