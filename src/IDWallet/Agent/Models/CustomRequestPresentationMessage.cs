@@ -8,5 +8,8 @@ namespace IDWallet.Agent.Models
     {
         [JsonProperty("~service")]
         public CustomServiceDecorator Service { get; set; }
+
+        [JsonProperty("~order")]
+        public int Order { get; set; }
     }
 }

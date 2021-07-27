@@ -28,6 +28,21 @@
                                LineBreakMode="WordWrap"
                                Text="{lang:L10n PopUp_BaseID_ReadyToScan_Title}"/>
 
+                        <Label FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource SecondaryTextColor}"
+                               MaxLines="100"
+                               LineBreakMode="WordWrap"
+                               Margin="0,10">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{lang:L10n PopUp_BaseID_ReadyToScan_Process_Before_Label}"/>
+                                    <Span Text="{Binding BindingContext.ScanProcessCounter, Source={x:Reference Root}}"/>
+                                    <Span Text="{lang:L10n PopUp_BaseID_ReadyToScan_Process_After_Label}"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
                         <forms:AnimationView x:Name="AnimationView"
                              Animation="nfc-animation.json"
                              RepeatMode="Infinite"

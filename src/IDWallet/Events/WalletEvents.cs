@@ -20,6 +20,9 @@ namespace IDWallet.Events
         public const string ToggleUseMediatorImages = "Toggled use mediator images";
         public const string UpdateConnections = "Update Connections";
         public const string BaseIdCredentialOffer = "BaseIdCredentialOffer";
+        public const string VacCredentialOffer = "VacCredentialOffer";
         public const string BaseIdCredentialIssue = "BaseIdCredentialIssue";
+        public const string VacCredentialIssue = "VacCredentialIssue";
+        public const string VacAdded = "VacAdded";
     }
 }

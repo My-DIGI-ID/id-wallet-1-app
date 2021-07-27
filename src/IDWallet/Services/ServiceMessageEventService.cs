@@ -39,7 +39,7 @@ namespace IDWallet.Services
                 case MessageTypes.ConnectionResponse:
                 case MessageTypesHttps.ConnectionResponse:
                     ConnectionRecord connectionRecord = await _connectionService.GetAsync(agentContext, msg.RecordId);
-                    if (!connectionRecord.Id.Equals(App.BaseIdConnectionId))
+                    if (!(connectionRecord.Id.Equals(App.BaseIdConnectionId) || connectionRecord.Id.Equals(App.VacConnectionId)))
                     {
                         await ShowConnectionAddedPopUp(connectionRecord);
                     }
@@ -52,6 +52,10 @@ namespace IDWallet.Services
                     if (!string.IsNullOrEmpty(credentialRecordOffer.ConnectionId) && credentialRecordOffer.ConnectionId.Equals(App.BaseIdConnectionId))
                     {
                         MessagingCenter.Send(this, WalletEvents.BaseIdCredentialOffer, msg.RecordId);
+                    }
+                    else if (credentialRecordOffer.ConnectionId.Equals(App.VacConnectionId))
+                    {
+                        MessagingCenter.Send(this, WalletEvents.VacCredentialOffer, msg.RecordId);
                     }
                     else
                     {
@@ -67,6 +71,10 @@ namespace IDWallet.Services
                     {
                         App.BaseIdConnectionId = "";
                         MessagingCenter.Send(this, WalletEvents.BaseIdCredentialIssue, msg.RecordId);
+                    }
+                    else if (credentialRecordIssue.ConnectionId.Equals(App.VacConnectionId))
+                    {
+                        MessagingCenter.Send(this, WalletEvents.VacCredentialIssue, msg.RecordId);
                     }
                     else
                     {

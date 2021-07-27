@@ -1,5 +1,6 @@
 ﻿using IDWallet.Views.Customs.PopUps;
 using System.Collections.ObjectModel;
+using System.Linq;
 using Xamarin.Forms.Xaml;
 
 namespace IDWallet.Views.BaseId.PopUps
@@ -11,10 +12,23 @@ namespace IDWallet.Views.BaseId.PopUps
         public AccessRightsPopUp(string[] effective)
         {
             AttributeList = new ObservableCollection<string>();
-            foreach (string attribute in effective)
+
+            string[] tmpEffective = effective;
+            ObservableCollection<string> orderedAttributeNames = new ObservableCollection<string> { "firstname", "familyname", "birthname", "academictitle", "addressStreet", "addresszipcode", "addresscity", "addressCountry", "dateofbirth", "placeofbirth", "dateofexpiry", "documenttype", "pseudonym" };
+            foreach (string attributeName in orderedAttributeNames)
+            {
+                if (tmpEffective.Contains(attributeName))
+                {
+                    AttributeList.Add(attributeName);
+                    tmpEffective = tmpEffective.Where(x => x != attributeName).ToArray<string>();
+                }
+            }
+
+            foreach (string attribute in tmpEffective)
             {
                 AttributeList.Add(attribute);
             }
+
             InitializeComponent();
         }
     }

@@ -129,7 +129,7 @@ namespace IDWallet.Views.Inbox.Content
                     RecordId = credentialDetail.CredentialRecord.CredentialId,
                     Title = credentialDetail.Title,
                     State = credentialDetail.State,
-                    UpdatedAtUtc = credentialDetail.UpdatedAtUtc,
+                    CreatedAtUtc = credentialDetail.CreatedAtUtc,
                     Attributes = credentialDetail.Attributes
                 };
 
@@ -150,7 +150,7 @@ namespace IDWallet.Views.Inbox.Content
             {
                 CredentialHistoryElements presentedCredentials = (CredentialHistoryElements)detail;
 
-                DateTime? updateDatetime = proofRecord.UpdatedAtUtc ?? proofRecord.CreatedAtUtc;
+                DateTime? createDatetime = proofRecord.CreatedAtUtc;
 
                 string proofTitle = "";
                 try
@@ -205,7 +205,7 @@ namespace IDWallet.Views.Inbox.Content
                 ConnectionDetailsPresentation cred = new ConnectionDetailsPresentation
                 {
                     Title = proofTitle,
-                    UpdatedAtUtc = updateDatetime,
+                    CreatedAtUtc = createDatetime,
                     ImageUri = string.IsNullOrEmpty(presentedCredentials.ConnectionRecord.Alias.ImageUrl)
                         ? ImageSource.FromFile("default_logo.png")
                         : new Uri(presentedCredentials.ConnectionRecord.Alias.ImageUrl),
@@ -236,7 +236,7 @@ namespace IDWallet.Views.Inbox.Content
                 State = Lang.ConnectionDetailsPage_Status_Issued
             };
 
-            credentialDetail.UpdatedAtUtc = credential.UpdatedAtUtc ?? credential.CreatedAtUtc;
+            credentialDetail.CreatedAtUtc = credential.CreatedAtUtc;
 
             CredentialInfo credentialInfo = new CredentialInfo();
             try
@@ -280,8 +280,8 @@ namespace IDWallet.Views.Inbox.Content
                     {
                         ConnectionRecord baseIdConnection = credentialOfferNotification.ConnectionRecord;
                         string revocationPassphrase = baseIdConnection.GetTag(WalletParams.KeyRevocationPassphrase);
-						
-						(CredentialRequestMessage request, CredentialRecord record) = await _credentialService.CreateRequestAsync(context, credentialOfferNotification.RecordId);
+
+                        (CredentialRequestMessage request, CredentialRecord record) = await _credentialService.CreateRequestAsync(context, credentialOfferNotification.RecordId);
                         await _messageService.SendAsync(context, request, credentialOfferNotification.ConnectionRecord);
 
                         if (!string.IsNullOrEmpty(revocationPassphrase))
@@ -553,7 +553,7 @@ namespace IDWallet.Views.Inbox.Content
                             ImageUri = connectionDetailsItem.ImageUri,
                             Title = connectionDetailsItem.Title,
                             State = connectionDetailsItem.State,
-                            UpdatedAtUtc = connectionDetailsItem.UpdatedAtUtc,
+                            CreatedAtUtc = connectionDetailsItem.CreatedAtUtc,
                             Attributes = new List<CredentialContentAttribute>()
                         };
 
@@ -702,7 +702,7 @@ namespace IDWallet.Views.Inbox.Content
                                     ConnectionAlias = newItem.Title,
                                     ImageUri = newItem.ImageUri,
                                     State = newItem.State,
-                                    UpdatedAtUtc = newItem.UpdatedAtUtc,
+                                    CreatedAtUtc = newItem.CreatedAtUtc,
                                     RevealedClaims = revealed,
                                     NonRevealedClaims = nonrevealed,
                                     SelfAttestedClaims = selfs,

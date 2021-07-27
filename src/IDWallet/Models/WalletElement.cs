@@ -28,10 +28,13 @@ namespace IDWallet.Models
         public event PropertyChangedEventHandler PropertyChanged;
 
         public ObservableCollection<CredentialClaim> Claims { get; set; }
+        public ObservableCollection<CredentialClaim> QrCodes { get; set; }
+        public bool QrCodesVisible { get; set; }
         public Color CredentialBarColor { get; set; }
         public ImageSource CredentialImageSource { get; set; }
         public CredentialRecord CredentialRecord { get; set; }
         public string DocumentString { get; set; }
+        public string VacQrRecordId { get; set; }
         public bool HasDocument
         {
             get => _hasDocument;

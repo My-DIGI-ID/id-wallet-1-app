@@ -34,6 +34,7 @@ namespace IDWallet.ViewModels
         private int _carouselPosition;
         private bool _progressBarIsVisible;
         private bool _isStartEnabled;
+        private bool _isInfoVisible;
         private int _idPinLength;
         private string _idPinHeaderLabel;
         private string _idPinBoldLabel;
@@ -45,6 +46,7 @@ namespace IDWallet.ViewModels
         private bool _isActivityIndicatorVisible;
         private SdkMessage _finalAuthMessage;
         private readonly ReadyToScanPopUp _scanPopUp;
+        private int _scanProcessCounter;
         private bool _pinPadIsVisible;
         private bool _idPinBoldIsVisible;
         private string _baseIdConnection;
@@ -79,6 +81,12 @@ namespace IDWallet.ViewModels
         {
             get => _isStartEnabled;
             set => SetProperty(ref _isStartEnabled, value);
+        }
+
+        public bool IsInfoVisible
+        {
+            get => _isInfoVisible;
+            set => SetProperty(ref _isInfoVisible, value);
         }
 
         public int IdPinLength
@@ -141,6 +149,12 @@ namespace IDWallet.ViewModels
             set => SetProperty(ref _pinPadIsVisible, value);
         }
 
+        public int ScanProcessCounter
+        {
+            get => _scanProcessCounter;
+            set => SetProperty(ref _scanProcessCounter, value);
+        }
+
         private bool _alreadySubscribed;
 
         private Command _idPinErrorCommand;
@@ -180,7 +194,8 @@ namespace IDWallet.ViewModels
             ProgressBarIsVisible = true;
             IdPinLength = 6;
             BaseIdProcessType = BaseIdProcessType.None;
-            _scanPopUp = new ReadyToScanPopUp();
+            _scanPopUp = new ReadyToScanPopUp(this);
+            ScanProcessCounter = 0;
 
             IsStartEnabled = true;
             IdPinBoldIsVisible = true;
@@ -188,6 +203,15 @@ namespace IDWallet.ViewModels
             IdPinLinkIsVisible = false;
             ForgotPINLinkIsVisible = false;
             MoreInformationLinkIsVisible = false;
+
+            if (WalletParams.PackageName.Equals("com.digitalenabling.idw"))
+            {
+                IsInfoVisible = true;
+            }
+            else
+            {
+                IsInfoVisible = false;
+            }
 
             IdPinHeaderLabel = Lang.BaseIDPage_PINScreen_Default_Header_Label;
             IdPinBoldLabel = Lang.BaseIDPage_PINScreen_Selection_Bold_Text;
@@ -267,11 +291,11 @@ namespace IDWallet.ViewModels
 
                             MessagingCenter.Send(this, WalletEvents.ReloadConnections);
                         }
-                        catch (Exception)
+                        catch (Exception ex)
                         {
                             _sdkService.SendCancel();
                             _sdkService.InitHttpClient();
-							
+
                             if (sdkMessage.Result.Message.Equals("The authenticity of your ID card could not be verified. Please make sure that you are using a genuine ID card. Please note that test applications require the use of a test ID card."))
                             {
                                 BaseIdBasicPopUp popUp = new BaseIdBasicPopUp(
@@ -284,23 +308,23 @@ namespace IDWallet.ViewModels
                             }
                             else
                             {
-								BaseIdBasicPopUp popUp = new BaseIdBasicPopUp(
-										Lang.PopUp_BaseID_Auth_Error_Title,
-										Lang.PopUp_BaseID_Auth_Error_Text,
-										Lang.PopUp_BaseID_Auth_Error_Button
-										);
-								await popUp.ShowPopUp();
-								await Navigation.PopAsync();
-							}
+                                BaseIdBasicPopUp popUp = new BaseIdBasicPopUp(
+                                        Lang.PopUp_BaseID_Auth_Error_Title,
+                                        Lang.PopUp_BaseID_Auth_Error_Text,
+                                        Lang.PopUp_BaseID_Auth_Error_Button
+                                        );
+                                await popUp.ShowPopUp();
+                                await Navigation.PopAsync();
+                            }
                         }
                     }
                     else
                     {
                         _sdkService.SendCancel();
                         _sdkService.InitHttpClient();
-						if (sdkMessage.Result.Message.Equals("The authenticity of your ID card could not be verified. Please make sure that you are using a genuine ID card. Please note that test applications require the use of a test ID card."))
+                        if (sdkMessage.Result.Message.Equals("The authenticity of your ID card could not be verified. Please make sure that you are using a genuine ID card. Please note that test applications require the use of a test ID card."))
                         {
-							BaseIdBasicPopUp popUp = new BaseIdBasicPopUp(
+                            BaseIdBasicPopUp popUp = new BaseIdBasicPopUp(
                                     Lang.PopUp_BaseID_Auth_Error_Title,
                                     Lang.PopUp_BaseID_Auth_Error_Card_Text,
                                     Lang.PopUp_BaseID_Auth_Error_Button
@@ -308,16 +332,16 @@ namespace IDWallet.ViewModels
                             await popUp.ShowPopUp();
                             await Navigation.PopAsync();
                         }
-						else
+                        else
                         {
                             BaseIdBasicPopUp popUp = new BaseIdBasicPopUp(
                                     Lang.PopUp_BaseID_Auth_Error_Title,
                                     Lang.PopUp_BaseID_Auth_Error_Text,
                                     Lang.PopUp_BaseID_Auth_Error_Button
                                     );
-							await popUp.ShowPopUp();
-							await Navigation.PopAsync();
-						}
+                            await popUp.ShowPopUp();
+                            await Navigation.PopAsync();
+                        }
                     }
                 }
                 else if (BaseIdProcessType == BaseIdProcessType.TransportPIN)
@@ -361,6 +385,7 @@ namespace IDWallet.ViewModels
 
         private async void Insert_Card(SDKMessageService arg1, SdkMessage sdkMessage)
         {
+            ScanProcessCounter += 1;
             Device.BeginInvokeOnMainThread(async () =>
             {
                 if (ActiveMessageType == SdkMessageType.ACCESS_RIGHTS)
@@ -410,15 +435,15 @@ namespace IDWallet.ViewModels
                 {
                     case BaseIdProcessType.Authentication:
                         await HandleAuthenticationEnterPin(sdkMessage);
-						ActiveMessageType = SdkMessageType.ENTER_PIN;
-						UseRegularPIN();
+                        ActiveMessageType = SdkMessageType.ENTER_PIN;
+                        UseRegularPIN();
                         break;
                     case BaseIdProcessType.ChangePIN:
-						ActiveMessageType = SdkMessageType.ENTER_PIN;
+                        ActiveMessageType = SdkMessageType.ENTER_PIN;
                         await HandleChangePinEnterPin(sdkMessage);
                         break;
                     case BaseIdProcessType.TransportPIN:
-						if (ActiveMessageType == SdkMessageType.ENTER_CAN)
+                        if (ActiveMessageType == SdkMessageType.ENTER_CAN)
                         {
                             ActiveMessageType = SdkMessageType.ENTER_PIN;
                             UseTransportPinNoCancel();
@@ -452,9 +477,9 @@ namespace IDWallet.ViewModels
                         Lang.PopUp_BaseID_Wrong_CAN_Button);
                     await canPopUp.ShowPopUp();
                 }
-                else if (ActiveMessageType == SdkMessageType.ENTER_PIN)
+                else
                 {
-					UseRegularPIN();
+                    UseRegularPIN();
                     EnterCANPopUp canPopUp = new EnterCANPopUp(Lang.PopUp_BaseID_Enter_CAN_Text_1);
 
                     if (BaseIdProcessType == BaseIdProcessType.TransportPIN)
@@ -606,6 +631,7 @@ namespace IDWallet.ViewModels
                         }
                         break;
                     case 1:
+                        IsInfoVisible = false;
                         _sdkService.SendRunAuth();
                         BaseIdProcessType = BaseIdProcessType.Authentication;
                         IsActivityIndicatorVisible = true;
@@ -796,9 +822,8 @@ namespace IDWallet.ViewModels
             _sdkService.InitHttpClient();
         }
 
-		private void UseTransportPinNoCancel()
+        private void UseTransportPinNoCancel()
         {
-            IsActivityIndicatorVisible = true;
             ProgressBarIsVisible = false;
             IdPinBoldIsVisible = false;
             PinPadIsVisible = true;
@@ -909,6 +934,15 @@ namespace IDWallet.ViewModels
 
         public void GoToStart()
         {
+            if (WalletParams.PackageName.Equals("com.digitalenabling.idw"))
+            {
+                IsInfoVisible = true;
+            }
+            else
+            {
+                IsInfoVisible = false;
+            }
+
             App.PopUpIsOpen = false;
             ActiveMessageType = SdkMessageType.UNKNOWN_COMMAND;
             BaseIdProcessType = BaseIdProcessType.None;

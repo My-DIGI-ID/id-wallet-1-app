@@ -1,4 +1,5 @@
-﻿using Hyperledger.Aries.Features.IssueCredential;
+﻿using IDWallet.Utils.Converter;
+using Hyperledger.Aries.Features.IssueCredential;
 using Xamarin.Forms.Xaml;
 
 namespace IDWallet.Views.Customs.PopUps
@@ -12,7 +13,8 @@ namespace IDWallet.Views.Customs.PopUps
 
             TitleLabel.Text = IDWallet.Resources.Lang.PopUp_Credential_Stored_Response_Title;
             string credentialName = credentialRecord.CredentialDefinitionId.Split(':')[4];
-            TextLabel.Text = credentialName + " " + IDWallet.Resources.Lang.PopUp_Credential_Stored_Response_Text;
+            CredDefNameConverter credDefNameConverter = new CredDefNameConverter();
+            TextLabel.Text = credDefNameConverter.Convert(credentialName, null, null, null) + " " + IDWallet.Resources.Lang.PopUp_Credential_Stored_Response_Text;
         }
     }
 }

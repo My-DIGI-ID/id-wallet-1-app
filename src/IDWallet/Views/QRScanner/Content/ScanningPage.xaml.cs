@@ -35,6 +35,7 @@ namespace IDWallet.Views.QRScanner.Content
         private readonly ConnectService _invitationService = App.Container.Resolve<ConnectService>();
         private readonly TransactionService _transactionService = App.Container.Resolve<TransactionService>();
         private readonly UrlShortenerService _urlShortenerService = App.Container.Resolve<UrlShortenerService>();
+            private readonly AddVacService _addVacService = App.Container.Resolve<AddVacService>();
         private readonly ZXingScannerView scanner = new ZXingScannerView();
         private CameraResolution _resolution = new CameraResolution();
 
@@ -224,9 +225,11 @@ namespace IDWallet.Views.QRScanner.Content
                     CustomServiceDecorator service = null;
                     CredentialRecord credentialRecord = null;
                     GatewayQR gatewayQR = null;
+                    string vacCode = null;
 
                     try
                     {
+                        vacCode = _addVacService.ReadVacJson(result.Text);
                         gatewayQR = _addGatewayService.ReadGatewayJson(result.Text);
                         (transactionId, connectionInvitationMessage, awaitableConnection, awaitableProof) =
                             _transactionService.ReadTransactionUrl(result.Text);
@@ -235,6 +238,11 @@ namespace IDWallet.Views.QRScanner.Content
                     catch (Exception)
                     {
                         //ignore
+                    }
+
+                    if (!string.IsNullOrEmpty(vacCode))
+                    {
+                        messageType = "vac_qr";
                     }
 
                     if (gatewayQR != null)
@@ -372,14 +380,14 @@ namespace IDWallet.Views.QRScanner.Content
                             }
                             else if (App.WaitForConnection)
                             {
-                                int counter = 0;
+                                int counterWaitForConnection = 0;
                                 while (App.WaitForConnection)
                                 {
                                     await Task.Delay(100);
 
-                                    counter++;
+                                    counterWaitForConnection++;
 
-                                    if (counter == 1000)
+                                    if (counterWaitForConnection == 1000)
                                     {
                                         break;
                                     }
@@ -403,14 +411,14 @@ namespace IDWallet.Views.QRScanner.Content
                             {
                                 App.AwaitableProofConnectionId = transactionConnectionRecord.Id;
 
+                                int counterWaitForProof = 0;
                                 while (App.WaitForProof)
                                 {
-                                    int counter = 0;
                                     await Task.Delay(100);
 
-                                    counter++;
+                                    counterWaitForProof++;
 
-                                    if (counter == 1000)
+                                    if (counterWaitForProof == 1000)
                                     {
                                         break;
                                     }
@@ -446,6 +454,31 @@ namespace IDWallet.Views.QRScanner.Content
                                 Lang.PopUp_Add_GW_Success_Button
                             );
                             await popUpSuccess.ShowPopUp();
+
+                            NavigateToWallet();
+                            break;
+
+                        case "vac_qr":
+                            SaveNewVacPopUp saveVacPopUp = new SaveNewVacPopUp();
+                            PopUpResult saveVacPopUpResult = await saveVacPopUp.ShowPopUp();
+
+                            if (PopUpResult.Accepted == saveVacPopUpResult)
+                            {
+                                await _addVacService.AddVac(vacCode);
+                            }
+
+                            int counterVacConnectionId = 0;
+                            while (!string.IsNullOrEmpty(App.VacConnectionId))
+                            {
+                                await Task.Delay(100);
+
+                                counterVacConnectionId++;
+
+                                if (counterVacConnectionId == 1000)
+                                {
+                                    break;
+                                }
+                            }
 
                             NavigateToWallet();
                             break;

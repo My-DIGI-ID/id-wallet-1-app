@@ -79,7 +79,14 @@ namespace IDWallet.Views.Wallet
             PopUpResult popResult = await popUp.ShowPopUp();
             if (PopUpResult.Accepted == popResult)
             {
-                await ViewModel.DeleteWalletElement(walletElement.CredentialRecord.Id);
+                if (string.IsNullOrEmpty(walletElement.VacQrRecordId))
+                {
+                    await ViewModel.DeleteWalletElement(walletElement.CredentialRecord.Id);
+                }
+                else
+                {
+                    await ViewModel.DeleteWalletQrElement(walletElement.VacQrRecordId);
+                }
             }
 
             EnableAll();

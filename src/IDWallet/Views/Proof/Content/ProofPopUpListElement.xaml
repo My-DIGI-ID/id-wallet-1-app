@@ -23,7 +23,7 @@
             </Frame>
             <StackLayout Spacing="0"
                          VerticalOptions="Center">
-                <Label Text="{Binding SelectedOption.WalletElement.Name}"
+                <Label Text="{Binding SelectedOption.WalletElement.Name, Converter={StaticResource CredDefNameConverter}}"
                        VerticalTextAlignment="Center"
                        FontSize="16"
                        FontAttributes="Bold"
@@ -37,7 +37,7 @@
                    HeightRequest="25"
                    VerticalOptions="CenterAndExpand"
                    HorizontalOptions="EndAndExpand">
-                    <iconize:IconImage x:Name="revokeWarning"
+                <iconize:IconImage x:Name="revokeWarning"
                                                Icon="mdi-alert"
                                                IconColor="{StaticResource DeletePrimaryColor}"
                                                IconSize="20"
@@ -63,7 +63,7 @@
                      Spacing="0">
             <StackLayout HeightRequest="49"
                          Spacing="0">
-                <Label Text="{Binding SelectedOption.WalletElement.Name}"
+                <Label Text="{Binding SelectedOption.WalletElement.Name, Converter={StaticResource CredDefNameConverter}}"
                        VerticalTextAlignment="Center"
                        VerticalOptions="EndAndExpand"
                        FontSize="16"
@@ -159,7 +159,7 @@
                                                    FontSize="12"
                                                    TextColor="{StaticResource SecondaryTextColor}"
                                                    VerticalTextAlignment="End" />
-                                                <Label Text="{Binding Value}"
+                                                <Label Text="{Binding Value, Converter={StaticResource AttributeValueConverter}}"
                                                    IsVisible="{Binding Name, Converter={StaticResource ValueVisibilityConverter}}"
                                                    FontSize="16"
                                                    FontAttributes="Bold"
@@ -222,7 +222,7 @@
                                    FontSize="12"
                                    TextColor="{StaticResource SecondaryTextColor}"
                                    VerticalTextAlignment="End" />
-                                <Label Text="{Binding Value}"
+                                <Label Text="{Binding Value, Converter={StaticResource AttributeValueConverter}}"
                                    IsVisible="{Binding Name, Converter={StaticResource ValueVisibilityConverter}}"
                                    FontSize="16"
                                    FontAttributes="Bold"

@@ -44,7 +44,7 @@ namespace IDWallet.ViewModels
                 new License {Name = "FormsPinView", Version = "2.0.0", Text = formsPinView},
                 new License {Name = "Hyperledger.Aries", Version = "1.5.5", Text = apache20},
                 new License {Name = "Hyperledger.Aries.Routing.Edge", Version = "1.5.5", Text = apache20},
-                new License {Name = "Hyperledger.Indy.Sdk", Version = "1.11.1", Text = apache20},
+                new License {Name = "Hyperledger.Indy.Sdk", Version = "1.15.0", Text = apache20},
                 new License {Name = "Microsoft.Extensions.DependencyInjection", Version = "5.0.1", Text = apache20},
                 new License {Name = "PCLStorage", Version = "1.0.2", Text = MsPL},
                 new License {Name = "Plugin.Fingerprint", Version = "2.1.3", Text = fingerprint},

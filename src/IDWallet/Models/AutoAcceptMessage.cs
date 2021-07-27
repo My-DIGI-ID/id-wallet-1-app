@@ -1,4 +1,5 @@
-﻿using Hyperledger.Aries.Extensions;
+﻿using IDWallet.Utils.Converter;
+using Hyperledger.Aries.Extensions;
 using Hyperledger.Aries.Features.DidExchange;
 using Hyperledger.Aries.Features.IssueCredential;
 using Hyperledger.Aries.Features.PresentProof;
@@ -29,7 +30,8 @@ namespace IDWallet.Models
             RecordId = credentialRecord.Id;
             Description = Resources.Lang.NotificationsPage_Credential_Auto_Accept_Text;
             CreatedAtUtc = credentialRecord.CreatedAtUtc;
-            Title = credentialRecord.CredentialDefinitionId?.Split(':')[4] ?? "UnknownTitle";
+            CredDefNameConverter credDefNameConverter = new CredDefNameConverter();
+            Title = credDefNameConverter.Convert(credentialRecord.CredentialDefinitionId?.Split(':')[4] ?? "UnknownTitle", null, null, null).ToString();
             CredentialId = credentialRecord.Id;
         }
 

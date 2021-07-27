@@ -11,6 +11,9 @@
                Text="{lang:L10n BaseIDPage_ReadIdScreen_Header_Label}"/>
         <Label Style="{StaticResource BaseIDBodyLabel}"
                Text="{lang:L10n BaseIDPage_ReadIdScreen_Body_Label}"
+               Margin="0,0,0,10"/>
+        <Label Style="{StaticResource BaseIDBodyLabel}"
+               Text="{lang:L10n BaseIDPage_ReadIdScreen_Security_Label}"
                Margin="0,0,0,20"/>
         <Button VerticalOptions="EndAndExpand"
                 Style="{StaticResource AcceptButton}"

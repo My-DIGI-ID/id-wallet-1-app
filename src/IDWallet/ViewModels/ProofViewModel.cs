@@ -281,7 +281,7 @@ namespace IDWallet.ViewModels
                 List<WalletElement> allIssuedCredentials = new List<WalletElement>();
                 foreach (WalletElement credential in credentialsViewModel.WalletElements)
                 {
-                    if (credential.CredentialRecord.State == CredentialState.Issued)
+                    if (string.IsNullOrEmpty(credential.VacQrRecordId) && credential.CredentialRecord.State == CredentialState.Issued)
                     {
                         allIssuedCredentials.Add(credential);
                     }

@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<base:CustomPopUp xmlns="http://xamarin.com/schemas/2014/forms"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                  xmlns:base="clr-namespace:IDWallet.Views.Customs.PopUps;assembly=IDWallet"
+                  xmlns:lang="clr-namespace:IDWallet.Extensions"
+                  mc:Ignorable="d"
+                  x:Class="IDWallet.Views.QRScanner.PopUps.SaveNewVacPopUp">
+    <base:CustomPopUp.Content>
+        <StackLayout Style="{StaticResource PopUpStackLayout}">
+            <Frame Style="{StaticResource PopUpFrame}"
+                   Padding="0,20">
+                <ContentView>
+                    <StackLayout>
+                        <Label Text="{lang:L10n PopUp_Add_Vac_Title}"
+                               Style="{StaticResource LabelHeader}"
+                               MaxLines="100"
+                               LineBreakMode="WordWrap"
+                               Margin="20,0" />
+                        <BoxView BackgroundColor="{StaticResource PopUpHeaderSeparatorColor}"
+                                 HeightRequest="1"
+                                 HorizontalOptions="FillAndExpand" />
+                        <Label Text="{lang:L10n PopUp_Add_Vac_Message}"
+                               Style="{StaticResource LabelMultiLine}"
+                               TextColor="{StaticResource AttributeValueColor}"
+                               Margin="20,0" />
+                        <StackLayout Style="{StaticResource PopUpButtonArea}"
+                                     Margin="20,0">
+                            <Button Style="{StaticResource CancelButton}"
+                                    Clicked="OnPopUpCanceled"
+                                    Text="{lang:L10n PopUp_Add_Vac_Button_Cancel}" />
+                            <Button Style="{StaticResource AcceptButton}"
+                                    Clicked="OnPopUpAccepted"
+                                    Text="{lang:L10n PopUp_Add_Vac_Button_Ok}" />
+                        </StackLayout>
+                    </StackLayout>
+                </ContentView>
+            </Frame>
+        </StackLayout>
+    </base:CustomPopUp.Content>
+</base:CustomPopUp>

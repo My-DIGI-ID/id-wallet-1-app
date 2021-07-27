@@ -17,7 +17,7 @@ namespace IDWallet.Views.History.PopUps
 
             try
             {
-                DateTimeSpan.Text = historyProofElement.UpdatedAtUtc.Value.ToLocalTime().ToString();
+                DateTimeSpan.Text = historyProofElement.CreatedAtUtc.Value.ToLocalTime().ToString();
             }
             catch
             {

@@ -380,9 +380,17 @@ namespace IDWallet.Agent
                 {
                     poolName = "idw_eesdi";
                 }
+                    else if (recommendedLedgerName == WalletParams.RecommendedLedger_EESDITest)
+                {
+                    poolName = "idw_eesditest";
+                }
                 else if (recommendedLedgerName == WalletParams.RecommendedLedger_DEVLEDGER)
                 {
                     poolName = "idw_devledger";
+                }
+                else if (recommendedLedgerName == WalletParams.RecommendedLedger_DGCDEVLEDGER)
+                {
+                    poolName = "idw_dgcdev";
                 }
 
                 if (poolName != "")
@@ -451,8 +459,12 @@ namespace IDWallet.Agent
                     return Resources.Lang.ChangeLedgerPage_IDunionTest;
                 case "idw_eesdi":
                     return Resources.Lang.ChangeLedgerPage_EESDI;
+                case "idw_eesditest":
+                    return Resources.Lang.ChangeLedgerPage_EESDITest;
                 case "idw_devledger":
                     return Resources.Lang.ChangeLedgerPage_DEVLEDGER;
+                case "idw_dgcdev":
+                    return Resources.Lang.ChangeLedgerPage_DGCDEVLEDGER;
                 default:
                     return options.PoolName;
             }
@@ -521,10 +533,20 @@ namespace IDWallet.Agent
                     _activeAgent.PoolName = "idw_eesdi";
                     _activeAgent.GenesisFilename = "idw_eesdi";
                     break;
+                case "eesditest":
+                    DeleteOldPool(_activeAgent.GenesisFilename);
+                    _activeAgent.PoolName = "idw_eesditest";
+                    _activeAgent.GenesisFilename = "idw_eesditest";
+                    break;
                 case "devledger":
                     DeleteOldPool(_activeAgent.GenesisFilename);
                     _activeAgent.PoolName = "idw_devledger";
                     _activeAgent.GenesisFilename = "idw_devledger";
+                    break;
+                case "dgcdevledger":
+                    DeleteOldPool(_activeAgent.GenesisFilename);
+                    _activeAgent.PoolName = "idw_dgcdev";
+                    _activeAgent.GenesisFilename = "idw_dgcdev";
                     break;
                 default:
                     break;
@@ -831,7 +853,7 @@ namespace IDWallet.Agent
 
                 return Base58.Bitcoin.Encode(walletKey);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return "";
             }
