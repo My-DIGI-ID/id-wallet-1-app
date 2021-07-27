@@ -41,6 +41,15 @@ namespace IDWallet
             {
                 AgentName = "ID Wallet",
                 EndpointUri = WalletParams.MediatorEndpoint,
+                WalletConfiguration = new CustomWalletConfiguration("EESDI Test").walletConfiguration,
+                PoolName = "idw_eesditest",
+                GenesisFilename = "idw_eesditest",
+                ProtocolVersion = 2
+            },
+            new AgentOptions
+            {
+                AgentName = "ID Wallet",
+                EndpointUri = WalletParams.MediatorEndpoint,
                 WalletConfiguration = new CustomWalletConfiguration("Sovrin Live").walletConfiguration,
                 PoolName = "idw_live",
                 GenesisFilename = "idw_live",
@@ -98,6 +107,15 @@ namespace IDWallet
                 WalletConfiguration = new CustomWalletConfiguration("DEV Ledger").walletConfiguration,
                 PoolName = "idw_devledger",
                 GenesisFilename = "idw_devledger",
+                ProtocolVersion = 2
+            },
+            new AgentOptions
+            {
+                AgentName = "ID Wallet",
+                EndpointUri = WalletParams.MediatorEndpoint,
+                WalletConfiguration = new CustomWalletConfiguration("DGC Dev").walletConfiguration,
+                PoolName = "idw_dgcdev",
+                GenesisFilename = "idw_dgcdev",
                 ProtocolVersion = 2
             }
         };

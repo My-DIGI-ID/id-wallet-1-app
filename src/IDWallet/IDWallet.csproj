@@ -26,6 +26,7 @@
     <PackageReference Include="Plugin.Fingerprint" Version="2.1.3" />
     <PackageReference Include="Plugin.Permissions" Version="6.0.1" />
     <PackageReference Include="Rg.Plugins.Popup" Version="2.0.0.10" />
+	<PackageReference Include="SharpZipLib" Version="1.3.1" />
     <PackageReference Include="SimpleBase" Version="3.0.2" />
     <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
     <PackageReference Include="Xam.Plugin.Iconize" Version="3.5.0.129" />
@@ -40,13 +41,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Resources\genesis\idw_bcgov" />
-    <None Remove="Resources\genesis\idw_builder" />
-    <None Remove="Resources\genesis\idw_eesdi" />
-    <None Remove="Resources\genesis\idw_esatus" />
-    <None Remove="Resources\genesis\idw_iduniontest" />
-    <None Remove="Resources\genesis\idw_live" />
-    <None Remove="Resources\genesis\idw_staging" />
+	<None Remove="Resources\genesis\idw_bcgov" />
+	<None Remove="Resources\genesis\idw_builder" />
+	<None Remove="Resources\genesis\idw_dgcdev" />
+	<None Remove="Resources\genesis\idw_eesdi" />
+	<None Remove="Resources\genesis\idw_eesditest" />
+	<None Remove="Resources\genesis\idw_esatus" />
+	<None Remove="Resources\genesis\idw_iduniontest" />
+	<None Remove="Resources\genesis\idw_live" />
+	<None Remove="Resources\genesis\idw_staging" />
+	<None Remove="Resources\genesis\idw_devledger" />
     <None Remove="Resources\imagesources\ConnectionConnected_Icon.svg" />
     <None Remove="Resources\imagesources\ConnectionNotConnected_Icon.svg" />
     <None Remove="Resources\imagesources\InfoProof_Icon.svg" />
@@ -114,29 +118,35 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Resources\genesis\idw_builder">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\genesis\idw_esatus">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\genesis\idw_live">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\genesis\idw_staging">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\genesis\idw_bcgov">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
+	<EmbeddedResource Include="Resources\genesis\idw_builder">
+	  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	</EmbeddedResource>
+	<EmbeddedResource Include="Resources\genesis\idw_dgcdev">
+	  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	</EmbeddedResource>
+	<EmbeddedResource Include="Resources\genesis\idw_eesditest">
+	  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	</EmbeddedResource>
+	<EmbeddedResource Include="Resources\genesis\idw_esatus">
+	  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	</EmbeddedResource>
+	<EmbeddedResource Include="Resources\genesis\idw_live">
+	  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	</EmbeddedResource>
+	<EmbeddedResource Include="Resources\genesis\idw_staging">
+	  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	</EmbeddedResource>
+	<EmbeddedResource Include="Resources\genesis\idw_bcgov">
+	  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	</EmbeddedResource>
 	<EmbeddedResource Include="Resources\genesis\idw_iduniontest">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
+	  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	</EmbeddedResource>
 	<EmbeddedResource Include="Resources\genesis\idw_eesdi">
-		<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	</EmbeddedResource>
 	<EmbeddedResource Include="Resources\genesis\idw_devledger">
-		<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	</EmbeddedResource>
 	<EmbeddedResource Include="Resources\imagesources\ConnectionConnected_Icon.svg" />
 	<EmbeddedResource Include="Resources\imagesources\ConnectionNotConnected_Icon.svg" />
@@ -229,6 +239,9 @@
     <Compile Update="Views\BaseId\Content\BaseIdSuccessView.xaml.cs">
       <DependentUpon>BaseIdSuccessView.xaml</DependentUpon>
     </Compile>
+	<Compile Update="Views\QRScanner\PopUps\VacOfferPopUp.xaml.cs">
+	  <DependentUpon>VacOfferPopUp.xaml</DependentUpon>
+	</Compile>  
     <Compile Update="Views\BaseId\PopUps\EnterCANPopUp.xaml.cs">
       <DependentUpon>EnterCANPopUp.xaml</DependentUpon>
     </Compile>
@@ -252,6 +265,9 @@
     </Compile>
 	<Compile Update="Views\Settings\Liability\LiabilityPage.xaml.cs">
       <DependentUpon>LiabilityPage.xaml</DependentUpon>
+    </Compile>
+	<Compile Update="Views\QRScanner\PopUps\SaveNewVacPopUp.xaml.cs">
+      <DependentUpon>SaveNewVacPopUp.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\Wallet\WalletPage.xaml.cs">
       <DependentUpon>WalletPage.xaml</DependentUpon>

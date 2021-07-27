@@ -33,11 +33,22 @@ namespace IDWallet.Views.Wallet.PopUps
                 case "PsDLsaget7L9duoaxzC2DZ":
                     walletCredentialOfferMessage.MessageImageSource = ImageSource.FromFile("bwi_logo.png");
                     break;
-                case "Deutsche Lufthansa":
+                case "X2p16G1BeEceJauzqofjQW":
                     walletCredentialOfferMessage.MessageImageSource = ImageSource.FromFile("dlufthansa_logo.png");
                     break;
                 default:
-                    walletCredentialOfferMessage.MessageImageSource = ImageSource.FromFile("default_logo.png");
+                    if (walletCredentialOfferMessage.CredentialRecord.CredentialDefinitionId.Equals("KXtvfp6c9ma1NBtttKpV6W:3:CL:75:Impfzertifikat"))
+                    {
+                        walletCredentialOfferMessage.MessageImageSource = ImageSource.FromFile("vac_transparent_icon.png");
+                    }
+                    else if (walletCredentialOfferMessage.CredentialRecord.CredentialDefinitionId.Equals("XnGEZ7gJxDNfxwnZpkkVcs:3:CL:988:Digitaler Führerschein"))
+                    {
+                        walletCredentialOfferMessage.MessageImageSource = ImageSource.FromFile("kba_logo.png");
+                    }
+                    else
+                    {
+                        walletCredentialOfferMessage.MessageImageSource = ImageSource.FromFile("default_logo.png");
+                    }
                     break;
             }
 

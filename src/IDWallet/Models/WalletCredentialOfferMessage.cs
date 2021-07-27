@@ -1,3 +1,4 @@
+using IDWallet.Utils.Converter;
 using Hyperledger.Aries.Features.DidExchange;
 using Hyperledger.Aries.Features.IssueCredential;
 using System;
@@ -20,7 +21,8 @@ namespace IDWallet.Models
             CredentialRecord = credentialRecord;
             Description = Resources.Lang.NotificationsPage_Credential_Offer_Text;
             CreatedAtUtc = credentialRecord.CreatedAtUtc;
-            CredentialTitle = credentialRecord.CredentialDefinitionId?.Split(':')[4] ?? "PlaceholderTitle";
+            CredDefNameConverter credDefNameConverter = new CredDefNameConverter();
+            CredentialTitle = credDefNameConverter.Convert(credentialRecord.CredentialDefinitionId?.Split(':')[4] ?? "PlaceholderTitle", null, null, null).ToString();
             IsDocumentVisible = false;
             _documentString = "";
 
@@ -31,10 +33,21 @@ namespace IDWallet.Models
                 : ImageSource.FromUri(new Uri(connectionRecord.Alias.ImageUrl));
 
             CredentialPreviewAttributes = new List<CredentialPreviewAttribute>();
-            List<CredentialPreviewAttribute> attributes =
-                credentialRecord.CredentialAttributesValues?.ToList().OrderBy(x => x.Name).ToList() ??
-                new List<CredentialPreviewAttribute>();
-            foreach (CredentialPreviewAttribute attribute in attributes)
+
+            List<CredentialPreviewAttribute> tmpAttributes = credentialRecord.CredentialAttributesValues?.ToList().OrderBy(x => x.Name).ToList() ?? new List<CredentialPreviewAttribute>();
+            List<string> orderedAttributeNames = new List<string> { "nam_gn", "nam_fn", "dob", "vac_tg", "vac_vp", "vac_ma", "vac_dn", "vac_sd", "vac_dt", "vac_co", "vac_is", "vac_ci", "nam_fnt", "nam_gnt", "ver", "vac_mp" };
+            foreach (string attributeName in orderedAttributeNames)
+            {
+                CredentialPreviewAttribute tmpAttribute = tmpAttributes.FirstOrDefault(x => x.Name == attributeName);
+                if (tmpAttribute != null)
+                {
+                    CredentialPreviewAttributes.Add(tmpAttribute);
+                    tmpAttributes.Remove(tmpAttribute);
+                }
+            }
+
+
+            foreach (CredentialPreviewAttribute attribute in tmpAttributes)
             {
                 if (attribute.Name == "embeddedImage")
                 {

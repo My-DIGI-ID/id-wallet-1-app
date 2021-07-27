@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 
@@ -16,6 +17,13 @@ namespace IDWallet.Models
         {
             get => _attributes;
             set => SetProperty(ref _attributes, value);
+        }
+
+        private ObservableCollection<CredentialPreviewAttribute> _qrCodes;
+        public ObservableCollection<CredentialPreviewAttribute> QrCodes
+        {
+            get => _qrCodes;
+            set => SetProperty(ref _qrCodes, value);
         }
 
         private bool _infoStackIsVisible;
@@ -71,7 +79,24 @@ namespace IDWallet.Models
                     break;
             }
             Attributes = new ObservableCollection<CredentialPreviewAttribute>();
-            foreach (CredentialPreviewAttribute credentialPreviewAttribute in credentialRecord.CredentialAttributesValues)
+
+            ObservableCollection<CredentialPreviewAttribute> tmpAttributes = new ObservableCollection<CredentialPreviewAttribute>();
+            foreach (var attrib in credentialRecord.CredentialAttributesValues)
+            {
+                tmpAttributes.Add(attrib);
+            }
+            ObservableCollection<string> orderedAttributeNames = new ObservableCollection<string> { "firstname", "familyname", "birthname", "academictitle", "addressstreet", "addresszipcode", "addresscity", "addresscountry", "dateofbirth", "placeofbirth", "dateofexpiry", "documenttype", "pseudonym" };
+            foreach (string attributeName in orderedAttributeNames)
+            {
+                CredentialPreviewAttribute attribute = tmpAttributes.FirstOrDefault(x => x.Name.ToLower().Equals(attributeName));
+                if (attribute != null)
+                {
+                    Attributes.Add(attribute);
+                    tmpAttributes.Remove(attribute);
+                }
+            }
+
+            foreach (CredentialPreviewAttribute credentialPreviewAttribute in tmpAttributes)
             {
                 Attributes.Add(credentialPreviewAttribute);
             }

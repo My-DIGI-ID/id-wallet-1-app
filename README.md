@@ -2,8 +2,8 @@
 
 ## Contact
 Digital Enabling GmbH  
-Bahnhofstr. 29  
-94424 Arnstorf  
+Rheinstr. 5  
+63225 Langen  
 info@digital-enabling.com  
 
 ## License

@@ -258,4 +258,7 @@
   <ItemGroup>
     <BundleResource Include="Resources\CAN_Info.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\qr_code.png" />
+  </ItemGroup>
 </Project>

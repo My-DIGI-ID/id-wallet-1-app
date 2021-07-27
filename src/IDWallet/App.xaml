@@ -264,6 +264,7 @@
                         x:TypeArguments="Thickness"
                         iOS="20, 0, 0, 0" />
 
+            <utils:CredDefNameConverter x:Key="CredDefNameConverter" />
             <utils:LocalDateTimeConverter x:Key="DateTimeConverter" />
             <utils:EmbeddedImageConverter x:Key="EmbeddedImageConverter" />
             <utils:ProofDeletionStatusConverter x:Key="ProofDeletionStatusConverter" />
@@ -276,6 +277,8 @@
             <utils:ValueVisibilityConverter x:Key="ValueVisibilityConverter" />
             <utils:ProgressBarColorConverter x:Key="ProgressBarColorConverter" /> 
             <utils:HistoryElementConverter x:Key="HistoryElementConverter" />
+            <utils:AttributeValueConverter x:Key="AttributeValueConverter"/>
+            <utils:MultiLabelTextConverter x:Key="MultiLabelTextConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

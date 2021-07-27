@@ -82,26 +82,32 @@ namespace IDWallet.Views.Settings.Ledger
                     case "idw_eesdi":
                         allAgentsWithOrder.Add(agent, 1);
                         break;
-                    case "idw_live":
+                    case "idw_eesditest":
                         allAgentsWithOrder.Add(agent, 2);
                         break;
-                    case "idw_builder":
+                    case "idw_live":
                         allAgentsWithOrder.Add(agent, 3);
                         break;
+                    case "idw_builder":
+                        allAgentsWithOrder.Add(agent, 4);
+                        break;
                     case "idw_staging":
-                        //allAgentsWithOrder.Add(agent, 4);
+                        //allAgentsWithOrder.Add(agent, 5);
                         break;
                     case "idw_bcgov":
-                        allAgentsWithOrder.Add(agent, 5);
-                        break;
-                    case "idw_esatus":
                         allAgentsWithOrder.Add(agent, 6);
                         break;
-                    case "idw_iduniontest":
+                    case "idw_esatus":
                         allAgentsWithOrder.Add(agent, 7);
                         break;
-                    case "idw_devledger":
+                    case "idw_iduniontest":
                         allAgentsWithOrder.Add(agent, 8);
+                        break;
+                    case "idw_devledger":
+                        allAgentsWithOrder.Add(agent, 9);
+                        break;
+                    case "idw_dgcdev":
+                        allAgentsWithOrder.Add(agent, 10);
                         break;
                     default:
                         break;

@@ -167,7 +167,347 @@ namespace IDWallet.Resources {
                 return ResourceManager.GetString("AddLedgerPage_Title", resourceCulture);
             }
         }
-        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die SARS-CoV-2 antigen vaccine ähnelt.
+        /// </summary>
+        public static string AttributeValueConvert_Antigen_Vaccine
+        {
+            get
+            {
+                return ResourceManager.GetString("AttributeValueConvert_Antigen_Vaccine", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die AstraZeneca AB ähnelt.
+        /// </summary>
+        public static string AttributeValueConvert_Astra_Zeneca
+        {
+            get
+            {
+                return ResourceManager.GetString("AttributeValueConvert_Astra_Zeneca", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die BBIBP-CorV ähnelt.
+        /// </summary>
+        public static string AttributeValueConvert_BBIBP_Vacc
+        {
+            get
+            {
+                return ResourceManager.GetString("AttributeValueConvert_BBIBP_Vacc", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Bharat Biotech ähnelt.
+        /// </summary>
+        public static string AttributeValueConvert_Bharat
+        {
+            get
+            {
+                return ResourceManager.GetString("AttributeValueConvert_Bharat", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Biontech Manufacturing GmbH ähnelt.
+        /// </summary>
+        public static string AttributeValueConvert_Biontech
+        {
+            get
+            {
+                return ResourceManager.GetString("AttributeValueConvert_Biontech", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die CanSino Biologics ähnelt.
+        /// </summary>
+        public static string AttributeValueConvert_Cansino
+        {
+            get
+            {
+                return ResourceManager.GetString("AttributeValueConvert_Cansino", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Comirnaty ähnelt.
+        /// </summary>
+        public static string AttributeValueConvert_Comirnaty_Vacc
+        {
+            get
+            {
+                return ResourceManager.GetString("AttributeValueConvert_Comirnaty_Vacc", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Convidecia ähnelt.
+        /// </summary>
+        public static string AttributeValueConvert_Convidecia_Vacc
+        {
+            get
+            {
+                return ResourceManager.GetString("AttributeValueConvert_Convidecia_Vacc", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die CoronaVac ähnelt.
+        /// </summary>
+        public static string AttributeValueConvert_CoronaVac_Vacc
+        {
+            get
+            {
+                return ResourceManager.GetString("AttributeValueConvert_CoronaVac_Vacc", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Covaxin (also known as BBV152 A, B, C) ähnelt.
+        /// </summary>
+        public static string AttributeValueConvert_Covaxin_Vacc
+        {
+            get
+            {
+                return ResourceManager.GetString("AttributeValueConvert_Covaxin_Vacc", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die COVID-19 ähnelt.
+        /// </summary>
+        public static string AttributeValueConvert_Covid19
+        {
+            get
+            {
+                return ResourceManager.GetString("AttributeValueConvert_Covid19", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Curevac AG ähnelt.
+        /// </summary>
+        public static string AttributeValueConvert_Curevac
+        {
+            get
+            {
+                return ResourceManager.GetString("AttributeValueConvert_Curevac", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die CVnCoV ähnelt.
+        /// </summary>
+        public static string AttributeValueConvert_CVnCoV_Vacc
+        {
+            get
+            {
+                return ResourceManager.GetString("AttributeValueConvert_CVnCoV_Vacc", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die EpiVacCorona ähnelt.
+        /// </summary>
+        public static string AttributeValueConvert_EpiVac_Vacc
+        {
+            get
+            {
+                return ResourceManager.GetString("AttributeValueConvert_EpiVac_Vacc", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Gamaleya Research Institute ähnelt.
+        /// </summary>
+        public static string AttributeValueConvert_Gamaleya
+        {
+            get
+            {
+                return ResourceManager.GetString("AttributeValueConvert_Gamaleya", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die COVID-19 Vaccine Janssen ähnelt.
+        /// </summary>
+        public static string AttributeValueConvert_Jannsen_Vacc
+        {
+            get
+            {
+                return ResourceManager.GetString("AttributeValueConvert_Jannsen_Vacc", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Janssen-Cilag International ähnelt.
+        /// </summary>
+        public static string AttributeValueConvert_Janssen
+        {
+            get
+            {
+                return ResourceManager.GetString("AttributeValueConvert_Janssen", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die covid-19 vaccines ähnelt.
+        /// </summary>
+        public static string AttributeValueConvert_Misc_Vaccine
+        {
+            get
+            {
+                return ResourceManager.GetString("AttributeValueConvert_Misc_Vaccine", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Moderna Biotech Spain S.L. ähnelt.
+        /// </summary>
+        public static string AttributeValueConvert_Moderna
+        {
+            get
+            {
+                return ResourceManager.GetString("AttributeValueConvert_Moderna", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die COVID-19 Vaccine Moderna ähnelt.
+        /// </summary>
+        public static string AttributeValueConvert_Moderna_Vacc
+        {
+            get
+            {
+                return ResourceManager.GetString("AttributeValueConvert_Moderna_Vacc", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die SARS-CoV-2 mRNA vaccine ähnelt.
+        /// </summary>
+        public static string AttributeValueConvert_Mrna_Vaccine
+        {
+            get
+            {
+                return ResourceManager.GetString("AttributeValueConvert_Mrna_Vaccine", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Novavax CZ AS ähnelt.
+        /// </summary>
+        public static string AttributeValueConvert_Novovax
+        {
+            get
+            {
+                return ResourceManager.GetString("AttributeValueConvert_Novovax", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die NVX-CoV2373 ähnelt.
+        /// </summary>
+        public static string AttributeValueConvert_NVX_Vacc
+        {
+            get
+            {
+                return ResourceManager.GetString("AttributeValueConvert_NVX_Vacc", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die China Sinopharm International Corp. - Beijing location ähnelt.
+        /// </summary>
+        public static string AttributeValueConvert_Sinopharm_Int
+        {
+            get
+            {
+                return ResourceManager.GetString("AttributeValueConvert_Sinopharm_Int", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Sinopharm Weiqida Europe Pharmaceutical s.r.o. - Prague location ähnelt.
+        /// </summary>
+        public static string AttributeValueConvert_Sinopharm_Prague
+        {
+            get
+            {
+                return ResourceManager.GetString("AttributeValueConvert_Sinopharm_Prague", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Sinopharm Zhijun (Shenzhen) Pharmaceutical Co. Ltd. - Shenzhen location ähnelt.
+        /// </summary>
+        public static string AttributeValueConvert_Sinopharm_Shenzhen
+        {
+            get
+            {
+                return ResourceManager.GetString("AttributeValueConvert_Sinopharm_Shenzhen", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Sinovac Biotech ähnelt.
+        /// </summary>
+        public static string AttributeValueConvert_Sinovac
+        {
+            get
+            {
+                return ResourceManager.GetString("AttributeValueConvert_Sinovac", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Sputnik V ähnelt.
+        /// </summary>
+        public static string AttributeValueConvert_Sputnik_Vacc
+        {
+            get
+            {
+                return ResourceManager.GetString("AttributeValueConvert_Sputnik_Vacc", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Vaxzevria ähnelt.
+        /// </summary>
+        public static string AttributeValueConvert_Vaxzevria_Vacc
+        {
+            get
+            {
+                return ResourceManager.GetString("AttributeValueConvert_Vaxzevria_Vacc", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Vector Institute ähnelt.
+        /// </summary>
+        public static string AttributeValueConvert_Vector
+        {
+            get
+            {
+                return ResourceManager.GetString("AttributeValueConvert_Vector", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Inactivated SARSCoV-2 (Vero Cell) ähnelt.
+        /// </summary>
+        public static string AttributeValueConvert_Vero_Cell_Vacc
+        {
+            get
+            {
+                return ResourceManager.GetString("AttributeValueConvert_Vero_Cell_Vacc", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Checking provider ähnelt.
         /// </summary>
@@ -518,7 +858,18 @@ namespace IDWallet.Resources {
                 return ResourceManager.GetString("BaseIDPage_ReadIdScreen_Header_Label", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die If you continue, a device check (Android: SafetyNet, iOS: DeviceCheck) is performed to ensure ID Wallet authenticity. The results of this check will be sent to Bundesdruckerei GmbH for verification. ähnelt.
+        /// </summary>
+        public static string BaseIDPage_ReadIdScreen_Security_Label
+        {
+            get
+            {
+                return ResourceManager.GetString("BaseIDPage_ReadIdScreen_Security_Label", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die  ähnelt.
         /// </summary>
@@ -563,7 +914,29 @@ namespace IDWallet.Resources {
                 return ResourceManager.GetString("BaseIDPage_StartScreen_Header_Label", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die  to the processing of your personal data and acknowledgement of the  ähnelt.
+        /// </summary>
+        public static string BaseIDPage_StartScreen_Middle_Label
+        {
+            get
+            {
+                return ResourceManager.GetString("BaseIDPage_StartScreen_Middle_Label", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Declaration of consent ähnelt.
+        /// </summary>
+        public static string BaseIDPage_StartScreen_Privacy_Consent_Label
+        {
+            get
+            {
+                return ResourceManager.GetString("BaseIDPage_StartScreen_Privacy_Consent_Label", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Privacy policy ähnelt.
         /// </summary>
@@ -572,7 +945,18 @@ namespace IDWallet.Resources {
                 return ResourceManager.GetString("BaseIDPage_StartScreen_Privacy_Policy_Label", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Attention: If a Basis-ID has already been created with this card, it will be revoked. ähnelt.
+        /// </summary>
+        public static string BaseIDPage_StartScreen_Revoke_Label
+        {
+            get
+            {
+                return ResourceManager.GetString("BaseIDPage_StartScreen_Revoke_Label", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die User agreement ähnelt.
         /// </summary>
@@ -696,6 +1080,17 @@ namespace IDWallet.Resources {
         public static string ChangeLedgerPage_EESDI {
             get {
                 return ResourceManager.GetString("ChangeLedgerPage_EESDI", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die EESDI Test Ledger ähnelt.
+        /// </summary>
+        public static string ChangeLedgerPage_EESDITest
+        {
+            get
+            {
+                return ResourceManager.GetString("ChangeLedgerPage_EESDITest", resourceCulture);
             }
         }
         
@@ -1409,7 +1804,18 @@ namespace IDWallet.Resources {
                 return ResourceManager.GetString("LabelTextConvert_birthName", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Country of Vaccination ähnelt.
+        /// </summary>
+        public static string LabelTextConvert_CountryOfVaccination
+        {
+            get
+            {
+                return ResourceManager.GetString("LabelTextConvert_CountryOfVaccination", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Date of Birth ähnelt.
         /// </summary>
@@ -1427,7 +1833,29 @@ namespace IDWallet.Resources {
                 return ResourceManager.GetString("LabelTextConvert_dateOfExpiry", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Date of Vaccination ähnelt.
+        /// </summary>
+        public static string LabelTextConvert_DateOfVaccination
+        {
+            get
+            {
+                return ResourceManager.GetString("LabelTextConvert_DateOfVaccination", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Desease Targeted ähnelt.
+        /// </summary>
+        public static string LabelTextConvert_DeseaseTargeted
+        {
+            get
+            {
+                return ResourceManager.GetString("LabelTextConvert_DeseaseTargeted", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Academic Title ähnelt.
         /// </summary>
@@ -1445,7 +1873,161 @@ namespace IDWallet.Resources {
                 return ResourceManager.GetString("LabelTextConvert_Documenttype", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Dose Number ähnelt.
+        /// </summary>
+        public static string LabelTextConvert_DoseNumber
+        {
+            get
+            {
+                return ResourceManager.GetString("LabelTextConvert_DoseNumber", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die 3. Date of birth ähnelt.
+        /// </summary>
+        public static string LabelTextConvert_DriveBirthDate
+        {
+            get
+            {
+                return ResourceManager.GetString("LabelTextConvert_DriveBirthDate", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die 1. Birthname ähnelt.
+        /// </summary>
+        public static string LabelTextConvert_DriveBirthName
+        {
+            get
+            {
+                return ResourceManager.GetString("LabelTextConvert_DriveBirthName", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die 3. Place of birth ähnelt.
+        /// </summary>
+        public static string LabelTextConvert_DriveBirthPlace
+        {
+            get
+            {
+                return ResourceManager.GetString("LabelTextConvert_DriveBirthPlace", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die 9. Driving license classes ähnelt.
+        /// </summary>
+        public static string LabelTextConvert_DriveClasses
+        {
+            get
+            {
+                return ResourceManager.GetString("LabelTextConvert_DriveClasses", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die 4b. Expiration date ähnelt.
+        /// </summary>
+        public static string LabelTextConvert_DriveExpiryDate
+        {
+            get
+            {
+                return ResourceManager.GetString("LabelTextConvert_DriveExpiryDate", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die 2. Firstname ähnelt.
+        /// </summary>
+        public static string LabelTextConvert_DriveFirstName
+        {
+            get
+            {
+                return ResourceManager.GetString("LabelTextConvert_DriveFirstName", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die 4a. Issue date ähnelt.
+        /// </summary>
+        public static string LabelTextConvert_DriveIssueDate
+        {
+            get
+            {
+                return ResourceManager.GetString("LabelTextConvert_DriveIssueDate", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die 4c. Issuer ähnelt.
+        /// </summary>
+        public static string LabelTextConvert_DriveIssuer
+        {
+            get
+            {
+                return ResourceManager.GetString("LabelTextConvert_DriveIssuer", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die 1. Name ähnelt.
+        /// </summary>
+        public static string LabelTextConvert_DriveName
+        {
+            get
+            {
+                return ResourceManager.GetString("LabelTextConvert_DriveName", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die 5. Driving license number ähnelt.
+        /// </summary>
+        public static string LabelTextConvert_DriveNumber
+        {
+            get
+            {
+                return ResourceManager.GetString("LabelTextConvert_DriveNumber", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die 12. Restrictions ähnelt.
+        /// </summary>
+        public static string LabelTextConvert_DriveRestrictions
+        {
+            get
+            {
+                return ResourceManager.GetString("LabelTextConvert_DriveRestrictions", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die 10. valid from ähnelt.
+        /// </summary>
+        public static string LabelTextConvert_DriveValidSince
+        {
+            get
+            {
+                return ResourceManager.GetString("LabelTextConvert_DriveValidSince", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die 11. valid till ähnelt.
+        /// </summary>
+        public static string LabelTextConvert_DriveValidTill
+        {
+            get
+            {
+                return ResourceManager.GetString("LabelTextConvert_DriveValidTill", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Family Name ähnelt.
         /// </summary>
@@ -1517,7 +2099,29 @@ namespace IDWallet.Resources {
                 return ResourceManager.GetString("LabelTextConvert_GivenNames", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Certificate Issuer ähnelt.
+        /// </summary>
+        public static string LabelTextConvert_Issuer
+        {
+            get
+            {
+                return ResourceManager.GetString("LabelTextConvert_Issuer", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Manufacturer ähnelt.
+        /// </summary>
+        public static string LabelTextConvert_Manufacturer
+        {
+            get
+            {
+                return ResourceManager.GetString("LabelTextConvert_Manufacturer", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Nationality ähnelt.
         /// </summary>
@@ -1535,7 +2139,18 @@ namespace IDWallet.Resources {
                 return ResourceManager.GetString("LabelTextConvert_placeOfBirth", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Vaccine Medical Product ähnelt.
+        /// </summary>
+        public static string LabelTextConvert_ProductDesc
+        {
+            get
+            {
+                return ResourceManager.GetString("LabelTextConvert_ProductDesc", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Pseudonym ähnelt.
         /// </summary>
@@ -1544,7 +2159,73 @@ namespace IDWallet.Resources {
                 return ResourceManager.GetString("LabelTextConvert_Pseudonym", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Version of the Schema ähnelt.
+        /// </summary>
+        public static string LabelTextConvert_SchemaVersion
+        {
+            get
+            {
+                return ResourceManager.GetString("LabelTextConvert_SchemaVersion", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Standardised Family Name ähnelt.
+        /// </summary>
+        public static string LabelTextConvert_StandardisedFamilyName
+        {
+            get
+            {
+                return ResourceManager.GetString("LabelTextConvert_StandardisedFamilyName", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Standardised Given Name ähnelt.
+        /// </summary>
+        public static string LabelTextConvert_StandardisedGivenName
+        {
+            get
+            {
+                return ResourceManager.GetString("LabelTextConvert_StandardisedGivenName", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Total Series of Doses ähnelt.
+        /// </summary>
+        public static string LabelTextConvert_TotalDoseNumber
+        {
+            get
+            {
+                return ResourceManager.GetString("LabelTextConvert_TotalDoseNumber", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die UVCI (Identification Number of the Certificate) ähnelt.
+        /// </summary>
+        public static string LabelTextConvert_Uvci
+        {
+            get
+            {
+                return ResourceManager.GetString("LabelTextConvert_Uvci", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Corona Vaccine ähnelt.
+        /// </summary>
+        public static string LabelTextConvert_Vaccine
+        {
+            get
+            {
+                return ResourceManager.GetString("LabelTextConvert_Vaccine", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Expiry Date of the ID ähnelt.
         /// </summary>
@@ -1564,16 +2245,16 @@ namespace IDWallet.Resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Arnstorf ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Langen ähnelt.
         /// </summary>
         public static string LegalNoticePage_City {
             get {
                 return ResourceManager.GetString("LegalNoticePage_City", resourceCulture);
             }
         }
-        
+
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Commercial Register: Local Court Landshut – HRB 12637 ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Commercial Register: Local Court Offenbach – HRB 53742 ähnelt.
         /// </summary>
         public static string LegalNoticePage_Commercial_Register {
             get {
@@ -1643,18 +2324,18 @@ namespace IDWallet.Resources {
                 return ResourceManager.GetString("LegalNoticePage_Phone_Number", resourceCulture);
             }
         }
-        
+
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Bahnhofstr. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Rheinstr. ähnelt.
         /// </summary>
         public static string LegalNoticePage_Street {
             get {
                 return ResourceManager.GetString("LegalNoticePage_Street", resourceCulture);
             }
         }
-        
+
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die 29 ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die 5 ähnelt.
         /// </summary>
         public static string LegalNoticePage_Street_Number {
             get {
@@ -1708,7 +2389,7 @@ namespace IDWallet.Resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die 94424 ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die 63225 ähnelt.
         /// </summary>
         public static string LegalNoticePage_ZIP {
             get {
@@ -1717,7 +2398,7 @@ namespace IDWallet.Resources {
         }
         
 		/// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Place of jurisdiction: Arnstorf ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Place of jurisdiction: Langen ähnelt.
         /// </summary>
         public static string LiabilityPage_Jurisdiction {
             get {
@@ -2102,18 +2783,18 @@ namespace IDWallet.Resources {
                 return ResourceManager.GetString("PopUp_Add_Vac_Button_Ok", resourceCulture);
             }
         }
-        
+
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Please confirm that you wish to proceed with storing the proof of vaccination in your Wallet. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Please confirm that you wish to proceed with storing the QR code in your Wallet. ähnelt.
         /// </summary>
         public static string PopUp_Add_Vac_Message {
             get {
                 return ResourceManager.GetString("PopUp_Add_Vac_Message", resourceCulture);
             }
         }
-        
+
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Storage of the vaccination certificate ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Storage of QR code certificate ähnelt.
         /// </summary>
         public static string PopUp_Add_Vac_Title {
             get {
@@ -2562,6 +3243,28 @@ namespace IDWallet.Resources {
             }
         }
         
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die  of 2 scan processes ähnelt.
+        /// </summary>
+        public static string PopUp_BaseID_ReadyToScan_Process_After_Label
+        {
+            get
+            {
+                return ResourceManager.GetString("PopUp_BaseID_ReadyToScan_Process_After_Label", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Scan process:  ähnelt.
+        /// </summary>
+        public static string PopUp_BaseID_ReadyToScan_Process_Before_Label
+        {
+            get
+            {
+                return ResourceManager.GetString("PopUp_BaseID_ReadyToScan_Process_Before_Label", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Please hold your ID card against the back of your device. ähnelt.
         /// </summary>
@@ -3679,7 +4382,7 @@ namespace IDWallet.Resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die you have received the following Credential ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die you have received the following Credential. ähnelt.
         /// </summary>
         public static string PopUp_HistoryCredential_Text2 {
             get {
@@ -5477,7 +6180,51 @@ namespace IDWallet.Resources {
                 return ResourceManager.GetString("ProofRequestPage_Unknown_Connection_Alias", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die QR code added ähnelt.
+        /// </summary>
+        public static string Qr_History_Message_1
+        {
+            get
+            {
+                return ResourceManager.GetString("Qr_History_Message_1", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die you have added the following QR code. ähnelt.
+        /// </summary>
+        public static string Qr_History_Message_2
+        {
+            get
+            {
+                return ResourceManager.GetString("Qr_History_Message_2", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Please note that the QR code may contain personal data. People who have access to the QR code can read the data it contains. ähnelt.
+        /// </summary>
+        public static string Qr_Personal_Data_Message
+        {
+            get
+            {
+                return ResourceManager.GetString("Qr_Personal_Data_Message", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Note ähnelt.
+        /// </summary>
+        public static string Qr_Personal_Data_Title
+        {
+            get
+            {
+                return ResourceManager.GetString("Qr_Personal_Data_Title", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Choose a file to recover your wallet. ähnelt.
         /// </summary>
