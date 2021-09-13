@@ -215,7 +215,7 @@ namespace IDWallet.ViewModels
         {
             foreach (WalletElement walletElement in WalletElements.Where(x => x.CredentialRecord != null))
             {
-                if (walletElement.CredentialRecord.CredentialDefinitionId == "Vq2C7Wfc44Q1cSroPuXaw2:3:CL:126:Basis-ID" || walletElement.CredentialRecord.CredentialDefinitionId == "5PmwwGsFhq8NDiRCyqjNXy:3:CL:126:Basis-ID Demo")
+                if (walletElement.CredentialRecord.CredentialDefinitionId == "Vq2C7Wfc44Q1cSroPuXaw2:3:CL:126:Basis-ID" || walletElement.CredentialRecord.CredentialDefinitionId == "MGfd8JjWRoiXMm2YGL4SGj:3:CL:43:Basis-ID Testnetzwerk")
                 {
                     AddBaseIdIsVisible = false;
                     return;
@@ -229,26 +229,32 @@ namespace IDWallet.ViewModels
 
         public async Task DeleteWalletElement(string recordId)
         {
-            IAgentContext agentContext = await _agentProvider.GetContextAsync();
-            await _credentialService.DeleteCredentialAsync(agentContext, recordId);
-
-            WalletElement walletElement = null;
             try
             {
-                walletElement = WalletElements.First(x => x.CredentialRecord != null && x.CredentialRecord.Id == recordId);
+                IAgentContext agentContext = await _agentProvider.GetContextAsync();
+                await _credentialService.DeleteCredentialAsync(agentContext, recordId);
+
+                WalletElement walletElement = null;
+                try
+                {
+                    walletElement = WalletElements.First(x => x.CredentialRecord != null && x.CredentialRecord.Id == recordId);
+                }
+                catch
+                {
+                }
+
+                if (walletElement != null)
+                {
+                    if (WalletElements.Count == 1)
+                    {
+                        EmptyLayoutVisible = true;
+                    }
+
+                    WalletElements.Remove(walletElement);
+                }
             }
             catch
             {
-            }
-
-            if (walletElement != null)
-            {
-                if (WalletElements.Count == 1)
-                {
-                    EmptyLayoutVisible = true;
-                }
-
-                WalletElements.Remove(walletElement);
             }
 
             CheckForBaseId();
@@ -703,9 +709,8 @@ namespace IDWallet.ViewModels
                     result.ImageUri = ImageSource.FromFile("ibm_logo.png");
                     result.CredentialBarColor = Color.FromHex("#0F62FE");
                     break;
-                case "XwQCiUus8QubFNJPJD2mDi":
                 case "Vq2C7Wfc44Q1cSroPuXaw2":
-                case "5PmwwGsFhq8NDiRCyqjNXy":
+                case "MGfd8JjWRoiXMm2YGL4SGj":
                     result.CredentialImageSource = ImageSource.FromFile("bdr_logo.png");
                     result.ImageUri = ImageSource.FromFile("bdr_logo.png");
                     result.CredentialBarColor = Color.FromHex("#f9f9e0");
@@ -848,9 +853,8 @@ namespace IDWallet.ViewModels
                     CheckAllRevocations();
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Debug.WriteLine(ex.Message);
                 BasicPopUp alertPopUp = new BasicPopUp(
                     Resources.Lang.PopUp_Undefined_Error_Title,
                     Resources.Lang.PopUp_Undefined_Error_Message,
@@ -1196,7 +1200,7 @@ namespace IDWallet.ViewModels
         private bool IsBaseIdCredential(CredentialRecord credential)
         {
             string credentialIssuerDID = credential.CredentialDefinitionId.Split(":")[0];
-            if (credentialIssuerDID == "XwQCiUus8QubFNJPJD2mDi" || credentialIssuerDID == "Vq2C7Wfc44Q1cSroPuXaw2" || credentialIssuerDID == "5PmwwGsFhq8NDiRCyqjNXy")
+            if (credentialIssuerDID == "Vq2C7Wfc44Q1cSroPuXaw2" || credentialIssuerDID == "MGfd8JjWRoiXMm2YGL4SGj")
             {
                 return true;
             }

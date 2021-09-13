@@ -52,8 +52,8 @@ namespace IDWallet
         public const string WalletSaltByteTag = "WalletSalt";
 
         //Change per Version
-        public const string AppVersion = "1.3";
-        public const string BuildVersion = "10305";
+        public const string AppVersion = "1.4";
+        public const string BuildVersion = "10403";
         public const string WalletName = "ID Wallet";
         public const string SafetyNetApiKey = "";
         public const string NotificationHubName = "";
@@ -67,5 +67,10 @@ namespace IDWallet
         public const string BsiUrl = "https://www.bsi.bund.de/DE/Themen/Oeffentliche-Verwaltung/Elektronische-Identitaeten/Online-Ausweisfunktion/Testinfrastruktur/eID-Karte/eID-Karte_node.html";
 
         public const string VacConnection = "VacConnection";
+
+        //Hardware Binding
+        public const string HardwareSignature = "hardwareDidProof";
+        public const string ApiKey = "";
+        public const string ApiHeader = "X-API-KEY";
     }
 }

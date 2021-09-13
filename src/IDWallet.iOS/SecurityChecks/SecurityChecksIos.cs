@@ -17,7 +17,7 @@ namespace IDWallet.iOS.SecurityChecks
             {
                 string key = await attestService.GenerateKeyAsync();
 
-                NSData attest = await attestService.AttestKeyAsync(key, NSData.FromArray(nonce));
+                NSData attest = await attestService.AttestKeyAsync(key, NSData.FromArray(Sha256.sha256(nonce)));
 
                 App.SafetyKey = key;
                 App.SafetyResult = attest.GetBase64EncodedString(new NSDataBase64EncodingOptions());

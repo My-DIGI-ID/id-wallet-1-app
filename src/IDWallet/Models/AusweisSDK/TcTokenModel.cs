@@ -7,6 +7,9 @@ namespace IDWallet.Models.AusweisSDK
         [JsonProperty("tcTokenUrl")]
         public string TcTokenUrl { get; set; }
 
+        [JsonProperty("issuerNonce")]
+        public string IssuerNonce { get; set; }
+
         [JsonProperty("walletValidationChallenge")]
         public string Challenge { get; set; }
     }

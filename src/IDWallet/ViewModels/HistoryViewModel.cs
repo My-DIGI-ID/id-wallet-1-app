@@ -316,9 +316,8 @@ namespace IDWallet.ViewModels
                     case "JiVLsA5wxVnbHQ5s7pDN58":
                         historyCredentialElement.ImageUri = ImageSource.FromFile("ibm_logo.png");
                         break;
-                    case "XwQCiUus8QubFNJPJD2mDi":
                     case "Vq2C7Wfc44Q1cSroPuXaw2":
-                    case "5PmwwGsFhq8NDiRCyqjNXy":
+                    case "MGfd8JjWRoiXMm2YGL4SGj":
                         historyCredentialElement.ImageUri = ImageSource.FromFile("bdr_logo.png");
                         break;
                     case "En38baYaTqVYSB8SFwguhT":

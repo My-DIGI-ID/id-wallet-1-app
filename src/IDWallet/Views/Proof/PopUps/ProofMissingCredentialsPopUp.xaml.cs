@@ -50,7 +50,7 @@ namespace IDWallet.Views.Proof.PopUps
                                 ObservableCollection<string> attributeList = new ObservableCollection<string>();
                                 foreach (ProofModel request in _failedRequests)
                                 {
-                                    if (request.Restrictions.Exists(x => x.SchemaId.Split(':')[2] == name))
+                                    if (request.Restrictions.Exists(x => !string.IsNullOrEmpty(x.SchemaId) && x.SchemaId.Split(':')[2] == name))
                                     {
                                         attributeList.Add(request.RequestedValue);
                                     }
@@ -66,7 +66,7 @@ namespace IDWallet.Views.Proof.PopUps
                                 ObservableCollection<string> attributeList = new ObservableCollection<string>();
                                 foreach (ProofModel request in _failedRequests)
                                 {
-                                    if (request.Restrictions.Exists(x => x.CredentialDefinitionId.Split(':')[4] == name))
+                                    if (request.Restrictions.Exists(x => !string.IsNullOrEmpty(x.CredentialDefinitionId) && x.CredentialDefinitionId.Split(':')[4] == name))
                                     {
                                         attributeList.Add(request.RequestedValue);
                                     }
@@ -91,7 +91,7 @@ namespace IDWallet.Views.Proof.PopUps
                                 ObservableCollection<string> attributeList = new ObservableCollection<string>();
                                 foreach (ProofModel request in _failedRequests)
                                 {
-                                    if (request.Restrictions.Find(x => x.SchemaId == restriction.SchemaId.Split(':')[2]) != null)
+                                    if (request.Restrictions.Find(x => !string.IsNullOrEmpty(x.SchemaId) && x.SchemaId == restriction.SchemaId.Split(':')[2]) != null)
                                     {
                                         attributeList.Add(request.RequestedValue);
                                     }
@@ -107,7 +107,7 @@ namespace IDWallet.Views.Proof.PopUps
                                 ObservableCollection<string> attributeList = new ObservableCollection<string>();
                                 foreach (ProofModel request in _failedRequests)
                                 {
-                                    if (request.Restrictions.Find(x => x.CredentialDefinitionId == restriction.CredentialDefinitionId.Split(':')[4]) != null)
+                                    if (request.Restrictions.Find(x => !string.IsNullOrEmpty(x.CredentialDefinitionId) && x.CredentialDefinitionId == restriction.CredentialDefinitionId.Split(':')[4]) != null)
                                     {
                                         attributeList.Add(request.RequestedValue);
                                     }

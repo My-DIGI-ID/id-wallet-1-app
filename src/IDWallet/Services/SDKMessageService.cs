@@ -2,13 +2,15 @@
 using IDWallet.Interfaces;
 using IDWallet.Models.AusweisSDK;
 using IDWallet.Utils;
-using Hyperledger.Aries.Extensions;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
 using System.Net.Security;
+using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace IDWallet.Services
@@ -36,7 +38,7 @@ namespace IDWallet.Services
                 {
                     List<string> allowedPublicKeys = new List<string>
                     {
-						// BDR API Public Key Pinning
+                        // BDR API Public Key Pinning
                     };
                     if (sender.RequestUri.Host.Equals(new Uri($"https://{WalletParams.AusweisHost}").Host))
                     {
@@ -107,43 +109,31 @@ namespace IDWallet.Services
         public async void SendRunAuth()
         {
             App.SafetyResult = "";
-            string apiKey = StringCipher.Decrypt("", WalletParams.PackageName + WalletParams.AppVersion); // decrypt and set BDR API-KEY
-            AusweisSdkHttpClient.DefaultRequestHeaders.Add("X-API-KEY", apiKey);
+            TcTokenModel tcToken = await GetToken();
 
-            HttpResponseMessage result = await AusweisSdkHttpClient.GetAsync($"https://{WalletParams.AusweisHost}/ssi/oauth2/authorization/ausweisident-integrated");
-
-            TcTokenModel TcToken = new TcTokenModel();
-            if (result.IsSuccessStatusCode)
+            if (!string.IsNullOrEmpty(tcToken.IssuerNonce))
             {
-                TcToken = JObject.Parse(await result.Content.ReadAsStringAsync()).ToObject<TcTokenModel>();
-                DependencyService.Get<IAusweisSdk>().SendCall($"{{\"cmd\": \"RUN_AUTH\", \"tcTokenURL\": \"{TcToken.TcTokenUrl}\"}}");
-            }
-
-            if (!string.IsNullOrEmpty(TcToken.Challenge))
-            {
-                var nonce = TcToken.Challenge.FromBase64();
-                var nonceByte = Sha256.sha256(nonce);
-                DependencyService.Get<ISecurityChecks>().SafetyCheck(Sha256.sha256(TcToken.Challenge.FromBase64()));
+                // Safety Check is done here
+                DependencyService.Get<ISecurityChecks>().SafetyCheck(GetNonce(tcToken.IssuerNonce, 0));
 
                 Device.StartTimer(new TimeSpan(0, 0, 0, 0, 100), () =>
                 {
                     if (!string.IsNullOrEmpty(App.SafetyResult))
                     {
-                        if (Device.RuntimePlatform == Device.Android)
-                        {
-                            string androidString = $"{{\"appVersion\": \"{WalletParams.AppVersion}\", \"attestation\": \"{App.SafetyResult}\"}}";
-                            StringContent androidContent = new StringContent(androidString, System.Text.Encoding.UTF8, "application/json");
-                            AusweisSdkHttpClient.PostAsync($"https://{WalletParams.AusweisHost}/ssi/api/integrated/wallet-validation/android", androidContent).GetAwaiter().GetResult();
-                        }
-                        else if (Device.RuntimePlatform == Device.iOS)
-                        {
-                            string iOSString = $"{{\"teamId\": \"{WalletParams.TeamId}\", \"bundleId\": \"{WalletParams.PackageName}\", \"keyId\": \"{App.SafetyKey}\", \"appVersion\": \"{WalletParams.AppVersion}\", \"attestation\": \"{App.SafetyResult}\"}}";
-                            StringContent iOSContent = new StringContent(iOSString, System.Text.Encoding.UTF8, "application/json");
-                            AusweisSdkHttpClient.PostAsync($"https://{WalletParams.AusweisHost}/ssi/api/integrated/wallet-validation/ios", iOSContent).GetAwaiter().GetResult();
-                        }
+                        IHardwareKeyService hardwareKeyService = DependencyService.Resolve<IHardwareKeyService>();
+
+                        string hwKey = hardwareKeyService.GetPublicKeyAsBase64(GetNonce(tcToken.IssuerNonce, 1));
+
+                        string signedNonce = hardwareKeyService.Sign(GetNonce(tcToken.IssuerNonce, 2));
+
+                        Uri uri = CreateDeviceDependentUri(Device.RuntimePlatform);
+                        StringContent body = CreateDeviceDependentRequestBody(Device.RuntimePlatform, hwKey, signedNonce);
+
+                        HttpResponseMessage response = AusweisSdkHttpClient.PostAsync(uri, body).GetAwaiter().GetResult();
 
                         App.SafetyResult = "";
                         App.SafetyKey = "";
+
                         return false;
                     }
                     else
@@ -153,6 +143,64 @@ namespace IDWallet.Services
                 });
             }
             AusweisSdkHttpClient.DefaultRequestHeaders.Clear();
+        }
+
+        private async Task<TcTokenModel> GetToken()
+        {
+            AusweisSdkHttpClient.DefaultRequestHeaders.Add(WalletParams.ApiHeader, StringCipher.Decrypt(WalletParams.ApiKey, WalletParams.PackageName + WalletParams.AppVersion));
+
+            HttpResponseMessage result = await AusweisSdkHttpClient.GetAsync($"https://{WalletParams.AusweisHost}/oauth2/authorization/ausweisident-integrated");
+
+            TcTokenModel tcToken = new TcTokenModel();
+            if (result.IsSuccessStatusCode)
+            {
+                tcToken = JObject.Parse(await result.Content.ReadAsStringAsync()).ToObject<TcTokenModel>();
+                DependencyService.Get<IAusweisSdk>().SendCall($"{{\"cmd\": \"RUN_AUTH\", \"tcTokenURL\": \"{tcToken.TcTokenUrl}\"}}");
+            }
+
+            return tcToken;
+        }
+
+        private Uri CreateDeviceDependentUri(string runtimePlatform)
+        {
+            string baseUrl = $"https://{WalletParams.AusweisHost}/api/integrated/wallet-validation";
+
+            if (runtimePlatform == Device.Android)
+            {
+                return new Uri($"{baseUrl}/android");
+            }
+
+            return new Uri($"{baseUrl}/ios");
+        }
+
+        private StringContent CreateDeviceDependentRequestBody(string runtimePlatform, string keyAttestationCerts, string keyChallengeSignature)
+        {
+            if (runtimePlatform == Device.Android)
+            {
+                string androidString = $"{{\"appVersion\": \"{WalletParams.AppVersion}\", \"attestation\": \"{App.SafetyResult}\", \"keyAttestationCerts\": {keyAttestationCerts}, \"keyChallengeSignature\": \"{keyChallengeSignature}\"}}";
+                return new StringContent(androidString, Encoding.UTF8, "application/json");
+            }
+
+            string iOSString = $"{{\"teamId\": \"{WalletParams.TeamId}\", \"bundleId\": \"{WalletParams.PackageName}\", \"keyId\": \"{App.SafetyKey}\", \"appVersion\": \"{WalletParams.AppVersion}\", \"attestation\": \"{App.SafetyResult}\", \"keyAttestationPublicKey\": \"{keyAttestationCerts}\", \"keyChallengeSignature\": \"{keyChallengeSignature}\"}}";
+            return new StringContent(iOSString, Encoding.UTF8, "application/json");
+        }
+
+        private static byte[] GetNonce(string issuerNonce, byte ending)
+        {
+            byte[] bytesNonce = Convert.FromBase64String(issuerNonce);
+            byte[] bytesConst = new byte[] { ending };
+            byte[] bytesNonceAndConst = new byte[bytesNonce.Length + bytesConst.Length];
+            Buffer.BlockCopy(bytesNonce, 0, bytesNonceAndConst, 0, bytesNonce.Length);
+            Buffer.BlockCopy(bytesConst, 0, bytesNonceAndConst, bytesNonce.Length, bytesConst.Length);
+            return Sha256.sha256(bytesNonceAndConst);
+        }
+
+        private static string ByteArrayToString(byte[] ba)
+        {
+            StringBuilder hex = new StringBuilder(ba.Length * 2);
+            foreach (byte b in ba)
+                hex.AppendFormat("{0:x2}", b);
+            return hex.ToString();
         }
 
         public void SendCancel()

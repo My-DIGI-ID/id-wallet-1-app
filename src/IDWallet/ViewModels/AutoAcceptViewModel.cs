@@ -15,6 +15,7 @@ using IDWallet.Views.Wallet;
 using IDWallet.Views.Wallet.PopUps;
 using Hyperledger.Aries.Agents;
 using Hyperledger.Aries.Configuration;
+using Hyperledger.Aries.Contracts;
 using Hyperledger.Aries.Decorators;
 using Hyperledger.Aries.Extensions;
 using Hyperledger.Aries.Features.DidExchange;
@@ -50,6 +51,8 @@ namespace IDWallet.ViewModels
 
         private readonly ICustomWalletRecordService _walletRecordService =
                                             App.Container.Resolve<ICustomWalletRecordService>();
+
+        private readonly InboxService _inboxService = App.Container.Resolve<InboxService>();
         private bool _emptyLayoutVisible;
 
         public AutoAcceptViewModel()
@@ -80,7 +83,7 @@ namespace IDWallet.ViewModels
         {
             ProofRequest proofRequest = proofRecord.RequestJson.ToObject<ProofRequest>();
             ProofViewModel viewModel = new ProofViewModel(proofRequest, proofRecord.Id, onlyKnownProofs, takeNewest);
-            
+
             var authPopUp = new ProofAuthenticationPopUp(new AuthViewModel(viewModel))
             {
                 ProofSendPopUp = true
@@ -647,6 +650,7 @@ namespace IDWallet.ViewModels
                                         //ignore
                                     }
 
+
                                     if (!string.IsNullOrEmpty(credentialRecord.ConnectionId))
                                     {
                                         (CredentialRequestMessage request, CredentialRecord record) =
@@ -754,9 +758,8 @@ namespace IDWallet.ViewModels
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Debug.WriteLine(ex.Message);
                 BasicPopUp alertPopUp4 = new BasicPopUp(
                     Resources.Lang.PopUp_Credential_Error_Title,
                     Resources.Lang.PopUp_Credential_Error_Message,

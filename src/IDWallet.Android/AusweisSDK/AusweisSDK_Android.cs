@@ -34,6 +34,11 @@ namespace IDWallet.Droid.AusweisSDK
             try
             {
                 AusweisSdkServiceConnection ausweisSdkServiceConnection = MainActivity.AusweisSdkServiceConnection;
+                
+                if (ausweisSdkServiceConnection == null)
+                {
+                    return false;
+                }
 
                 return ausweisSdkServiceConnection.IsConnected;
             }

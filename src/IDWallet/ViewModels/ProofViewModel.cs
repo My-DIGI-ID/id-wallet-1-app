@@ -31,6 +31,8 @@ namespace IDWallet.ViewModels
         private string _connectionAlias;
         private int _currentlyOpen;
         private bool _readyToSend;
+        private ProofModel _hwRequest;
+        private bool _isHwRequest;
         public ProofViewModel(ProofRequest proofRequest, string proofRecordId, bool onlyKnownProofs = false,
             bool takeNewest = true)
         {
@@ -74,6 +76,12 @@ namespace IDWallet.ViewModels
             set => SetProperty(ref _readyToSend, value);
         }
 
+        public bool IsHwRequest
+        {
+            get => _isHwRequest;
+            set => SetProperty(ref _isHwRequest, value);
+        }
+
         public ObservableCollection<ProofModel> Requests { get; set; }
         public List<ProofModel> FailedRequests { get; set; }
         public string RequestTitle { get; set; }
@@ -87,8 +95,13 @@ namespace IDWallet.ViewModels
         {
             Hyperledger.Aries.Agents.IAgentContext agentContext = await _agentProvider.GetContextAsync();
 
+            if (_hwRequest != null)
+            {
+                Requests.Add(_hwRequest);
+            }
+
             return await _proofRequestService.CreateAndSendProof(Requests, agentContext, _proofRecordId,
-                _knownProofAttributes, service);
+                _knownProofAttributes, service, _proofRequest);
         }
 
         public async Task LoadAttributes(ProofModel request, ProofElementOption listViewOption)
@@ -340,6 +353,17 @@ namespace IDWallet.ViewModels
                 }
 
                 ReadyToSend = IsAvailable();
+            }
+
+            _hwRequest = Requests.Where(x => x.RequestedValue.Equals(WalletParams.HardwareSignature)).FirstOrDefault();
+            if (_hwRequest != null)
+            {
+                _isHwRequest = true;
+                Requests.Remove(_hwRequest);
+            }
+            else
+            {
+                _isHwRequest = false;
             }
 
             LoadCommandFinished = true;

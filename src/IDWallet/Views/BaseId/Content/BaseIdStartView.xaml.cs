@@ -12,10 +12,10 @@ namespace IDWallet.Views.BaseId.Content
         public BaseIdStartView()
         {
             InitializeComponent();
+            privacyClick.CommandParameter = $"https://{WalletParams.AusweisHost}/privacy.html";
+            privacyConsentClick.CommandParameter = $"https://{WalletParams.AusweisHost}/privacy.html#privacy-consent";
+            termsClick.CommandParameter = $"https://{WalletParams.AusweisHost}/terms.html";
             bsiClick.CommandParameter = WalletParams.BsiUrl;
-            privacyConsentClick.CommandParameter = $"https://{WalletParams.AusweisHost}/ssi/privacy.html#privacy-consent";
-            privacyClick.CommandParameter = $"https://{WalletParams.AusweisHost}/ssi/privacy.html#privacy-info";
-            termsClick.CommandParameter = $"https://{WalletParams.AusweisHost}/ssi/terms.html";
             GoToNextButton.IsEnabled = false;
         }
 
@@ -26,13 +26,6 @@ namespace IDWallet.Views.BaseId.Content
         private async void LinkTapped(string url)
         {
             await Launcher.OpenAsync(new Uri(url));
-        }
-
-        private Command _linkClickedCommand;
-        public Command LinkClickedCommand => _linkClickedCommand ??= new Command(OnLinkClicked);
-        private async void OnLinkClicked(object obj)
-        {
-            await Launcher.OpenAsync(new Uri("https://www.bsi.bund.de/DE/Themen/Oeffentliche-Verwaltung/Elektronische-Identitaeten/Online-Ausweisfunktion/Testinfrastruktur/eID-Karte/eID-Karte_node.html"));
         }
 
         private void Button_Clicked(object sender, EventArgs e)
