@@ -95,6 +95,7 @@
     <Compile Include="Renderer\CircleViewRenderer.cs" />
     <Compile Include="Renderer\PinItemViewRenderer.cs" />
     <Compile Include="Renderer\ZFRippleButton.cs" />
+    <Compile Include="SecurityChecks\HardwareKeyServiceIOS.cs" />
     <Compile Include="SecurityChecks\SecurityChecksIos.cs" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />

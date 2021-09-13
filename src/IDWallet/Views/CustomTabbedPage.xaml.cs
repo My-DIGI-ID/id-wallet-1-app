@@ -13,7 +13,7 @@ using Hyperledger.Aries.Contracts;
 using System;
 using System.ComponentModel;
 using Xamarin.Forms;
-using Xamarin.Forms.PlatformConfiguration;
+using PlatformConfiguration = Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 using Xamarin.Forms.Svg;
 using Xamarin.Forms.Xaml;
@@ -32,8 +32,8 @@ namespace IDWallet.Views
         public CustomTabbedPage()
         {
             InitializeComponent();
-            On<Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
-            On<Android>().DisableSwipePaging();
+            On<PlatformConfiguration.Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
+            On<PlatformConfiguration.Android>().DisableSwipePaging();
 
             Children.Add(new NavigationPage(new WalletPage())
             {

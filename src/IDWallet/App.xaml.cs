@@ -200,6 +200,8 @@ namespace IDWallet
         public static bool WaitForConnection { get; set; } = false;
         public static bool WaitForProof { get; set; } = false;
         public static string BaseIdConnectionId { get; set; } = "";
+
+        public static string AuthenticationResult { get; set; } = "";
         public static string SafetyResult { get; set; } = "";
         public static string SafetyKey { get; set; } = "";
         public static string SecurityCert { get; set; } = "";
@@ -753,7 +755,7 @@ namespace IDWallet
             builder.RegisterType<DefaultProvisioningService>().AsImplementedInterfaces();
             builder.RegisterType<DefaultWalletService>().AsImplementedInterfaces();
             builder.RegisterType<DefaultLedgerSigningService>().AsImplementedInterfaces();
-            builder.RegisterType<DefaultLedgerService>().AsImplementedInterfaces();
+            builder.RegisterType<CustomLedgerService>().AsImplementedInterfaces();
             builder.RegisterType<DefaultBasicMessageHandler>().AsImplementedInterfaces().AsSelf();
             builder.RegisterType<DefaultSchemaService>().AsImplementedInterfaces();
             builder.RegisterType<CustomTailsService>().AsImplementedInterfaces();

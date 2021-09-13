@@ -29,6 +29,8 @@ namespace IDWallet.Agent.Interface
 
         new Task<IAgentContext> GetContextAsync(params object[] args);
 
+        Task<IAgentContext> GetContextAutoSwitchAsync(params object[] args);
+
         string GetPoolName(AgentOptions agentOptions);
 
         Task ImportAgentAsync(string importConfig);

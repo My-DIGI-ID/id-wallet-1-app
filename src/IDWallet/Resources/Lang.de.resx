@@ -2288,4 +2288,7 @@
   <data name="Qr_History_Message_2" xml:space="preserve">
     <value>haben Sie folgenden QR-Code hinzugefügt.</value>
   </data>
+  <data name="HwProofNotice" xml:space="preserve">
+    <value>Hinweis: Diese Überprüfung fragt die Informationen der Basis-ID zur Gerätebindung an. Beachten Sie bitte, dass auch diese einen Personenbezug darstellen. Des weiteren wird der Überprüfung eine Signatur unter Verwendung der Gerätebindungsschlüssel hinzugefügt.</value>
+  </data>
 </root>

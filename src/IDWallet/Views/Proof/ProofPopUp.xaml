@@ -60,6 +60,10 @@
                                 </StackLayout>
                             </ScrollView>
                             <Label Style="{StaticResource LabelMultiLine}"
+                               Margin="0,10"
+                               IsVisible="{Binding IsHwRequest}"
+                               Text="{lang:L10n HwProofNotice}"/>
+                            <Label Style="{StaticResource LabelMultiLine}"
                                FontSize="10"
                                Margin="0,10">
                             <Label.FormattedText>

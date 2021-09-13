@@ -205,6 +205,7 @@
     <Compile Include="Resources\Resource.designer.cs" />
     <AndroidResource Include="Resources\xml\provider_paths.xml" />
     <TransformFile Include="Resources\values\values.xml" />
+    <Compile Include="SecurityChecks\HardwareKeyServiceAndroid.cs" />
     <Compile Include="SecurityChecks\SecurityChecksAndroid.cs" />
     <Compile Include="SplashScreenActivity.cs" />
   </ItemGroup>
@@ -342,7 +343,7 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties XamarinHotReloadUnhandledDeviceExceptionIDWalletAndroidHideInfoBar="True" TriggeredFromHotReload="False" />
+      <UserProperties TriggeredFromHotReload="False" XamarinHotReloadUnhandledDeviceExceptionIDWalletAndroidHideInfoBar="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

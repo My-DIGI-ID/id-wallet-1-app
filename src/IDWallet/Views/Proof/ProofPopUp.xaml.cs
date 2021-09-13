@@ -106,9 +106,8 @@ namespace IDWallet.Views.Proof
                             MessagingCenter.Send(this, WalletEvents.SentProofRequest, _proofRecordId);
                             OnPopUpAccepted(sender, e);
                         }
-                        catch (Exception ex)
+                        catch (Exception)
                         {
-                            Debug.WriteLine(ex.Message);
                             BasicPopUp alertPopUp = new BasicPopUp(
                                 Lang.PopUp_Proof_Sending_Error_Title,
                                 Lang.PopUp_Proof_Sending_Error_Message,
@@ -145,19 +144,3 @@ namespace IDWallet.Views.Proof
         }
     }
 }
-        
-        
-
-        
-
-        
-
-        
-
-        
-
-        
-
-        
-
-           

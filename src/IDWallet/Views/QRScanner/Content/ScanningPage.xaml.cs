@@ -10,6 +10,7 @@ using IDWallet.Views.Customs.PopUps;
 using IDWallet.Views.QRScanner.PopUps;
 using IDWallet.Views.Settings.Connections.PopUps;
 using Hyperledger.Aries.Agents;
+using Hyperledger.Aries.Configuration;
 using Hyperledger.Aries.Features.IssueCredential;
 using Hyperledger.Aries.Features.PresentProof;
 using Plugin.Permissions;
@@ -35,7 +36,7 @@ namespace IDWallet.Views.QRScanner.Content
         private readonly ConnectService _invitationService = App.Container.Resolve<ConnectService>();
         private readonly TransactionService _transactionService = App.Container.Resolve<TransactionService>();
         private readonly UrlShortenerService _urlShortenerService = App.Container.Resolve<UrlShortenerService>();
-            private readonly AddVacService _addVacService = App.Container.Resolve<AddVacService>();
+        private readonly AddVacService _addVacService = App.Container.Resolve<AddVacService>();
         private readonly ZXingScannerView scanner = new ZXingScannerView();
         private CameraResolution _resolution = new CameraResolution();
 
@@ -284,28 +285,8 @@ namespace IDWallet.Views.QRScanner.Content
                     switch (messageType)
                     {
                         case MessageTypes.ConnectionInvitation:
-                            PopUpResult popUpResult = PopUpResult.Canceled;
-                            if (string.IsNullOrEmpty(invitation.Ledger))
-                            {
-                                NewConnectionPopUp popUp = new NewConnectionPopUp(invitation);
-                                popUpResult = await popUp.ShowPopUp();
-                            }
-                            else
-                            {
-                                Hyperledger.Aries.Configuration.AgentOptions recommendedLedger =
-                                    _customAgentProvider.GetAgentOptionsRecommendedLedger(invitation.Ledger);
-                                if (recommendedLedger == null || recommendedLedger.PoolName == activeAgent.PoolName)
-                                {
-                                    NewConnectionPopUp popUp = new NewConnectionPopUp(invitation);
-                                    popUpResult = await popUp.ShowPopUp();
-                                }
-                                else
-                                {
-                                    ConnectionLedgerChangePopUp popUp =
-                                        new ConnectionLedgerChangePopUp(invitation, activeAgent, recommendedLedger);
-                                    popUpResult = await popUp.ShowPopUp();
-                                }
-                            }
+                            NewConnectionPopUp popUp = new NewConnectionPopUp(invitation);
+                            PopUpResult popUpResult = await popUp.ShowPopUp();
 
                             if (PopUpResult.Accepted == popUpResult)
                             {
@@ -320,20 +301,6 @@ namespace IDWallet.Views.QRScanner.Content
                             break;
 
                         case "transaction_offer":
-                            if (!string.IsNullOrEmpty(connectionInvitationMessage.Ledger))
-                            {
-                                Hyperledger.Aries.Configuration.AgentOptions recommendedLedger =
-                                    _customAgentProvider.GetAgentOptionsRecommendedLedger(connectionInvitationMessage
-                                        .Ledger);
-                                if (!(recommendedLedger == null || recommendedLedger.PoolName == activeAgent.PoolName))
-                                {
-                                    TransactionLedgerChangePopUp popUp =
-                                        new TransactionLedgerChangePopUp(connectionInvitationMessage, activeAgent,
-                                            recommendedLedger);
-                                    popUpResult = await popUp.ShowPopUp();
-                                }
-                            }
-
                             agentContext = await _customAgentProvider.GetContextAsync();
 
                             Hyperledger.Aries.Features.DidExchange.ConnectionRecord transactionConnectionRecord =

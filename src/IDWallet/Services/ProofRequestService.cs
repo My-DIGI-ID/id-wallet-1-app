@@ -2,7 +2,9 @@
 using IDWallet.Agent.Interface;
 using IDWallet.Agent.Models;
 using IDWallet.Agent.Services;
+using IDWallet.Interfaces;
 using IDWallet.Models;
+using IDWallet.Utils;
 using IDWallet.Views.Customs.PopUps;
 using Hyperledger.Aries;
 using Hyperledger.Aries.Agents;
@@ -19,6 +21,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace IDWallet.Services
 {
@@ -76,11 +79,51 @@ namespace IDWallet.Services
             foreach (Credential credential in credentials)
             {
                 WalletElement foundCredential = walletElements.Find(x =>
-                    x.CredentialRecord.CredentialId == credential.CredentialInfo.Referent);
+                   x.CredentialRecord.CredentialId == credential.CredentialInfo.Referent);
                 if (foundCredential != null)
                 {
                     matchingCredentials.Add(foundCredential);
                 }
+            }
+
+            // Check if its a self attested attribute for hardware signature
+            if (!string.IsNullOrEmpty(attribute.Name) && attribute.Name.Equals(WalletParams.HardwareSignature))
+            {
+                CredentialClaim credentialClaim = new CredentialClaim();
+                credentialClaim.Name = WalletParams.HardwareSignature;
+                credentialClaim.Value = "Signatur";
+                ProofElementOption proofElementOption = new ProofElementOption();
+                proofElementOption.Attributes.Add(credentialClaim);
+
+                WalletElement walletElement = new WalletElement();
+                walletElement.Name = "Hardware-Signatur";
+                walletElement.IssuedBy = "Selbsterstellte Signatur";
+                walletElement.Revoked = false;
+                walletElement.CredentialImageSource = ImageSource.FromFile("hardware_signatur.png");
+                proofElementOption.WalletElement = walletElement;
+
+                List<ProofElementOption> proofElementOptions = new List<ProofElementOption>(new ProofElementOption[] { proofElementOption });
+
+                requestCollection.Add(new ProofModel
+                {
+                    RequestedValue = name,
+                    SelectedValue = "",
+                    DictionaryKey = key,
+                    IsSelfAttested = true,
+                    ProofElementOptions = proofElementOptions,
+                    ImageVisibility = false,
+                    SelectedOption = null,
+                    IsSelected = true,
+                    Restrictions = null,
+                    IsEmbeddedImage = false,
+                    IsRegular = true,
+                    HasEmbeddedDocument = false,
+                    PortraitByteArray = null,
+                    OnlyOneOption = true,
+                    NeedToShow = true
+                });
+
+                return;
             }
 
             if (restrictions == null || !restrictions.Any())
@@ -568,7 +611,8 @@ namespace IDWallet.Services
             IAgentContext agentContext,
             string proofRecordId,
             Dictionary<string, Tuple<List<AttributeFilter>, string>> knownProofAttributes,
-            CustomServiceDecorator service = null)
+            CustomServiceDecorator service = null,
+            ProofRequest proofRequest = null)
         {
             Dictionary<string, RequestedAttribute> attributes = new Dictionary<string, RequestedAttribute>();
             Dictionary<string, string> selfs = new Dictionary<string, string>();
@@ -578,7 +622,7 @@ namespace IDWallet.Services
             try
             {
                 await GetCallCredentialsForProof(requestCollection, agentContext, attributes, selfs, predicates,
-                    timestamp);
+                    timestamp, proofRequest);
             }
             catch (Exception)
             {
@@ -660,13 +704,24 @@ namespace IDWallet.Services
 
         public async Task GetCallCredentialsForProof(ObservableCollection<ProofModel> requestCollection,
             IAgentContext agentContext, Dictionary<string, RequestedAttribute> attributes,
-            Dictionary<string, string> selfs, Dictionary<string, RequestedAttribute> predicates, long timestamp)
+            Dictionary<string, string> selfs, Dictionary<string, RequestedAttribute> predicates, long timestamp, ProofRequest proofRequest = null)
         {
             foreach (Models.ProofModel currentRequest in requestCollection)
             {
                 if (currentRequest.IsSelfAttested && currentRequest.SelectedOption == null)
                 {
-                    selfs.Add(currentRequest.DictionaryKey, currentRequest.SelectedValue);
+                    if (currentRequest.RequestedValue.Equals(WalletParams.HardwareSignature))
+                    {
+
+                        IHardwareKeyService hardwareKeyService = DependencyService.Resolve<IHardwareKeyService>();
+                        string signature = hardwareKeyService.Sign(GetNonce(proofRequest.Nonce, 2));
+
+                        selfs.Add(currentRequest.DictionaryKey, signature);
+                    }
+                    else
+                    {
+                        selfs.Add(currentRequest.DictionaryKey, currentRequest.SelectedValue);
+                    }
                 }
                 else
                 {
@@ -716,6 +771,16 @@ namespace IDWallet.Services
                     }
                 }
             }
+        }
+
+        private static byte[] GetNonce(string nonce, byte ending)
+        {
+            byte[] bytesNonce = Convert.FromBase64String(nonce);
+            byte[] bytesConst = new byte[] { ending };
+            byte[] bytesNonceAndConst = new byte[bytesNonce.Length + bytesConst.Length];
+            Buffer.BlockCopy(bytesNonce, 0, bytesNonceAndConst, 0, bytesNonce.Length);
+            Buffer.BlockCopy(bytesConst, 0, bytesNonceAndConst, bytesNonce.Length, bytesConst.Length);
+            return Sha256.sha256(bytesNonceAndConst);
         }
 
         private bool EqualFilter(AttributeFilter filter1, AttributeFilter filter2)
