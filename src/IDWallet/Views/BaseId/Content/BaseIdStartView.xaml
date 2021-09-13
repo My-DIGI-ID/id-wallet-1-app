@@ -11,7 +11,8 @@
                Text="{lang:L10n BaseIDPage_StartScreen_Header_Label}"/>
 		<Label  Style="{StaticResource LabelMultiLine}"
                 FontAttributes="Bold"
-                x:Name="infoLabel">
+                x:Name="infoLabel"
+                IsVisible="{Binding IsInfoVisible, Mode=OneWay}">
             <Label.FormattedText>
                 <FormattedString>
                     <Span Text="{lang:L10n BaseIDPage_Info_Label_1}" />
@@ -19,7 +20,8 @@
                                           TextColor="{StaticResource LinkColor}"
                                           TextDecorations="Underline">
                         <Span.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding LinkClickedCommand, Source={x:Reference Root}}" />
+                            <TapGestureRecognizer x:Name="bsiClick"
+                                                  Command="{Binding LinkTappedCommand, Source={x:Reference Root}}" />
                         </Span.GestureRecognizers>
                     </Span>
                     <Span Text="{lang:L10n BaseIDPage_Info_Label_3}" />
@@ -38,22 +40,34 @@
                          IsVisible="{Binding IsStartEnabled, Converter={StaticResource InverseBooleanConverter}}"/>
 
         <StackLayout Orientation="Horizontal"
+                     Margin="0,10,0,0"
                      IsVisible="{Binding IsStartEnabled}">
             <CheckBox Color="{StaticResource PrimaryTextColor}"
                       x:Name="PrivacyCheckbox"
                       CheckedChanged="CheckboxChecked"/>
             <Label Style="{StaticResource BaseIDBodyLabel}">
                 <Label.GestureRecognizers>
-                    <TapGestureRecognizer x:Name="privacyClick" Command="{Binding LinkTappedCommand, Source={x:Reference Root}}" />
+
                 </Label.GestureRecognizers>
                 <Label.FormattedText>
                     <FormattedString>
-                        <Span Text="{lang:L10n BaseIDPage_StartScreen_Accept_Before_Label}"/>
+                        <Span Text="{lang:L10n BaseIDPage_StartScreen_Privacy_Consent_Label}"
+                              TextColor="{StaticResource PrimaryTextColor}"
+                              FontAttributes="Bold">
+                            <Span.GestureRecognizers>
+                                <TapGestureRecognizer x:Name="privacyConsentClick"
+                                                      Command="{Binding LinkTappedCommand, Source={x:Reference Root}}" />
+                            </Span.GestureRecognizers>
+                        </Span>
+                        <Span Text="{lang:L10n BaseIDPage_StartScreen_Middle_Label}" />
                         <Span Text="{lang:L10n BaseIDPage_StartScreen_Privacy_Policy_Label}"
                               TextColor="{StaticResource PrimaryTextColor}"
                               FontAttributes="Bold">
+                            <Span.GestureRecognizers>
+                                <TapGestureRecognizer x:Name="privacyClick" 
+                                                      Command="{Binding LinkTappedCommand, Source={x:Reference Root}}" />
+                            </Span.GestureRecognizers>
                         </Span>
-                        <Span Text="{lang:L10n BaseIDPage_StartScreen_Accept_After_Label}"/>
                     </FormattedString>
                 </Label.FormattedText>
             </Label>
@@ -64,21 +78,28 @@
                       x:Name="UserAgreementCheckbox"
                       CheckedChanged="CheckboxChecked"/>
             <Label Style="{StaticResource BaseIDBodyLabel}">
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer x:Name="termsClick" Command="{Binding LinkTappedCommand, Source={x:Reference Root}}" />
-                </Label.GestureRecognizers>
                 <Label.FormattedText>
                     <FormattedString>
                         <Span Text="{lang:L10n BaseIDPage_StartScreen_Accept_Before_Label}"/>
                         <Span Text="{lang:L10n BaseIDPage_StartScreen_User_Agreement_Label}"
                               TextColor="{StaticResource PrimaryTextColor}"
-                              FontAttributes="Bold"/>
+                              FontAttributes="Bold">
+                            <Span.GestureRecognizers>
+                                <TapGestureRecognizer x:Name="termsClick" 
+                                                      Command="{Binding LinkTappedCommand, Source={x:Reference Root}}" />
+                            </Span.GestureRecognizers>
+                        </Span>
                         <Span Text="{lang:L10n BaseIDPage_StartScreen_Accept_After_Label}"/>
                     </FormattedString>
                 </Label.FormattedText>
             </Label>
         </StackLayout>
-        
+
+        <Label Text="{lang:L10n BaseIDPage_StartScreen_Revoke_Label}"
+               Style="{StaticResource BaseIDBodyLabel}"
+               Margin="0,10,0,10"
+               HorizontalTextAlignment="Center"/>
+
         <Button VerticalOptions="EndAndExpand"
                 IsVisible="{Binding IsStartEnabled}"
                 Style="{StaticResource AcceptButton}"

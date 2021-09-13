@@ -2,6 +2,7 @@
 using IDWallet.Interfaces;
 using IDWallet.iOS.SecurityChecks;
 using Foundation;
+using Security;
 
 [assembly: Xamarin.Forms.Dependency(typeof(SecurityChecksIos))]
 namespace IDWallet.iOS.SecurityChecks

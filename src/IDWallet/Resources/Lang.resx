@@ -430,10 +430,10 @@
     <value>Build</value>
   </data>
   <data name="LegalNoticePage_City" xml:space="preserve">
-    <value>Arnstorf</value>
+    <value>Langen</value>
   </data>
   <data name="LegalNoticePage_Commercial_Register" xml:space="preserve">
-    <value>Commercial Register: Local Court Landshut – HRB 12637</value>
+    <value>Commercial Register: Local Court Offenbach – HRB 53742</value>
   </data>
   <data name="LegalNoticePage_Company" xml:space="preserve">
     <value>Digital Enabling GmbH</value>
@@ -457,10 +457,10 @@
     <value>+49 6103 9029-0</value>
   </data>
   <data name="LegalNoticePage_Street" xml:space="preserve">
-    <value>Bahnhofstr.</value>
+    <value>Rheinstr.</value>
   </data>
   <data name="LegalNoticePage_Street_Number" xml:space="preserve">
-    <value>29</value>
+    <value>5</value>
   </data>
   <data name="LegalNoticePage_Title" xml:space="preserve">
     <value>Legal Notice</value>
@@ -478,7 +478,7 @@
     <value>Website</value>
   </data>
   <data name="LegalNoticePage_ZIP" xml:space="preserve">
-    <value>94424</value>
+    <value>63225</value>
   </data>
   <data name="LicensePage_Title" xml:space="preserve">
     <value>Licenses</value>
@@ -1635,7 +1635,7 @@
     <value>Enter ID PIN</value>
   </data>
   <data name="BaseIDPage_PINScreen_Default_Body_Label" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="BaseIDPage_PINScreen_Transport_Label" xml:space="preserve">
     <value>Only Transport PIN known?</value>
@@ -1917,7 +1917,7 @@
     <value>Enter current ID PIN</value>
   </data>
   <data name="PopUp_BaseID_AccessRights_Confirm_Text" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="PopUp_BaseID_AccessRights_DataAccess_Text" xml:space="preserve">
     <value>The following data is accessed (read access)</value>
@@ -1986,7 +1986,7 @@
     <value>On</value>
   </data>
   <data name="PopUp_HistoryCredential_Text2" xml:space="preserve">
-    <value>you have received the following Credential</value>
+    <value>you have received the following Credential.</value>
   </data>
   <data name="PopUp_HistoryCredential_Title" xml:space="preserve">
     <value>Received Credential</value>
@@ -2055,10 +2055,10 @@
     <value>Please enter your wallet PIN.</value>
   </data>
   <data name="PopUp_Add_Vac_Title" xml:space="preserve">
-    <value>Storage of the vaccination certificate</value>
+    <value>Storage of QR code</value>
   </data>
   <data name="PopUp_Add_Vac_Message" xml:space="preserve">
-    <value>Please confirm that you wish to proceed with storing the proof of vaccination in your Wallet.</value>
+    <value>Please confirm that you wish to proceed with storing the QR code in your Wallet.</value>
   </data>
   <data name="PopUp_Add_Vac_Button_Ok" xml:space="preserve">
     <value>Okay</value>
@@ -2079,7 +2079,7 @@
     <value>The user is aware that technical malfunctions and other complications may occur when using the app. Any liability claims are governed by §§ 516 ff. BGB. The liability of the operator is limited to intent and gross negligence (§ 521 BGB). In addition, the operator shall only be liable for defects of law and defects of quality in the event of fraudulent concealment of the defects (§ 523 para. 1, § 524 para. 1 BGB). Any other relevant provisions shall remain unaffected.</value>
   </data>
   <data name="LiabilityPage_Jurisdiction" xml:space="preserve">
-    <value>Place of jurisdiction: Arnstorf</value>
+    <value>Place of jurisdiction: Langen</value>
   </data>
   <data name="PopUp_BaseID_Auth_Error_Text" xml:space="preserve">
     <value>Something went wrong while issuing your Basis-ID. Please restart the process.</value>
@@ -2092,5 +2092,209 @@
   </data>
   <data name="BaseIDPage_Info_Label_3" xml:space="preserve">
     <value>). Later in the year also available for your ID card.</value>
+  </data>
+  <data name="AttributeValueConvert_Antigen_Vaccine" xml:space="preserve">
+    <value>SARS-CoV-2 antigen vaccine</value>
+  </data>
+  <data name="AttributeValueConvert_Astra_Zeneca" xml:space="preserve">
+    <value>AstraZeneca AB</value>
+  </data>
+  <data name="AttributeValueConvert_BBIBP_Vacc" xml:space="preserve">
+    <value>BBIBP-CorV</value>
+  </data>
+  <data name="AttributeValueConvert_Bharat" xml:space="preserve">
+    <value>Bharat Biotech</value>
+  </data>
+  <data name="AttributeValueConvert_Biontech" xml:space="preserve">
+    <value>Biontech Manufacturing GmbH</value>
+  </data>
+  <data name="AttributeValueConvert_Cansino" xml:space="preserve">
+    <value>CanSino Biologics</value>
+  </data>
+  <data name="AttributeValueConvert_Comirnaty_Vacc" xml:space="preserve">
+    <value>Comirnaty</value>
+  </data>
+  <data name="AttributeValueConvert_Convidecia_Vacc" xml:space="preserve">
+    <value>Convidecia</value>
+  </data>
+  <data name="AttributeValueConvert_CoronaVac_Vacc" xml:space="preserve">
+    <value>CoronaVac</value>
+  </data>
+  <data name="AttributeValueConvert_Covaxin_Vacc" xml:space="preserve">
+    <value>Covaxin (also known as BBV152 A, B, C)</value>
+  </data>
+  <data name="AttributeValueConvert_Covid19" xml:space="preserve">
+    <value>COVID-19</value>
+  </data>
+  <data name="AttributeValueConvert_Curevac" xml:space="preserve">
+    <value>Curevac AG</value>
+  </data>
+  <data name="AttributeValueConvert_CVnCoV_Vacc" xml:space="preserve">
+    <value>CVnCoV</value>
+  </data>
+  <data name="AttributeValueConvert_EpiVac_Vacc" xml:space="preserve">
+    <value>EpiVacCorona</value>
+  </data>
+  <data name="AttributeValueConvert_Gamaleya" xml:space="preserve">
+    <value>Gamaleya Research Institute</value>
+  </data>
+  <data name="AttributeValueConvert_Jannsen_Vacc" xml:space="preserve">
+    <value>COVID-19 Vaccine Janssen</value>
+  </data>
+  <data name="AttributeValueConvert_Janssen" xml:space="preserve">
+    <value>Janssen-Cilag International</value>
+  </data>
+  <data name="AttributeValueConvert_Misc_Vaccine" xml:space="preserve">
+    <value>covid-19 vaccines</value>
+  </data>
+  <data name="AttributeValueConvert_Moderna" xml:space="preserve">
+    <value>Moderna Biotech Spain S.L.</value>
+  </data>
+  <data name="AttributeValueConvert_Moderna_Vacc" xml:space="preserve">
+    <value>COVID-19 Vaccine Moderna</value>
+  </data>
+  <data name="AttributeValueConvert_Mrna_Vaccine" xml:space="preserve">
+    <value>SARS-CoV-2 mRNA vaccine</value>
+  </data>
+  <data name="AttributeValueConvert_Novovax" xml:space="preserve">
+    <value>Novavax CZ AS</value>
+  </data>
+  <data name="AttributeValueConvert_NVX_Vacc" xml:space="preserve">
+    <value>NVX-CoV2373</value>
+  </data>
+  <data name="AttributeValueConvert_Sinopharm_Int" xml:space="preserve">
+    <value>China Sinopharm International Corp. - Beijing location</value>
+  </data>
+  <data name="AttributeValueConvert_Sinopharm_Prague" xml:space="preserve">
+    <value>Sinopharm Weiqida Europe Pharmaceutical s.r.o. - Prague location</value>
+  </data>
+  <data name="AttributeValueConvert_Sinopharm_Shenzhen" xml:space="preserve">
+    <value>Sinopharm Zhijun (Shenzhen) Pharmaceutical Co. Ltd. - Shenzhen location</value>
+  </data>
+  <data name="AttributeValueConvert_Sinovac" xml:space="preserve">
+    <value>Sinovac Biotech</value>
+  </data>
+  <data name="AttributeValueConvert_Sputnik_Vacc" xml:space="preserve">
+    <value>Sputnik V</value>
+  </data>
+  <data name="AttributeValueConvert_Vaxzevria_Vacc" xml:space="preserve">
+    <value>Vaxzevria</value>
+  </data>
+  <data name="AttributeValueConvert_Vector" xml:space="preserve">
+    <value>Vector Institute</value>
+  </data>
+  <data name="AttributeValueConvert_Vero_Cell_Vacc" xml:space="preserve">
+    <value>Inactivated SARSCoV-2 (Vero Cell)</value>
+  </data>
+  <data name="LabelTextConvert_CountryOfVaccination" xml:space="preserve">
+    <value>Country of Vaccination</value>
+  </data>
+  <data name="LabelTextConvert_DateOfVaccination" xml:space="preserve">
+    <value>Date of Vaccination</value>
+  </data>
+  <data name="LabelTextConvert_DeseaseTargeted" xml:space="preserve">
+    <value>Desease Targeted</value>
+  </data>
+  <data name="LabelTextConvert_DoseNumber" xml:space="preserve">
+    <value>Dose Number</value>
+  </data>
+  <data name="LabelTextConvert_Issuer" xml:space="preserve">
+    <value>Certificate Issuer</value>
+  </data>
+  <data name="LabelTextConvert_Manufacturer" xml:space="preserve">
+    <value>Manufacturer</value>
+  </data>
+  <data name="LabelTextConvert_TotalDoseNumber" xml:space="preserve">
+    <value>Total Series of Doses</value>
+  </data>
+  <data name="LabelTextConvert_Uvci" xml:space="preserve">
+    <value>UVCI (Identification Number of the Certificate)</value>
+  </data>
+  <data name="LabelTextConvert_Vaccine" xml:space="preserve">
+    <value>Corona Vaccine</value>
+  </data>
+  <data name="LabelTextConvert_ProductDesc" xml:space="preserve">
+    <value>Vaccine Medical Product</value>
+  </data>
+  <data name="LabelTextConvert_SchemaVersion" xml:space="preserve">
+    <value>Version of the Schema</value>
+  </data>
+  <data name="LabelTextConvert_StandardisedFamilyName" xml:space="preserve">
+    <value>Standardised Family Name</value>
+  </data>
+  <data name="LabelTextConvert_StandardisedGivenName" xml:space="preserve">
+    <value>Standardised Given Name</value>
+  </data>
+  <data name="BaseIDPage_StartScreen_Middle_Label" xml:space="preserve">
+    <value> to the processing of your personal data and acknowledgement of the </value>
+  </data>
+  <data name="BaseIDPage_StartScreen_Privacy_Consent_Label" xml:space="preserve">
+    <value>Declaration of consent</value>
+  </data>
+  <data name="PopUp_BaseID_ReadyToScan_Process_After_Label" xml:space="preserve">
+    <value> of 2 scan processes</value>
+  </data>
+  <data name="PopUp_BaseID_ReadyToScan_Process_Before_Label" xml:space="preserve">
+    <value>Scan process: </value>
+  </data>
+  <data name="BaseIDPage_StartScreen_Revoke_Label" xml:space="preserve">
+    <value>Attention: If a Basis-ID has already been created with this card, it will be revoked.</value>
+  </data>
+  <data name="BaseIDPage_ReadIdScreen_Security_Label" xml:space="preserve">
+    <value>If you continue, a device check (Android: SafetyNet, iOS: DeviceCheck) is performed to ensure ID Wallet authenticity. The results of this check will be sent to Bundesdruckerei GmbH for verification.</value>
+  </data>
+  <data name="LabelTextConvert_DriveName" xml:space="preserve">
+    <value>1. Name</value>
+  </data>
+  <data name="LabelTextConvert_DriveBirthName" xml:space="preserve">
+    <value>1. Birthname</value>
+  </data>
+  <data name="LabelTextConvert_DriveFirstName" xml:space="preserve">
+    <value>2. Firstname</value>
+  </data>
+  <data name="LabelTextConvert_DriveBirthDate" xml:space="preserve">
+    <value>3. Date of birth</value>
+  </data>
+  <data name="LabelTextConvert_DriveBirthPlace" xml:space="preserve">
+    <value>3. Place of birth</value>
+  </data>
+  <data name="LabelTextConvert_DriveIssueDate" xml:space="preserve">
+    <value>4a. Issue date</value>
+  </data>
+  <data name="LabelTextConvert_DriveExpiryDate" xml:space="preserve">
+    <value>4b. Expiration date</value>
+  </data>
+  <data name="LabelTextConvert_DriveIssuer" xml:space="preserve">
+    <value>4c. Issuer</value>
+  </data>
+  <data name="LabelTextConvert_DriveNumber" xml:space="preserve">
+    <value>5. Driving license number</value>
+  </data>
+  <data name="LabelTextConvert_DriveClasses" xml:space="preserve">
+    <value>9. Driving license classes</value>
+  </data>
+  <data name="LabelTextConvert_DriveValidSince" xml:space="preserve">
+    <value>10. valid from</value>
+  </data>
+  <data name="LabelTextConvert_DriveValidTill" xml:space="preserve">
+    <value>11. valid till</value>
+  </data>
+  <data name="LabelTextConvert_DriveRestrictions" xml:space="preserve">
+    <value>12. Restrictions</value>
+  </data>
+  <data name="ChangeLedgerPage_EESDITest" xml:space="preserve">
+    <value>EESDI Test Ledger</value>
+  </data>
+  <data name="Qr_Personal_Data_Title" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="Qr_Personal_Data_Message" xml:space="preserve">
+    <value>Please note that the QR code may contain personal data. People who have access to the QR code can read the data it contains.</value>
+  </data>
+  <data name="Qr_History_Message_1" xml:space="preserve">
+    <value>QR code added</value>
+  </data>
+  <data name="Qr_History_Message_2" xml:space="preserve">
+    <value>you have added the following QR code.</value>
   </data>
 </root>

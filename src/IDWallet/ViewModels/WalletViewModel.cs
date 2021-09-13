@@ -23,6 +23,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
@@ -74,6 +75,8 @@ namespace IDWallet.ViewModels
             MessagingCenter.Subscribe<AutoAcceptViewModel, string>(this, WalletEvents.SentProofRequest, OnProofSent);
             MessagingCenter.Subscribe<CustomAgentProvider>(this, WalletEvents.AgentSwitched, ReloadWalletElements);
             MessagingCenter.Subscribe<BaseIdViewModel>(this, WalletEvents.ReloadCredentials, ReloadWalletElements);
+            MessagingCenter.Subscribe<AddVacService>(this, WalletEvents.ReloadCredentials, ReloadWalletElements);
+            MessagingCenter.Subscribe<AddVacService, string>(this, WalletEvents.VacAdded, OnVacQrAdded);
             MessagingCenter.Subscribe<InboxListElement, string>(this, WalletEvents.CredentialDeleted,
                 OnWalletElementDeleted);
             MessagingCenter.Subscribe<LoginPage>(this, WalletEvents.AppStarted, ReloadWalletElements);
@@ -156,7 +159,7 @@ namespace IDWallet.ViewModels
                 bool updateRecord = false;
                 IAgentContext agentContext = await _agentProvider.GetContextAsync();
 
-                foreach (WalletElement credential in WalletElements.ToList())
+                foreach (WalletElement credential in WalletElements.ToList().Where(x => x.CredentialRecord != null))
                 {
                     CredentialInfo credentialInfo = new CredentialInfo();
                     try
@@ -169,7 +172,6 @@ namespace IDWallet.ViewModels
                     {
                         //ignore
                     }
-
 
                     credential.Revoked =
                         !await _checkRevocationService.NonRevoked(credentialInfo, credential.CredentialRecord);
@@ -209,14 +211,18 @@ namespace IDWallet.ViewModels
             }
         }
 
-        private async void CheckForBaseId()
+        private void CheckForBaseId()
         {
-            foreach (WalletElement walletElement in WalletElements)
+            foreach (WalletElement walletElement in WalletElements.Where(x => x.CredentialRecord != null))
             {
-                if (walletElement.CredentialRecord.CredentialDefinitionId == "Vq2C7Wfc44Q1cSroPuXaw2:3:CL:126:Basis-ID")
+                if (walletElement.CredentialRecord.CredentialDefinitionId == "Vq2C7Wfc44Q1cSroPuXaw2:3:CL:126:Basis-ID" || walletElement.CredentialRecord.CredentialDefinitionId == "5PmwwGsFhq8NDiRCyqjNXy:3:CL:126:Basis-ID Demo")
                 {
                     AddBaseIdIsVisible = false;
                     return;
+                }
+                else
+                {
+                    AddBaseIdIsVisible = true;
                 }
             }
         }
@@ -229,7 +235,34 @@ namespace IDWallet.ViewModels
             WalletElement walletElement = null;
             try
             {
-                walletElement = WalletElements.First(x => x.CredentialRecord.Id == recordId);
+                walletElement = WalletElements.First(x => x.CredentialRecord != null && x.CredentialRecord.Id == recordId);
+            }
+            catch
+            {
+            }
+
+            if (walletElement != null)
+            {
+                if (WalletElements.Count == 1)
+                {
+                    EmptyLayoutVisible = true;
+                }
+
+                WalletElements.Remove(walletElement);
+            }
+
+            CheckForBaseId();
+        }
+
+        public async Task DeleteWalletQrElement(string recordId)
+        {
+            IAgentContext agentContext = await _agentProvider.GetContextAsync();
+            await _walletRecordService.DeleteAsync<VacQrCredential>(agentContext.Wallet, recordId);
+
+            WalletElement walletElement = null;
+            try
+            {
+                walletElement = WalletElements.First(x => x.VacQrRecordId == recordId);
             }
             catch
             {
@@ -288,6 +321,21 @@ namespace IDWallet.ViewModels
                     try
                     {
                         await AddWalletElement(credential);
+                    }
+                    catch (Exception)
+                    {
+                        //ignore
+                    }
+                }
+
+                List<VacQrCredential> allVacQrCredentials =
+                    await _walletRecordService.SearchAsync<VacQrCredential>(agentContext.Wallet, null, null, 2147483647, false);
+
+                foreach (VacQrCredential vacQrCredential in allVacQrCredentials)
+                {
+                    try
+                    {
+                        await AddVacQrElement(vacQrCredential);
                     }
                     catch (Exception)
                     {
@@ -367,25 +415,28 @@ namespace IDWallet.ViewModels
                             PredicateType = claim.PredicateType
                         });
                     }
-					
-					string serviceAlias = "";
+
+                    string serviceAlias = "";
                     if (string.IsNullOrEmpty(presentedCredentials.ConnectionRecord?.Alias.Name))
                     {
                         CustomServiceDecorator service = proofRecord.GetTag(DecoratorNames.ServiceDecorator)
                             .ToObject<CustomServiceDecorator>();
-                        var endpointUri = new Uri(service.ServiceEndpoint);
+                        Uri endpointUri = new Uri(service.ServiceEndpoint);
                         serviceAlias = !string.IsNullOrEmpty(service.EndpointName) ? service.EndpointName + " - " + endpointUri.Host : service.ServiceEndpoint;
+                    }
+                    else
+                    {
+                        serviceAlias = presentedCredentials.ConnectionRecord?.Alias.Name;
                     }
 
                     HistoryProofElement historyItem = new HistoryProofElement
                     {
                         CredentialName = credentialsPageItem.Name,
-                        ConnectionAlias = presentedCredentials.ConnectionRecord?.Alias.Name ??
-                                          Resources.Lang.WalletPage_Info_Panel_No_Origin,
+                        ConnectionAlias = serviceAlias,
                         ImageUri = string.IsNullOrEmpty(presentedCredentials.ConnectionRecord?.Alias.ImageUrl)
                             ? ImageSource.FromFile("default_logo.png")
                             : new Uri(presentedCredentials.ConnectionRecord.Alias.ImageUrl),
-                        UpdatedAtUtc = proofRecord.UpdatedAtUtc ?? proofRecord.CreatedAtUtc,
+                        CreatedAtUtc = proofRecord.CreatedAtUtc,
                         State = Resources.Lang.WalletPage_History_Panel_Status_Shared,
                         RevealedClaims = revealed,
                         NonRevealedClaims = nonrevealed,
@@ -396,7 +447,7 @@ namespace IDWallet.ViewModels
                 }
 
                 history = new ObservableCollection<HistoryProofElement>(
-                    history.OrderByDescending(x => x.UpdatedAtUtc.Value));
+                    history.OrderByDescending(x => x.CreatedAtUtc.Value));
                 foreach (HistoryProofElement credentialHistoryItem in history)
                 {
                     credentialsPageItem.HistoryItems.Add(credentialHistoryItem);
@@ -425,6 +476,7 @@ namespace IDWallet.ViewModels
             result.Name = credDefId[4];
 
             result.Claims = new ObservableCollection<CredentialClaim>();
+            result.QrCodes = new ObservableCollection<CredentialClaim>();
             List<CredentialClaim> temporaryAttributes = new List<CredentialClaim>();
 
             CredentialInfo credentialInfo = new CredentialInfo();
@@ -531,16 +583,66 @@ namespace IDWallet.ViewModels
                 issuedByValue = connectionAlias;
             }
 
+            if (IsBaseIdCredential(credentialRecord))
+            {
+                ObservableCollection<string> orderedAttributeNames = new ObservableCollection<string> { "firstname", "familyname", "birthname", "academictitle", "addressstreet", "addresszipcode", "addresscity", "addresscountry", "dateofbirth", "placeofbirth", "dateofexpiry", "documenttype", "pseudonym" };
+                foreach (string attributeName in orderedAttributeNames)
+                {
+                    CredentialClaim tmpAttribute = temporaryAttributes.FirstOrDefault(x => x.Name.ToLower().Equals(attributeName));
+                    if (tmpAttribute != null)
+                    {
+                        result.Claims.Add(tmpAttribute);
+                        temporaryAttributes.Remove(tmpAttribute);
+                    }
+                }
+            }
+
+            if (IsArbeitgeberCredential(credentialRecord))
+            {
+                ObservableCollection<string> orderedAttributeNames = new ObservableCollection<string> { "firstname", "lastname", "firmname", "firmsubject", "firmstreet", "firmpostalcode", "firmcity" };
+                foreach (string attributeName in orderedAttributeNames)
+                {
+                    CredentialClaim tmpAttribute = temporaryAttributes.FirstOrDefault(x => x.Name.ToLower().Equals(attributeName));
+                    if (tmpAttribute != null)
+                    {
+                        result.Claims.Add(tmpAttribute);
+                        temporaryAttributes.Remove(tmpAttribute);
+                    }
+                }
+            }
+
+            if (IsFuehrerscheinCredential(credentialRecord))
+            {
+                ObservableCollection<string> orderedAttributeNames = new ObservableCollection<string> { "name", "geburtsname", "vorname", "geburtsdatum", "geburtsort", "ausstellungsdatum", "ablaufdatum", "aussteller", "führerscheinnummer", "führerscheinklassen", "gültigab", "gültigbis", "beschränkungen" };
+                foreach (string attributeName in orderedAttributeNames)
+                {
+                    CredentialClaim tmpAttribute = temporaryAttributes.FirstOrDefault(x => x.Name.ToLower().Equals(attributeName));
+                    if (tmpAttribute != null)
+                    {
+                        result.Claims.Add(tmpAttribute);
+                        temporaryAttributes.Remove(tmpAttribute);
+                    }
+                }
+            }
+
             temporaryAttributes = temporaryAttributes.OrderBy(x => x.Name).ToList();
             foreach (CredentialClaim attribute in temporaryAttributes)
             {
-                result.Claims.Add(attribute);
+                if (!attribute.Name.ToLower().Equals("dgc"))
+                {
+                    result.Claims.Add(attribute);
+                }
+                else
+                {
+                    result.QrCodes.Add(attribute);
+                }
+            }
+            if (!result.QrCodes.Count.Equals(0))
+            {
+                result.QrCodesVisible = true;
             }
 
-            string baseIdIssuerDid = credentialRecord.CredentialDefinitionId.Split(':')[0];
-            if (baseIdIssuerDid == "XwQCiUus8QubFNJPJD2mDi"
-                    || baseIdIssuerDid == "Vq2C7Wfc44Q1cSroPuXaw2"
-                    || baseIdIssuerDid == "5PmwwGsFhq8NDiRCyqjNXy")
+            if (IsBaseIdCredential(credentialRecord))
             {
                 try
                 {
@@ -572,6 +674,11 @@ namespace IDWallet.ViewModels
                 Name = Resources.Lang.WalletPage_Info_Panel_Issue_Time,
                 Value = $"{credentialRecord.CreatedAtUtc:dd/MM/yyyy}"
             });
+
+            foreach (CredentialClaim claim in result.Claims)
+            {
+                claim.SchemaId = credentialRecord.SchemaId;
+            }
 
             result.HistoryItems = new ObservableCollection<HistoryProofElement>();
             result.IsHistoryOpen = false;
@@ -621,19 +728,75 @@ namespace IDWallet.ViewModels
                     result.ImageUri = ImageSource.FromFile("bwi_logo.png");
                     result.CredentialBarColor = Color.FromHex("#ffffff");
                     break;
-                case "Deutsche Lufthansa":
+                case "X2p16G1BeEceJauzqofjQW":
                     result.CredentialImageSource = ImageSource.FromFile("dlufthansa_logo.png");
                     result.ImageUri = ImageSource.FromFile("dlufthansa_logo.png");
                     result.CredentialBarColor = Color.FromHex("#05164D");
                     break;
                 default:
-                    result.CredentialImageSource = ImageSource.FromFile("default_logo.png");
-                    result.ImageUri = ImageSource.FromFile("default_logo.png");
-                    result.CredentialBarColor = Color.FromHex("#cfcfcf");
+                    if (credentialRecord.CredentialDefinitionId.Equals("XnGEZ7gJxDNfxwnZpkkVcs:3:CL:988:Digitaler Führerschein"))
+                    {
+                        result.CredentialImageSource = ImageSource.FromFile("kba_logo.png");
+                        result.ImageUri = ImageSource.FromFile("kba_logo.png");
+                        result.CredentialBarColor = Color.FromHex("#eaeaea");
+                    }
+                    else
+                    {
+                        result.CredentialImageSource = ImageSource.FromFile("default_logo.png");
+                        result.ImageUri = ImageSource.FromFile("default_logo.png");
+                        result.CredentialBarColor = Color.FromHex("#cfcfcf");
+                    }
                     break;
             }
 
             result.IssuedBy = issuedByValue;
+
+            WalletElements.Add(result);
+        }
+
+        private async Task AddVacQrElement(VacQrCredential vacQrCredential)
+        {
+            IAgentContext agentContext = await _agentProvider.GetContextAsync();
+
+            WalletElement result = new WalletElement();
+
+            result.Name = vacQrCredential.Name;
+            result.VacQrRecordId = vacQrCredential.Id;
+
+            result.Claims = new ObservableCollection<CredentialClaim>();
+            result.QrCodes = new ObservableCollection<CredentialClaim>();
+
+            //if (IsVaccinePassCredential(credentialRecord))
+            //{
+            //    ObservableCollection<string> orderedAttributeNames = new ObservableCollection<string> { "nam_gn", "nam_fn", "dob", "vac_tg", "vac_vp", "vac_ma", "vac_dn", "vac_sd", "vac_dt", "vac_co", "vac_is", "vac_ci", "nam_fnt", "nam_gnt", "ver", "vac_mp" };
+            //    foreach (string attributeName in orderedAttributeNames)
+            //    {
+            //        CredentialClaim tmpAttribute = temporaryAttributes.FirstOrDefault(x => x.Name.ToLower().Equals(attributeName));
+            //        if (tmpAttribute != null)
+            //        {
+            //            result.Claims.Add(tmpAttribute);
+            //            temporaryAttributes.Remove(tmpAttribute);
+            //        }
+            //    }
+            //}
+
+            CredentialClaim vacQrAttribute = new CredentialClaim();
+            vacQrAttribute.Value = vacQrCredential.QrContent;
+            result.QrCodes.Add(vacQrAttribute);
+
+            result.QrCodesVisible = true;
+
+            result.HistoryItems = new ObservableCollection<HistoryProofElement>();
+            result.IsHistoryOpen = false;
+            result.IsHistorySet = false;
+
+            result.IsInfoOpen = true;
+
+            result.ImageUri = ImageSource.FromFile("qr_code.png");
+            result.CredentialImageSource = ImageSource.FromFile("qr_code.png");
+            result.CredentialBarColor = Color.FromHex("#cfcfcf");
+
+            result.IssuedBy = "";
 
             WalletElements.Add(result);
         }
@@ -671,12 +834,10 @@ namespace IDWallet.ViewModels
                     await _walletRecordService.GetAsync<CredentialRecord>(context.Wallet, recordId);
                 if (credential.State == CredentialState.Issued)
                 {
-                    IEnumerable<WalletElement> contains =
-                        from cred in WalletElements.ToList()
-                        where cred.CredentialRecord.Id == credential.Id
-                        select cred;
+                    IEnumerable<WalletElement> contains = WalletElements.ToList().Where(x => x.CredentialRecord != null && x.CredentialRecord.Id == credential.Id);
 
-                    if (contains.Any())
+
+                    if (contains != null && contains.Any())
                     {
                         WalletElements.Remove(contains.First());
                     }
@@ -687,13 +848,30 @@ namespace IDWallet.ViewModels
                     CheckAllRevocations();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Debug.WriteLine(ex.Message);
                 BasicPopUp alertPopUp = new BasicPopUp(
                     Resources.Lang.PopUp_Undefined_Error_Title,
                     Resources.Lang.PopUp_Undefined_Error_Message,
                     Resources.Lang.PopUp_Undefined_Error_Button);
                 await alertPopUp.ShowPopUp();
+            }
+        }
+
+        private async void OnVacQrAdded(AddVacService msg, string recordId)
+        {
+            try
+            {
+                IAgentContext context = await _agentProvider.GetContextAsync();
+                VacQrCredential credential = await _walletRecordService.GetAsync<VacQrCredential>(context.Wallet, recordId);
+
+                await AddVacQrElement(credential);
+                EmptyLayoutVisible = false;
+            }
+            catch (Exception)
+            {
+                //ignore
             }
         }
 
@@ -843,8 +1021,12 @@ namespace IDWallet.ViewModels
                         {
                             CustomServiceDecorator service = proofRecord.GetTag(DecoratorNames.ServiceDecorator)
                                 .ToObject<CustomServiceDecorator>();
-                            var endpointUri = new Uri(service.ServiceEndpoint);
+                            Uri endpointUri = new Uri(service.ServiceEndpoint);
                             serviceAlias = !string.IsNullOrEmpty(service.EndpointName) ? service.EndpointName + " - " + endpointUri.Host : service.ServiceEndpoint;
+                        }
+                        else
+                        {
+                            serviceAlias = presentedCredentials.ConnectionRecord.Alias.Name;
                         }
 
                         HistoryProofElement historyItem = new HistoryProofElement
@@ -854,7 +1036,7 @@ namespace IDWallet.ViewModels
                             ImageUri = string.IsNullOrEmpty(presentedCredentials.ConnectionRecord?.Alias.ImageUrl)
                                 ? ImageSource.FromFile("default_logo.png")
                                 : new Uri(presentedCredentials.ConnectionRecord.Alias.ImageUrl),
-                            UpdatedAtUtc = proofRecord.UpdatedAtUtc ?? proofRecord.CreatedAtUtc,
+                            CreatedAtUtc = proofRecord.CreatedAtUtc,
                             State = Resources.Lang.WalletPage_History_Panel_Status_Shared,
                             RevealedClaims = revealed,
                             NonRevealedClaims = nonrevealed,
@@ -952,24 +1134,28 @@ namespace IDWallet.ViewModels
                                 PredicateType = claim.PredicateType
                             });
                         }
-						
-	                    string serviceAlias = "";
+
+                        string serviceAlias = "";
                         if (string.IsNullOrEmpty(presentedCredentials.ConnectionRecord?.Alias.Name))
                         {
                             CustomServiceDecorator service = proofRecord.GetTag(DecoratorNames.ServiceDecorator)
                                 .ToObject<CustomServiceDecorator>();
-                            var endpointUri = new Uri(service.ServiceEndpoint);
+                            Uri endpointUri = new Uri(service.ServiceEndpoint);
                             serviceAlias = !string.IsNullOrEmpty(service.EndpointName) ? service.EndpointName + " - " + endpointUri.Host : service.ServiceEndpoint;
+                        }
+                        else
+                        {
+                            serviceAlias = presentedCredentials.ConnectionRecord.Alias.Name;
                         }
 
                         HistoryProofElement historyItem = new HistoryProofElement
                         {
                             CredentialName = credentialsPageItem.Name,
-                            ConnectionAlias = presentedCredentials.ConnectionRecord.Alias.Name,
+                            ConnectionAlias = serviceAlias,
                             ImageUri = string.IsNullOrEmpty(presentedCredentials.ConnectionRecord?.Alias.ImageUrl)
                                 ? ImageSource.FromFile("default_logo.png")
                                 : new Uri(presentedCredentials.ConnectionRecord.Alias.ImageUrl),
-                            UpdatedAtUtc = proofRecord.UpdatedAtUtc ?? proofRecord.CreatedAtUtc,
+                            CreatedAtUtc = proofRecord.CreatedAtUtc,
                             State = Resources.Lang.WalletPage_History_Panel_Status_Shared,
                             RevealedClaims = revealed,
                             NonRevealedClaims = nonrevealed,
@@ -1005,6 +1191,56 @@ namespace IDWallet.ViewModels
             WalletElementPosition = 0;
 
             await ExecuteLoadWalletElements();
+        }
+
+        private bool IsBaseIdCredential(CredentialRecord credential)
+        {
+            string credentialIssuerDID = credential.CredentialDefinitionId.Split(":")[0];
+            if (credentialIssuerDID == "XwQCiUus8QubFNJPJD2mDi" || credentialIssuerDID == "Vq2C7Wfc44Q1cSroPuXaw2" || credentialIssuerDID == "5PmwwGsFhq8NDiRCyqjNXy")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private bool IsArbeitgeberCredential(CredentialRecord credential)
+        {
+            string credentialIssuerDID = credential.CredentialDefinitionId.Split(":")[0];
+            if (credential.SchemaId.Equals("VkVqDPzeDCQe31H3RsMzbf:2:corporateID:1.0"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private bool IsVaccinePassCredential(CredentialRecord credential)
+        {
+            if (credential.CredentialDefinitionId.Equals("REPLACE"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private bool IsFuehrerscheinCredential(CredentialRecord credential)
+        {
+            if (credential.CredentialDefinitionId.Equals("XnGEZ7gJxDNfxwnZpkkVcs:3:CL:988:Digitaler Führerschein"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

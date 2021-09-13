@@ -430,10 +430,7 @@
     <value>Build</value>
   </data>
   <data name="LegalNoticePage_City" xml:space="preserve">
-    <value>Arnstorf</value>
-  </data>
-  <data name="LegalNoticePage_Commercial_Register" xml:space="preserve">
-    <value>Handelsregister: Amtsgericht Landshut – HRB 12637</value>
+    <value>Langen</value>
   </data>
   <data name="LegalNoticePage_Company" xml:space="preserve">
     <value>Digital Enabling GmbH</value>
@@ -457,10 +454,10 @@
     <value>+49 6103 9029-0</value>
   </data>
   <data name="LegalNoticePage_Street" xml:space="preserve">
-    <value>Bahnhofstr.</value>
+    <value>Rheinstr.</value>
   </data>
   <data name="LegalNoticePage_Street_Number" xml:space="preserve">
-    <value>29</value>
+    <value>5</value>
   </data>
   <data name="LegalNoticePage_Title" xml:space="preserve">
     <value>Rechtlicher Hinweis</value>
@@ -475,7 +472,7 @@
     <value>Website</value>
   </data>
   <data name="LegalNoticePage_ZIP" xml:space="preserve">
-    <value>94424</value>
+    <value>63225</value>
   </data>
   <data name="LicensePage_Title" xml:space="preserve">
     <value>Lizenzen</value>
@@ -1656,7 +1653,7 @@
     <value>Nutzungsbedingungen</value>
   </data>
   <data name="BaseIDPage_StartScreen_Accept_After_Label" xml:space="preserve">
-    <value> zustimmen</value>
+    <value />
   </data>
   <data name="PopUp_BaseID_AccessRights_Text" xml:space="preserve">
     <value>Bitte prüfen Sie, ob Sie diese Daten teilen möchten.</value>
@@ -1695,7 +1692,7 @@
     <value>Sperrkennwort</value>
   </data>
   <data name="BaseIDPage_StartScreen_Privacy_Policy_Label" xml:space="preserve">
-    <value>Datenschutzbestimmungen</value>
+    <value>Datenschutzerklärung</value>
   </data>
   <data name="BaseIDPage_PINScreen_Transport_Body_Label" xml:space="preserve">
     <value>Diese PIN haben Sie zusammen mit der PUK postalisch von Ihrer zuständigen Meldebehörde erhalten.</value>
@@ -1890,7 +1887,7 @@
     <value>ID Wallet</value>
   </data>
   <data name="BaseIDPage_StartScreen_Accept_Before_Label" xml:space="preserve">
-    <value />
+    <value>Akzeptieren der </value>
   </data>
   <data name="BaseIDPage_PINScreen_ChangePIN_Body_Label" xml:space="preserve">
     <value>Bitte geben Sie nun Ihre aktuelle Ausweis-PIN ein.</value>
@@ -2052,7 +2049,7 @@
     <value>Haftung</value>
   </data>
   <data name="LiabilityPage_Jurisdiction" xml:space="preserve">
-    <value>Gerichtsstand: Arnstorf</value>
+    <value>Gerichtsstand: Langen</value>
   </data>
   <data name="PopUp_BaseID_Auth_Error_Text" xml:space="preserve">
     <value>Bei der Ausstellung ihrer Basis-ID ist etwas schief gelaufen. Bitte starten Sie den Prozess erneut.</value>
@@ -2065,5 +2062,230 @@
   </data>
   <data name="BaseIDPage_Info_Label_3" xml:space="preserve">
     <value>). Später im Jahr auch für Ihren Personalausweis verfügbar.</value>
+  </data>
+  <data name="AttributeValueConvert_Antigen_Vaccine" xml:space="preserve">
+    <value>SARS-CoV-2 Antigen Impfstoff</value>
+  </data>
+  <data name="AttributeValueConvert_Astra_Zeneca" xml:space="preserve">
+    <value>AstraZeneca AB</value>
+  </data>
+  <data name="AttributeValueConvert_BBIBP_Vacc" xml:space="preserve">
+    <value>BBIBP-CorV</value>
+  </data>
+  <data name="AttributeValueConvert_Bharat" xml:space="preserve">
+    <value>Bharat Biotech</value>
+  </data>
+  <data name="AttributeValueConvert_Biontech" xml:space="preserve">
+    <value>Biontech Manufacturing GmbH</value>
+  </data>
+  <data name="AttributeValueConvert_Cansino" xml:space="preserve">
+    <value>CanSino Biologics</value>
+  </data>
+  <data name="AttributeValueConvert_Comirnaty_Vacc" xml:space="preserve">
+    <value>Comirnaty</value>
+  </data>
+  <data name="AttributeValueConvert_Convidecia_Vacc" xml:space="preserve">
+    <value>Convidecia</value>
+  </data>
+  <data name="AttributeValueConvert_CoronaVac_Vacc" xml:space="preserve">
+    <value>CoronaVac</value>
+  </data>
+  <data name="AttributeValueConvert_Covaxin_Vacc" xml:space="preserve">
+    <value>Covaxin (auch BBV152 A, B, C)</value>
+  </data>
+  <data name="AttributeValueConvert_Covid19" xml:space="preserve">
+    <value>COVID-19</value>
+  </data>
+  <data name="AttributeValueConvert_Curevac" xml:space="preserve">
+    <value>Curevac AG</value>
+  </data>
+  <data name="AttributeValueConvert_CVnCoV_Vacc" xml:space="preserve">
+    <value>CVnCoV</value>
+  </data>
+  <data name="AttributeValueConvert_EpiVac_Vacc" xml:space="preserve">
+    <value>EpiVacCorona</value>
+  </data>
+  <data name="AttributeValueConvert_Gamaleya" xml:space="preserve">
+    <value>Gamaleya Research Institute</value>
+  </data>
+  <data name="AttributeValueConvert_Jannsen_Vacc" xml:space="preserve">
+    <value>COVID-19 Vaccine Janssen</value>
+  </data>
+  <data name="AttributeValueConvert_Janssen" xml:space="preserve">
+    <value>Janssen-Cilag International</value>
+  </data>
+  <data name="AttributeValueConvert_Misc_Vaccine" xml:space="preserve">
+    <value>covid-19 Impfstoff</value>
+  </data>
+  <data name="AttributeValueConvert_Moderna" xml:space="preserve">
+    <value>Moderna Biotech Spain S.L.</value>
+  </data>
+  <data name="AttributeValueConvert_Moderna_Vacc" xml:space="preserve">
+    <value>COVID-19 Vaccine Moderna</value>
+  </data>
+  <data name="AttributeValueConvert_Mrna_Vaccine" xml:space="preserve">
+    <value>SARS-CoV-2 mRNA Impfstoff</value>
+  </data>
+  <data name="AttributeValueConvert_Novovax" xml:space="preserve">
+    <value>Novavax CZ AS</value>
+  </data>
+  <data name="AttributeValueConvert_NVX_Vacc" xml:space="preserve">
+    <value>NVX-CoV2373</value>
+  </data>
+  <data name="AttributeValueConvert_Sinopharm_Int" xml:space="preserve">
+    <value>China Sinopharm International Corp. - Beijing location</value>
+  </data>
+  <data name="AttributeValueConvert_Sinopharm_Prague" xml:space="preserve">
+    <value>Sinopharm Weiqida Europe Pharmaceutical s.r.o. - Prague location</value>
+  </data>
+  <data name="AttributeValueConvert_Sinopharm_Shenzhen" xml:space="preserve">
+    <value>Sinopharm Zhijun (Shenzhen) Pharmaceutical Co. Ltd. - Shenzhen location</value>
+  </data>
+  <data name="AttributeValueConvert_Sinovac" xml:space="preserve">
+    <value>Sinovac Biotech</value>
+  </data>
+  <data name="AttributeValueConvert_Sputnik_Vacc" xml:space="preserve">
+    <value>Sputnik V</value>
+  </data>
+  <data name="AttributeValueConvert_Vector" xml:space="preserve">
+    <value>Vector Institute</value>
+  </data>
+  <data name="AttributeValueConvert_Vero_Cell_Vacc" xml:space="preserve">
+    <value>Deaktiviertes SARSCoV-2 (Vero Cell)</value>
+  </data>
+  <data name="LabelTextConvert_CountryOfVaccination" xml:space="preserve">
+    <value>Land der Impfung</value>
+  </data>
+  <data name="LabelTextConvert_DateOfVaccination" xml:space="preserve">
+    <value>Datum der Impfung</value>
+  </data>
+  <data name="LabelTextConvert_DeseaseTargeted" xml:space="preserve">
+    <value>Impfung gegen</value>
+  </data>
+  <data name="LabelTextConvert_DoseNumber" xml:space="preserve">
+    <value>Anzahl Impfungen</value>
+  </data>
+  <data name="LabelTextConvert_Issuer" xml:space="preserve">
+    <value>Aussteller des Nachweises</value>
+  </data>
+  <data name="LabelTextConvert_Manufacturer" xml:space="preserve">
+    <value>Hersteller</value>
+  </data>
+  <data name="LabelTextConvert_TotalDoseNumber" xml:space="preserve">
+    <value>Gesamtzahl notwendiger Impfungen</value>
+  </data>
+  <data name="LabelTextConvert_Uvci" xml:space="preserve">
+    <value>UVCI (Identifikationsnummer für das Zertifikat)</value>
+  </data>
+  <data name="LabelTextConvert_Vaccine" xml:space="preserve">
+    <value>Impfstoff</value>
+  </data>
+  <data name="LabelTextConvert_ProductDesc" xml:space="preserve">
+    <value>Produktbezeichnung (Name des Impfstoffs)</value>
+  </data>
+  <data name="LabelTextConvert_SchemaVersion" xml:space="preserve">
+    <value>Version des Schemas</value>
+  </data>
+  <data name="LabelTextConvert_StandardisedFamilyName" xml:space="preserve">
+    <value>Standardiserter Nachname</value>
+  </data>
+  <data name="LabelTextConvert_StandardisedGivenName" xml:space="preserve">
+    <value>Standardiserter Vorname</value>
+  </data>
+  <data name="PopUp_Add_Vac_Title" xml:space="preserve">
+    <value>Speicherung des QR-Code</value>
+  </data>
+  <data name="PopUp_Add_Vac_Message" xml:space="preserve">
+    <value>Bitte bestätigen Sie, dass Sie mit der Speicherung des QR-Code in Ihrem Wallet fortfahren möchten.</value>
+  </data>
+  <data name="PopUp_Add_Vac_Button_Ok" xml:space="preserve">
+    <value>Okay</value>
+  </data>
+  <data name="PopUp_Add_Vac_Button_Cancel" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="ChangeLedgerPage_DGCDEVLEDGER" xml:space="preserve">
+    <value>DGC Dev</value>
+  </data>
+  <data name="PopUp_BaseID_ReadyToScan_Process_After_Label" xml:space="preserve">
+    <value> von 2 Auslesevorgängen</value>
+  </data>
+  <data name="PopUp_BaseID_ReadyToScan_Process_Before_Label" xml:space="preserve">
+    <value>Auslesevorgang: </value>
+  </data>
+  <data name="BaseIDPage_StartScreen_Middle_Label" xml:space="preserve">
+    <value> zur Verarbeitung Ihrer personenbezogenen Daten und Kenntnisnahme der </value>
+  </data>
+  <data name="BaseIDPage_StartScreen_Privacy_Consent_Label" xml:space="preserve">
+    <value>Einwilligungserklärung</value>
+  </data>
+  <data name="BaseIDPage_StartScreen_Revoke_Label" xml:space="preserve">
+    <value>Achtung: Sofern mit diesem Ausweis bereits eine Basis-ID erstellt wurde, wird diese widerrufen.</value>
+  </data>
+  <data name="LegalNoticePage_Commercial_Register" xml:space="preserve">
+    <value>Handelsregister: Amtsgericht Offenbach - HRB 53742</value>
+  </data>
+  <data name="AttributeValueConvert_Vaxzevria_Vacc" xml:space="preserve">
+    <value>Vaxzevria</value>
+  </data>
+  <data name="PopUp_ReadyToScan_Cancel_Button" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="BaseIDPage_ReadIdScreen_Security_Label" xml:space="preserve">
+    <value>Wenn Sie fortfahren, wird zur Gewährleistung der ID Wallet Authentizität eine Geräteprüfung (Android: SafetyNet, iOS: DeviceCheck) durchgeführt. Die Ergebnisse dieses Checks werden zur Überprüfung an die Bundesdruckerei GmbH übermittelt.</value>
+  </data>
+  <data name="LabelTextConvert_DriveName" xml:space="preserve">
+    <value>1. Name</value>
+  </data>
+  <data name="LabelTextConvert_DriveBirthName" xml:space="preserve">
+    <value>1. Geburtsname</value>
+  </data>
+  <data name="LabelTextConvert_DriveFirstName" xml:space="preserve">
+    <value>2. Vorname</value>
+  </data>
+  <data name="LabelTextConvert_DriveBirthDate" xml:space="preserve">
+    <value>3. Geburtsdatum</value>
+  </data>
+  <data name="LabelTextConvert_DriveBirthPlace" xml:space="preserve">
+    <value>3. Geburtsort</value>
+  </data>
+  <data name="LabelTextConvert_DriveIssueDate" xml:space="preserve">
+    <value>4a. Ausstellungsdatum</value>
+  </data>
+  <data name="LabelTextConvert_DriveExpiryDate" xml:space="preserve">
+    <value>4b. Ablaufdatum</value>
+  </data>
+  <data name="LabelTextConvert_DriveIssuer" xml:space="preserve">
+    <value>4c. Aussteller</value>
+  </data>
+  <data name="LabelTextConvert_DriveNumber" xml:space="preserve">
+    <value>5. Führerscheinnummer</value>
+  </data>
+  <data name="LabelTextConvert_DriveClasses" xml:space="preserve">
+    <value>9. Führerscheinklassen</value>
+  </data>
+  <data name="LabelTextConvert_DriveValidSince" xml:space="preserve">
+    <value>10. gültig ab</value>
+  </data>
+  <data name="LabelTextConvert_DriveValidTill" xml:space="preserve">
+    <value>11. gültig bis</value>
+  </data>
+  <data name="LabelTextConvert_DriveRestrictions" xml:space="preserve">
+    <value>12. Beschränkungen</value>
+  </data>
+  <data name="ChangeLedgerPage_EESDITest" xml:space="preserve">
+    <value>EESDI Test Ledger</value>
+  </data>
+  <data name="Qr_Personal_Data_Message" xml:space="preserve">
+    <value>Bitte beachten Sie, dass der QR-Code personenbezogene Daten enthalten kann. Personen, die Zugriff auf den QR-Code haben, können die enthaltenen Daten auslesen.</value>
+  </data>
+  <data name="Qr_Personal_Data_Title" xml:space="preserve">
+    <value>Hinweis</value>
+  </data>
+  <data name="Qr_History_Message_1" xml:space="preserve">
+    <value>QR-Code hinzugefügt</value>
+  </data>
+  <data name="Qr_History_Message_2" xml:space="preserve">
+    <value>haben Sie folgenden QR-Code hinzugefügt.</value>
   </data>
 </root>

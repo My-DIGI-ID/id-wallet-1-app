@@ -136,7 +136,6 @@ namespace IDWallet
 
                 AutoAcceptViewModel = new AutoAcceptViewModel();
 
-                MainPage = new CustomTabbedPage();
             }
             else
             {
@@ -154,6 +153,8 @@ namespace IDWallet
                     Process.GetCurrentProcess().Kill();
                 });
             }
+
+            MainPage = new CustomTabbedPage();
         }
 
         private void LockOnSleep(object sender, ElapsedEventArgs e)
@@ -202,7 +203,8 @@ namespace IDWallet
         public static string SafetyResult { get; set; } = "";
         public static string SafetyKey { get; set; } = "";
         public static string SecurityCert { get; set; } = "";
-        public static Wallet Wallet {get; set;}
+        public static Wallet Wallet { get; set; }
+        public static string VacConnectionId { get; set; } = "";
 
         public static bool GetBiometricsInfo(ICustomSecureStorageService storageService)
         {
@@ -789,6 +791,7 @@ namespace IDWallet
             builder.RegisterType<ConnectionsViewModel>().AsSelf().SingleInstance();
             builder.RegisterType<TransactionOfferService>().AsSelf().AsImplementedInterfaces();
             builder.RegisterType<BaseIdViewModel>().AsSelf().SingleInstance();
+            builder.RegisterType<AddVacService>().AsSelf().SingleInstance();
             builder.Populate(services);
 
             Container = builder.Build();

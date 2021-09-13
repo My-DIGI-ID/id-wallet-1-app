@@ -35,7 +35,9 @@ namespace IDWallet
         public const string RecommendedLedger_BCGov = "bcgov";
         public const string RecommendedLedger_Builder = "builder";
         public const string RecommendedLedger_DEVLEDGER = "devledger";
+        public const string RecommendedLedger_DGCDEVLEDGER = "dgcdevledger";
         public const string RecommendedLedger_EESDI = "eesdi";
+        public const string RecommendedLedger_EESDITest = "eesditest";
         public const string RecommendedLedger_Esatus = "esatus";
         public const string RecommendedLedger_IDuniontest = "iduniontest";
         public const string RecommendedLedger_Live = "live";
@@ -50,8 +52,8 @@ namespace IDWallet
         public const string WalletSaltByteTag = "WalletSalt";
 
         //Change per Version
-        public const string AppVersion = "1.2";
-        public const string BuildVersion = "10203";
+        public const string AppVersion = "1.3";
+        public const string BuildVersion = "10305";
         public const string WalletName = "ID Wallet";
         public const string SafetyNetApiKey = "";
         public const string NotificationHubName = "";
@@ -62,5 +64,8 @@ namespace IDWallet
 		public const string TeamId = "";
 
         public const string AusweisHost = "";
+        public const string BsiUrl = "https://www.bsi.bund.de/DE/Themen/Oeffentliche-Verwaltung/Elektronische-Identitaeten/Online-Ausweisfunktion/Testinfrastruktur/eID-Karte/eID-Karte_node.html";
+
+        public const string VacConnection = "VacConnection";
     }
 }
