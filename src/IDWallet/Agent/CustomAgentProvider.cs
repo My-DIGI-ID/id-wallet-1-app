@@ -25,7 +25,6 @@ using Newtonsoft.Json;
 using SimpleBase;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -179,7 +178,7 @@ namespace IDWallet.Agent
         {
             try
             {
-                var activeAgent = await _storageService.GetAsync<AgentOptions>(_activeAgentKey);
+                AgentOptions activeAgent = await _storageService.GetAsync<AgentOptions>(_activeAgentKey);
                 activeAgent.WalletConfiguration.StorageConfiguration.Path =
                         Path.Combine(FileSystem.AppDataDirectory, ".indy_client");
                 return activeAgent;
@@ -380,7 +379,7 @@ namespace IDWallet.Agent
                 {
                     poolName = "idw_eesdi";
                 }
-                    else if (recommendedLedgerName == WalletParams.RecommendedLedger_EESDITest)
+                else if (recommendedLedgerName == WalletParams.RecommendedLedger_EESDITest)
                 {
                     poolName = "idw_eesditest";
                 }
@@ -430,7 +429,15 @@ namespace IDWallet.Agent
                 NetworkAccess connectivity = Connectivity.NetworkAccess;
                 if (connectivity == NetworkAccess.ConstrainedInternet || connectivity == NetworkAccess.Internet)
                 {
-                    await context.Pool;
+                    Task<Pool> task = OpenPool(context);
+                    if (await Task.WhenAny(task, Task.Delay(5000)) == task)
+                    {
+                        // task completed within timeout
+                    }
+                    else
+                    {
+                        // timeout
+                    }
                 }
             }
             catch (Exception)
@@ -439,6 +446,49 @@ namespace IDWallet.Agent
             }
 
             return context;
+        }
+
+        public async Task<IAgentContext> GetContextAutoSwitchAsync(params object[] args)
+        {
+            IAgent agent = await GetAgentAsync(args);
+
+            CustomAgentContext context = new CustomAgentContext
+            {
+                Agent = agent,
+                Wallet = App.Wallet,
+                SupportedMessages = agent.GetSupportedMessageTypes()
+            };
+
+            try
+            {
+                context.Pool = new PoolAwaitable(() =>
+                    _poolService.GetPoolAsync(_activeAgent.PoolName, _activeAgent.ProtocolVersion));
+
+                NetworkAccess connectivity = Connectivity.NetworkAccess;
+                if (connectivity == NetworkAccess.ConstrainedInternet || connectivity == NetworkAccess.Internet)
+                {
+                    Task<Pool> task = OpenPool(context);
+                    if (await Task.WhenAny(task, Task.Delay(5000)) == task)
+                    {
+                        // task completed within timeout
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                //ignore
+            }
+
+            return context;
+        }
+
+        private async Task<Pool> OpenPool(IAgentContext context)
+        {
+            return await context.Pool;
         }
 
         public string GetPoolName(AgentOptions options)
@@ -720,7 +770,7 @@ namespace IDWallet.Agent
             await _walletService.CreateWalletAsync(
                 configuration: agentOptions.WalletConfiguration,
                 credentials: agentOptions.WalletCredentials);
-            var wallet = await Wallet.OpenWalletAsync(agentOptions.WalletConfiguration.ToJson(), agentOptions.WalletCredentials.ToJson());
+            Wallet wallet = await Wallet.OpenWalletAsync(agentOptions.WalletConfiguration.ToJson(), agentOptions.WalletCredentials.ToJson());
 
             // Configure agent endpoint
             AgentEndpoint endpoint = null;
@@ -729,7 +779,7 @@ namespace IDWallet.Agent
                 endpoint = new AgentEndpoint { Uri = agentOptions.EndpointUri.ToString() };
                 if (agentOptions.AgentKeySeed != null)
                 {
-                    var agent = await Did.CreateAndStoreMyDidAsync(wallet, new { seed = agentOptions.AgentKeySeed }.ToJson());
+                    CreateAndStoreMyDidResult agent = await Did.CreateAndStoreMyDidAsync(wallet, new { seed = agentOptions.AgentKeySeed }.ToJson());
                     endpoint.Did = agent.Did;
                     endpoint.Verkey = new[] { agent.VerKey };
                 }
@@ -740,14 +790,14 @@ namespace IDWallet.Agent
                 }
                 else
                 {
-                    var agent = await Did.CreateAndStoreMyDidAsync(wallet, "{}");
+                    CreateAndStoreMyDidResult agent = await Did.CreateAndStoreMyDidAsync(wallet, "{}");
                     endpoint.Did = agent.Did;
                     endpoint.Verkey = new[] { agent.VerKey };
                 }
             }
-            var masterSecretId = await AnonCreds.ProverCreateMasterSecretAsync(wallet, null);
+            string masterSecretId = await AnonCreds.ProverCreateMasterSecretAsync(wallet, null);
 
-            var record = new ProvisioningRecord
+            ProvisioningRecord record = new ProvisioningRecord
             {
                 MasterSecretId = masterSecretId,
                 Endpoint = endpoint,
@@ -764,7 +814,7 @@ namespace IDWallet.Agent
                 agentOptions.IssuerKeySeed = CryptoUtils.GetUniqueKey(32);
             }
 
-            var issuer = await Did.CreateAndStoreMyDidAsync(
+            CreateAndStoreMyDidResult issuer = await Did.CreateAndStoreMyDidAsync(
                 wallet: wallet,
                 didJson: new
                 {

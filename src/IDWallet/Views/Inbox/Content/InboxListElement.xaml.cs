@@ -101,7 +101,7 @@ namespace IDWallet.Views.Inbox.Content
                         service = proofRequestNotification.ProofRecord.GetTag(DecoratorNames.ServiceDecorator)
                             .ToObject<CustomServiceDecorator>();
                     }
-                    var endpointUri = new Uri(service.ServiceEndpoint);
+                    Uri endpointUri = new Uri(service.ServiceEndpoint);
                     ConnectionAliasLabel.Text = !string.IsNullOrEmpty(service.EndpointName) ? service.EndpointName + " - " + endpointUri.Host : service.ServiceEndpoint;
                 }
                 else if (notification is Models.WalletCredentialOfferMessage credentialOfferNotification)
@@ -273,10 +273,11 @@ namespace IDWallet.Views.Inbox.Content
                 _viewModel.InboxMessages.Remove(credentialOfferNotification);
                 _viewModel.OnRequestFinished();
                 IAgentContext context = await _customAgentProvider.GetContextAsync();
+
                 try
                 {
                     string baseIdIssuerDid = credentialOfferNotification.CredentialRecord.CredentialDefinitionId.Split(':')[0];
-                    if (baseIdIssuerDid == "XwQCiUus8QubFNJPJD2mDi" || baseIdIssuerDid == "Vq2C7Wfc44Q1cSroPuXaw2" || baseIdIssuerDid == "5PmwwGsFhq8NDiRCyqjNXy")
+                    if (baseIdIssuerDid == "Vq2C7Wfc44Q1cSroPuXaw2" || baseIdIssuerDid == "MGfd8JjWRoiXMm2YGL4SGj")
                     {
                         ConnectionRecord baseIdConnection = credentialOfferNotification.ConnectionRecord;
                         string revocationPassphrase = baseIdConnection.GetTag(WalletParams.KeyRevocationPassphrase);
@@ -292,38 +293,41 @@ namespace IDWallet.Views.Inbox.Content
                     }
                     else
                     {
+
                         (CredentialRequestMessage request, CredentialRecord record) = await _credentialService.CreateRequestAsync(context, credentialOfferNotification.RecordId);
-
-                        string[] routingKeys = credentialOfferNotification.ConnectionRecord.Endpoint?.Verkey != null
-                        ? credentialOfferNotification.ConnectionRecord.Endpoint.Verkey
-                        : new string[0];
-
-                        await _messageService.SendAsync(context, request, credentialOfferNotification.ConnectionRecord);
-
-                        ConnectionRecord connectionRecord = credentialOfferNotification.ConnectionRecord;
-                        string neverAskAgain = "";
-                        try
+                        if (request != null)
                         {
-                            neverAskAgain = connectionRecord.GetTag("NeverAskAgainCred");
-                        }
-                        catch (Exception)
-                        {
-                            //ignore
-                        }
+                            string[] routingKeys = credentialOfferNotification.ConnectionRecord.Endpoint?.Verkey != null
+                            ? credentialOfferNotification.ConnectionRecord.Endpoint.Verkey
+                            : new string[0];
 
-                        if (neverAskAgain == null || neverAskAgain == "")
-                        {
-                            ActivateAutoAcceptPopUp activateAutoAcceptPopUp = new ActivateAutoAcceptPopUp(connectionRecord);
-                            PopUpResult accepted = await activateAutoAcceptPopUp.ShowPopUp();
-                            if (accepted == PopUpResult.Accepted)
+                            await _messageService.SendAsync(context, request, credentialOfferNotification.ConnectionRecord);
+
+                            ConnectionRecord connectionRecord = credentialOfferNotification.ConnectionRecord;
+                            string neverAskAgain = "";
+                            try
                             {
-                                try
+                                neverAskAgain = connectionRecord.GetTag("NeverAskAgainCred");
+                            }
+                            catch (Exception)
+                            {
+                                //ignore
+                            }
+
+                            if (neverAskAgain == null || neverAskAgain == "")
+                            {
+                                ActivateAutoAcceptPopUp activateAutoAcceptPopUp = new ActivateAutoAcceptPopUp(connectionRecord);
+                                PopUpResult accepted = await activateAutoAcceptPopUp.ShowPopUp();
+                                if (accepted == PopUpResult.Accepted)
                                 {
-                                    MessagingCenter.Send(this, WalletEvents.ReloadConnections);
-                                }
-                                catch (Exception)
-                                {
-                                    //ignore
+                                    try
+                                    {
+                                        MessagingCenter.Send(this, WalletEvents.ReloadConnections);
+                                    }
+                                    catch (Exception)
+                                    {
+                                        //ignore
+                                    }
                                 }
                             }
                         }
@@ -486,7 +490,7 @@ namespace IDWallet.Views.Inbox.Content
                             service = proofRequestNotification.ProofRecord.GetTag(DecoratorNames.ServiceDecorator)
                                 .ToObject<CustomServiceDecorator>();
 
-                            var endpointUri = new Uri(service.ServiceEndpoint);
+                            Uri endpointUri = new Uri(service.ServiceEndpoint);
                             string serviceAlias = !string.IsNullOrEmpty(service.EndpointName) ? service.EndpointName + " - " + endpointUri.Host : service.ServiceEndpoint;
                             ProofPopUp popUp = new ProofPopUp(proofViewModel, recordId, service, serviceAlias);
                             PopUpResult result = await popUp.ShowPopUp();
@@ -737,9 +741,8 @@ namespace IDWallet.Views.Inbox.Content
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Debug.WriteLine(ex.Message);
                 BasicPopUp alertPopUp = new BasicPopUp(
                     Lang.PopUp_Undefined_Error_Title,
                     Lang.PopUp_Undefined_Error_Message,

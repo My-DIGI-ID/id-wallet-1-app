@@ -2297,4 +2297,7 @@
   <data name="Qr_History_Message_2" xml:space="preserve">
     <value>you have added the following QR code.</value>
   </data>
+  <data name="HwProofNotice" xml:space="preserve">
+    <value>Note: This check requests the Basis-ID information for device binding. Please note that these also represent a personal reference. Furthermore, a signature is added to the verification using the device binding keys.</value>
+  </data>
 </root>

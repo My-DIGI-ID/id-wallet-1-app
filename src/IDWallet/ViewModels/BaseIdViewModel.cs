@@ -7,13 +7,16 @@ using IDWallet.Resources;
 using IDWallet.Services;
 using IDWallet.Views.BaseId.PopUps;
 using IDWallet.Views.Customs.PopUps;
+using IDWallet.Views.Proof.PopUps;
 using Hyperledger.Aries.Agents;
 using Hyperledger.Aries.Features.DidExchange;
 using Hyperledger.Aries.Features.IssueCredential;
+using Hyperledger.Aries.Features.PresentProof;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -81,6 +84,12 @@ namespace IDWallet.ViewModels
         {
             get => _isStartEnabled;
             set => SetProperty(ref _isStartEnabled, value);
+        }
+
+        public bool IsInfoVisible
+        {
+            get => _isInfoVisible;
+            set => SetProperty(ref _isInfoVisible, value);
         }
 
         public int IdPinLength
@@ -626,9 +635,12 @@ namespace IDWallet.ViewModels
                         break;
                     case 1:
                         IsInfoVisible = false;
-                        _sdkService.SendRunAuth();
-                        BaseIdProcessType = BaseIdProcessType.Authentication;
-                        IsActivityIndicatorVisible = true;
+                        if (await ShowPinPrompt())
+                        {
+                            _sdkService.SendRunAuth();
+                            BaseIdProcessType = BaseIdProcessType.Authentication;
+                            IsActivityIndicatorVisible = true;
+                        }
                         break;
                     case 2:
                         CarouselPosition = 3;
@@ -679,6 +691,39 @@ namespace IDWallet.ViewModels
                         break;
                 }
             });
+        }
+
+        private async Task<bool> ShowPinPrompt()
+        {
+            ProofRequest proofRequest = new ProofRequest();
+            ProofViewModel viewModel = new ProofViewModel(proofRequest, "");
+
+            var authPopUp = new ProofAuthenticationPopUp(new AuthViewModel(viewModel))
+            {
+                ProofSendPopUp = true
+            };
+#pragma warning disable CS4014 // Da auf diesen Aufruf nicht gewartet wird, wird die Ausführung der aktuellen Methode vor Abschluss des Aufrufs fortgesetzt.
+            authPopUp.ShowPopUp(); // No await.
+#pragma warning restore CS4014 // Da auf diesen Aufruf nicht gewartet wird, wird die Ausführung der aktuellen Methode vor Abschluss des Aufrufs fortgesetzt.
+
+            while (!viewModel.AuthSuccess)
+            {
+                if (viewModel.AuthError)
+                {
+                    return false;
+                }
+                await Task.Delay(100);
+            }
+            authPopUp.OnAuthCanceled(authPopUp, null);
+
+            if (!viewModel.AuthError && viewModel.AuthSuccess)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private bool ValidateIdPin(IList<char> arg)

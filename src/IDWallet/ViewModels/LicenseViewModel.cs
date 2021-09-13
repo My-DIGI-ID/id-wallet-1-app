@@ -34,7 +34,7 @@ namespace IDWallet.ViewModels
             string MsPL = LoadEmbeddedTxt("Ms-PL.txt");
             string svg = LoadEmbeddedTxt("MIT_Svg.txt");
             string dagger = LoadEmbeddedTxt("MIT_dagger.txt");
-			string ausweis = LoadEmbeddedTxt("EUPLv1-2.txt");
+            string ausweis = LoadEmbeddedTxt("EUPLv1-2.txt");
 
             List<License> unorder = new List<License>
             {
@@ -42,14 +42,17 @@ namespace IDWallet.ViewModels
                 new License {Name = "Com.Airbnb.Xamarin.Forms.Lottie", Version = "4.0.8", Text = apache20},
                 new License {Name = "dotnetstandard-bip39", Version = "1.0.2", Text = apache20},
                 new License {Name = "FormsPinView", Version = "2.0.0", Text = formsPinView},
-                new License {Name = "Hyperledger.Aries", Version = "1.5.5", Text = apache20},
+                new License {Name = "Hyperledger.Aries", Version = "1.6.1", Text = apache20},
                 new License {Name = "Hyperledger.Aries.Routing.Edge", Version = "1.5.5", Text = apache20},
                 new License {Name = "Hyperledger.Indy.Sdk", Version = "1.15.0", Text = apache20},
                 new License {Name = "Microsoft.Extensions.DependencyInjection", Version = "5.0.1", Text = apache20},
                 new License {Name = "PCLStorage", Version = "1.0.2", Text = MsPL},
                 new License {Name = "Plugin.Fingerprint", Version = "2.1.3", Text = fingerprint},
                 new License {Name = "Plugin.Permissions", Version = "6.0.1", Text = permissions},
+                new License {Name = "System.Net.Http.Json", Version = "5.0.0", Text = mIT},
                 new License {Name = "Rg.Plugins.Popup", Version = "2.0.0.10", Text = mIT},
+                new License {Name = "SharpZipLib", Version = "1.3.1", Text = mIT},
+                new License {Name = "SimpleBase", Version = "3.0.2", Text = apache20},
                 new License {Name = "Xam.Plugin.Iconize", Version = "3.5.0.129", Text = iconize},
                 new License {Name = "Xam.Plugin.Iconize.Material", Version = "3.5.0.129", Text = iconize},
                 new License {Name = "Xam.Plugin.Iconize.MaterialDesignIcons", Version = "3.5.0.129", Text = iconize},
@@ -101,7 +104,7 @@ namespace IDWallet.ViewModels
                 new License {Name = "Xamarin.GooglePlayServices.SafetyNet", Version = "117.0.0", Text = googlePlay},
 
                 new License {Name = "Xamarin.Azure.NotificationHubs.iOS", Version = "3.1.1", Text = microsoftAzure},
-                new License {Name = "AusweisApp2 SDK", Version = "1.22.1", Text = ausweis}             
+                new License {Name = "AusweisApp2 SDK", Version = "1.22.1", Text = ausweis}
             };
 
             Licenses = unorder.OrderBy(x => x.Name).ToList();
