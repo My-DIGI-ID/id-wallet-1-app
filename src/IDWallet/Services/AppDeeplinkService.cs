@@ -5,6 +5,8 @@ using IDWallet.Interfaces;
 using IDWallet.Views.Customs.PopUps;
 using IDWallet.Views.Settings.Connections.PopUps;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace IDWallet.Services
@@ -48,6 +50,19 @@ namespace IDWallet.Services
                     else if (uri.Query.StartsWith("?t_o="))
                     {
                         await ProcessTransactionOfferLinkAsync(deepLinkUri);
+                    }
+                    else if (uri.Query.StartsWith("?eid_uc="))
+                    {
+                        Dictionary<string, string> arguments = uri.Query
+                                    .Substring(1)
+                                    .Split('&')
+                                    .Select(q => q.Split('='))
+                                    .ToDictionary(q => q.FirstOrDefault(), q => q.Skip(1).FirstOrDefault());
+
+                        if (arguments["eid_uc"].Equals("de.kba.fs-nachweis"))
+                        {
+                            //Call eID DDL Flow
+                        }
                     }
                     else
                     {

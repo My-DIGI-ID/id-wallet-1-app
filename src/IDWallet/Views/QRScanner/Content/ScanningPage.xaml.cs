@@ -227,6 +227,7 @@ namespace IDWallet.Views.QRScanner.Content
                     CredentialRecord credentialRecord = null;
                     GatewayQR gatewayQR = null;
                     string vacCode = null;
+                    Dictionary<string, string> arguments = new Dictionary<string, string>();
 
                     try
                     {
@@ -235,6 +236,17 @@ namespace IDWallet.Views.QRScanner.Content
                         (transactionId, connectionInvitationMessage, awaitableConnection, awaitableProof) =
                             _transactionService.ReadTransactionUrl(result.Text);
                         invitation = _invitationService.ReadInvitationUrl(result.Text);
+
+                        if (new Uri(result.Text).Query.StartsWith("?eid_uc="))
+                        {
+                            arguments = new Uri(result.Text).Query
+                                    .Substring(1)
+                                    .Split('&')
+                                    .Select(q => q.Split('='))
+                                    .ToDictionary(q => q.FirstOrDefault(), q => q.Skip(1).FirstOrDefault());
+
+                            messageType = "eid_uc";
+                        }
                     }
                     catch (Exception)
                     {
@@ -448,6 +460,13 @@ namespace IDWallet.Views.QRScanner.Content
                             }
 
                             NavigateToWallet();
+                            break;
+
+                        case "eid_uc":
+                            if (arguments["eid_uc"].Equals("de.kba.fs-nachweis"))
+                            {
+                                //Call eID DDL Flow
+                            }
                             break;
 
                         default:
