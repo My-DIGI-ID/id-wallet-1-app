@@ -385,12 +385,18 @@ namespace IDWallet.ViewModels
                     byte[] keyByte = rfc2898DeriveBytes.GetBytes(16);
 
                     PinRecord pinRecord = new PinRecord() { Id = Guid.NewGuid().ToString(), WalletPinSaltByte = salt, WalletPinPBKDF2 = keyByte };
-                    await _walletRecordService.AddAsync(App.Wallet, pinRecord);
-
+                    
+                    await _secureStorageService.SetAsync(WalletParams.PinRecordTag, pinRecord);
                     await _secureStorageService.SetAsync(WalletParams.PushService, App.PushService);
                 }
 
                 PinRecord pinRecordLoaded = (await _walletRecordService.SearchAsync<PinRecord>(App.Wallet, null, null, 1, false)).FirstOrDefault();
+
+                if (pinRecordLoaded != null)
+                {
+                    await _walletRecordService.DeleteAsync<PinRecord>(App.Wallet, pinRecordLoaded.Id);
+                    await _secureStorageService.SetAsync(WalletParams.PinRecordTag, pinRecordLoaded);
+                }
 
                 App.IsLoggedIn = true;
                 App.LoggedInOnce = true;

@@ -1,16 +1,11 @@
 ﻿using Autofac;
 using IDWallet.Agent.Interface;
 using IDWallet.Agent.Models;
-using IDWallet.Events;
 using IDWallet.Interfaces;
 using IDWallet.Services;
 using IDWallet.Views.Customs.PopUps;
 using IDWallet.Views.Proof.PopUps;
-using Hyperledger.Aries.Configuration;
 using Hyperledger.Aries.Extensions;
-using Microsoft.Extensions.Options;
-using Plugin.Fingerprint;
-using Plugin.Fingerprint.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -48,7 +43,7 @@ namespace IDWallet.ViewModels
         private int _wrongPinCount;
         private PinRecord _pinRecordLoaded;
         private ProofViewModel _proofViewModel;
-        private ProofAuthenticationPopUp _authPopUp;
+        private readonly ProofAuthenticationPopUp _authPopUp;
 
         public AuthViewModel(ProofViewModel proofViewModel)
         {
@@ -69,7 +64,8 @@ namespace IDWallet.ViewModels
                 PinText = Resources.Lang.PopUp_Login_Ultimately_Failed_Text;
                 PinPadVisible = false;
             }
-            else if(_wrongPinCount == 4){
+            else if (_wrongPinCount == 4)
+            {
                 PinText = Resources.Lang.PopUp_Login_Last_Try_Label;
                 PinPadVisible = true;
             }
@@ -85,7 +81,7 @@ namespace IDWallet.ViewModels
 
         private async void GetPinRecord()
         {
-            _pinRecordLoaded = (await _walletRecordService.SearchAsync<PinRecord>(App.Wallet, null, null, 1, false)).FirstOrDefault();
+            _pinRecordLoaded = await _secureStorageService.GetAsync<PinRecord>(WalletParams.PinRecordTag);
         }
 
         private async Task<int> GetWrongPinCount()
