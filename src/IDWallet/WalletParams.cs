@@ -30,6 +30,7 @@ namespace IDWallet
         public const string PollingWasActive = "PollingWasActive";
         public const string ProofCallingEndpoints = "";
         public const string PushService = "PushService";
+        public const string PinRecordTag = "PinRecord";
         public const string PushServiceName = "";
         public const string RecipientKeys = "RecipientKeys";
         public const string RecommendedLedger_BCGov = "bcgov";
@@ -50,10 +51,11 @@ namespace IDWallet
         public const string WalletKeyTag = "WalletKey";
         public const string WalletPreKeyTag = "WalletPreKey";
         public const string WalletSaltByteTag = "WalletSalt";
+        public const string VacConnection = "VacConnection";
 
         //Change per Version
-        public const string AppVersion = "1.4";
-        public const string BuildVersion = "10403";
+        public const string AppVersion = "1.5";
+        public const string BuildVersion = "10503";
         public const string WalletName = "ID Wallet";
         public const string SafetyNetApiKey = "";
         public const string NotificationHubName = "";
@@ -65,8 +67,6 @@ namespace IDWallet
 
         public const string AusweisHost = "";
         public const string BsiUrl = "https://www.bsi.bund.de/DE/Themen/Oeffentliche-Verwaltung/Elektronische-Identitaeten/Online-Ausweisfunktion/Testinfrastruktur/eID-Karte/eID-Karte_node.html";
-
-        public const string VacConnection = "VacConnection";
 
         //Hardware Binding
         public const string HardwareSignature = "hardwareDidProof";

@@ -215,7 +215,7 @@ namespace IDWallet.ViewModels
         {
             foreach (WalletElement walletElement in WalletElements.Where(x => x.CredentialRecord != null))
             {
-                if (walletElement.CredentialRecord.CredentialDefinitionId == "Vq2C7Wfc44Q1cSroPuXaw2:3:CL:126:Basis-ID" || walletElement.CredentialRecord.CredentialDefinitionId == "MGfd8JjWRoiXMm2YGL4SGj:3:CL:43:Basis-ID Testnetzwerk")
+                if (walletElement.CredentialRecord.CredentialDefinitionId == "Vq2C7Wfc44Q1cSroPuXaw2:3:CL:1128:Basis-ID" || walletElement.CredentialRecord.CredentialDefinitionId == "MGfd8JjWRoiXMm2YGL4SGj:3:CL:43:Basis-ID Testnetzwerk")
                 {
                     AddBaseIdIsVisible = false;
                     return;
@@ -736,7 +736,7 @@ namespace IDWallet.ViewModels
                 case "X2p16G1BeEceJauzqofjQW":
                     result.CredentialImageSource = ImageSource.FromFile("dlufthansa_logo.png");
                     result.ImageUri = ImageSource.FromFile("dlufthansa_logo.png");
-                    result.CredentialBarColor = Color.FromHex("#05164D");
+                    result.CredentialBarColor = Color.FromHex("#ffffff");
                     break;
                 default:
                     if (credentialRecord.CredentialDefinitionId.Equals("XnGEZ7gJxDNfxwnZpkkVcs:3:CL:988:Digitaler Führerschein"))

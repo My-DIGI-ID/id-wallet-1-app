@@ -231,7 +231,7 @@ namespace IDWallet.ViewModels
                     _pinRecordLoaded.WalletPinPBKDF2 = keyByte;
                     _pinRecordLoaded.WalletPinSaltByte = salt;
 
-                    await _walletRecordService.UpdateAsync(App.Wallet, _pinRecordLoaded);
+                    await _secureStorageService.SetAsync(WalletParams.PinRecordTag, _pinRecordLoaded);
 
                     Task.Run(async () =>
                         _activeAgent = await _agentProvider.GetActiveAgent()
@@ -255,7 +255,7 @@ namespace IDWallet.ViewModels
 
         private async void GetPinRecord()
         {
-            _pinRecordLoaded = (await _walletRecordService.SearchAsync<PinRecord>(App.Wallet, null, null, 1, false)).FirstOrDefault();
+            _pinRecordLoaded = await _secureStorageService.GetAsync<PinRecord>(WalletParams.PinRecordTag);
         }
 
         private void Toggle()
