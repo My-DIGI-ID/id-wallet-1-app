@@ -1,10 +1,6 @@
-﻿using Autofac;
-using IDWallet.Agent.Interface;
-using IDWallet.Resources;
-using Hyperledger.Aries.Features.IssueCredential;
+﻿using IDWallet.Resources;
 using System;
 using System.Globalization;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace IDWallet.Utils.Converter
@@ -19,17 +15,25 @@ namespace IDWallet.Utils.Converter
             try
             {
                 label = values[0] as string;
+            }
+            catch (Exception)
+            {
+                //...
+            }
+
+            try
+            {
                 schemaId = values[1] as string;
             }
             catch (Exception)
             {
-                label = "";
-                schemaId = "";
+                // ...
             }
+
 
             if (!string.IsNullOrEmpty(label))
             {
-                if (!string.IsNullOrEmpty(schemaId) && schemaId.Equals("XnGEZ7gJxDNfxwnZpkkVcs:2:Digitaler Führerschein:0.2"))
+                if (!string.IsNullOrEmpty(schemaId) && (schemaId.Equals(WalletParams.DdlSchemaId) || schemaId.Equals(WalletParams.DdlDemoSchemaId)))
                 {
                     switch (label.ToLower())
                     {

@@ -21,7 +21,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>ID Wallet</string>
 	<key>CFBundleVersion</key>
-	<string>10503</string>
+	<string>10617</string>
 	<key>CFBundleName</key>
 	<string>ID Wallet</string>
 	<key>UIAppFonts</key>
@@ -77,7 +77,7 @@
 	<key>CFBundleIdentifier</key>
 	<string>com.digitalenabling.idw</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.5</string>
+	<string>1.6</string>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcons.appiconset</string>
 	<key>UILaunchStoryboardName</key>

@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:views="clr-namespace:IDWallet.Views.Wallet.Content"
              xmlns:viewModels="clr-namespace:IDWallet.ViewModels;assembly=IDWallet"
              xmlns:lang="clr-namespace:IDWallet.Extensions"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" 
              xmlns:svg="clr-namespace:Xamarin.Forms.Svg;assembly=SvgImageSource"
              x:Class="IDWallet.Views.Wallet.WalletPage"
              Title=""
@@ -29,6 +29,16 @@
                 <Setter Property="HasShadow" Value="True" />
             </Style>
         </ResourceDictionary>
+
+        <DataTemplate x:Key="DDLTemplate">
+            <views:DDLTemplate/>
+        </DataTemplate>
+        <DataTemplate x:Key="RegularDocumentTemplate">
+            <views:RegularDocumentTemplate/>
+        </DataTemplate>
+        <views:DocumentTemplateSelector x:Key="DocumentTemplateSelector" 
+                                        DDLTemplate="{StaticResource DDLTemplate}" 
+                                        RegularDocumentTemplate="{StaticResource RegularDocumentTemplate}"/>
     </ContentPage.Resources>
 
     <NavigationPage.TitleView>
@@ -74,143 +84,132 @@
     <ContentPage.BindingContext>
         <viewModels:WalletViewModel />
     </ContentPage.BindingContext>
-    <Grid RowSpacing="1">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+    <Grid>
+        <Grid RowSpacing="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
-        <StackLayout Orientation="Horizontal"
-                     Grid.Row="1"
-                     Margin="20,20,20,0">
-            <Label Text="{lang:L10n WalletPage_Title}"
-                   FontAttributes="Bold"
-                   FontSize="18"
-                   TextColor="{StaticResource AttributeValueColor}" />
-            <Label Text="{lang:L10n WalletPage_BaseID}"
-                   IsVisible="{Binding AddBaseIdIsVisible}"
-                   Opacity="{Binding IsEnabled, Source={x:Reference BaseIdFrame}, Converter={StaticResource BaseIdButtonConverter}}"
-                   HorizontalOptions="EndAndExpand"
-                   FontAttributes="Bold"
-                   FontSize="18" />
-            <Frame WidthRequest="30"
-                   HeightRequest="30"
-                   Padding="0"
-                   Opacity="{Binding IsEnabled, Source={x:Reference BaseIdFrame}, Converter={StaticResource BaseIdButtonConverter}}"
-                   IsVisible="{Binding AddBaseIdIsVisible}"
-                   IsEnabled="False"
-                   CornerRadius="15"
-                   BackgroundColor="#DAD9ED"
-                   x:Name="BaseIdFrame">
-                <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding BaseIdTappedCommand, Source={x:Reference Root}}"/>
-                </Frame.GestureRecognizers>
-                <Label Text="+"
-                       FontSize="20"
-                       VerticalTextAlignment="Center"
-                       VerticalOptions="CenterAndExpand"
-                       HorizontalTextAlignment="Center"
-                       HorizontalOptions="CenterAndExpand"/>
-            </Frame>
-        </StackLayout>
+            <StackLayout Orientation="Horizontal"
+                         Grid.Row="1"
+                         Margin="20,20,20,0">
+                <Label Text="{lang:L10n WalletPage_Title}"
+                       FontAttributes="Bold"
+                       FontSize="18"
+                       TextColor="{StaticResource AttributeValueColor}" />
 
-        <Frame
-            CornerRadius="0"
-            BackgroundColor="{StaticResource PageShadowColor}"
-            HeightRequest="1"
-            Grid.Row="0" />
+                <Image Source="{Binding AddCredentialsImage, Source={x:Reference Root}}"
+                       HorizontalOptions="EndAndExpand"
+                       VerticalOptions="StartAndExpand"  
+                       Aspect="AspectFit"
+                       Margin="0">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding AddDocumentTappedCommand, Source={x:Reference Root}}"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </StackLayout>
 
-        <CarouselView x:Name="carouselView"
-                      ItemsSource="{Binding WalletElements}"
-                      IsSwipeEnabled="True"
-                      IsTabStop="True"
-                      Loop="False"
-                      PeekAreaInsets="15"
-                      Grid.Row="2">
-            <CarouselView.ItemsLayout>
-                <LinearItemsLayout Orientation="Horizontal"
-                                   SnapPointsAlignment="Center"
-                                   SnapPointsType="Mandatory"
-                                   ItemSpacing="0" />
-            </CarouselView.ItemsLayout>
-            <CarouselView.ItemTemplate>
-                <DataTemplate>
-                    <views:CredentialCarouselElement />
-                </DataTemplate>
-            </CarouselView.ItemTemplate>
-        </CarouselView>
-
-        <StackLayout IsVisible="{Binding EmptyLayoutVisible}"
-                     x:Name="EmptyStack"
-                     PropertyChanged="EmptyStackLayout_PropertyChanged"
-                     HorizontalOptions="FillAndExpand"
-                     VerticalOptions="FillAndExpand"
-                     Grid.Row="1"
-                     Grid.RowSpan="2"
-                     Spacing="20"
-                     BackgroundColor="{StaticResource BackgroundColor}">
             <Frame
                 CornerRadius="0"
-                BackgroundColor="{StaticResource PageShadowColor}" />
-            <Frame Margin="20,20,20,0"
-                   HorizontalOptions="FillAndExpand"
-                   VerticalOptions="FillAndExpand">
-                <Image Aspect="AspectFit">
-                    <Image.Source>
-                        <svg:SvgImageSource Source="imagesources.EmptyWallet_Image.svg" Width="150" Height="135" />
-                    </Image.Source>
+                BackgroundColor="{StaticResource PageShadowColor}"
+                HeightRequest="1"
+                Grid.Row="0" />
+
+            <CarouselView x:Name="carouselView"
+                          ItemsSource="{Binding WalletElements}"
+                          IsSwipeEnabled="True"
+                          IsTabStop="True"
+                          Loop="False"
+                          PeekAreaInsets="15"
+                          Grid.Row="2"
+                          ItemTemplate="{StaticResource DocumentTemplateSelector}">
+                <CarouselView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal"
+                                       SnapPointsAlignment="Center"
+                                       SnapPointsType="Mandatory"
+                                       ItemSpacing="0" />
+                </CarouselView.ItemsLayout>
+            </CarouselView>
+        </Grid>
+        <Grid RowSpacing="1"
+              IsVisible="{Binding EmptyLayoutVisible}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <StackLayout
+                  x:Name="EmptyStack"
+                  PropertyChanged="EmptyStack_PropertyChanged"
+                  HorizontalOptions="FillAndExpand"
+                  VerticalOptions="StartAndExpand"
+                  Grid.Row="1"
+                  Grid.RowSpan="2"
+                  Padding="20"
+                  Margin="10,0"
+                  BackgroundColor="{StaticResource BackgroundColor}">
+
+                <Label Text="{lang:L10n WalletPage_Empty_Wallet_Title}"
+                       VerticalOptions="Start"
+                       VerticalTextAlignment="Start"
+                       HorizontalOptions="StartAndExpand"
+                       HorizontalTextAlignment="Start"
+                       Margin="6,0,0,10"
+                       FontAttributes="Bold"
+                       FontSize="18"
+                       TextColor="{StaticResource AttributeValueColor}" />
+
+                <Image Source="idCard_deactivated.png"
+                       Margin="2,0,4,15"
+                       Aspect="AspectFit"
+                       HorizontalOptions="FillAndExpand"
+                       VerticalOptions="Start">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding AddBaseIdTappedCommand, Source={x:Reference Root}}" />
+                    </Image.GestureRecognizers>
                 </Image>
-            </Frame>
 
-            <Label Style="{StaticResource LabelMultiLine}"
-                   HorizontalTextAlignment="Center"
-                   FontAttributes="Bold"
-                   FontSize="30"
-                   Margin="50,0"
-                   Text="{lang:L10n WalletPage_Empty_Wallet_Title}" />
-
-            <Label Style="{StaticResource LabelMultiLine}"
-                   HorizontalTextAlignment="Center"
-                   TextColor="{StaticResource SecondaryTextColor}"
-                   Margin="50,0"
-                   Text="{lang:L10n WalletPage_Empty_Wallet_BaseID_Text}" />
-
-            <Button Text="{lang:L10n WalletPage_Empty_Wallet_BaseID_Button}"
-                    Style="{StaticResource AcceptButton}"
-                    HorizontalOptions="FillAndExpand"
-                    Command="{Binding BaseIdTappedCommand, Source={x:Reference Root}}"
-                    Margin="80,0"
-                    IsEnabled="False"
-                    x:Name="BaseID_Button"/>
-
-            <Label Style="{StaticResource LabelMultiLine}"
-                   HorizontalTextAlignment="Center"
-                   TextColor="{StaticResource SecondaryTextColor}"
-                   Margin="50,0"
-                   Text="{lang:L10n WalletPage_Empty_Wallet_Text}" />
-            <Grid VerticalOptions="End"
-                  Margin="5,0,5,20">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Frame x:Name="ArrowFrame"
-                       HorizontalOptions="Center"
-                       VerticalOptions="End"
-                       HeightRequest="60"
-                       Padding="0"
-                       WidthRequest="21"
-                       Grid.Column="1"
-                       BackgroundColor="Transparent">
-                    <Image Aspect="AspectFill">
-                        <Image.Source>
-                            <svg:SvgImageSource Source="imagesources.EmptyWalletArrow_Image.svg" Width="14" Height="40" />
-                        </Image.Source>
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="ddl_deactivated.png"
+                                    x:Name="ddlImage"
+                                    Aspect="AspectFit"
+                                    HorizontalOptions="StartAndExpand"
+                                    VerticalOptions="Start">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding AddDdlTappedCommand, Source={x:Reference Root}}"/>
+                        </Image.GestureRecognizers>
                     </Image>
-                </Frame>
-            </Grid>
-        </StackLayout>
+
+                    <Image Source="vacCert_deactivated.png"
+                                    x:Name="vacImage"
+                                    Aspect="AspectFit"
+                                    HorizontalOptions="EndAndExpand"
+                                    VerticalOptions="Start">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding AddVacCertTappedCommand, Source={x:Reference Root}}"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="addCard.png"
+                                    x:Name="addImage"
+                                    Aspect="AspectFit"
+                                    HorizontalOptions="StartAndExpand"
+                                    VerticalOptions="Start">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding AddDocumentTappedCommand, Source={x:Reference Root}}"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+
+                    <BoxView HorizontalOptions="EndAndExpand" 
+                             VerticalOptions="Start"/>
+                </StackLayout>
+
+            </StackLayout>
+        </Grid>
     </Grid>
 </ContentPage>

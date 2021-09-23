@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IDWallet.Views.DDL.Content.DdlReadView"
+             xmlns:lang="clr-namespace:IDWallet.Extensions"
+             xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             BackgroundColor="{StaticResource BackgroundColor}"
+             x:Name="Root">
+  <ContentView.Content>
+        <StackLayout>
+            <Label Style="{StaticResource BaseIDHeaderLabel}"
+                   HorizontalOptions="StartAndExpand"
+                   HorizontalTextAlignment="Start"
+                   Text="{lang:L10n DdlPage_StartScreen_Header_Label}"/>
+            <Label Style="{StaticResource BaseIDBodyLabel}"
+               Text="{lang:L10n DdlPage_ReadIdScreen_Body_Label}"
+               Margin="0,0,0,10"/>
+            <Label Style="{StaticResource BaseIDBodyLabel}"
+               Text="{lang:L10n DdlPage_ReadIdScreen_Security_Label}"
+               Margin="0,0,0,20"/>
+            <forms:AnimationView x:Name="AnimationView"
+                         Animation="loader.json"
+                         RepeatMode="Infinite"
+                         AutoPlay="True"
+                         HorizontalOptions="FillAndExpand"
+                         HeightRequest="150"
+                         Margin="0,20,0,0"
+                         IsVisible="{Binding IsActivityIndicatorVisible}"/>
+            <Button VerticalOptions="EndAndExpand"
+                Style="{StaticResource AcceptButton}"
+                Text="{lang:L10n DdlPage_ReadIdScreen_Button_Label}"
+                Clicked="Button_Clicked"
+                HorizontalOptions="FillAndExpand"
+                Margin="20,0"/>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

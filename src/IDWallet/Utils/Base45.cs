@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
 
 namespace IDWallet.Utils
@@ -20,9 +19,14 @@ namespace IDWallet.Utils
         static Base45()
         {
             for (int i = 0; i < Base45.DecodingTable.Length; i++)
+            {
                 DecodingTable[i] = -1;
+            }
+
             for (int i = 0; i < 45; i++)
+            {
                 DecodingTable[Alphabet[i]] = i;
+            }
         }
 
 
@@ -45,12 +49,18 @@ namespace IDWallet.Utils
                 int i1 = coded[ip++];
                 int i2 = (ip < coded.Length ? coded[ip] : 0);
                 if (i0 > 127 || i1 > 127 || i2 > 127)
+                {
                     throw new ArgumentException("Illegal character in Base45 encoded data.");
+                }
+
                 int b0 = DecodingTable[i0];
                 int b1 = (ip <= coded.Length ? DecodingTable[i1] : 0);
                 int b2 = (ip < coded.Length ? DecodingTable[i2] : 0);
                 if (b0 < 0 || b1 < 0 || b2 < 0)
+                {
                     throw new ArgumentException("Illegal character in Base45 encoded data.");
+                }
+
                 int value = b0 + 45 * b1 + 45 * 45 * b2;
                 int o0 = (value / 256);
                 int o1 = (value % 256);

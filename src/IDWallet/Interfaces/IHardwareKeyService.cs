@@ -2,7 +2,7 @@
 {
     public interface IHardwareKeyService
     {
-        string GetPublicKeyAsBase64(byte[] nonce);
-        string Sign(byte[] nonce);
+        string GetPublicKeyAsBase64(byte[] nonce, string alias);
+        string Sign(byte[] nonce, string alias);
     }
 }

@@ -2,7 +2,8 @@
 <base:CustomPopUp xmlns="http://xamarin.com/schemas/2014/forms" 
                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                   xmlns:base="clr-namespace:IDWallet.Views.Customs.PopUps"
-                  xmlns:lang="clr-namespace:IDWallet.Extensions" xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+                  xmlns:lang="clr-namespace:IDWallet.Extensions" 
+                  xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
                   x:Class="IDWallet.Views.BaseId.PopUps.ReadyToScanPopUp"
                   x:Name="Root">
     <base:CustomPopUp.Resources>
@@ -62,6 +63,7 @@
                                     Style="{StaticResource AcceptButton}"
                                     HorizontalOptions="FillAndExpand"
                                     Margin="70,0"
+                                    TextColor="{StaticResource SecondaryButtonColor}"
                                     Clicked="OnPopUpCanceled"/>
                         </StackLayout>
                     </StackLayout>

@@ -69,7 +69,7 @@ namespace IDWallet.Droid.AusweisSDK
 
                 return ausweisSdk.Send(ausweisSdkCallback.SessionID, command);
             }
-            catch (System.Exception e)
+            catch (System.Exception)
             {
                 return false;
             }

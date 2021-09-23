@@ -7,7 +7,7 @@ namespace IDWallet.Views.BaseId.PopUps
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class WrongPINPopUp : CustomPopUp
     {
-        public WrongPINPopUp(int triesLeft, string bodyText1)
+        public WrongPINPopUp(int triesLeft, string bodyText)
         {
             InitializeComponent();
 

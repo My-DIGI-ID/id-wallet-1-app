@@ -24,7 +24,6 @@ using Plugin.Permissions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
@@ -276,11 +275,11 @@ namespace IDWallet.Views.Inbox.Content
 
                 try
                 {
-                    string baseIdIssuerDid = credentialOfferNotification.CredentialRecord.CredentialDefinitionId.Split(':')[0];
-                    if (baseIdIssuerDid == "Vq2C7Wfc44Q1cSroPuXaw2" || baseIdIssuerDid == "MGfd8JjWRoiXMm2YGL4SGj")
+                    string issuerDid = credentialOfferNotification.CredentialRecord.CredentialDefinitionId.Split(':')[0];
+                    if (issuerDid == "Vq2C7Wfc44Q1cSroPuXaw2" || issuerDid == "MGfd8JjWRoiXMm2YGL4SGj" || issuerDid == "9hsRe5jdzAbbyLAStV6sPc" || issuerDid == "KqtBRiQSyWqnzaxN3u2d7G")
                     {
-                        ConnectionRecord baseIdConnection = credentialOfferNotification.ConnectionRecord;
-                        string revocationPassphrase = baseIdConnection.GetTag(WalletParams.KeyRevocationPassphrase);
+                        ConnectionRecord connection = credentialOfferNotification.ConnectionRecord;
+                        string revocationPassphrase = connection.GetTag(WalletParams.KeyRevocationPassphrase);
 
                         (CredentialRequestMessage request, CredentialRecord record) = await _credentialService.CreateRequestAsync(context, credentialOfferNotification.RecordId);
                         await _messageService.SendAsync(context, request, credentialOfferNotification.ConnectionRecord);
@@ -333,7 +332,7 @@ namespace IDWallet.Views.Inbox.Content
                         }
                     }
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
                     BasicPopUp alertPopUp = new BasicPopUp(
                         Lang.PopUp_Credential_Error_Title,
@@ -516,8 +515,28 @@ namespace IDWallet.Views.Inbox.Content
                     }
                     else
                     {
-                        ProofMissingCredentialsPopUp popUp = new ProofMissingCredentialsPopUp(request, proofViewModel.FailedRequests);
-                        await popUp.ShowPopUp();
+                        if (proofViewModel.DriverLicenseIsValid)
+                        {
+                            ProofMissingCredentialsPopUp popUp2 = new ProofMissingCredentialsPopUp(request, proofViewModel.FailedRequests);
+                            await popUp2.ShowPopUp();
+                        }
+                        else
+                        {
+                            ExpiredDDLPopUp popUp2 = new ExpiredDDLPopUp();
+                            PopUpResult popUpResult = await popUp2.ShowPopUp();
+
+                            if (popUpResult == PopUpResult.Accepted)
+                            {
+                                try
+                                {
+                                    await App.AutoAcceptViewModel.StartDdlFlow();
+                                }
+                                catch (Exception ex) when (ex.Message.Equals("NFC-ERROR") || ex.Message.Equals("SDK-NOT-CONNECTED-ERROR"))
+                                {
+                                    //ignore
+                                }
+                            }
+                        }
                     }
                 }
 

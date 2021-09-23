@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<base:CustomPage  xmlns:base="clr-namespace:IDWallet.Views.Customs.Pages" 
+                  xmlns="http://xamarin.com/schemas/2014/forms"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"             
+                  xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"      
+                  xmlns:lang="clr-namespace:IDWallet.Extensions"
+                  xmlns:iconize="clr-namespace:Plugin.Iconize;assembly=Plugin.Iconize"    
+                  x:Class="IDWallet.Views.Onboarding.OnboardingPage"
+                  BackgroundColor="{StaticResource OnboardingSecondaryColor}"
+                  x:Name="Root">
+    <base:CustomPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Frame Grid.Row="0"
+                   CornerRadius="0"
+                   HorizontalOptions="EndAndExpand"
+                   VerticalOptions="StartAndExpand"
+                   Margin="0"
+                   Padding="0,10,0,0">
+                <Image x:Name="PageImage"                               
+                        Aspect="AspectFit"
+                        VerticalOptions="FillAndExpand"
+                        HorizontalOptions="FillAndExpand"/>
+            </Frame>
+            <Grid Margin="20,0,20,32"
+                  Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <ScrollView>
+                    <StackLayout Grid.Row="0">
+                        <Label x:Name="Title"
+                           FontAttributes="Bold"
+                           Margin="0,0,20,0"
+                           FontSize="24"
+                           LineHeight="1.1"
+                           LineBreakMode="WordWrap"
+                           MaxLines="5"
+                           TextColor="{StaticResource OnboardingPrimaryColor}"/>
+                        <Label x:Name="Text"
+                           Margin="0,10,20,0"
+                           FontSize="16"
+                           LineHeight="1.2"
+                           TextColor="{StaticResource OnboardingTextColor}"
+                           MaxLines="50"
+                           LineBreakMode="WordWrap"/>
+                    </StackLayout>
+                </ScrollView>
+
+                <Grid Grid.Row="1"
+                  Margin="0,20,10,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Onboarding Indicators -->
+                    <Grid Grid.Row="0"
+                      Grid.Column="0"
+                      Margin="0,0,0,15"
+                      Padding="0"
+                      ColumnSpacing="7"
+                      VerticalOptions="EndAndExpand"
+                      HorizontalOptions="StartAndExpand">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Frame Grid.Column="0"
+                           BackgroundColor="{Binding Progress, Source={x:Reference Root}, Converter={StaticResource OnboardingProgressBarConverter}, ConverterParameter=0}"
+                           VerticalOptions="EndAndExpand"
+                           HorizontalOptions="Center"
+                           WidthRequest="10"
+                           HeightRequest="2"
+                           CornerRadius="1"/>
+
+                        <Frame Grid.Column="1"
+                           BackgroundColor="{Binding Progress, Source={x:Reference Root}, Converter={StaticResource OnboardingProgressBarConverter}, ConverterParameter=1}"
+                           VerticalOptions="EndAndExpand"
+                           HorizontalOptions="Center"
+                           WidthRequest="10"
+                           HeightRequest="2"
+                           CornerRadius="1"/>
+
+                        <Frame Grid.Column="2"
+                           BackgroundColor="{Binding Progress, Source={x:Reference Root}, Converter={StaticResource OnboardingProgressBarConverter}, ConverterParameter=2}"
+                           VerticalOptions="EndAndExpand"
+                           HorizontalOptions="Center"
+                           WidthRequest="10"
+                           HeightRequest="2"
+                           CornerRadius="1" />
+                    </Grid>
+
+                    <!-- Onboarding Button -->
+                    <Frame Grid.Row="0"
+                       Grid.Column="1"
+                       IsVisible="{Binding ArrowIsVisible, Source={x:Reference Root}}"
+                       BackgroundColor="{StaticResource OnboardingPrimaryColor}"
+                       HorizontalOptions="EndAndExpand"
+                       HeightRequest="50"
+                       WidthRequest="50"
+                       CornerRadius="25"
+                       Padding="0"
+                       Margin="0">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NextButtonTappedCommand, Source={x:Reference Root}}"/>
+                        </Frame.GestureRecognizers>
+                        <iconize:IconImage Icon="mdi-arrow-right"                                      
+                                       IconColor="{StaticResource OnboardingSecondaryColor}"
+                                       VerticalOptions="CenterAndExpand"
+                                       HorizontalOptions="CenterAndExpand"
+                                       IconSize="25"/>
+
+                    </Frame>
+
+                    <Frame Grid.Row="0"
+                       Grid.Column="1"
+                       IsVisible="{Binding ArrowIsVisible, Source={x:Reference Root}, Converter={StaticResource InverseBooleanConverter}}"
+                       BackgroundColor="{StaticResource OnboardingPrimaryColor}"
+                       HorizontalOptions="StartAndExpand"
+                       HeightRequest="50"
+                       WidthRequest="250"
+                       CornerRadius="10"
+                       Padding="0"
+                       Margin="0">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding FinishedButtonTappedCommand, Source={x:Reference Root}}"/>
+                        </Frame.GestureRecognizers>
+                        <Label Text="{lang:L10n OnboardingPage_Button_Text}"
+                           TextColor="{StaticResource OnboardingSecondaryColor}"
+                           FontSize="16"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"/>
+                    </Frame>
+                </Grid>
+            </Grid>            
+        </Grid>        
+    </base:CustomPage.Content>
+</base:CustomPage>

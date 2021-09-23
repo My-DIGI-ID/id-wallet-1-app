@@ -13,10 +13,10 @@ using Hyperledger.Aries.Contracts;
 using System;
 using System.ComponentModel;
 using Xamarin.Forms;
-using PlatformConfiguration = Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 using Xamarin.Forms.Svg;
 using Xamarin.Forms.Xaml;
+using PlatformConfiguration = Xamarin.Forms.PlatformConfiguration;
 using TabbedPage = Xamarin.Forms.TabbedPage;
 
 namespace IDWallet.Views

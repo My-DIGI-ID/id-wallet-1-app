@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="319px" height="117px" viewBox="0 0 319 117" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Group 15</title>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="295" height="93" rx="9.9"></rect>
+        <filter x="-6.6%" y="-17.7%" width="113.2%" height="141.9%" filterUnits="objectBoundingBox" id="filter-2">
+            <feMorphology radius="2" operator="dilate" in="SourceAlpha" result="shadowSpreadOuter1"></feMorphology>
+            <feOffset dx="0" dy="3" in="shadowSpreadOuter1" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="4" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.450980392   0 0 0 0 0.396078431   0 0 0 0 1  0 0 0 0.169006774 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Invision-Flow" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="empty2a" transform="translate(-28.000000, -396.000000)">
+            <g id="Group-9" transform="translate(20.000000, 140.000000)">
+                <g id="Group-4" transform="translate(20.000000, 160.000000)">
+                    <g id="Group-15" transform="translate(0.000000, 105.000000)">
+                        <g id="Rectangle">
+                            <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                            <use fill="#483DE1" fill-rule="evenodd" xlink:href="#path-1"></use>
+                        </g>
+                        <text id="Andere-(z.B.Arbeitge" font-family="IBMPlexSans-Bold, IBM Plex Sans" font-size="12.8" font-weight="bold" fill="#FFFFFF">
+                            <tspan x="124.556634" y="63.6647428">Others </tspan>
+                            <tspan x="92" y="80.6647428" font-family="IBMPlexSans, IBM Plex Sans" font-size="9.6" font-weight="normal">(e.g.employer certificate)</tspan>
+                        </text>
+                        <g id="Group-7" transform="translate(129.000000, 10.000000)">
+                            <g id="Add" fill="#FFFFFF" fill-rule="nonzero">
+                                <g id="noun_qr_1635943">
+                                    <path d="M0,0 L0,6.93333333 L6.93333333,6.93333333 L6.93333333,0 L0,0 Z M4.95255075,4.95255075 L1.98107973,4.95255075 L1.98107973,1.98107973 L4.95255075,1.98107973 L4.95255075,4.95255075 Z" id="Shape"></path>
+                                    <path d="M0,17.0666667 L0,24 L6.93333333,24 L6.93333333,17.0666667 L0,17.0666667 Z M4.95255075,22.0193023 L1.98107973,22.0193023 L1.98107973,19.0479586 L4.95255075,19.0479586 L4.95255075,22.0193023 Z" id="Shape"></path>
+                                    <path d="M17.0666667,0 L17.0666667,6.93333333 L24,6.93333333 L24,0 L17.0666667,0 Z M22.0189203,4.95255075 L19.0474492,4.95255075 L19.0474492,1.98107973 L22.0189203,1.98107973 L22.0189203,4.95255075 Z" id="Shape"></path>
+                                    <polygon id="Path" points="9.06666667 0 9.06666667 1.98107973 12.97768 1.98107973 12.97768 6.93333333 14.9333333 6.93333333 14.9333333 0"></polygon>
+                                    <polygon id="Path" points="10.9334733 22.0193023 10.9334733 17.0666667 9.06666667 17.0666667 9.06666667 24 12.8 24 12.8 22.0193023"></polygon>
+                                    <rect id="Rectangle" x="21.8666667" y="9.06666667" width="2.13333333" height="4.26666667"></rect>
+                                    <polygon id="Path" points="19.7333333 9.06666667 12.8 9.06666667 12.8 13.3333333 14.7809948 13.3333333 14.7809948 11.2 19.7333333 11.2"></polygon>
+                                    <rect id="Rectangle" x="4.26666667" y="12.8" width="6.93333333" height="2.13333333"></rect>
+                                    <polygon id="Path" points="9.16355306 3.73333333 9.16355306 8.82429796 0 8.82429796 0 14.9333333 2.03644694 14.9333333 2.03644694 10.8607449 11.2 10.8607449 11.2 3.73333333"></polygon>
+                                </g>
+                            </g>
+                            <g id="Add" transform="translate(20.000000, 18.000000)" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.87900997">
+                                <path d="M16,8 C16,12.4185 12.4185,16 8,16 C3.582,16 0,12.4185 0,8 C0,3.582 3.582,0 8,0 C12.4185,0 16,3.582 16,8 Z" id="Stroke-35"></path>
+                                <line x1="8" y1="5.2705" x2="8" y2="10.73" id="Stroke-37"></line>
+                                <line x1="10.73" y1="8" x2="5.2705" y2="8" id="Stroke-39"></line>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

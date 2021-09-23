@@ -33,7 +33,7 @@
                             <Button Style="{StaticResource CancelButton}"
                                     Clicked="OnPopUpCanceled"
                                     Text="{lang:L10n PopUp_Invalid_Invitation_Cancel_Button}" />
-                            <Button Style="{StaticResource DeleteButton}"
+                            <Button Style="{StaticResource AcceptButton}"
                                     Clicked="OnPopUpDeleted"
                                     Text="{lang:L10n PopUp_Invalid_Invitation_Accept_Button}" />
                         </StackLayout>

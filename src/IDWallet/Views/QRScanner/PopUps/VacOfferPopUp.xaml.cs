@@ -9,7 +9,7 @@ namespace IDWallet.Views.QRScanner.PopUps
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class VacOfferPopUp : CustomPopUp
     {
-        private VacOfferMessage _offerMessage;
+        private readonly VacOfferMessage _offerMessage;
         public VacOfferPopUp(VacOfferMessage vacOfferMessage)
         {
             InitializeComponent();

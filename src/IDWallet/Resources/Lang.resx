@@ -178,9 +178,10 @@
     <value>Attention:</value>
   </data>
   <data name="ChangeLedgerPage_EESDI" xml:space="preserve">
-    <value>EESDI Pilot Ledger</value>
+    <value>EESDI Productive Ledger</value>
   </data>
-  <data name="ChangeLedgerPage_Esatus" xml:space="preserve">
+  <data name="ChangeLedgerPage_
+		" xml:space="preserve">
     <value>esatus Test Ledger</value>
   </data>
   <data name="ChangeLedgerPage_IDunionTest" xml:space="preserve">
@@ -349,10 +350,10 @@
     <value>To</value>
   </data>
   <data name="WalletPage_Empty_Wallet_Title" xml:space="preserve">
-    <value>Your wallet is empty</value>
+    <value>Your documents</value>
   </data>
   <data name="WalletPage_Empty_Wallet_Text" xml:space="preserve">
-    <value>Or scan a QR code to fill your wallet</value>
+    <value>Your ID Wallet is still empty. Add your first document by clicking below:</value>
   </data>
   <data name="WalletPage_Empty_Wallet_BaseID_Text" xml:space="preserve">
     <value>Create your Basis-ID:</value>
@@ -1506,13 +1507,13 @@
     <value>Credentials</value>
   </data>
   <data name="Tabbar_History" xml:space="preserve">
-    <value>History</value>
+    <value>Activity</value>
   </data>
   <data name="Tabbar_Proofs" xml:space="preserve">
     <value>Proofs</value>
   </data>
   <data name="Tabbar_Scan" xml:space="preserve">
-    <value>Scan</value>
+    <value>QR-Code Scan</value>
   </data>
   <data name="Tabbar_Wallet" xml:space="preserve">
     <value>Wallet</value>
@@ -1650,19 +1651,16 @@
     <value>Read ID card</value>
   </data>
   <data name="BaseIDPage_StartScreen_Header_Label" xml:space="preserve">
-    <value>Add Basis-ID</value>
-  </data>
-  <data name="BaseIDPage_StartScreen_Body_Label" xml:space="preserve">
-    <value>As part of the "European Identity Ecosystem" project, Bundesdruckerei GmbH issues a Basis-ID for the Federal Chancellery after successful identification using the online ID card function of the ID card. This Basis-ID is available to you as part of a test operation for subsequent use in accordance with the following provisions.</value>
+    <value>Create your Basis-ID</value>
   </data>
   <data name="BaseIDPage_StartScreen_Button_Label" xml:space="preserve">
-    <value>Let's go</value>
+    <value>I have it all! Start now</value>
   </data>
   <data name="BaseIDPage_StartScreen_User_Agreement_Label" xml:space="preserve">
     <value>User agreement</value>
   </data>
-  <data name="BaseIDPage_StartScreen_Accept_Before_Label" xml:space="preserve">
-    <value>Accept </value>
+  <data name="BaseIDPage_StartScreen_User_Agreement_Label2" xml:space="preserve">
+    <value />
   </data>
   <data name="PopUp_BaseID_AccessRights_Title" xml:space="preserve">
     <value>You would like to identify yourself for the following process</value>
@@ -1907,8 +1905,8 @@
   <data name="LoginPage_Title" xml:space="preserve">
     <value>ID Wallet</value>
   </data>
-  <data name="BaseIDPage_StartScreen_Accept_After_Label" xml:space="preserve">
-    <value />
+  <data name="BaseIDPage_StartScreen_Privacy_Consent_Label2" xml:space="preserve">
+    <value> to the processing of your personal data and the </value>
   </data>
   <data name="BaseIDPage_PINScreen_ChangePIN_Body_Label" xml:space="preserve">
     <value>Please enter your current ID PIN.</value>
@@ -1941,7 +1939,7 @@
     <value>Okay</value>
   </data>
   <data name="PopUp_NFC_Not_Enabled_Text" xml:space="preserve">
-    <value>To create your Basis-ID you need to activate NFC on your mobile device.</value>
+    <value>To perform this step, you need to activate NFC on your mobile device.</value>
   </data>
   <data name="PopUp_NFC_Not_Enabled_Title" xml:space="preserve">
     <value>NFC not enabled</value>
@@ -2028,7 +2026,7 @@
     <value>You have entered an incorrect Transport-PIN twice.</value>
   </data>
   <data name="PopUp_BaseID_Wrong_PIN_Pre_Text_2" xml:space="preserve">
-    <value>You have entered the wrong Transport-PIN. You have </value>
+    <value>You have entered an incorrect Transport-PIN or the one-time possible use has already been made. You have </value>
   </data>
   <data name="PopUp_Vitual_Device_Title" xml:space="preserve">
     <value>Warning</value>
@@ -2055,10 +2053,10 @@
     <value>Please enter your wallet PIN.</value>
   </data>
   <data name="PopUp_Add_Vac_Title" xml:space="preserve">
-    <value>Storage of QR code</value>
+    <value>Storage of COVID certificate</value>
   </data>
   <data name="PopUp_Add_Vac_Message" xml:space="preserve">
-    <value>Please confirm that you wish to proceed with storing the QR code in your Wallet.</value>
+    <value>Please confirm that you wish to proceed with storing the COVID certificate in your Wallet.</value>
   </data>
   <data name="PopUp_Add_Vac_Button_Ok" xml:space="preserve">
     <value>Okay</value>
@@ -2225,8 +2223,8 @@
   <data name="LabelTextConvert_StandardisedGivenName" xml:space="preserve">
     <value>Standardised Given Name</value>
   </data>
-  <data name="BaseIDPage_StartScreen_Middle_Label" xml:space="preserve">
-    <value> to the processing of your personal data and acknowledgement of the </value>
+  <data name="BaseIDPage_StartScreen_Privacy_Policy_Label2" xml:space="preserve">
+    <value />
   </data>
   <data name="BaseIDPage_StartScreen_Privacy_Consent_Label" xml:space="preserve">
     <value>Declaration of consent</value>
@@ -2237,11 +2235,11 @@
   <data name="PopUp_BaseID_ReadyToScan_Process_Before_Label" xml:space="preserve">
     <value>Scan process: </value>
   </data>
-  <data name="BaseIDPage_StartScreen_Revoke_Label" xml:space="preserve">
-    <value>Attention: If a Basis-ID has already been created with this card, it will be revoked.</value>
+  <data name="BaseIDPage_StartScreen_Privacy_Consent_Label1" xml:space="preserve">
+    <value>Acknowledge the </value>
   </data>
   <data name="BaseIDPage_ReadIdScreen_Security_Label" xml:space="preserve">
-    <value>If you continue, a device check (Android: SafetyNet, iOS: DeviceCheck) is performed to ensure ID Wallet authenticity. The results of this check will be sent to Bundesdruckerei GmbH for verification.</value>
+    <value>If you continue, a device check (Android: SafetyNet, iOS: DeviceCheck) is performed to check ID Wallet authenticity. The results of this check will be sent to Bundesdruckerei GmbH for verification.</value>
   </data>
   <data name="LabelTextConvert_DriveName" xml:space="preserve">
     <value>1. Name</value>
@@ -2292,12 +2290,312 @@
     <value>Please note that the QR code may contain personal data. People who have access to the QR code can read the data it contains.</value>
   </data>
   <data name="Qr_History_Message_1" xml:space="preserve">
-    <value>QR code added</value>
+    <value>COVID certificate added</value>
   </data>
   <data name="Qr_History_Message_2" xml:space="preserve">
-    <value>you have added the following QR code.</value>
+    <value>you have added the following COVID certificate.</value>
   </data>
   <data name="HwProofNotice" xml:space="preserve">
     <value>Note: This check requests the Basis-ID information for device binding. Please note that these also represent a personal reference. Furthermore, a signature is added to the verification using the device binding keys.</value>
+  </data>
+  <data name="DdlPage_StartScreen_Body_Label" xml:space="preserve">
+    <value>The digital driving licence represents your driving licence in your ID Wallet and is created using the online ID function of your ID card. Go through the short process and add your digital driving licence to your ID Wallet. For this you will need:</value>
+  </data>
+  <data name="DdlPage_StartScreen_Header_Label" xml:space="preserve">
+    <value>Create your digital driving license</value>
+  </data>
+  <data name="PopUp_Ddl_KBA_Error_001_Text" xml:space="preserve">
+    <value>The digital driving license may only be issued if there is a unique hit in the Central register of driving licences.</value>
+  </data>
+  <data name="PopUp_Ddl_KBA_Error_001_Title" xml:space="preserve">
+    <value>No unique identification possible</value>
+  </data>
+  <data name="PopUp_Ddl_KBA_Error_002_Text" xml:space="preserve">
+    <value>No hit could be found for your personal data in the Central register of driving licences.</value>
+  </data>
+  <data name="PopUp_Ddl_KBA_Error_002_Title" xml:space="preserve">
+    <value>No entry found in the Central register of driving licences</value>
+  </data>
+  <data name="PopUp_Ddl_KBA_Error_003_Text" xml:space="preserve">
+    <value>For your person there are negative entries in the register (e.g. driving ban).</value>
+  </data>
+  <data name="PopUp_Ddl_KBA_Error_003_Title" xml:space="preserve">
+    <value>Negative entries in the register</value>
+  </data>
+  <data name="PopUp_Ddl_KBA_Error_004_Text" xml:space="preserve">
+    <value>Due to a revocation of the driving licence, no valid German driving licence could be determined.</value>
+  </data>
+  <data name="PopUp_Ddl_KBA_Error_004_Title" xml:space="preserve">
+    <value>No valid driving license available</value>
+  </data>
+  <data name="PopUp_Ddl_KBA_Error_005_Text" xml:space="preserve">
+    <value>Sorry, there is currently an error. Please try again later.</value>
+  </data>
+  <data name="PopUp_Ddl_KBA_Error_005_Title" xml:space="preserve">
+    <value>Technical error</value>
+  </data>
+  <data name="PopUp_Ddl_KBA_Error_Button" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="PopUp_Ddl_Offer_Accept_Button" xml:space="preserve">
+    <value>Accept</value>
+  </data>
+  <data name="PopUp_Ddl_Offer_Delete_Button" xml:space="preserve">
+    <value>Decline</value>
+  </data>
+  <data name="PopUp_Ddl_Offer_Send_Label" xml:space="preserve">
+    <value> sends you </value>
+  </data>
+  <data name="PopUp_Ddl_Offer_Text" xml:space="preserve">
+    <value>Please check if you want to accept this data.</value>
+  </data>
+  <data name="DdlPage_SuccessScreen_Button" xml:space="preserve">
+    <value>Show digital driving license</value>
+  </data>
+  <data name="DdlPage_SuccessScreen_Text" xml:space="preserve">
+    <value>Your digital driving license is now available in your Wallet.</value>
+  </data>
+  <data name="DdlPage_SuccessScreen_Title" xml:space="preserve">
+    <value>Digital driving license created successfully</value>
+  </data>
+  <data name="PopUp_Expired_DDL_Text" xml:space="preserve">
+    <value>The digital driving license must be up-to-date on a daily basis. Before sharing your data, please make sure that your digital driving license was issued today.</value>
+  </data>
+  <data name="PopUp_Expired_DDL_Title" xml:space="preserve">
+    <value>Digital driving license must be renewed</value>
+  </data>
+  <data name="DdlPage_StartScreen_Notification_Label" xml:space="preserve">
+    <value>Note: A previously saved digital driving license will be replaced.</value>
+  </data>
+  <data name="DdlIDPage_StartScreen_Acknowledge_Before_Label" xml:space="preserve">
+    <value>Acknowledge </value>
+  </data>
+  <data name="PopUp_DDL_AccessRights_Provider_Label_2" xml:space="preserve">
+    <value>Kraftfahrt-Bundesamt</value>
+  </data>
+  <data name="PopUp_DDL_AccessRights_Purpose_Label_2" xml:space="preserve">
+    <value>Proof of identity for issuing the digital driving license</value>
+  </data>
+  <data name="PopUp_DDL_Auth_Error_Title" xml:space="preserve">
+    <value>Digital driving license error</value>
+  </data>
+  <data name="PopUp_DDL_Auth_Error_Card_Text" xml:space="preserve">
+    <value>The authenticity of your ID card could not be verified. Please make sure that you are using a genuine ID card. Please note that test applications require the use of a test ID card.</value>
+  </data>
+  <data name="PopUp_DDL_Auth_Error_Button" xml:space="preserve">
+    <value>Okay</value>
+  </data>
+  <data name="PopUp_DDL_Auth_Error_Text" xml:space="preserve">
+    <value>Something went wrong when issuing your digital driving license. Please start the process again.</value>
+  </data>
+  <data name="PopUp_Expired_DDL_Cancel_Button" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="PopUp_Expired_DDL_Accept_Button" xml:space="preserve">
+    <value>Renew</value>
+  </data>
+  <data name="PopUp_Ddl_Offer_Notification_Text" xml:space="preserve">
+    <value>Your expired credential will be deleted after you accept it.</value>
+  </data>
+  <data name="DdlPage_Connecting_Title" xml:space="preserve">
+    <value>Identification is carried out</value>
+  </data>
+  <data name="DdlPage_Connecting_Title_Issue" xml:space="preserve">
+    <value>Digital driving license is issued</value>
+  </data>
+  <data name="DdlPage_ReadIdScreen_Body_Label" xml:space="preserve">
+    <value>Please have your wallet PIN, your ID card and the corresponding ID card or transport PIN ready.</value>
+  </data>
+  <data name="DdlPage_ReadIdScreen_Button_Label" xml:space="preserve">
+    <value>Start process</value>
+  </data>
+  <data name="DdlPage_ReadIdScreen_Header_Label" xml:space="preserve">
+    <value>Read ID card</value>
+  </data>
+  <data name="DdlPage_ReadIdScreen_Security_Label" xml:space="preserve">
+    <value>If you continue, a device check will be performed to verify the authenticity of your ID Wallet. The results of this check will be sent to the Kraftfahrt-Bundesamt for verification.</value>
+  </data>
+  <data name="PopUp_Ddl_AccessRights_Text" xml:space="preserve">
+    <value>Please make sure you want to submit these information.</value>
+  </data>
+  <data name="PopUp_Ddl_AccessRights_Continue_Button" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="DdlPage_StartScreen_Button_Label" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="WalletPage_Empty_Wallet_Button_Text" xml:space="preserve">
+    <value>Add document</value>
+  </data>
+  <data name="PopUp_AddDocument_Info_Text" xml:space="preserve">
+    <value>We are currently working with several partners to add more document types that will appear here in the future - such as your hotel access card or your concert ticket.</value>
+  </data>
+  <data name="PopUp_AddDocument_Text" xml:space="preserve">
+    <value>Click here:</value>
+  </data>
+  <data name="PopUp_AddDocument_Title" xml:space="preserve">
+    <value>You can already add the following documents:</value>
+  </data>
+  <data name="PopUp_AddVacCert_Button_Text" xml:space="preserve">
+    <value>Scan now</value>
+  </data>
+  <data name="PopUp_AddVacCert_Text_Info" xml:space="preserve">
+    <value>You will either receive this by POST with your COVID vaccination certificate or you can have it generated at participating pharmacies.</value>
+  </data>
+  <data name="PopUp_AddVacCert_Text_One" xml:space="preserve">
+    <value>Scan the QR code from your EU COVID certificate. The certificate will then be digitally transferred directly to the ID Wallet app.</value>
+  </data>
+  <data name="PopUp_AddVacCert_Text_Two" xml:space="preserve">
+    <value>To do this, simply hold your camera over the QR code.</value>
+  </data>
+  <data name="PopUp_AddVacCert_Title" xml:space="preserve">
+    <value>Add vaccination certificate</value>
+  </data>
+  <data name="BaseIDPage_StartScreen_Second_Button_Label" xml:space="preserve">
+    <value>I am still missing something</value>
+  </data>
+  <data name="BaseIDPage_StartScreen_Requirement_Body1" xml:space="preserve">
+    <value>How can I tell if the online ID function is activated on my ID card?</value>
+  </data>
+  <data name="BaseIDPage_StartScreen_Requirement_Body2" xml:space="preserve">
+    <value>Where can I find these PINs?</value>
+  </data>
+  <data name="BaseIDPage_StartScreen_Requirement_Title1" xml:space="preserve">
+    <value>Identity card incl. online ID function (since 2017)</value>
+  </data>
+  <data name="BaseIDPage_StartScreen_Requirement_Title2" xml:space="preserve">
+    <value>Your ID card or transport PIN</value>
+  </data>
+  <data name="BaseIDPage_StartScreen_User_Agreement_Label1" xml:space="preserve">
+    <value>Accept </value>
+  </data>
+  <data name="PopUp_MissingInformation_Body1" xml:space="preserve">
+    <value>In case you miss the transport PIN:</value>
+  </data>
+  <data name="PopUp_MissingInformation_Body2" xml:space="preserve">
+    <value>Please apply for the letter with the PIN</value>
+  </data>
+  <data name="PopUp_MissingInformation_Body3" xml:space="preserve">
+    <value>at your citizens' registration office</value>
+  </data>
+  <data name="PopUp_MissingInformation_Body4" xml:space="preserve">
+    <value>If you have further questions or problems, send an</value>
+  </data>
+  <data name="PopUp_MissingInformation_Body5" xml:space="preserve">
+    <value>email to our support team</value>
+  </data>
+  <data name="PopUp_MissingInformation_Title" xml:space="preserve">
+    <value>I am still missing something</value>
+  </data>
+  <data name="PopUp_StartInfo1_Body1" xml:space="preserve">
+    <value>Since 2017, this function has been automatically activated with every newly issued ID card.</value>
+  </data>
+  <data name="PopUp_StartInfo1_Body2" xml:space="preserve">
+    <value>Note: For ID cards from 2011 onwards, the function was optional.</value>
+  </data>
+  <data name="PopUp_StartInfo1_Body3" xml:space="preserve">
+    <value>In addition, you can check whether your online ID function is activated at any time using software for the online ID function, such as the free </value>
+  </data>
+  <data name="PopUp_StartInfo1_Body4" xml:space="preserve">
+    <value>.</value>
+  </data>
+  <data name="PopUp_StartInfo1_Body5" xml:space="preserve">
+    <value>If the online ID function is deactivated, you can have it activated at the citizens' registration office responsible for you.</value>
+  </data>
+  <data name="PopUp_StartInfo1_Body6" xml:space="preserve">
+    <value>You can find the Bürgeramt responsible for you, for example, on </value>
+  </data>
+  <data name="PopUp_StartInfo1_Title" xml:space="preserve">
+    <value>How can I tell if the online ID function is activated on my ID card?</value>
+  </data>
+  <data name="PopUp_StartInfo2_Body1" xml:space="preserve">
+    <value>ID PIN:</value>
+  </data>
+  <data name="PopUp_StartInfo2_Body2" xml:space="preserve">
+    <value>This is the 6-digit PIN that you either created yourself in the ID Card App2 or can set up with the transport PIN below.</value>
+  </data>
+  <data name="PopUp_StartInfo2_Body3" xml:space="preserve">
+    <value>Transport-PIN:</value>
+  </data>
+  <data name="PopUp_StartInfo2_Body4" xml:space="preserve">
+    <value>This is the 5-digit PIN that you received by letter together with your identity card.</value>
+  </data>
+  <data name="PopUp_StartInfo2_Body5" xml:space="preserve">
+    <value>If you have lost your transport PIN, you must go to your local Citizens' Advice Bureau and apply for it.</value>
+  </data>
+  <data name="PopUp_StartInfo2_Body6" xml:space="preserve">
+    <value>More info</value>
+  </data>
+  <data name="PopUp_StartInfo2_Title" xml:space="preserve">
+    <value>Where can I find these PINs?</value>
+  </data>
+  <data name="BaseIDPage_StartScreen_Body_Label" xml:space="preserve">
+    <value>The Basis-ID represents your identity in your ID Wallet and is created using the online ID card function of your ID card. Go through the short process and add your Basis-ID to your ID Wallet.</value>
+  </data>
+  <data name="OnboardingPage_Text_First" xml:space="preserve">
+    <value>Add IDs, documents and proofs to the ID Wallet and have them digitally at hand at any time via your smartphone.</value>
+  </data>
+  <data name="OnboardingPage_Text_Second" xml:space="preserve">
+    <value>Your data is encrypted and can be deleted by you at any time. In addition, you can specify with whom you want to share which detailed data and track this - for example, only your age in years and not your date of birth with date information.</value>
+  </data>
+  <data name="OnboardingPage_Text_Third" xml:space="preserve">
+    <value>Once you have added your documents, you can use the ID Wallet for a variety of purposes - for example, applying for your new SIM card, digital check-in at the hotel, etc.</value>
+  </data>
+  <data name="OnboardingPage_Title_First" xml:space="preserve">
+    <value>Create your personal digital wallet with the ID Wallet</value>
+  </data>
+  <data name="OnboardingPage_Title_Second" xml:space="preserve">
+    <value>Keep your verification documents safe and secure</value>
+  </data>
+  <data name="OnboardingPage_Title_Third" xml:space="preserve">
+    <value>Identify yourself easily and digitally with your ID Wallet</value>
+  </data>
+  <data name="OnboardingPage_Button_Text" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="PopUp_AddVacCert_Info_Text" xml:space="preserve">
+    <value>You will either receive this by mail with your COVID vaccination certificate or you can have it generated at participating pharmacies.</value>
+  </data>
+  <data name="PopUp_NFC_No_NFC_Text" xml:space="preserve">
+    <value>Your device does not have an NFC interface, unfortunately this function is not available to you.</value>
+  </data>
+  <data name="PopUp_NFC_No_NFC_Title" xml:space="preserve">
+    <value>No NFC</value>
+  </data>
+  <data name="PopUp_NFC_No_NFC_Button" xml:space="preserve">
+    <value>Okay</value>
+  </data>
+  <data name="PopUp_SDK_Not_Connected_Title" xml:space="preserve">
+    <value>AusweisApp2 SDK not yet connected</value>
+  </data>
+  <data name="PopUp_SDK_Not_Connected_Button" xml:space="preserve">
+    <value>Okay</value>
+  </data>
+  <data name="PopUp_SDK_Not_Connected_Text" xml:space="preserve">
+    <value>Sorry, the AusweisApp2 SDK is not connected yet, please try again.</value>
+  </data>
+  <data name="BaseIDPage_StartScreen_Body_Label2" xml:space="preserve">
+    <value>For this you will need:</value>
+  </data>
+  <data name="DdlPage_StartScreen_Body_Label2" xml:space="preserve">
+    <value>For this you will need:</value>
+  </data>
+  <data name="PopUp_DDL_Auth_Message_Error_Text" xml:space="preserve">
+    <value>Something went wrong when issuing your digital driving license. Please check if your ID card is still valid and start the process again.</value>
+  </data>
+  <data name="PopUp_BaseID_Auth_Message_Error_Text" xml:space="preserve">
+    <value>Something went wrong while issuing your Basis-ID. Please check if your ID card is still valid and start the process again.</value>
+  </data>
+  <data name="PopUp_StartInfo2_Body7" xml:space="preserve">
+    <value>Federal Ministry of the Interior, Building and Community</value>
+  </data>
+  <data name="PopUp_AddVacCertSoon_Title" xml:space="preserve">
+    <value>COVID Certificate can be added soon</value>
+  </data>
+  <data name="PopUp_AddVacCertSoon_Text" xml:space="preserve">
+    <value>Shortly you will be able to add your COVID Certificate here and use it within the ID Wallet by scanning the provided QR code.</value>
+  </data>
+  <data name="PopUp_AddVacCertSoonClose_Button_Text" xml:space="preserve">
+    <value>Close</value>
   </data>
 </root>

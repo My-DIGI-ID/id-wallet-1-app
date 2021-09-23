@@ -1,7 +1,6 @@
 ﻿using IDWallet.Resources;
 using IDWallet.ViewModels;
 using IDWallet.Views.Customs.PopUps;
-using System;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;

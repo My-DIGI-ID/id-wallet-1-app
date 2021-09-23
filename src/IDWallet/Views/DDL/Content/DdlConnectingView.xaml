@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:lang="clr-namespace:IDWallet.Extensions" 
+             xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             x:Class="IDWallet.Views.DDL.Content.DdlConnectingView">
+  <ContentView.Content>
+        <StackLayout>
+            <Label Style="{StaticResource BaseIDHeaderLabel}"
+               Text="{lang:L10n DdlPage_Connecting_Title}"
+               IsVisible="{Binding IsNotMoveTextVisible}"/>
+            <Label Style="{StaticResource BaseIDHeaderLabel}"
+               Text="{lang:L10n DdlPage_Connecting_Title_Issue}"
+               IsVisible="{Binding IsNotMoveTextVisible, Converter={StaticResource InverseBooleanConverter}}"/>
+            <Label Style="{StaticResource BaseIDBodyLabel}"
+               Text="{lang:L10n BaseIDPage_Connecting_Text}"
+               IsVisible="{Binding IsNotMoveTextVisible}"/>
+
+            <forms:AnimationView x:Name="AnimationView"
+                         Animation="loader.json"
+                         RepeatMode="Infinite"
+                         AutoPlay="True"
+                         HorizontalOptions="FillAndExpand"
+                         HeightRequest="150"
+                         Margin="0,20,0,0"/>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

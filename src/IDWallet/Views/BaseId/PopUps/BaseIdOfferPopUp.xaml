@@ -7,7 +7,7 @@
                   xmlns:svg="clr-namespace:Xamarin.Forms.Svg;assembly=SvgImageSource"
                   x:Class="IDWallet.Views.BaseId.PopUps.BaseIdOfferPopUp"
                   x:Name="Root">
-    
+
     <base:CustomPopUp.Resources>
         <ResourceDictionary>
             <Style x:Key="PopUpButtonArea" TargetType="StackLayout">
@@ -18,7 +18,7 @@
             </Style>
         </ResourceDictionary>
     </base:CustomPopUp.Resources>
-    
+
     <base:CustomPopUp.Content>
         <StackLayout Style="{StaticResource PopUpStackLayout}">
             <Frame Style="{StaticResource PopUpFrame}"
@@ -109,7 +109,7 @@
                                                        IsVisible="{Binding InfoStackIsVisible}"/>
                                 </Frame>
 
-                                
+
                             </StackLayout>
 
                             <BoxView BackgroundColor="{StaticResource SeparatorColor}"
@@ -124,10 +124,16 @@
                                     <BindableLayout.ItemTemplate>
                                         <DataTemplate>
                                             <StackLayout Spacing="0">
-                                                <Label Text="{Binding Name, Converter={StaticResource LabelTextConverter}}"                                                    
-                                                       FontSize="12"
+                                                <Label FontSize="12"
                                                        TextColor="{StaticResource AttributeNameColor}"
-                                                       VerticalTextAlignment="End" />
+                                                       VerticalTextAlignment="End">
+                                                    <Label.Text>
+                                                        <MultiBinding Converter="{StaticResource MultiLabelTextConverter}">
+                                                            <Binding Path="Name"/>
+                                                            <Binding Path="Ausweis"/>
+                                                        </MultiBinding>
+                                                    </Label.Text>
+                                                </Label>
                                                 <Label Text="{Binding Value}"
                                                        IsVisible="{Binding Name, Converter={StaticResource ValueVisibilityConverter}}"
                                                        FontSize="16"

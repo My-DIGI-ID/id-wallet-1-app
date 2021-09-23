@@ -2,7 +2,7 @@
 
 namespace IDWallet.Models.AusweisSDK
 {
-    public class AusweisSdkInvitation
+    public class SdkInvitation
     {
         [JsonProperty("invitationUrl")]
         public string InvitationUrl { get; set; }

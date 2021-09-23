@@ -90,7 +90,7 @@ namespace IDWallet
                 _appDeeplinkService = Container.Resolve<IAppDeeplinkService>();
                 _secureStorageService = Container.Resolve<ICustomSecureStorageService>();
                 _agentProvider = Container.Resolve<ICustomAgentProvider>();
-                _baseIdViewModel = App.Container.Resolve<BaseIdViewModel>();
+                _baseIdViewModel = Container.Resolve<BaseIdViewModel>();
                 _ = Container.Resolve<ConnectionsViewModel>();
 
                 NativeStorageService = _secureStorageService;
@@ -200,8 +200,8 @@ namespace IDWallet
         public static bool WaitForConnection { get; set; } = false;
         public static bool WaitForProof { get; set; } = false;
         public static string BaseIdConnectionId { get; set; } = "";
-
         public static string AuthenticationResult { get; set; } = "";
+        public static string DdlConnectionId { get; set; } = "";
         public static string SafetyResult { get; set; } = "";
         public static string SafetyKey { get; set; } = "";
         public static string SecurityCert { get; set; } = "";
@@ -656,7 +656,7 @@ namespace IDWallet
             MainPage.Navigation.PushModalAsync(_loginPage);
             if (!IntroCompleted)
             {
-                MainPage.Navigation.PushModalAsync(new Views.Intro.IntroPage());
+                MainPage.Navigation.PushModalAsync(new Views.Onboarding.OnboardingPage());
             }
         }
 
@@ -794,6 +794,7 @@ namespace IDWallet
             builder.RegisterType<TransactionOfferService>().AsSelf().AsImplementedInterfaces();
             builder.RegisterType<BaseIdViewModel>().AsSelf().SingleInstance();
             builder.RegisterType<AddVacService>().AsSelf().SingleInstance();
+            builder.RegisterType<DdlViewModel>().AsSelf().SingleInstance();
             builder.Populate(services);
 
             Container = builder.Build();

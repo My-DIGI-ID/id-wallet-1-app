@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<base:CustomPopUp xmlns="http://xamarin.com/schemas/2014/forms" 
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:base="clr-namespace:IDWallet.Views.Customs.PopUps"
+                  xmlns:iconize="clr-namespace:Plugin.Iconize;assembly=Plugin.Iconize"                  
+                  xmlns:lang="clr-namespace:IDWallet.Extensions"
+                  x:Class="IDWallet.Views.BaseId.PopUps.StartInfoPopUp1">
+    <base:CustomPopUp.Content>
+        <StackLayout Style="{StaticResource PopUpStackLayout}">
+            <Frame Style="{StaticResource PopUpFrame}">
+                <ScrollView>
+                    <StackLayout>
+                        <iconize:IconLabel Text="mdi-close"
+                                           Margin="15,15,15,0"
+                                           HorizontalOptions="EndAndExpand"
+                                           HorizontalTextAlignment="End"
+                                           TextColor="{StaticResource FontBlackColor}"
+                                           FontSize="20">
+                            <iconize:IconLabel.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnPopUpCanceled"/>
+                            </iconize:IconLabel.GestureRecognizers>
+                        </iconize:IconLabel>
+
+                        <Label Text="{lang:L10n PopUp_StartInfo1_Title}"
+                               FontSize="22"
+                               MaxLines="15"
+                               LineBreakMode="WordWrap"
+                               FontAttributes="Bold"
+                               Margin="20,0,30,15"/>
+
+                        <Label Text="{lang:L10n PopUp_StartInfo1_Body1}"
+                               FontSize="14"
+                               MaxLines="15"
+                               LineBreakMode="WordWrap"
+                               Margin="20,0,30,-5"/>
+
+                        <Label Text="{lang:L10n PopUp_StartInfo1_Body2}"
+                               FontSize="14"
+                               MaxLines="15"
+                               LineBreakMode="WordWrap"
+                               FontAttributes="Bold"
+                               Margin="20,0,30,15"/>
+
+                        <Label FontSize="14"
+                               MaxLines="15"
+                               LineBreakMode="WordWrap"
+                               Margin="20,0,30,15">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{lang:L10n PopUp_StartInfo1_Body3}"/>
+                                    <Span Text="AusweisApp2"
+                                          FontAttributes="Bold"
+                                          TextDecorations="Underline">
+                                        <Span.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="AusweisApp2_Tapped"/>
+                                        </Span.GestureRecognizers>
+                                    </Span>
+                                    <Span Text="{lang:L10n PopUp_StartInfo1_Body4}"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                        <Label Text="{lang:L10n PopUp_StartInfo1_Body5}"
+                               FontSize="14"
+                               MaxLines="15"
+                               LineBreakMode="WordWrap"
+                               Margin="20,0,30,15"/>
+
+                        <Label FontSize="14"
+                               MaxLines="15"
+                               LineBreakMode="WordWrap"
+                               Margin="20,0,30,50">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{lang:L10n PopUp_StartInfo1_Body6}"/>
+                                    <Span Text="www.behoerdenfinder.de"
+                                          FontAttributes="Bold"
+                                          TextDecorations="Underline">
+                                        <Span.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="BehoerdenFinder_Tapped"/>
+                                        </Span.GestureRecognizers>
+                                    </Span>
+                                    <Span Text="."/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </StackLayout>
+                </ScrollView>
+            </Frame>
+        </StackLayout>
+    </base:CustomPopUp.Content>
+</base:CustomPopUp>

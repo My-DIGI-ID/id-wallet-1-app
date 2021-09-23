@@ -20,6 +20,10 @@ namespace IDWallet.Views.Wallet.PopUps
                 case "MGfd8JjWRoiXMm2YGL4SGj":
                     walletCredentialOfferMessage.MessageImageSource = ImageSource.FromFile("bdr_logo.png");
                     break;
+                case "9hsRe5jdzAbbyLAStV6sPc":
+                case "KqtBRiQSyWqnzaxN3u2d7G":
+                    walletCredentialOfferMessage.MessageImageSource = ImageSource.FromFile("kraftfahrtbundesamt_logo.png");
+                    break;
                 case "En38baYaTqVYSB8SFwguhT":
                 case "9HX4bs8pdH2uJB7sjeWPtU":
                     walletCredentialOfferMessage.MessageImageSource = ImageSource.FromFile("bosch_logo.png");
@@ -35,14 +39,14 @@ namespace IDWallet.Views.Wallet.PopUps
                 case "X2p16G1BeEceJauzqofjQW":
                     walletCredentialOfferMessage.MessageImageSource = ImageSource.FromFile("dlufthansa_logo.png");
                     break;
+                case "XnGEZ7gJxDNfxwnZpkkVcs":
+                    //case "KuXsPLZAsxgjbaAeQd4rr8":
+                    walletCredentialOfferMessage.MessageImageSource = ImageSource.FromFile("kba_logo.png");
+                    break;
                 default:
                     if (walletCredentialOfferMessage.CredentialRecord.CredentialDefinitionId.Equals("KXtvfp6c9ma1NBtttKpV6W:3:CL:75:Impfzertifikat"))
                     {
                         walletCredentialOfferMessage.MessageImageSource = ImageSource.FromFile("vac_transparent_icon.png");
-                    }
-                    else if (walletCredentialOfferMessage.CredentialRecord.CredentialDefinitionId.Equals("XnGEZ7gJxDNfxwnZpkkVcs:3:CL:988:Digitaler Führerschein"))
-                    {
-                        walletCredentialOfferMessage.MessageImageSource = ImageSource.FromFile("kba_logo.png");
                     }
                     else
                     {

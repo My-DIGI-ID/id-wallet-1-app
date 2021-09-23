@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             xmlns:lang="clr-namespace:IDWallet.Extensions" 
+             x:Class="IDWallet.Views.DDL.Content.DdlCreateConnectionView">
+  <ContentView.Content>
+        <StackLayout>
+            <forms:AnimationView x:Name="AnimationView"
+                         Animation="nfc-animation.json"
+                         RepeatMode="Infinite"
+                         AutoPlay="True"
+                         HorizontalOptions="FillAndExpand"
+                         HeightRequest="150"/>
+
+            <Label Style="{StaticResource BaseIDHeaderLabel}"
+               Text="{lang:L10n BaseIDPage_Create_Connection_Title}"/>
+            <Label Style="{StaticResource BaseIDBodyLabel}"
+               Text="{lang:L10n BaseIDPage_Create_Connection_Text}"/>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

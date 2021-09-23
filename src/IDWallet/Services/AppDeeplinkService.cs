@@ -61,7 +61,14 @@ namespace IDWallet.Services
 
                         if (arguments["eid_uc"].Equals("de.kba.fs-nachweis"))
                         {
-                            //Call eID DDL Flow
+                            try
+                            {
+                                await App.AutoAcceptViewModel.StartDdlFlow();
+                            }
+                            catch (Exception ex) when (ex.Message.Equals("NFC-ERROR") || ex.Message.Equals("SDK-NOT-CONNECTED-ERROR"))
+                            {
+                                //ignore
+                            }
                         }
                     }
                     else
