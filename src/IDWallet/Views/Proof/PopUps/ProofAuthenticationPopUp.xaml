@@ -49,7 +49,7 @@
                             <BoxView HorizontalOptions="FillAndExpand"
                                      BackgroundColor="{StaticResource PopUpHeaderSeparatorColor}"/>
                             <Button Text="{lang:L10n PopUp_ProofRequest_Delete_Button}"
-                                    Style="{StaticResource DeleteButton}"
+                                    Style="{StaticResource CancelButton}"
                                     HorizontalOptions="FillAndExpand"
                                     Clicked="OnAuthCanceled" 
                                     x:Name="CancelAuthButton"/>

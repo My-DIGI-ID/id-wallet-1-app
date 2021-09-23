@@ -39,7 +39,7 @@ namespace IDWallet.Services
                 case MessageTypes.ConnectionResponse:
                 case MessageTypesHttps.ConnectionResponse:
                     ConnectionRecord connectionRecord = await _connectionService.GetAsync(agentContext, msg.RecordId);
-                    if (!(connectionRecord.Id.Equals(App.BaseIdConnectionId) || connectionRecord.Id.Equals(App.VacConnectionId)))
+                    if (!(connectionRecord.Id.Equals(App.BaseIdConnectionId) || connectionRecord.Id.Equals(App.DdlConnectionId) || connectionRecord.Id.Equals(App.VacConnectionId)))
                     {
                         await ShowConnectionAddedPopUp(connectionRecord);
                     }
@@ -49,13 +49,18 @@ namespace IDWallet.Services
                 case MessageTypesHttps.IssueCredentialNames.OfferCredential:
                     CredentialRecord credentialRecordOffer =
                         await _credentialService.GetAsync(agentContext, msg.RecordId);
+
                     if (!string.IsNullOrEmpty(credentialRecordOffer.ConnectionId) && credentialRecordOffer.ConnectionId.Equals(App.BaseIdConnectionId))
                     {
                         MessagingCenter.Send(this, WalletEvents.BaseIdCredentialOffer, msg.RecordId);
                     }
-                    else if (credentialRecordOffer.ConnectionId.Equals(App.VacConnectionId))
+                    else if (!string.IsNullOrEmpty(credentialRecordOffer.ConnectionId) && credentialRecordOffer.ConnectionId.Equals(App.VacConnectionId))
                     {
                         MessagingCenter.Send(this, WalletEvents.VacCredentialOffer, msg.RecordId);
+                    }
+                    else if (!string.IsNullOrEmpty(credentialRecordOffer.ConnectionId) && credentialRecordOffer.ConnectionId.Equals(App.DdlConnectionId))
+                    {
+                        MessagingCenter.Send(this, WalletEvents.DdlCredentialOffer, msg.RecordId);
                     }
                     else
                     {
@@ -67,6 +72,7 @@ namespace IDWallet.Services
                 case MessageTypesHttps.IssueCredentialNames.IssueCredential:
                     CredentialRecord credentialRecordIssue =
                         await _credentialService.GetAsync(agentContext, msg.RecordId);
+
                     if (credentialRecordIssue.ConnectionId.Equals(App.BaseIdConnectionId))
                     {
                         App.BaseIdConnectionId = "";
@@ -75,6 +81,11 @@ namespace IDWallet.Services
                     else if (credentialRecordIssue.ConnectionId.Equals(App.VacConnectionId))
                     {
                         MessagingCenter.Send(this, WalletEvents.VacCredentialIssue, msg.RecordId);
+                    }
+                    else if (credentialRecordIssue.ConnectionId.Equals(App.DdlConnectionId))
+                    {
+                        App.DdlConnectionId = "";
+                        MessagingCenter.Send(this, WalletEvents.DdlCredentialIssue, msg.RecordId);
                     }
                     else
                     {

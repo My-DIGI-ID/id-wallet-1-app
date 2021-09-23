@@ -1,6 +1,5 @@
 ﻿using IDWallet.Models;
 using IDWallet.ViewModels;
-using System.Collections.ObjectModel;
 using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -35,31 +34,37 @@ namespace IDWallet.Views.Proof.Content
 
         private async void InfoButtonTapped(ProofElementOption listViewOption)
         {
-            if (listViewOption.ShowInfo)
+            if (listViewOption != null)
             {
-                listViewOption.ShowInfo = false;
-            }
-            else
-            {
-                if (!listViewOption.Attributes.Any())
+                if (listViewOption.ShowInfo)
                 {
-                    ProofModel request = this.BindingContext as ProofModel;
-                    ProofViewModel viewModel =
-                        (Parent.Parent.Parent.Parent.Parent.Parent.BindingContext) as ProofViewModel;
-                    await viewModel.LoadAttributes(request, listViewOption);
+                    listViewOption.ShowInfo = false;
                 }
+                else
+                {
+                    if (!listViewOption.Attributes.Any())
+                    {
+                        ProofModel request = this.BindingContext as ProofModel;
+                        ProofViewModel viewModel =
+                            (Parent.Parent.Parent.Parent.Parent.Parent.BindingContext) as ProofViewModel;
+                        await viewModel.LoadAttributes(request, listViewOption);
+                    }
 
-                listViewOption.ShowInfo = true;
+                    listViewOption.ShowInfo = true;
+                }
             }
         }
 
         private void ListViewOptionTapped(ProofElementOption listViewOption)
         {
-            ProofModel request = this.BindingContext as ProofModel;
-            ProofViewModel viewModel = (Parent.Parent.Parent.Parent.Parent.Parent.BindingContext) as ProofViewModel;
-            int indexTapped = (viewModel.Requests as ObservableCollection<ProofModel>).IndexOf(request);
-            viewModel.SetIndex(indexTapped);
-            viewModel.SelectCredential(listViewOption);
+            if (listViewOption != null)
+            {
+                ProofModel request = this.BindingContext as ProofModel;
+                ProofViewModel viewModel = (Parent.Parent.Parent.Parent.Parent.Parent.BindingContext) as ProofViewModel;
+                int indexTapped = viewModel.Requests.IndexOf(request);
+                viewModel.SetIndex(indexTapped);
+                viewModel.SelectCredential(listViewOption);
+            }
         }
     }
 }

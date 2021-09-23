@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<base:CustomPopUp  xmlns:base="clr-namespace:IDWallet.Views.Customs.PopUps" 
+                   xmlns="http://xamarin.com/schemas/2014/forms"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+                   xmlns:iconize="clr-namespace:Plugin.Iconize;assembly=Plugin.Iconize"                  
+                   xmlns:lang="clr-namespace:IDWallet.Extensions"
+                   xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" 
+                   xmlns:svg="clr-namespace:Xamarin.Forms.Svg;assembly=SvgImageSource"
+                   x:Class="IDWallet.Views.Wallet.PopUps.AddDocumentPopUp"
+                   x:Name="Root">
+    <base:CustomPopUp.Content>
+        <StackLayout Style="{StaticResource PopUpStackLayout}">
+            <Frame Style="{StaticResource PopUpFrame}">
+                <StackLayout>
+                    <iconize:IconLabel Text="mdi-close"
+                                       Margin="15,15,15,0"
+                                       HorizontalOptions="EndAndExpand"
+                                       HorizontalTextAlignment="End"
+                                       TextColor="{StaticResource FontBlackColor}"
+                                       FontSize="20">
+                        <iconize:IconLabel.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnPopUpCanceled"/>
+                        </iconize:IconLabel.GestureRecognizers>
+                    </iconize:IconLabel>
+
+                    <Label Text="{lang:L10n PopUp_AddDocument_Title}"
+                           MaxLines="3"
+                           LineBreakMode="WordWrap"
+                           TextColor="{StaticResource EmptyWalletPrimaryTextColor}"
+                           FontSize="20"
+                           Margin="15,0,15,15"
+                           FontAttributes="Bold"/>
+                    
+                    <Label Text="{lang:L10n PopUp_AddDocument_Text}"
+                           TextColor="{StaticResource EmptyWalletPrimaryTextColor}"
+                           Margin="15,0,15,15"/>
+                    
+                    <Grid RowSpacing="0"
+                          ColumnSpacing="0"
+                          Margin="0"
+                          Padding="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Frame Grid.Row="0"
+                               Grid.Column="0"
+                               Padding="0"
+                               Margin="0">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="AddBaseIdTapped"/>
+                            </Frame.GestureRecognizers>
+                            <Image Aspect="AspectFill"
+                                   Margin="0"
+                                   x:Name="BaseIdImage">
+                                <Image.Source>
+                                    <svg:SvgImageSource Source="imagesources.WalletPage.AddBaseId.svg"
+                                                        Height="100"
+                                                        Width="100"/>
+                                </Image.Source>
+                            </Image>
+                        </Frame>
+
+                        <Frame Grid.Row="0"
+                               Grid.Column="1">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="AddDdlTapped"/>
+                            </Frame.GestureRecognizers>
+                            <Image x:Name="DdlImage"
+                                   Aspect="AspectFill">
+                                <Image.Source>
+                                    <svg:SvgImageSource Source="imagesources.WalletPage.AddDdl.svg" 
+                                                        Height="100"
+                                                        Width="100"/>
+                                </Image.Source>
+                            </Image>
+                        </Frame>
+
+                        <Frame Grid.Row="0"
+                               Grid.Column="2">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="AddVacCertTapped"/>
+                            </Frame.GestureRecognizers>
+                            <Image x:Name="VacCertImage"
+                                   Aspect="AspectFill">
+                                <Image.Source>
+                                    <svg:SvgImageSource Source="imagesources.WalletPage.AddVacCert.svg" 
+                                                        Height="100"
+                                                        Width="100"/>
+                                </Image.Source>
+                            </Image>
+                        </Frame>
+
+                        <Frame Grid.Row="1"
+                               Grid.Column="0"
+                               Grid.ColumnSpan="3"
+                               Padding="0"
+                               Margin="0"
+                               HorizontalOptions="CenterAndExpand"
+                               VerticalOptions="CenterAndExpand">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="AddOtherTapped"/>
+                            </Frame.GestureRecognizers>
+                            <Image  x:Name="OtherImage">
+                                <Image.Source>
+                                    <svg:SvgImageSource Source="{Binding AddOthersImage, Source={x:Reference Root}}"
+                                                        Width="650"/>
+                                </Image.Source>
+                            </Image>
+                        </Frame>
+                        
+
+                        <Frame BackgroundColor="{StaticResource InfoBoxBackgroundColor}"
+                               HasShadow="True"
+                               Margin="15,0,15,25"
+                               Padding="10"
+                               Grid.Row="2"
+                               Grid.Column="0"
+                               Grid.ColumnSpan="3">
+                            <StackLayout Orientation="Horizontal">
+                                <iconize:IconLabel Text="mdi-information"
+                                                   VerticalOptions="StartAndExpand"
+                                                   VerticalTextAlignment="Start"
+                                                   HorizontalOptions="StartAndExpand"
+                                                   HorizontalTextAlignment="Start"
+                                                   FontSize="20"
+                                                   WidthRequest="45"
+                                                   TextColor="{StaticResource InfoBoxTextColor}"/>
+
+                                <Label Text="{lang:L10n PopUp_AddDocument_Info_Text}"
+                                       MaxLines="100"
+                                       FontSize="13"
+                                       LineHeight="1.2"
+                                       VerticalOptions="StartAndExpand"
+                                       VerticalTextAlignment="Start"
+                                       HorizontalOptions="StartAndExpand"
+                                       HorizontalTextAlignment="Start"
+                                       TextColor="{StaticResource InfoBoxTextColor}"
+                                       LineBreakMode="WordWrap"/>
+                            </StackLayout>
+                        </Frame>
+
+                    </Grid>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </base:CustomPopUp.Content>
+</base:CustomPopUp>

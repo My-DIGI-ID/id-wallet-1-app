@@ -16,7 +16,6 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -47,7 +46,6 @@ namespace IDWallet.ViewModels
         private bool _moreInformationLinkIsVisible;
         private string _newPIN = null;
         private bool _isActivityIndicatorVisible;
-        private SdkMessage _finalAuthMessage;
         private readonly ReadyToScanPopUp _scanPopUp;
         private int _scanProcessCounter;
         private bool _pinPadIsVisible;
@@ -55,10 +53,10 @@ namespace IDWallet.ViewModels
         private string _baseIdConnection;
         private bool _hasAcceptedAccess = false;
 
-        public BaseIdProcessType BaseIdProcessType;
+        private BaseIdProcessType _baseIdProcessType;
         public bool ViewModelWasResetted { get; set; }
         public INavigation Navigation { get; set; }
-        public SdkMessageType ActiveMessageType;
+        private SdkMessageType _activeMessageType;
 
         public int Progress
         {
@@ -166,7 +164,7 @@ namespace IDWallet.ViewModels
 
         private Command _idPinSuccessCommand;
         public Command IdPinSuccessCommand =>
-            _idPinSuccessCommand ??= new Command(async () => { await IdPinSuccessTask(); });
+            _idPinSuccessCommand ??= new Command(IdPinSuccessTask);
 
         private Command _changeDigitsTappedCommand;
         public Command ChangeDigitsTappedCommand =>
@@ -182,7 +180,7 @@ namespace IDWallet.ViewModels
 
         private Command _forgotPINTappedCommand;
         public Command ForgotPINTappedCommand =>
-            _forgotPINTappedCommand ??= new Command(ForgotPINTapped);
+            _forgotPINTappedCommand ??= new Command(async () => { await ForgotPINTapped(); });
 
         private Command _moreInformationTappedCommand;
         public Command MoreInformationTappedCommand =>
@@ -192,11 +190,11 @@ namespace IDWallet.ViewModels
         {
             ViewModelWasResetted = false;
             IsActivityIndicatorVisible = false;
-            ActiveMessageType = SdkMessageType.UNKNOWN_COMMAND;
+            _activeMessageType = SdkMessageType.UNKNOWN_COMMAND;
             Progress = 0;
             ProgressBarIsVisible = true;
             IdPinLength = 6;
-            BaseIdProcessType = BaseIdProcessType.None;
+            _baseIdProcessType = BaseIdProcessType.None;
             _scanPopUp = new ReadyToScanPopUp(this);
             ScanProcessCounter = 0;
 
@@ -207,7 +205,7 @@ namespace IDWallet.ViewModels
             ForgotPINLinkIsVisible = false;
             MoreInformationLinkIsVisible = false;
 
-            if (WalletParams.PackageName.Equals("com.digitalenabling.idw"))
+            if (WalletParams.AusweisHost.Equals("demo.gessine.bundesdruckerei.de/ssi"))
             {
                 IsInfoVisible = true;
             }
@@ -230,6 +228,7 @@ namespace IDWallet.ViewModels
             if (!_alreadySubscribed)
             {
                 _alreadySubscribed = true;
+                _sdkService.StartBaseIdFlow();
                 MessagingCenter.Subscribe<SDKMessageService, SdkMessage>(this, BaseIDEvents.AccessRights, Access_Rights);
                 MessagingCenter.Subscribe<SDKMessageService, SdkMessage>(this, BaseIDEvents.EnterPIN, Enter_PIN);
                 MessagingCenter.Subscribe<SDKMessageService, SdkMessage>(this, BaseIDEvents.EnterNewPIN, Enter_New_PIN);
@@ -261,24 +260,22 @@ namespace IDWallet.ViewModels
             MessagingCenter.Unsubscribe<ServiceMessageEventService, string>(this, WalletEvents.BaseIdCredentialIssue);
         }
 
-        private async void Auth(SDKMessageService arg1, SdkMessage sdkMessage)
+        private void Auth(SDKMessageService arg1, SdkMessage sdkMessage)
         {
             Device.BeginInvokeOnMainThread(async () =>
             {
                 if (sdkMessage.Result != null && sdkMessage.Result.Description != "The process has been cancelled.")
                 {
-                    _finalAuthMessage = sdkMessage;
+                    string redirectUrl = sdkMessage.Url;
 
-                    string redirectUrl = _finalAuthMessage.Url;
-
-                    System.Net.Http.HttpResponseMessage result = await _sdkService.AusweisSdkHttpClient.GetAsync(redirectUrl);
+                    System.Net.Http.HttpResponseMessage result = await _sdkService.SdkHttpClient.GetAsync(redirectUrl);
 
                     if (result.IsSuccessStatusCode)
                     {
                         try
                         {
                             string resultString = await result.Content.ReadAsStringAsync();
-                            AusweisSdkInvitation ausweisSdkInvitation = JObject.Parse(resultString).ToObject<AusweisSdkInvitation>();
+                            SdkInvitation ausweisSdkInvitation = JObject.Parse(resultString).ToObject<SdkInvitation>();
 
                             Agent.Models.CustomConnectionInvitationMessage connectionInvitationMessage = _connectService.ReadInvitationUrl(ausweisSdkInvitation.InvitationUrl);
 
@@ -294,12 +291,12 @@ namespace IDWallet.ViewModels
 
                             MessagingCenter.Send(this, WalletEvents.ReloadConnections);
                         }
-                        catch (Exception ex)
+                        catch (Exception)
                         {
                             _sdkService.SendCancel();
-                            _sdkService.InitHttpClient();
+                            _sdkService.StartBaseIdFlow();
 
-                            if (sdkMessage.Result.Message.Equals("The authenticity of your ID card could not be verified. Please make sure that you are using a genuine ID card. Please note that test applications require the use of a test ID card."))
+                            if (sdkMessage.Result != null && !string.IsNullOrEmpty(sdkMessage.Result.Message) && sdkMessage.Result.Message.Equals("The authenticity of your ID card could not be verified. Please make sure that you are using a genuine ID card. Please note that test applications require the use of a test ID card."))
                             {
                                 BaseIdBasicPopUp popUp = new BaseIdBasicPopUp(
                                         Lang.PopUp_BaseID_Auth_Error_Title,
@@ -307,25 +304,35 @@ namespace IDWallet.ViewModels
                                         Lang.PopUp_BaseID_Auth_Error_Button
                                         );
                                 await popUp.ShowPopUp();
-                                await Navigation.PopAsync();
+                                try
+                                {
+                                    await Navigation.PopAsync();
+                                }
+                                catch (Exception)
+                                { }
                             }
                             else
                             {
                                 BaseIdBasicPopUp popUp = new BaseIdBasicPopUp(
                                         Lang.PopUp_BaseID_Auth_Error_Title,
-                                        Lang.PopUp_BaseID_Auth_Error_Text,
+                                        Lang.PopUp_BaseID_Auth_Message_Error_Text,
                                         Lang.PopUp_BaseID_Auth_Error_Button
                                         );
                                 await popUp.ShowPopUp();
-                                await Navigation.PopAsync();
+                                try
+                                {
+                                    await Navigation.PopAsync();
+                                }
+                                catch (Exception)
+                                { }
                             }
                         }
                     }
                     else
                     {
                         _sdkService.SendCancel();
-                        _sdkService.InitHttpClient();
-                        if (sdkMessage.Result.Message.Equals("The authenticity of your ID card could not be verified. Please make sure that you are using a genuine ID card. Please note that test applications require the use of a test ID card."))
+                        _sdkService.StartBaseIdFlow();
+                        if (sdkMessage.Result != null && !string.IsNullOrEmpty(sdkMessage.Result.Message) && sdkMessage.Result.Message.Equals("The authenticity of your ID card could not be verified. Please make sure that you are using a genuine ID card. Please note that test applications require the use of a test ID card."))
                         {
                             BaseIdBasicPopUp popUp = new BaseIdBasicPopUp(
                                     Lang.PopUp_BaseID_Auth_Error_Title,
@@ -333,33 +340,43 @@ namespace IDWallet.ViewModels
                                     Lang.PopUp_BaseID_Auth_Error_Button
                                     );
                             await popUp.ShowPopUp();
-                            await Navigation.PopAsync();
+                            try
+                            {
+                                await Navigation.PopAsync();
+                            }
+                            catch (Exception)
+                            { }
                         }
                         else
                         {
                             BaseIdBasicPopUp popUp = new BaseIdBasicPopUp(
                                     Lang.PopUp_BaseID_Auth_Error_Title,
-                                    Lang.PopUp_BaseID_Auth_Error_Text,
+                                    Lang.PopUp_BaseID_Auth_Message_Error_Text,
                                     Lang.PopUp_BaseID_Auth_Error_Button
                                     );
                             await popUp.ShowPopUp();
-                            await Navigation.PopAsync();
+                            try
+                            {
+                                await Navigation.PopAsync();
+                            }
+                            catch (Exception)
+                            { }
                         }
                     }
                 }
-                else if (BaseIdProcessType == BaseIdProcessType.TransportPIN)
+                else if (_baseIdProcessType == BaseIdProcessType.TransportPIN)
                 {
                     _sdkService.SendRunChangePIN();
                 }
             });
         }
 
-        private async void Access_Rights(SDKMessageService obj, SdkMessage sdkMessage)
+        private void Access_Rights(SDKMessageService obj, SdkMessage sdkMessage)
         {
             Device.BeginInvokeOnMainThread(async () =>
             {
                 IsActivityIndicatorVisible = false;
-                ActiveMessageType = SdkMessageType.ACCESS_RIGHTS;
+                _activeMessageType = SdkMessageType.ACCESS_RIGHTS;
                 if (!_hasAcceptedAccess)
                 {
                     AccessRightsPopUp accessRightsPopUp = new AccessRightsPopUp(sdkMessage.Chat.Effective);
@@ -374,8 +391,8 @@ namespace IDWallet.ViewModels
                     else
                     {
                         _sdkService.SendCancel();
-                        _sdkService.InitHttpClient();
-                        BaseIdProcessType = BaseIdProcessType.None;
+                        _sdkService.StartBaseIdFlow();
+                        _baseIdProcessType = BaseIdProcessType.None;
                         await Navigation.PopAsync();
                     }
                 }
@@ -386,12 +403,16 @@ namespace IDWallet.ViewModels
             });
         }
 
-        private async void Insert_Card(SDKMessageService arg1, SdkMessage sdkMessage)
+        private void Insert_Card(SDKMessageService arg1, SdkMessage sdkMessage)
         {
-            ScanProcessCounter += 1;
+            if (ScanProcessCounter < 2)
+            {
+                ScanProcessCounter += 1;
+            }
+
             Device.BeginInvokeOnMainThread(async () =>
             {
-                if (ActiveMessageType == SdkMessageType.ACCESS_RIGHTS)
+                if (_activeMessageType == SdkMessageType.ACCESS_RIGHTS)
                 {
                     IsActivityIndicatorVisible = false;
                     CarouselPosition = 2;
@@ -424,7 +445,7 @@ namespace IDWallet.ViewModels
             });
         }
 
-        private async void Enter_PIN(SDKMessageService arg1, SdkMessage sdkMessage)
+        private void Enter_PIN(SDKMessageService arg1, SdkMessage sdkMessage)
         {
             Device.BeginInvokeOnMainThread(async () =>
             {
@@ -434,26 +455,26 @@ namespace IDWallet.ViewModels
                     CarouselPosition = 3;
                 }
 
-                switch (BaseIdProcessType)
+                switch (_baseIdProcessType)
                 {
                     case BaseIdProcessType.Authentication:
                         await HandleAuthenticationEnterPin(sdkMessage);
-                        ActiveMessageType = SdkMessageType.ENTER_PIN;
+                        _activeMessageType = SdkMessageType.ENTER_PIN;
                         UseRegularPIN();
                         break;
                     case BaseIdProcessType.ChangePIN:
-                        ActiveMessageType = SdkMessageType.ENTER_PIN;
+                        _activeMessageType = SdkMessageType.ENTER_PIN;
                         await HandleChangePinEnterPin(sdkMessage);
                         break;
                     case BaseIdProcessType.TransportPIN:
-                        if (ActiveMessageType == SdkMessageType.ENTER_CAN)
+                        if (_activeMessageType == SdkMessageType.ENTER_CAN)
                         {
-                            ActiveMessageType = SdkMessageType.ENTER_PIN;
+                            _activeMessageType = SdkMessageType.ENTER_PIN;
                             UseTransportPinNoCancel();
                         }
                         else
                         {
-                            ActiveMessageType = SdkMessageType.ENTER_PIN;
+                            _activeMessageType = SdkMessageType.ENTER_PIN;
                         }
                         await HandleTransportPinEnterPin(sdkMessage);
                         break;
@@ -463,7 +484,7 @@ namespace IDWallet.ViewModels
             });
         }
 
-        private async void Enter_CAN(SDKMessageService arg1, SdkMessage sdkMessage)
+        private void Enter_CAN(SDKMessageService arg1, SdkMessage sdkMessage)
         {
             Device.BeginInvokeOnMainThread(async () =>
             {
@@ -472,7 +493,7 @@ namespace IDWallet.ViewModels
                 {
                     CarouselPosition = 3;
                 }
-                if (ActiveMessageType == SdkMessageType.ENTER_CAN)
+                if (_activeMessageType == SdkMessageType.ENTER_CAN)
                 {
                     BaseIdBasicPopUp canPopUp = new BaseIdBasicPopUp(
                         Lang.PopUp_BaseID_Wrong_CAN_Title,
@@ -485,7 +506,7 @@ namespace IDWallet.ViewModels
                     UseRegularPIN();
                     EnterCANPopUp canPopUp = new EnterCANPopUp(Lang.PopUp_BaseID_Enter_CAN_Text_1);
 
-                    if (BaseIdProcessType == BaseIdProcessType.TransportPIN)
+                    if (_baseIdProcessType == BaseIdProcessType.TransportPIN)
                     {
                         canPopUp = new EnterCANPopUp(Lang.PopUp_BaseID_Enter_CAN_Text_4);
                     }
@@ -499,11 +520,11 @@ namespace IDWallet.ViewModels
                     ForgotPINLinkIsVisible = false;
                     MoreInformationLinkIsVisible = true;
                 }
-                ActiveMessageType = SdkMessageType.ENTER_CAN;
+                _activeMessageType = SdkMessageType.ENTER_CAN;
             });
         }
 
-        private async void Enter_PUK(SDKMessageService arg1, SdkMessage sdkMessage)
+        private void Enter_PUK(SDKMessageService arg1, SdkMessage sdkMessage)
         {
             Device.BeginInvokeOnMainThread(async () =>
             {
@@ -514,7 +535,7 @@ namespace IDWallet.ViewModels
                 }
                 if (!sdkMessage.Reader.Card.Inoperative)
                 {
-                    if (ActiveMessageType == SdkMessageType.ENTER_PUK)
+                    if (_activeMessageType == SdkMessageType.ENTER_PUK)
                     {
                         BaseIdBasicPopUp pukPopUp = new BaseIdBasicPopUp(
                             Lang.PopUp_BaseID_Wrong_PUK_Title,
@@ -523,7 +544,7 @@ namespace IDWallet.ViewModels
                             );
                         await pukPopUp.ShowPopUp();
                     }
-                    else if (ActiveMessageType == SdkMessageType.ENTER_PIN)
+                    else if (_activeMessageType == SdkMessageType.ENTER_PIN)
                     {
                         IdPinLength = 10;
                         IdPinHeaderLabel = Lang.BaseIDPage_PINScreen_PUK_Header_Label;
@@ -536,7 +557,7 @@ namespace IDWallet.ViewModels
                         await pukPopUp.ShowPopUp();
                     }
 
-                    ActiveMessageType = SdkMessageType.ENTER_PUK;
+                    _activeMessageType = SdkMessageType.ENTER_PUK;
                 }
                 else
                 {
@@ -556,7 +577,7 @@ namespace IDWallet.ViewModels
             Device.BeginInvokeOnMainThread(async () =>
             {
                 IsActivityIndicatorVisible = false;
-                ActiveMessageType = SdkMessageType.ENTER_NEW_PIN;
+                _activeMessageType = SdkMessageType.ENTER_NEW_PIN;
 
                 IdPinLength = 6;
                 IdPinHeaderLabel = Lang.BaseIDPage_PINScreen_New_Header_Label;
@@ -573,7 +594,7 @@ namespace IDWallet.ViewModels
             {
                 if (sdkMessage.Success)
                 {
-                    BaseIdProcessType = BaseIdProcessType.None;
+                    _baseIdProcessType = BaseIdProcessType.None;
                     IsActivityIndicatorVisible = false;
                     ProgressBarIsVisible = false;
                     CarouselPosition = 6;
@@ -581,7 +602,7 @@ namespace IDWallet.ViewModels
             });
         }
 
-        private async void BaseIdCredentialIssue(ServiceMessageEventService arg1, string arg2)
+        private void BaseIdCredentialIssue(ServiceMessageEventService arg1, string arg2)
         {
             IsActivityIndicatorVisible = false;
             GoToNext();
@@ -593,7 +614,7 @@ namespace IDWallet.ViewModels
             GoToNext(credentialRecordId);
         }
 
-        public async void GoToNext(string credentialRecordId = "")
+        public void GoToNext(string credentialRecordId = "")
         {
             Device.BeginInvokeOnMainThread(async () =>
             {
@@ -611,7 +632,7 @@ namespace IDWallet.ViewModels
                         {
                             MessagingCenter.Send(this, WalletEvents.ReloadCredentials);
                             MessagingCenter.Send(this, WalletEvents.ReloadHistory);
-                            _sdkService.InitHttpClient();
+                            _sdkService.StartBaseIdFlow();
 
                             try
                             {
@@ -637,9 +658,10 @@ namespace IDWallet.ViewModels
                         IsInfoVisible = false;
                         if (await ShowPinPrompt())
                         {
-                            _sdkService.SendRunAuth();
-                            BaseIdProcessType = BaseIdProcessType.Authentication;
                             IsActivityIndicatorVisible = true;
+
+                            await _sdkService.SendRunAuth();
+                            _baseIdProcessType = BaseIdProcessType.Authentication;
                         }
                         break;
                     case 2:
@@ -698,9 +720,9 @@ namespace IDWallet.ViewModels
             ProofRequest proofRequest = new ProofRequest();
             ProofViewModel viewModel = new ProofViewModel(proofRequest, "");
 
-            var authPopUp = new ProofAuthenticationPopUp(new AuthViewModel(viewModel))
+            ProofAuthenticationPopUp authPopUp = new ProofAuthenticationPopUp(new AuthViewModel(viewModel))
             {
-                ProofSendPopUp = true
+                AlwaysDisplay = true
             };
 #pragma warning disable CS4014 // Da auf diesen Aufruf nicht gewartet wird, wird die Ausführung der aktuellen Methode vor Abschluss des Aufrufs fortgesetzt.
             authPopUp.ShowPopUp(); // No await.
@@ -730,7 +752,7 @@ namespace IDWallet.ViewModels
         {
             string enteredDigits = string.Concat(arg.TakeWhile(char.IsNumber));
 
-            if (ActiveMessageType == SdkMessageType.ENTER_NEW_PIN)
+            if (_activeMessageType == SdkMessageType.ENTER_NEW_PIN)
             {
                 if (string.IsNullOrEmpty(_newPIN))
                 {
@@ -751,12 +773,12 @@ namespace IDWallet.ViewModels
             }
             else
             {
-                if (ActiveMessageType == SdkMessageType.ENTER_CAN)
+                if (_activeMessageType == SdkMessageType.ENTER_CAN)
                 {
                     IsActivityIndicatorVisible = true;
                     _sdkService.SendSetCAN(enteredDigits);
                 }
-                else if (ActiveMessageType == SdkMessageType.ENTER_PUK)
+                else if (_activeMessageType == SdkMessageType.ENTER_PUK)
                 {
                     IsActivityIndicatorVisible = true;
                     _sdkService.SendSetPUK(enteredDigits);
@@ -766,7 +788,7 @@ namespace IDWallet.ViewModels
                     IsActivityIndicatorVisible = true;
                     _sdkService.SendSetPIN(enteredDigits);
 
-                    if (BaseIdProcessType == BaseIdProcessType.Authentication)
+                    if (_baseIdProcessType == BaseIdProcessType.Authentication)
                     {
                         GoToNext();
                     }
@@ -778,7 +800,7 @@ namespace IDWallet.ViewModels
 
         private async Task IdPinErrorTask()
         {
-            if (ActiveMessageType == SdkMessageType.ENTER_NEW_PIN)
+            if (_activeMessageType == SdkMessageType.ENTER_NEW_PIN)
             {
                 IdPinLength = 6;
                 IdPinHeaderLabel = Lang.BaseIDPage_PINScreen_New_Header_Label;
@@ -789,9 +811,9 @@ namespace IDWallet.ViewModels
             }
         }
 
-        private async Task IdPinSuccessTask()
+        private void IdPinSuccessTask()
         {
-            if (ActiveMessageType == SdkMessageType.ENTER_NEW_PIN)
+            if (_activeMessageType == SdkMessageType.ENTER_NEW_PIN)
             {
                 IdPinLength = 6;
                 IdPinHeaderLabel = Lang.BaseIDPage_PINScreen_Confirm_Header_Label;
@@ -805,15 +827,15 @@ namespace IDWallet.ViewModels
         private void ChangeDigitsTapped()
         {
             IsActivityIndicatorVisible = true;
-            if (BaseIdProcessType == BaseIdProcessType.Authentication)
+            if (_baseIdProcessType == BaseIdProcessType.Authentication)
             {
                 UseTransportPIN();
             }
-            else if (BaseIdProcessType == BaseIdProcessType.TransportPIN)
+            else if (_baseIdProcessType == BaseIdProcessType.TransportPIN)
             {
                 GoToStart();
             }
-            else if (BaseIdProcessType == BaseIdProcessType.None)
+            else if (_baseIdProcessType == BaseIdProcessType.None)
             {
                 GoToStart();
             }
@@ -826,7 +848,7 @@ namespace IDWallet.ViewModels
             IdPinBoldIsVisible = false;
             PinPadIsVisible = true;
 
-            switch (ActiveMessageType)
+            switch (_activeMessageType)
             {
                 case SdkMessageType.ENTER_PIN:
                     IdPinHeaderLabel = Lang.BaseIDPage_PINScreen_Transport_Header_Label;
@@ -854,11 +876,11 @@ namespace IDWallet.ViewModels
                     break;
             }
 
-            BaseIdProcessType = BaseIdProcessType.TransportPIN;
-            ActiveMessageType = SdkMessageType.UNKNOWN_COMMAND;
+            _baseIdProcessType = BaseIdProcessType.TransportPIN;
+            _activeMessageType = SdkMessageType.UNKNOWN_COMMAND;
 
             _sdkService.SendCancel();
-            _sdkService.InitHttpClient();
+            _sdkService.StartBaseIdFlow();
         }
 
         private void UseTransportPinNoCancel()
@@ -867,7 +889,7 @@ namespace IDWallet.ViewModels
             IdPinBoldIsVisible = false;
             PinPadIsVisible = true;
 
-            switch (ActiveMessageType)
+            switch (_activeMessageType)
             {
                 case SdkMessageType.ENTER_PIN:
                     IdPinHeaderLabel = Lang.BaseIDPage_PINScreen_Transport_Header_Label;
@@ -895,8 +917,8 @@ namespace IDWallet.ViewModels
                     break;
             }
 
-            BaseIdProcessType = BaseIdProcessType.TransportPIN;
-            ActiveMessageType = SdkMessageType.UNKNOWN_COMMAND;
+            _baseIdProcessType = BaseIdProcessType.TransportPIN;
+            _activeMessageType = SdkMessageType.UNKNOWN_COMMAND;
         }
 
         private void UseRegularPIN()
@@ -904,7 +926,7 @@ namespace IDWallet.ViewModels
             IdPinBoldIsVisible = false;
             PinPadIsVisible = true;
 
-            switch (ActiveMessageType)
+            switch (_activeMessageType)
             {
                 case SdkMessageType.ENTER_PIN:
                     IdPinHeaderLabel = Lang.BaseIDPage_PINScreen_Default_Header_Label;
@@ -933,7 +955,7 @@ namespace IDWallet.ViewModels
             }
         }
 
-        private async void ForgotPINTapped()
+        private async Task ForgotPINTapped()
         {
             BaseIdBasicPopUp popUp = new BaseIdBasicPopUp(
                 Lang.PopUp_BaseID_Forgot_My_PIN_Title,
@@ -943,16 +965,16 @@ namespace IDWallet.ViewModels
             await popUp.ShowPopUp();
         }
 
-        private async void MoreInformationTapped()
+        private void MoreInformationTapped()
         {
             Device.BeginInvokeOnMainThread(async () =>
             {
-                if (ActiveMessageType == SdkMessageType.ENTER_CAN)
+                if (_activeMessageType == SdkMessageType.ENTER_CAN)
                 {
                     CANInfoPopUp canPopUp = new CANInfoPopUp();
                     await canPopUp.ShowPopUp();
                 }
-                else if (ActiveMessageType == SdkMessageType.ENTER_PUK)
+                else if (_activeMessageType == SdkMessageType.ENTER_PUK)
                 {
                     BaseIdBasicPopUp pupPopUp = new BaseIdBasicPopUp(
                         Lang.PopUp_BaseID_PUK_Info_Title,
@@ -967,13 +989,13 @@ namespace IDWallet.ViewModels
         public void CancelCurrentProcess()
         {
             _sdkService.SendCancel();
-            _sdkService.InitHttpClient();
-            BaseIdProcessType = BaseIdProcessType.None;
+            _sdkService.StartBaseIdFlow();
+            _baseIdProcessType = BaseIdProcessType.None;
         }
 
         public void GoToStart()
         {
-            if (WalletParams.PackageName.Equals("com.digitalenabling.idw"))
+            if (WalletParams.AusweisHost.Equals("demo.gessine.bundesdruckerei.de/ssi"))
             {
                 IsInfoVisible = true;
             }
@@ -983,10 +1005,10 @@ namespace IDWallet.ViewModels
             }
 
             App.PopUpIsOpen = false;
-            ActiveMessageType = SdkMessageType.UNKNOWN_COMMAND;
-            BaseIdProcessType = BaseIdProcessType.None;
+            _activeMessageType = SdkMessageType.UNKNOWN_COMMAND;
+            _baseIdProcessType = BaseIdProcessType.None;
             _sdkService.SendCancel();
-            _sdkService.InitHttpClient();
+            _sdkService.StartBaseIdFlow();
             _baseIdConnection = "";
             _hasAcceptedAccess = false;
             IsActivityIndicatorVisible = false;
@@ -1000,6 +1022,7 @@ namespace IDWallet.ViewModels
             IdPinLinkIsVisible = false;
             ForgotPINLinkIsVisible = false;
             MoreInformationLinkIsVisible = false;
+            ScanProcessCounter = 0;
 
             IdPinHeaderLabel = Lang.BaseIDPage_PINScreen_Default_Header_Label;
             IdPinBoldLabel = Lang.BaseIDPage_PINScreen_Selection_Bold_Text;
@@ -1013,7 +1036,7 @@ namespace IDWallet.ViewModels
             switch (sdkMessage.Reader.Card.RetryCounter)
             {
                 case 3:
-                    if (ActiveMessageType == SdkMessageType.ENTER_PUK)
+                    if (_activeMessageType == SdkMessageType.ENTER_PUK)
                     {
                         BaseIdBasicPopUp popUp = new BaseIdBasicPopUp(
                             Lang.PopUp_BaseID_PUK_Success_Title,
@@ -1022,19 +1045,19 @@ namespace IDWallet.ViewModels
                         await popUp.ShowPopUp();
 
                         _sdkService.SendCancel();
-                        _sdkService.InitHttpClient();
+                        _sdkService.StartBaseIdFlow();
                         await Navigation.PopAsync();
                     }
                     break;
                 case 2:
-                    if (ActiveMessageType == SdkMessageType.ENTER_PIN)
+                    if (_activeMessageType == SdkMessageType.ENTER_PIN)
                     {
                         WrongPINPopUp wrongPinPopUp2 = new WrongPINPopUp(sdkMessage.Reader.Card.RetryCounter, Lang.PopUp_BaseID_Wrong_PIN_Pre_Text);
                         await wrongPinPopUp2.ShowPopUp();
                     }
                     break;
                 case 1:
-                    if (ActiveMessageType == SdkMessageType.ENTER_CAN)
+                    if (_activeMessageType == SdkMessageType.ENTER_CAN)
                     {
                         ProgressBarIsVisible = true;
                         IdPinLinkIsVisible = true;
@@ -1055,7 +1078,7 @@ namespace IDWallet.ViewModels
             switch (sdkMessage.Reader.Card.RetryCounter)
             {
                 case 3:
-                    if (ActiveMessageType == SdkMessageType.ENTER_PUK)
+                    if (_activeMessageType == SdkMessageType.ENTER_PUK)
                     {
                         BaseIdBasicPopUp popUp = new BaseIdBasicPopUp(
                             Lang.PopUp_BaseID_PUK_Success_Title,
@@ -1064,19 +1087,19 @@ namespace IDWallet.ViewModels
                         await popUp.ShowPopUp();
 
                         _sdkService.SendCancel();
-                        _sdkService.InitHttpClient();
+                        _sdkService.StartBaseIdFlow();
                         await Navigation.PopAsync();
                     }
                     break;
                 case 2:
-                    if (ActiveMessageType == SdkMessageType.ENTER_PIN)
+                    if (_activeMessageType == SdkMessageType.ENTER_PIN)
                     {
                         WrongPINPopUp wrongPinPopUp2 = new WrongPINPopUp(sdkMessage.Reader.Card.RetryCounter, Lang.PopUp_BaseID_Wrong_PIN_Pre_Text);
                         await wrongPinPopUp2.ShowPopUp();
                     }
                     break;
                 case 1:
-                    if (ActiveMessageType == SdkMessageType.ENTER_CAN)
+                    if (_activeMessageType == SdkMessageType.ENTER_CAN)
                     {
                         ProgressBarIsVisible = false;
                         IdPinLinkIsVisible = false;
@@ -1097,7 +1120,7 @@ namespace IDWallet.ViewModels
             switch (sdkMessage.Reader.Card.RetryCounter)
             {
                 case 3:
-                    if (ActiveMessageType == SdkMessageType.ENTER_PUK)
+                    if (_activeMessageType == SdkMessageType.ENTER_PUK)
                     {
                         BaseIdBasicPopUp popUp = new BaseIdBasicPopUp(
                             Lang.PopUp_BaseID_PUK_Success_Title,
@@ -1106,19 +1129,19 @@ namespace IDWallet.ViewModels
                         await popUp.ShowPopUp();
 
                         _sdkService.SendCancel();
-                        _sdkService.InitHttpClient();
+                        _sdkService.StartBaseIdFlow();
                         await Navigation.PopAsync();
                     }
                     break;
                 case 2:
-                    if (ActiveMessageType == SdkMessageType.ENTER_PIN)
+                    if (_activeMessageType == SdkMessageType.ENTER_PIN)
                     {
                         WrongPINPopUp wrongPinPopUp2 = new WrongPINPopUp(sdkMessage.Reader.Card.RetryCounter, Lang.PopUp_BaseID_Wrong_PIN_Pre_Text_2);
                         await wrongPinPopUp2.ShowPopUp();
                     }
                     break;
                 case 1:
-                    if (ActiveMessageType == SdkMessageType.ENTER_CAN)
+                    if (_activeMessageType == SdkMessageType.ENTER_CAN)
                     {
                         ProgressBarIsVisible = false;
                         IdPinLinkIsVisible = false;

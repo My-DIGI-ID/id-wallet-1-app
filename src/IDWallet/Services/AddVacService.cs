@@ -9,13 +9,10 @@ using IDWallet.Utils;
 using IDWallet.Views.Customs.PopUps;
 using IDWallet.Views.QRScanner.PopUps;
 using Hyperledger.Aries.Agents;
-using Hyperledger.Aries.Features.BasicMessage;
 using Hyperledger.Aries.Features.DidExchange;
 using Hyperledger.Aries.Features.IssueCredential;
 using ICSharpCode.SharpZipLib.Zip.Compression.Streams;
-using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Text;
@@ -110,7 +107,7 @@ namespace IDWallet.Services
         {
             IAgentContext agentContext = await _agentProvider.GetContextAsync();
 
-            var vacQrCredential = new VacQrCredential() { Id = Guid.NewGuid().ToString(), QrContent = codeData, Name = "QR-Code" };
+            VacQrCredential vacQrCredential = new VacQrCredential() { Id = Guid.NewGuid().ToString(), QrContent = codeData, Name = "COVID-Zertifikat" };
 
             await _walletRecordService.AddAsync(agentContext.Wallet, vacQrCredential);
 

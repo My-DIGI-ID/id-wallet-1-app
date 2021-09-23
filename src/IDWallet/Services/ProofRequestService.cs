@@ -87,78 +87,181 @@ namespace IDWallet.Services
             }
 
             // Check if its a self attested attribute for hardware signature
-            if (!string.IsNullOrEmpty(attribute.Name) && attribute.Name.Equals(WalletParams.HardwareSignature))
+            if (!string.IsNullOrEmpty(attribute.Name) && (attribute.Name.Equals(WalletParams.HardwareSignature) || attribute.Name.Equals(WalletParams.HardwareSignatureDdl)))
             {
-                CredentialClaim credentialClaim = new CredentialClaim();
-                credentialClaim.Name = WalletParams.HardwareSignature;
-                credentialClaim.Value = "Signatur";
-                ProofElementOption proofElementOption = new ProofElementOption();
-                proofElementOption.Attributes.Add(credentialClaim);
-
-                WalletElement walletElement = new WalletElement();
-                walletElement.Name = "Hardware-Signatur";
-                walletElement.IssuedBy = "Selbsterstellte Signatur";
-                walletElement.Revoked = false;
-                walletElement.CredentialImageSource = ImageSource.FromFile("hardware_signatur.png");
-                proofElementOption.WalletElement = walletElement;
-
-                List<ProofElementOption> proofElementOptions = new List<ProofElementOption>(new ProofElementOption[] { proofElementOption });
-
-                requestCollection.Add(new ProofModel
-                {
-                    RequestedValue = name,
-                    SelectedValue = "",
-                    DictionaryKey = key,
-                    IsSelfAttested = true,
-                    ProofElementOptions = proofElementOptions,
-                    ImageVisibility = false,
-                    SelectedOption = null,
-                    IsSelected = true,
-                    Restrictions = null,
-                    IsEmbeddedImage = false,
-                    IsRegular = true,
-                    HasEmbeddedDocument = false,
-                    PortraitByteArray = null,
-                    OnlyOneOption = true,
-                    NeedToShow = true
-                });
-
+                AddHwSignatureRequest(requestCollection, name, key, attribute.Name);
                 return;
             }
 
             if (restrictions == null || !restrictions.Any())
             {
-                List<ProofElementOption> proofElementOptions = new List<ProofElementOption>();
-                foreach (WalletElement walletElement in walletElements)
+                AddSelfAttestedRequest(requestCollection, name, key, walletElements, connectionAlias, attribute);
+            }
+            else if (takeNewest)
+            {
+                AddTakeNewestRequest(requestCollection, name, key, matchingCredentials, connectionAlias, attribute, needToShow, restrictions);
+            }
+            else
+            {
+                AddRequest(requestCollection, name, key, matchingCredentials, connectionAlias, attribute, knownProofAttributes, restrictions);
+            }
+        }
+
+        private void AddHwSignatureRequest(ObservableCollection<ProofModel> requestCollection, string name, string key, string hardwareType)
+        {
+            CredentialClaim credentialClaim = new CredentialClaim();
+            credentialClaim.Name = hardwareType;
+            credentialClaim.Value = "Signatur";
+            ProofElementOption proofElementOption = new ProofElementOption();
+            proofElementOption.Attributes.Add(credentialClaim);
+
+            WalletElement walletElement = new WalletElement();
+            walletElement.Name = "Hardware-Signatur";
+            walletElement.IssuedBy = "Selbsterstellte Signatur";
+            walletElement.Revoked = false;
+            walletElement.CredentialImageSource = ImageSource.FromFile("hardware_signatur.png");
+            proofElementOption.WalletElement = walletElement;
+
+            List<ProofElementOption> proofElementOptions = new List<ProofElementOption>(new ProofElementOption[] { proofElementOption });
+
+            requestCollection.Add(new ProofModel
+            {
+                RequestedValue = name,
+                SelectedValue = "",
+                DictionaryKey = key,
+                IsSelfAttested = true,
+                ProofElementOptions = proofElementOptions,
+                ImageVisibility = false,
+                SelectedOption = null,
+                IsSelected = true,
+                Restrictions = null,
+                IsEmbeddedImage = false,
+                IsRegular = true,
+                HasEmbeddedDocument = false,
+                PortraitByteArray = null,
+                OnlyOneOption = true,
+                NeedToShow = true
+            });
+        }
+
+        private void AddSelfAttestedRequest(ObservableCollection<ProofModel> requestCollection, string name, string key, List<WalletElement> walletElements, string connectionAlias, ProofAttributeInfo attribute)
+        {
+            List<ProofElementOption> proofElementOptions = new List<ProofElementOption>();
+            foreach (WalletElement walletElement in walletElements)
+            {
+                string value = "";
+                if (!string.IsNullOrEmpty(attribute.Name) && !attribute.Name.Equals("embeddedImage") &&
+                    !attribute.Name.Equals("embeddedDocument"))
+                {
+                    if (walletElement.Claims.ToList().Exists(x => x.Name == name))
+                    {
+                        value = walletElement.Claims.First(x => x.Name == attribute.Name).Value;
+                    }
+                }
+                else if (attribute.Names != null && attribute.Names.Count() > 0 && name != "embeddedImage" &&
+                         name != "embeddedDocument")
+                {
+                    if (walletElement.Claims.ToList().Exists(x => x.Name == name))
+                    {
+                        value = walletElement.Claims.First(x =>
+                            x.Name == attribute.Names.Where(y => y.Equals(name)).FirstOrDefault()).Value;
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(value))
+                {
+                    proofElementOptions.Add(new ProofElementOption
+                    {
+                        WalletElement = walletElement,
+                        Value = value,
+                        ConnectionAlias = connectionAlias
+                    });
+                }
+            }
+
+            proofElementOptions = new List<ProofElementOption>(proofElementOptions
+                .OrderBy(x => x.WalletElement.CredentialRecord.CredentialDefinitionId)
+                .ThenByDescending(x => x.WalletElement.CredentialRecord.CreatedAtUtc.Value));
+            for (int i = 1; i < proofElementOptions.Count; i++)
+            {
+                ProofElementOption currentOption = proofElementOptions[i];
+                ProofElementOption previousOption = proofElementOptions[i - 1];
+                if (currentOption.WalletElement.CredentialRecord.CredentialDefinitionId ==
+                    previousOption.WalletElement.CredentialRecord.CredentialDefinitionId)
+                {
+                    if (previousOption.CopyCounter == null)
+                    {
+                        currentOption.CopyCounter = "#2";
+                        previousOption.CopyCounter = "#1";
+                    }
+                    else
+                    {
+                        currentOption.CopyCounter =
+                            "#" + (int.Parse(previousOption.CopyCounter.Substring(1)) + 1).ToString();
+                    }
+                }
+            }
+
+            requestCollection.Add(new ProofModel
+            {
+                RequestedValue = name,
+                SelectedValue = "",
+                DictionaryKey = key,
+                OnlyOneOption = false,
+                IsSelfAttested = true,
+                ProofElementOptions = proofElementOptions,
+                ImageVisibility = false,
+                SelectedOption = null,
+                IsSelected = false,
+                Restrictions = null,
+                IsEmbeddedImage = false,
+                IsRegular = true,
+                HasEmbeddedDocument = false,
+                PortraitByteArray = null,
+                NeedToShow = true
+            });
+        }
+
+        private void AddTakeNewestRequest(ObservableCollection<ProofModel> requestCollection, string name, string key, List<WalletElement> matchingCredentials, string connectionAlias, ProofAttributeInfo attribute, bool needToShow, List<AttributeFilter> restrictions)
+        {
+            bool optionsEmpty = true;
+            List<ProofElementOption> proofElementOptions = new List<ProofElementOption>();
+            bool onlyOneOption = true;
+            string selectedValue = null;
+            string copyCounter = null;
+            ProofElementOption selectedOption = null;
+            bool isSelected = false;
+            bool revoked = false;
+            bool isRegular = true;
+            bool isEmbedded = false;
+            byte[] portraitByteArray = null;
+            bool hasDocument = false;
+            string documentString = "";
+
+            if (matchingCredentials.Any())
+            {
+                optionsEmpty = false;
+                foreach (WalletElement credential in matchingCredentials)
                 {
                     string value = "";
                     if (!string.IsNullOrEmpty(attribute.Name) && !attribute.Name.Equals("embeddedImage") &&
                         !attribute.Name.Equals("embeddedDocument"))
                     {
-                        if (walletElement.Claims.ToList().Exists(x => x.Name == name))
-                        {
-                            value = walletElement.Claims.First(x => x.Name == attribute.Name).Value;
-                        }
+                        value = credential.Claims.First(x => x.Name == attribute.Name).Value;
                     }
                     else if (attribute.Names != null && attribute.Names.Count() > 0 && name != "embeddedImage" &&
                              name != "embeddedDocument")
                     {
-                        if (walletElement.Claims.ToList().Exists(x => x.Name == name))
-                        {
-                            value = walletElement.Claims.First(x =>
-                                x.Name == attribute.Names.Where(y => y.Equals(name)).FirstOrDefault()).Value;
-                        }
+                        value = credential.Claims.First(x =>
+                            x.Name == attribute.Names.Where(y => y.Equals(name)).FirstOrDefault()).Value;
                     }
 
-                    if (!string.IsNullOrEmpty(value))
+                    proofElementOptions.Add(new ProofElementOption
                     {
-                        proofElementOptions.Add(new ProofElementOption
-                        {
-                            WalletElement = walletElement,
-                            Value = value,
-                            ConnectionAlias = connectionAlias
-                        });
-                    }
+                        WalletElement = credential,
+                        Value = value,
+                        ConnectionAlias = connectionAlias
+                    });
                 }
 
                 proofElementOptions = new List<ProofElementOption>(proofElementOptions
@@ -184,220 +287,138 @@ namespace IDWallet.Services
                     }
                 }
 
-                requestCollection.Add(new ProofModel
+                proofElementOptions = new List<ProofElementOption>(proofElementOptions.OrderByDescending(x =>
+                    x.WalletElement.CredentialRecord.CreatedAtUtc.Value));
+                if (proofElementOptions.Count > 1)
                 {
-                    RequestedValue = name,
-                    SelectedValue = null,
-                    DictionaryKey = key,
-                    IsSelfAttested = true,
-                    ProofElementOptions = proofElementOptions,
-                    ImageVisibility = false,
-                    SelectedOption = null,
-                    IsSelected = false,
-                    Restrictions = null,
-                    IsEmbeddedImage = false,
-                    IsRegular = true,
-                    HasEmbeddedDocument = false,
-                    PortraitByteArray = null
-                });
+                    onlyOneOption = false;
+                    proofElementOptions.First().IconSource = "mdi-circle-slice-8";
+                }
+
+                if (proofElementOptions.Any())
+                {
+                    proofElementOptions[proofElementOptions.Count - 1].ShowSeparator = false;
+                }
+
+                selectedValue = proofElementOptions.First().Value;
+                copyCounter = proofElementOptions.First().CopyCounter;
+                selectedOption = proofElementOptions.First();
+                isSelected = true;
+                revoked = proofElementOptions.First().WalletElement.Revoked;
+
+                if ((attribute.Name != null && attribute.Name == "embeddedImage") || (attribute.Names != null &&
+                    attribute.Names.Count() > 0 && attribute.Names.Contains("embeddedImage") &&
+                    name == "embeddedImage"))
+                {
+                    isEmbedded = true;
+                    isRegular = false;
+                    portraitByteArray = proofElementOptions.First().WalletElement.PortraitByteArray;
+                }
+
+                else if ((attribute.Name != null && attribute.Name == "embeddedDocument") ||
+                         (attribute.Names != null && attribute.Names.Count() > 0 &&
+                          attribute.Names.Contains("embeddedDocument") && name == "embeddedDocument"))
+                {
+                    hasDocument = true;
+                    isRegular = false;
+                    documentString = proofElementOptions.First().WalletElement.DocumentString;
+                }
             }
-            else if (takeNewest)
+
+            requestCollection.Add(new ProofModel
             {
-                bool optionsEmpty = true;
-                List<ProofElementOption> proofElementOptions = new List<ProofElementOption>();
-                bool onlyOneOption = true;
-                string selectedValue = null;
-                string copyCounter = null;
-                ProofElementOption selectedOption = null;
-                bool isSelected = false;
-                bool revoked = false;
-                bool isRegular = true;
-                bool isEmbedded = false;
-                byte[] portraitByteArray = null;
-                bool hasDocument = false;
-                string documentString = "";
+                RequestedValue = name,
+                SelectedValue = selectedValue,
+                DictionaryKey = key,
+                NeedToShow = needToShow,
+                IsSelfAttested = false,
+                Revoked = revoked,
+                ProofElementOptions = proofElementOptions,
+                OnlyOneOption = onlyOneOption,
+                ImageVisibility = optionsEmpty,
+                SelectedOption = selectedOption,
+                IsSelected = isSelected,
+                Restrictions = restrictions,
+                IsEmbeddedImage = isEmbedded,
+                IsRegular = isRegular,
+                PortraitByteArray = portraitByteArray,
+                HasEmbeddedDocument = hasDocument,
+                DocumentString = documentString
+            });
+        }
 
-                if (matchingCredentials.Any())
+        private void AddRequest(ObservableCollection<ProofModel> requestCollection, string name, string key, List<WalletElement> matchingCredentials, string connectionAlias, ProofAttributeInfo attribute, Dictionary<string, Tuple<List<AttributeFilter>, string>> knownProofAttributes, List<AttributeFilter> restrictions)
+        {
+            bool isSelected = false;
+            string selectedValue = null;
+            bool isEmbedded = false;
+            bool isRegular = true;
+            bool hasDocument = false;
+            byte[] portraitByteArray = null;
+            WalletElement lastUsedCredential = null;
+            ProofElementOption selectedOption = null;
+            if (knownProofAttributes.ContainsKey(name))
+            {
+                string lastUsedCredentialId = knownProofAttributes[name].Item2;
+                lastUsedCredential =
+                    matchingCredentials.Find(x => x.CredentialRecord.CredentialId == lastUsedCredentialId);
+                if (lastUsedCredential != null)
                 {
-                    optionsEmpty = false;
-                    foreach (WalletElement credential in matchingCredentials)
-                    {
-                        string value = "";
-                        if (!string.IsNullOrEmpty(attribute.Name) && !attribute.Name.Equals("embeddedImage") &&
-                            !attribute.Name.Equals("embeddedDocument"))
-                        {
-                            value = credential.Claims.First(x => x.Name == attribute.Name).Value;
-                        }
-                        else if (attribute.Names != null && attribute.Names.Count() > 0 && name != "embeddedImage" &&
-                                 name != "embeddedDocument")
-                        {
-                            value = credential.Claims.First(x =>
-                                x.Name == attribute.Names.Where(y => y.Equals(name)).FirstOrDefault()).Value;
-                        }
-
-                        proofElementOptions.Add(new ProofElementOption
-                        {
-                            WalletElement = credential,
-                            Value = value,
-                            ConnectionAlias = connectionAlias
-                        });
-                    }
-
-                    proofElementOptions = new List<ProofElementOption>(proofElementOptions
-                        .OrderBy(x => x.WalletElement.CredentialRecord.CredentialDefinitionId)
-                        .ThenByDescending(x => x.WalletElement.CredentialRecord.CreatedAtUtc.Value));
-                    for (int i = 1; i < proofElementOptions.Count; i++)
-                    {
-                        ProofElementOption currentOption = proofElementOptions[i];
-                        ProofElementOption previousOption = proofElementOptions[i - 1];
-                        if (currentOption.WalletElement.CredentialRecord.CredentialDefinitionId ==
-                            previousOption.WalletElement.CredentialRecord.CredentialDefinitionId)
-                        {
-                            if (previousOption.CopyCounter == null)
-                            {
-                                currentOption.CopyCounter = "#2";
-                                previousOption.CopyCounter = "#1";
-                            }
-                            else
-                            {
-                                currentOption.CopyCounter =
-                                    "#" + (int.Parse(previousOption.CopyCounter.Substring(1)) + 1).ToString();
-                            }
-                        }
-                    }
-
-                    proofElementOptions = new List<ProofElementOption>(proofElementOptions.OrderByDescending(x =>
-                        x.WalletElement.CredentialRecord.CreatedAtUtc.Value));
-                    if (proofElementOptions.Count > 1)
-                    {
-                        onlyOneOption = false;
-                        proofElementOptions.First().IconSource = "mdi-circle-slice-8";
-                    }
-
-                    if (proofElementOptions.Any())
-                    {
-                        proofElementOptions[proofElementOptions.Count - 1].ShowSeparator = false;
-                    }
-
-                    selectedValue = proofElementOptions.First().Value;
-                    copyCounter = proofElementOptions.First().CopyCounter;
-                    selectedOption = proofElementOptions.First();
                     isSelected = true;
-                    revoked = proofElementOptions.First().WalletElement.Revoked;
-
                     if ((attribute.Name != null && attribute.Name == "embeddedImage") || (attribute.Names != null &&
                         attribute.Names.Count() > 0 && attribute.Names.Contains("embeddedImage") &&
                         name == "embeddedImage"))
                     {
+                        selectedValue = lastUsedCredential.PortraitByteArray.ToBase64String();
                         isEmbedded = true;
                         isRegular = false;
-                        portraitByteArray = proofElementOptions.First().WalletElement.PortraitByteArray;
                     }
-
                     else if ((attribute.Name != null && attribute.Name == "embeddedDocument") ||
                              (attribute.Names != null && attribute.Names.Count() > 0 &&
                               attribute.Names.Contains("embeddedDocument") && name == "embeddedDocument"))
                     {
+                        selectedValue = lastUsedCredential.DocumentString;
                         hasDocument = true;
                         isRegular = false;
-                        documentString = proofElementOptions.First().WalletElement.DocumentString;
                     }
-                }
-
-                requestCollection.Add(new ProofModel
-                {
-                    RequestedValue = name,
-                    SelectedValue = selectedValue,
-                    DictionaryKey = key,
-                    NeedToShow = needToShow,
-                    IsSelfAttested = false,
-                    Revoked = revoked,
-                    ProofElementOptions = proofElementOptions,
-                    OnlyOneOption = onlyOneOption,
-                    ImageVisibility = optionsEmpty,
-                    SelectedOption = selectedOption,
-                    IsSelected = isSelected,
-                    Restrictions = restrictions,
-                    IsEmbeddedImage = isEmbedded,
-                    IsRegular = isRegular,
-                    PortraitByteArray = portraitByteArray,
-                    HasEmbeddedDocument = hasDocument,
-                    DocumentString = documentString
-                });
-            }
-            else
-            {
-                bool isSelected = false;
-                string selectedValue = null;
-                bool isEmbedded = false;
-                bool isRegular = true;
-                bool hasDocument = false;
-                byte[] portraitByteArray = null;
-                WalletElement lastUsedCredential = null;
-                ProofElementOption selectedOption = null;
-                if (knownProofAttributes.ContainsKey(name))
-                {
-                    string lastUsedCredentialId = knownProofAttributes[name].Item2;
-                    lastUsedCredential =
-                        matchingCredentials.Find(x => x.CredentialRecord.CredentialId == lastUsedCredentialId);
-                    if (lastUsedCredential != null)
+                    else
                     {
-                        isSelected = true;
-                        if ((attribute.Name != null && attribute.Name == "embeddedImage") || (attribute.Names != null &&
-                            attribute.Names.Count() > 0 && attribute.Names.Contains("embeddedImage") &&
-                            name == "embeddedImage"))
+                        if (attribute.Name != null)
                         {
-                            selectedValue = lastUsedCredential.PortraitByteArray.ToBase64String();
-                            isEmbedded = true;
-                            isRegular = false;
+                            selectedValue = lastUsedCredential.Claims.First(x => x.Name == attribute.Name).Value;
                         }
-                        else if ((attribute.Name != null && attribute.Name == "embeddedDocument") ||
-                                 (attribute.Names != null && attribute.Names.Count() > 0 &&
-                                  attribute.Names.Contains("embeddedDocument") && name == "embeddedDocument"))
+                        else if (attribute.Names != null && attribute.Names.Count() > 0)
                         {
-                            selectedValue = lastUsedCredential.DocumentString;
-                            hasDocument = true;
-                            isRegular = false;
+                            selectedValue = lastUsedCredential.Claims.First(x =>
+                                x.Name == attribute.Names.Where(y => y.Equals(name)).FirstOrDefault()).Value;
                         }
-                        else
-                        {
-                            if (attribute.Name != null)
-                            {
-                                selectedValue = lastUsedCredential.Claims.First(x => x.Name == attribute.Name).Value;
-                            }
-                            else if (attribute.Names != null && attribute.Names.Count() > 0)
-                            {
-                                selectedValue = lastUsedCredential.Claims.First(x =>
-                                    x.Name == attribute.Names.Where(y => y.Equals(name)).FirstOrDefault()).Value;
-                            }
-                        }
-
-                        selectedOption = new ProofElementOption
-                        {
-                            WalletElement = lastUsedCredential,
-                            Value = selectedValue,
-                            ConnectionAlias = connectionAlias
-                        };
                     }
-                }
 
-                requestCollection.Add(new ProofModel
-                {
-                    RequestedValue = name,
-                    SelectedValue = selectedValue,
-                    DictionaryKey = key,
-                    IsSelfAttested = false,
-                    ProofElementOptions = null,
-                    ImageVisibility = false,
-                    SelectedOption = selectedOption,
-                    IsSelected = isSelected,
-                    Restrictions = restrictions,
-                    IsEmbeddedImage = isEmbedded,
-                    IsRegular = isRegular,
-                    HasEmbeddedDocument = hasDocument,
-                    PortraitByteArray = portraitByteArray
-                });
+                    selectedOption = new ProofElementOption
+                    {
+                        WalletElement = lastUsedCredential,
+                        Value = selectedValue,
+                        ConnectionAlias = connectionAlias
+                    };
+                }
             }
+
+            requestCollection.Add(new ProofModel
+            {
+                RequestedValue = name,
+                SelectedValue = selectedValue,
+                DictionaryKey = key,
+                IsSelfAttested = false,
+                ProofElementOptions = null,
+                ImageVisibility = false,
+                SelectedOption = selectedOption,
+                IsSelected = isSelected,
+                Restrictions = restrictions,
+                IsEmbeddedImage = isEmbedded,
+                IsRegular = isRegular,
+                HasEmbeddedDocument = hasDocument,
+                PortraitByteArray = portraitByteArray
+            });
         }
 
         public async Task AddKnownProofAttributes(ObservableCollection<ProofModel> requestCollection,
@@ -649,7 +670,7 @@ namespace IDWallet.Services
                         Resources.Lang.PopUp_Proof_Sending_Failed_Text,
                         Resources.Lang.PopUp_Proof_Sending_Failed_Button)
                     {
-                        ProofSendPopUp = true
+                        AlwaysDisplay = true
                     };
                     await alert.ShowPopUp();
                 }
@@ -660,7 +681,7 @@ namespace IDWallet.Services
                         Resources.Lang.PopUp_Network_Error_Text,
                         Resources.Lang.PopUp_Network_Error_Button)
                     {
-                        ProofSendPopUp = true
+                        AlwaysDisplay = true
                     };
                     await popUp.ShowPopUp();
                 }
@@ -682,7 +703,7 @@ namespace IDWallet.Services
                         Resources.Lang.PopUp_Proof_Sending_Failed_Text,
                         Resources.Lang.PopUp_Proof_Sending_Failed_Button)
                     {
-                        ProofSendPopUp = true
+                        AlwaysDisplay = true
                     };
                     await alert.ShowPopUp();
                 }
@@ -693,7 +714,7 @@ namespace IDWallet.Services
                         Resources.Lang.PopUp_Network_Error_Text,
                         Resources.Lang.PopUp_Network_Error_Button)
                     {
-                        ProofSendPopUp = true
+                        AlwaysDisplay = true
                     };
                     await popUp.ShowPopUp();
                 }
@@ -706,15 +727,23 @@ namespace IDWallet.Services
             IAgentContext agentContext, Dictionary<string, RequestedAttribute> attributes,
             Dictionary<string, string> selfs, Dictionary<string, RequestedAttribute> predicates, long timestamp, ProofRequest proofRequest = null)
         {
-            foreach (Models.ProofModel currentRequest in requestCollection)
+            foreach (ProofModel currentRequest in requestCollection)
             {
                 if (currentRequest.IsSelfAttested && currentRequest.SelectedOption == null)
                 {
-                    if (currentRequest.RequestedValue.Equals(WalletParams.HardwareSignature))
+                    if (currentRequest.RequestedValue.Equals(WalletParams.HardwareSignature) || currentRequest.RequestedValue.Equals(WalletParams.HardwareSignatureDdl))
                     {
-
+                        string hwAlias;
+                        if (currentRequest.RequestedValue.Equals(WalletParams.HardwareSignature))
+                        {
+                            hwAlias = WalletParams.BaseIdAlias;
+                        }
+                        else
+                        {
+                            hwAlias = WalletParams.DdlAlias;
+                        }
                         IHardwareKeyService hardwareKeyService = DependencyService.Resolve<IHardwareKeyService>();
-                        string signature = hardwareKeyService.Sign(GetNonce(proofRequest.Nonce, 2));
+                        string signature = hardwareKeyService.Sign(GetNonce(proofRequest.Nonce, 2), hwAlias);
 
                         selfs.Add(currentRequest.DictionaryKey, signature);
                     }
@@ -744,7 +773,7 @@ namespace IDWallet.Services
                             Resources.Lang.PopUp_Undefined_Error_Message,
                             Resources.Lang.PopUp_Undefined_Error_Button)
                         {
-                            ProofSendPopUp = true
+                            AlwaysDisplay = true
                         };
                         await alertPopUp.ShowPopUp();
                     }

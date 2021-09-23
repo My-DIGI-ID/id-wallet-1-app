@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IDWallet.Views.DDL.DdlPage"
+             xmlns:iconize="clr-namespace:Plugin.Iconize;assembly=Plugin.Iconize"
+             xmlns:lang="clr-namespace:IDWallet.Extensions" 
+             xmlns:views="clr-namespace:IDWallet.Views.DDL.Content"
+             BackgroundColor="{StaticResource BackgroundColor}"
+             Padding="20"
+             x:Name="Root">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="BoxView" x:Key="ProgressBarBoxViewStyle">
+                <Setter Property="HorizontalOptions" Value="Fill"/>
+                <Setter Property="HeightRequest" Value="3"/>
+            </Style>
+
+            <Style TargetType="Label" x:Key="ProgressBarLabelStyle">
+                <Setter Property="FontSize" Value="14"/>
+            </Style>
+
+            <Style TargetType="StackLayout" x:Key="ProgressBarStackLayoutStyle">
+                <Setter Property="Spacing" Value="0"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="{lang:L10n Navigation_Back}"
+                   HorizontalOptions="StartAndExpand"
+                   VerticalOptions="CenterAndExpand"
+                   FontAttributes="Bold"
+                   FontSize="20" />
+        </StackLayout>
+    </NavigationPage.TitleView>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Margin="0,10"
+              ColumnSpacing="2"
+              IsVisible="{Binding ProgressBarIsVisible}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackLayout Grid.Column="0"
+                         Style="{StaticResource ProgressBarStackLayoutStyle}">
+                <Label Text="1"
+                       TextColor="{Binding Progress, Converter={StaticResource ProgressBarColorConverter}, ConverterParameter=0}"
+                       Style="{StaticResource ProgressBarLabelStyle}"/>
+                <BoxView BackgroundColor="{Binding Progress, Converter={StaticResource ProgressBarColorConverter}, ConverterParameter=0}"
+                         Style="{StaticResource ProgressBarBoxViewStyle}"/>
+            </StackLayout>
+
+            <StackLayout Grid.Column="1"
+                         Style="{StaticResource ProgressBarStackLayoutStyle}">
+                <Label Text="2"
+                       TextColor="{Binding Progress, Converter={StaticResource ProgressBarColorConverter}, ConverterParameter=1}"
+                       Style="{StaticResource ProgressBarLabelStyle}"/>
+                <BoxView BackgroundColor="{Binding Progress, Converter={StaticResource ProgressBarColorConverter}, ConverterParameter=1}"
+                         Style="{StaticResource ProgressBarBoxViewStyle}"/>
+            </StackLayout>
+
+            <StackLayout Grid.Column="2"
+                         Style="{StaticResource ProgressBarStackLayoutStyle}">
+                <Label Text="3"
+                       TextColor="{Binding Progress, Converter={StaticResource ProgressBarColorConverter}, ConverterParameter=2}"
+                       Style="{StaticResource ProgressBarLabelStyle}"/>
+                <BoxView BackgroundColor="{Binding Progress, Converter={StaticResource ProgressBarColorConverter}, ConverterParameter=2}"
+                         Style="{StaticResource ProgressBarBoxViewStyle}"/>
+            </StackLayout>
+
+            <StackLayout Grid.Column="3"
+                         Style="{StaticResource ProgressBarStackLayoutStyle}">
+                <Label Text="4"
+                       TextColor="{Binding Progress, Converter={StaticResource ProgressBarColorConverter}, ConverterParameter=3}"
+                       Style="{StaticResource ProgressBarLabelStyle}"/>
+                <BoxView BackgroundColor="{Binding Progress, Converter={StaticResource ProgressBarColorConverter}, ConverterParameter=3}"
+                         Style="{StaticResource ProgressBarBoxViewStyle}"/>
+            </StackLayout>
+
+            <StackLayout Grid.Column="4"
+                         Style="{StaticResource ProgressBarStackLayoutStyle}">
+                <Label Text="5"
+                       TextColor="{Binding Progress, Converter={StaticResource ProgressBarColorConverter}, ConverterParameter=4}"
+                       Style="{StaticResource ProgressBarLabelStyle}"/>
+                <BoxView BackgroundColor="{Binding Progress, Converter={StaticResource ProgressBarColorConverter}, ConverterParameter=4}"
+                         Style="{StaticResource ProgressBarBoxViewStyle}"/>
+            </StackLayout>
+        </Grid>
+
+        <StackLayout IsVisible="{Binding ProgressBarIsVisible, Converter={StaticResource InverseBooleanConverter}}"
+                     Orientation="Horizontal">
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding ChangeDigitsTappedCommand}"/>
+            </StackLayout.GestureRecognizers>
+            <iconize:IconImage Icon="mdi-chevron-left"
+                               IconSize="20"
+                               IconColor="{StaticResource PrimaryTextColor}"/>
+
+            <Label Text="{lang:L10n BaseIDPage_PINScreen_Transport_Cancel}"
+                   FontAttributes="Bold"/>
+        </StackLayout>
+
+        <CarouselView IsTabStop="True" 
+                      Grid.Row="1"
+                      HorizontalOptions="FillAndExpand" 
+                      VerticalOptions="FillAndExpand"
+                      IsScrollAnimated="False"
+                      PeekAreaInsets="0"
+                      IsSwipeEnabled="False"
+                      Position="{Binding CarouselPosition}"
+                      x:Name="BaseIdCarousel">
+            <CarouselView.ItemsSource>
+                <x:Array Type="{x:Type ContentView}">
+                    <views:DdlStartView/>
+                    <views:DdlReadView/>
+                    <views:DdlCreateConnectionView/>
+                    <views:DdlPINView/>
+                    <views:DdlConnectingView/>
+                    <views:DdlSuccessView/>
+                    <views:DdlPINSuccessView/>
+                </x:Array>
+            </CarouselView.ItemsSource>
+            <CarouselView.ItemTemplate>
+                <DataTemplate>
+                    <ContentView Content="{Binding .}" />
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+        </CarouselView>
+
+        <BoxView BackgroundColor="Transparent"
+                 HorizontalOptions="FillAndExpand"
+                 VerticalOptions="FillAndExpand"
+                 IsVisible="{Binding IsActivityIndicatorVisible}"
+                 Grid.RowSpan="2"/>
+    </Grid>
+</ContentPage>

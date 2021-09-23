@@ -17,6 +17,10 @@ namespace IDWallet.Utils.Converter
                     {
                         return true;
                     }
+                    else if (credentialClaim.Name == WalletParams.HardwareSignatureDdl)
+                    {
+                        return true;
+                    }
                 }
             }
             return false;

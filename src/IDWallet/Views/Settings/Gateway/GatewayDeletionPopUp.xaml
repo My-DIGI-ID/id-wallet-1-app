@@ -52,7 +52,7 @@
                                     Text="{lang:L10n PopUp_Gateway_Deletion_Cancel_Button}" />
                             <Button x:Name="DeleteButton"
                                     Text="{lang:L10n PopUp_Gateway_Deletion_Delete_Button}"
-                                    Style="{StaticResource DeleteButton}"
+                                    Style="{StaticResource AcceptButton}"
                                     IsVisible="False"
                                     Clicked="OnPopUpAccepted" />
                         </StackLayout>

@@ -18,13 +18,13 @@ namespace IDWallet.Views.Customs.PopUps
     {
         public bool PopUpIsLoading = false;
         public bool PreLoginPopUp = false;
-        public bool ProofSendPopUp = false;
+        public bool AlwaysDisplay = false;
         private TaskCompletionSource<PopUpResult> _taskCompletionSource = null;
 
         public static async Task WaitForOpenPopUp(CustomPopUp popUp)
         {
             await Task.Delay(10);
-            while ((App.PopUpIsOpen || (!App.IsLoggedIn && !popUp.PreLoginPopUp)) && !popUp.ProofSendPopUp)
+            while ((App.PopUpIsOpen || (!App.IsLoggedIn && !popUp.PreLoginPopUp)) && !popUp.AlwaysDisplay)
             {
                 await Task.Delay(10);
             }

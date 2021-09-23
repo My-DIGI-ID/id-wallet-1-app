@@ -5,11 +5,13 @@ using IDWallet.Resources;
 using IDWallet.ViewModels;
 using IDWallet.Views.BaseId;
 using IDWallet.Views.Customs.PopUps;
+using IDWallet.Views.DDL;
 using IDWallet.Views.Inbox;
 using IDWallet.Views.Settings;
 using IDWallet.Views.Wallet.PopUps;
 using System;
 using System.ComponentModel;
+using System.Globalization;
 using Xamarin.Forms;
 using Xamarin.Forms.Svg;
 
@@ -18,10 +20,10 @@ namespace IDWallet.Views.Wallet
     [DesignTimeVisible(false)]
     public partial class WalletPage : ContentPage
     {
-        private bool _arrowIsBouncing { get; set; } = false;
-
+        private bool _clicked = false;
         public readonly WalletViewModel ViewModel;
         public ImageSource SettingsIconImage { get; set; }
+        public ImageSource AddCredentialsImage { get; set; }
 
         private Command _notificationsClickedCommand;
         public Command NotificationsClickedCommand =>
@@ -31,13 +33,33 @@ namespace IDWallet.Views.Wallet
         public Command SettingsClickedCommand =>
             _settingsClickedCommand ??= new Command(Settings_Clicked);
 
-        private Command _baseIdTappedCommand;
-        public Command BaseIdTappedCommand =>
-            _baseIdTappedCommand ??= new Command(BaseIdTapped);
+        private Command _addBaseIdTappedCommand;
+        public Command AddBaseIdTappedCommand =>
+            _addBaseIdTappedCommand ??= new Command(AddBaseIdTapped);
+
+        private Command _addDdlTappedCommand;
+        public Command AddDdlTappedCommand =>
+            _addDdlTappedCommand ??= new Command(AddDdlTapped);
+
+        private Command _addVacCertTappedCommand;
+        public Command AddVacCertTappedCommand =>
+            _addVacCertTappedCommand ??= new Command(AddVacCertTapped);
+
+        private Command _addDocumentTappedCommand;
+        public Command AddDocumentTappedCommand => _addDocumentTappedCommand ??= new Command(AddDocumentTapped);
 
         public WalletPage()
         {
             SettingsIconImage = SvgImageSource.FromSvgResource("imagesources.SettingNotOpen_Icon.svg");
+
+            if (CultureInfo.CurrentUICulture.Name.Equals("de-DE"))
+            {
+                AddCredentialsImage = SvgImageSource.FromSvgResource("imagesources.WalletPage.AddCredential.svg");
+            }
+            else
+            {
+                AddCredentialsImage = SvgImageSource.FromSvgResource("imagesources.WalletPage.AddCredential_en.svg");
+            }
 
             InitializeComponent();
 
@@ -47,8 +69,6 @@ namespace IDWallet.Views.Wallet
             {
                 Device.StartTimer(new TimeSpan(0, 0, 2), () =>
                 {
-                    BaseID_Button.IsEnabled = false;
-                    BaseIdFrame.IsEnabled = false;
                     if (!DependencyService.Get<IAusweisSdk>().IsConnected())
                     {
                         DependencyService.Get<IAusweisSdk>().BindService();
@@ -56,8 +76,6 @@ namespace IDWallet.Views.Wallet
                     }
                     else
                     {
-                        BaseIdFrame.IsEnabled = true;
-                        BaseID_Button.IsEnabled = true;
                         return false;
                     }
                 });
@@ -71,25 +89,37 @@ namespace IDWallet.Views.Wallet
             MessagingCenter.Subscribe<InboxPage>(this, WalletEvents.DisableNotifications, NotificationsClosed);
         }
 
-
         public async void Delete_Credential(WalletElement walletElement)
         {
-            DisableAll();
-            DeleteCredentialPopUp popUp = new DeleteCredentialPopUp();
-            PopUpResult popResult = await popUp.ShowPopUp();
-            if (PopUpResult.Accepted == popResult)
+            if (_clicked)
             {
-                if (string.IsNullOrEmpty(walletElement.VacQrRecordId))
+                return;
+            }
+            DisableAll();
+
+            _clicked = true;
+            try
+            {
+
+                DeleteCredentialPopUp popUp = new DeleteCredentialPopUp();
+                PopUpResult popResult = await popUp.ShowPopUp();
+                if (PopUpResult.Accepted == popResult)
                 {
-                    await ViewModel.DeleteWalletElement(walletElement.CredentialRecord.Id);
-                }
-                else
-                {
-                    await ViewModel.DeleteWalletQrElement(walletElement.VacQrRecordId);
+                    if (string.IsNullOrEmpty(walletElement.VacQrRecordId))
+                    {
+                        await ViewModel.DeleteWalletElement(walletElement.CredentialRecord.Id);
+                    }
+                    else
+                    {
+                        await ViewModel.DeleteWalletQrElement(walletElement.VacQrRecordId);
+                    }
                 }
             }
-
-            EnableAll();
+            finally
+            {
+                _clicked = false;
+                EnableAll();
+            }
         }
 
         public void ReloadCredentials()
@@ -114,24 +144,6 @@ namespace IDWallet.Views.Wallet
         {
             NotificationsToolBarItem.IsEnabled = false;
             SettingsToolBarItem.IsEnabled = false;
-        }
-
-        private void EmptyStackLayout_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            StackLayout emptyStack = sender as StackLayout;
-            if (emptyStack.IsVisible && !_arrowIsBouncing)
-            {
-                _arrowIsBouncing = true;
-                new Animation
-                {
-                    {0, 0.2, new Animation(v => ArrowFrame.TranslationY = v, 0, -30)},
-                    {0.2, 0.4, new Animation(v => ArrowFrame.TranslationY = v, -30, 0, Easing.BounceOut)}
-                }.Commit(this, "BouncingArrow", length: 5000, repeat: () => true);
-            }
-            else
-            {
-                ArrowFrame.CancelAnimations();
-            }
         }
 
         private void EnableAll()
@@ -186,25 +198,173 @@ namespace IDWallet.Views.Wallet
             EnableAll();
         }
 
-        private async void BaseIdTapped(object obj)
+        private async void AddBaseIdTapped(object obj)
         {
-            DisableAll();
-            if (DependencyService.Get<IAusweisSdk>().NfcEnabled())
+            if (!DependencyService.Get<IAusweisSdk>().IsConnected() || _clicked)
             {
-                DependencyService.Get<IAusweisSdk>().StartSdkIos();
-                DependencyService.Get<IAusweisSdk>().EnableNfcDispatcher();
-                await Navigation.PushAsync(new BaseIdPage());
-            }
-            else
-            {
-                BasicPopUp popUp = new BasicPopUp(
-                    Lang.PopUp_NFC_Not_Enabled_Title,
-                    Lang.PopUp_NFC_Not_Enabled_Text,
-                    Lang.PopUp_NFC_Not_Enabled_Button
+                if (!DependencyService.Get<IAusweisSdk>().DeviceHasNfc())
+                {
+                    BasicPopUp popUp = new BasicPopUp(
+                        Lang.PopUp_NFC_No_NFC_Title,
+                        Lang.PopUp_NFC_No_NFC_Text,
+                        Lang.PopUp_NFC_No_NFC_Button
                     );
-                await popUp.ShowPopUp();
+                    await popUp.ShowPopUp();
+
+                    return;
+                }
+
+                if (!DependencyService.Get<IAusweisSdk>().IsConnected())
+                {
+                    BasicPopUp popUp = new BasicPopUp(
+                        Lang.PopUp_SDK_Not_Connected_Title,
+                        Lang.PopUp_SDK_Not_Connected_Text,
+                        Lang.PopUp_SDK_Not_Connected_Button
+                    );
+                    await popUp.ShowPopUp();
+
+                    return;
+                }
+
+                return;
             }
-            EnableAll();
+            DisableAll();
+
+            _clicked = true;
+            try
+            {
+                if (DependencyService.Get<IAusweisSdk>().NfcEnabled())
+                {
+                    DependencyService.Get<IAusweisSdk>().StartSdkIos();
+                    DependencyService.Get<IAusweisSdk>().EnableNfcDispatcher();
+                    await Navigation.PushAsync(new BaseIdPage());
+                }
+                else
+                {
+                    BasicPopUp popUp = new BasicPopUp(
+                        Lang.PopUp_NFC_Not_Enabled_Title,
+                        Lang.PopUp_NFC_Not_Enabled_Text,
+                        Lang.PopUp_NFC_Not_Enabled_Button
+                        );
+                    await popUp.ShowPopUp();
+                }
+            }
+            finally
+            {
+                _clicked = false;
+                EnableAll();
+            }
+        }
+
+        private async void AddDdlTapped(object obj)
+        {
+            if (!DependencyService.Get<IAusweisSdk>().IsConnected() || _clicked)
+            {
+                if (!DependencyService.Get<IAusweisSdk>().DeviceHasNfc())
+                {
+                    BasicPopUp popUp = new BasicPopUp(
+                        Lang.PopUp_NFC_No_NFC_Title,
+                        Lang.PopUp_NFC_No_NFC_Text,
+                        Lang.PopUp_NFC_No_NFC_Button
+                    );
+                    await popUp.ShowPopUp();
+
+                    return;
+                }
+
+                if (!DependencyService.Get<IAusweisSdk>().IsConnected())
+                {
+                    BasicPopUp popUp = new BasicPopUp(
+                        Lang.PopUp_SDK_Not_Connected_Title,
+                        Lang.PopUp_SDK_Not_Connected_Text,
+                        Lang.PopUp_SDK_Not_Connected_Button
+                    );
+                    await popUp.ShowPopUp();
+
+                    return;
+                }
+
+                return;
+            }
+            DisableAll();
+
+            _clicked = true;
+            try
+            {
+                if (DependencyService.Get<IAusweisSdk>().NfcEnabled())
+                {
+                    DependencyService.Get<IAusweisSdk>().StartSdkIos();
+                    DependencyService.Get<IAusweisSdk>().EnableNfcDispatcher();
+                    await Navigation.PushAsync(new DdlPage());
+                }
+                else
+                {
+                    BasicPopUp popUp = new BasicPopUp(
+                        Lang.PopUp_NFC_Not_Enabled_Title,
+                        Lang.PopUp_NFC_Not_Enabled_Text,
+                        Lang.PopUp_NFC_Not_Enabled_Button
+                        );
+                    await popUp.ShowPopUp();
+                }
+
+            }
+            finally
+            {
+                _clicked = false;
+                EnableAll();
+            }
+        }
+
+        private async void AddVacCertTapped(object obj)
+        {
+            if (_clicked)
+            {
+                return;
+            }
+            DisableAll();
+
+            _clicked = true;
+            try
+            {
+                AddVacCertPopUpSoon addVacCertPopUp = new AddVacCertPopUpSoon();
+                await addVacCertPopUp.ShowPopUp();
+            }
+            finally
+            {
+                _clicked = false;
+                EnableAll();
+            }
+        }
+
+        private async void AddDocumentTapped(object obj)
+        {
+            if (_clicked)
+            {
+                return;
+            }
+            DisableAll();
+
+            _clicked = true;
+            try
+            {
+                AddDocumentPopUp addDocumentPopUp = new AddDocumentPopUp(ViewModel);
+                await addDocumentPopUp.ShowPopUp();
+            }
+            finally
+            {
+                _clicked = false;
+                EnableAll();
+            }
+        }
+
+        private void EmptyStack_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Width")
+            {
+                ddlImage.WidthRequest = (Application.Current.MainPage.Width - EmptyStack.Spacing - EmptyStack.Margin.HorizontalThickness - EmptyStack.Padding.HorizontalThickness) / 2;
+                vacImage.WidthRequest = (Application.Current.MainPage.Width - EmptyStack.Spacing - EmptyStack.Margin.HorizontalThickness - EmptyStack.Padding.HorizontalThickness) / 2;
+                addImage.WidthRequest = (Application.Current.MainPage.Width - EmptyStack.Spacing - EmptyStack.Margin.HorizontalThickness - EmptyStack.Padding.HorizontalThickness) / 2;
+            }
         }
     }
 }

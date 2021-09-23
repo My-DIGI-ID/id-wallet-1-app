@@ -10,36 +10,34 @@ namespace IDWallet.iOS.SecurityChecks
 {
     public class HardwareKeyServiceIOS : IHardwareKeyService
     {
-        private const string ALIAS = "BaseIdHWKey";
-
-        public string GetPublicKeyAsBase64(byte[] nonce)
+        public string GetPublicKeyAsBase64(byte[] nonce, string alias)
         {
-            SecKey privKey = GetPrivateKey();
+            SecKey privKey = GetPrivateKey(alias);
             while (privKey != null)
             {
                 Debug.WriteLine("Key found");
                 var deleted = SecKeyChain.Remove(new SecRecord(SecKind.Key)
                 {
-                    ApplicationTag = NSData.FromString(ALIAS),
+                    ApplicationTag = NSData.FromString(alias),
                     KeyType = SecKeyType.ECSecPrimeRandom,
                 });
 
                 Debug.WriteLine($"Key deleted: {deleted}");
 
-                privKey = GetPrivateKey();
+                privKey = GetPrivateKey(alias);
             }
 
-            CreateKey(nonce);
+            CreateKey(nonce, alias);
 
-            privKey = GetPrivateKey();
+            privKey = GetPrivateKey(alias);
 
             SecKey publKey = privKey.GetPublicKey();
             return publKey.GetExternalRepresentation().GetBase64EncodedString(NSDataBase64EncodingOptions.None);
         }
 
-        public string Sign(byte[] nonce)
+        public string Sign(byte[] nonce, string alias)
         {
-            SecKey key = GetPrivateKey();
+            SecKey key = GetPrivateKey(alias);
             if (key != null)
             {
                 NSError nSError;
@@ -51,7 +49,7 @@ namespace IDWallet.iOS.SecurityChecks
             return null;
         }
 
-        public void CreateKey(byte[] nonce)
+        public void CreateKey(byte[] nonce, string alias)
         {
             using (SecAccessControl access = new SecAccessControl(SecAccessible.WhenUnlockedThisDeviceOnly, SecAccessControlCreateFlags.PrivateKeyUsage))
             {
@@ -59,13 +57,13 @@ namespace IDWallet.iOS.SecurityChecks
                 {
                     KeyType = SecKeyType.ECSecPrimeRandom,
                     KeySizeInBits = 256,
-                    Label = ALIAS,
-                    ApplicationTag = NSData.FromString(ALIAS),
+                    Label = alias,
+                    ApplicationTag = NSData.FromString(alias),
                     // CanSign = true,
                     PrivateKeyAttrs = new SecKeyParameters
                     {
                         //IsPermanent = true,
-                        ApplicationTag = NSData.FromString(ALIAS),
+                        ApplicationTag = NSData.FromString(alias),
                         AccessControl = access
                     },
                     PublicKeyAttrs = new SecKeyParameters
@@ -83,7 +81,7 @@ namespace IDWallet.iOS.SecurityChecks
 
                 SecRecord sr = new SecRecord(SecKind.Key)
                 {
-                    ApplicationTag = NSData.FromString(ALIAS),
+                    ApplicationTag = NSData.FromString(alias),
                     KeyType = SecKeyType.ECSecPrimeRandom,
                 };
                 sr.SetKey(genKey);
@@ -92,12 +90,12 @@ namespace IDWallet.iOS.SecurityChecks
             }
         }
 
-        private SecKey GetPrivateKey()
+        private SecKey GetPrivateKey(string alias)
         {
             object privateKey = SecKeyChain.QueryAsConcreteType(
                 new SecRecord(SecKind.Key)
                 {
-                    ApplicationTag = NSData.FromString(ALIAS),
+                    ApplicationTag = NSData.FromString(alias),
                     KeyType = SecKeyType.ECSecPrimeRandom,
                 },
                 out SecStatusCode code);

@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:lang="clr-namespace:IDWallet.Extensions"
+             x:Class="IDWallet.Views.DDL.Content.DdlSuccessView">
+  <ContentView.Content>
+        <StackLayout>
+            <Label Style="{StaticResource BaseIDHeaderLabel}"
+               Text="{lang:L10n DdlPage_SuccessScreen_Title}"/>
+            <Label Style="{StaticResource BaseIDBodyLabel}"
+               Text="{lang:L10n DdlPage_SuccessScreen_Text}"/>
+
+            <Button VerticalOptions="EndAndExpand"
+                Style="{StaticResource AcceptButton}"
+                Text="{lang:L10n DdlPage_SuccessScreen_Button}"
+                Clicked="Button_Clicked"
+                HorizontalOptions="Center"/>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

@@ -111,8 +111,16 @@ namespace IDWallet.Views.History
             }
             else if (historySubElement is HistoryCredentialElement)
             {
-                HistoryCredentialPopUp details = new HistoryCredentialPopUp(historySubElement as HistoryCredentialElement);
-                await details.ShowPopUp();
+                if (!string.IsNullOrEmpty(historySubElement.ConnectionAlias) && historySubElement.ConnectionAlias.Equals("QR-Scan"))
+                {
+                    HistoryQrPopUp details = new HistoryQrPopUp(historySubElement as HistoryCredentialElement);
+                    await details.ShowPopUp();
+                }
+                else
+                {
+                    HistoryCredentialPopUp details = new HistoryCredentialPopUp(historySubElement as HistoryCredentialElement);
+                    await details.ShowPopUp();
+                }
             }
             EnableAll();
         }

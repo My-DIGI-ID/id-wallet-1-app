@@ -1,0 +1,229 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:lang="clr-namespace:IDWallet.Extensions"
+             xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             xmlns:iconize="clr-namespace:Plugin.Iconize;assembly=Plugin.Iconize"
+             x:Class="IDWallet.Views.DDL.Content.DdlStartView"
+             x:Name="Root">
+    <StackLayout>
+        <ScrollView x:Name="OuterScrollView">
+            <StackLayout x:Name="InnerStack">
+                <Label Text="{lang:L10n DdlPage_StartScreen_Header_Label}"
+                       Style="{StaticResource BaseIDHeaderLabel}"/>
+
+                <Label Style="{StaticResource BaseIDBodyLabel}"
+                       Text="{lang:L10n DdlPage_StartScreen_Body_Label}"
+                       IsVisible="{Binding IsStartEnabled}"/>
+
+                <Label Style="{StaticResource BaseIDBodyLabel}"
+                       Margin="0,-7,0,0"
+                       Text="{lang:L10n DdlPage_StartScreen_Body_Label2}"
+                       IsVisible="{Binding IsStartEnabled}"/>
+
+                <StackLayout Orientation="Horizontal"
+                             Margin="0,30,0,10">
+                    <ff:CachedImage Source="Checkmark.png"
+                                    LoadingPlaceholder="empty_image.png"
+                                    ErrorPlaceholder="empty_image.png"
+                                    Aspect="AspectFit"
+                                    WidthRequest="24"
+                                    HeightRequest="24"
+                                    VerticalOptions="Start"
+                                    HorizontalOptions="Start"/>
+                    <StackLayout Spacing="-1">
+                        <Label Margin="0,0,30,0"
+                               Text="{lang:L10n BaseIDPage_StartScreen_Requirement_Title1}"
+                               MaxLines="5"
+                               LineBreakMode="WordWrap"
+                               FontAttributes="Bold"
+                               FontSize="16"/>
+                        <StackLayout Orientation="Horizontal"
+                                     Margin="0,0,20,0"
+                                     HorizontalOptions="FillAndExpand">
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="Info1_Tapped"/>
+                            </StackLayout.GestureRecognizers>
+                            <Label Margin="5,0" 
+                                   Text="{lang:L10n BaseIDPage_StartScreen_Requirement_Body1}"
+                                   MaxLines="10"
+                                   LineBreakMode="WordWrap"
+                                   FontSize="12"
+                                   TextColor="#754DFF"
+                                   HorizontalOptions="StartAndExpand"/>
+                            <iconize:IconImage IconSize="20"
+                                               IconColor="#754DFF"
+                                               Icon="mdi-chevron-right"
+                                               VerticalOptions="Start"
+                                               Margin="0,2,0,0"
+                                               HorizontalOptions="EndAndExpand"/>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal"
+                             Margin="0,0,0,30">
+                    <ff:CachedImage Source="Checkmark.png"
+                                    LoadingPlaceholder="empty_image.png"
+                                    ErrorPlaceholder="empty_image.png"
+                                    Aspect="AspectFit"
+                                    WidthRequest="24"
+                                    HeightRequest="24"
+                                    VerticalOptions="Start"
+                                    HorizontalOptions="Start"/>
+                    <StackLayout Spacing="-1" HorizontalOptions="FillAndExpand">
+                        <Label Margin="0,0,30,0"
+                               Text="{lang:L10n BaseIDPage_StartScreen_Requirement_Title2}"
+                               MaxLines="5"
+                               LineBreakMode="WordWrap"
+                               FontAttributes="Bold"
+                               FontSize="16"/>
+                        <StackLayout Orientation="Horizontal"
+                                     Margin="0,0,20,0"
+                                     HorizontalOptions="FillAndExpand">
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="Info2_Tapped"/>
+                            </StackLayout.GestureRecognizers>
+                            <Label Margin="5,0" 
+                                   Text="{lang:L10n BaseIDPage_StartScreen_Requirement_Body2}"
+                                   MaxLines="10"
+                                   LineBreakMode="WordWrap"
+                                   FontSize="12"
+                                   TextColor="#754DFF"
+                                   HorizontalOptions="StartAndExpand"/>
+                            <iconize:IconImage IconSize="20"
+                                               IconColor="#754DFF"
+                                               Icon="mdi-chevron-right"
+                                               VerticalOptions="Start"
+                                               Margin="0,2,0,0"
+                                               HorizontalOptions="EndAndExpand"/>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+
+                <forms:AnimationView x:Name="AnimationView"
+                                     Animation="loader.json"
+                                     RepeatMode="Infinite"
+                                     AutoPlay="True"
+                                     HorizontalOptions="FillAndExpand"
+                                     HeightRequest="150"
+                                     IsVisible="{Binding IsStartEnabled, Converter={StaticResource InverseBooleanConverter}}"/>
+
+                <Frame CornerRadius="8"
+                       Padding="10"
+                       BackgroundColor="#0C0A008D">
+                    <Frame.Margin>
+                        <OnPlatform x:TypeArguments="Thickness" Android="0,0,0,0" iOS="0,0,1,0"/>
+                    </Frame.Margin>
+                    <StackLayout>
+                        <StackLayout Orientation="Horizontal"
+                                     IsVisible="{Binding IsStartEnabled}">
+                            <CheckBox Color="#754DFF"
+                                      x:Name="UserAgreementCheckbox"
+                                      CheckedChanged="CheckboxChecked"
+                                      VerticalOptions="Start"/>
+                            <Label Style="{StaticResource BaseIDBodyLabel}">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{lang:L10n BaseIDPage_StartScreen_User_Agreement_Label1}"/>
+                                        <Span Text="{lang:L10n BaseIDPage_StartScreen_User_Agreement_Label}"
+                                              TextColor="#754DFF"
+                                              FontAttributes="Bold">
+                                            <Span.GestureRecognizers>
+                                                <TapGestureRecognizer x:Name="termsClick" 
+                                                                      Command="{Binding LinkTappedCommand, Source={x:Reference Root}}" />
+                                            </Span.GestureRecognizers>
+                                        </Span>
+                                        <Span Text="{lang:L10n BaseIDPage_StartScreen_User_Agreement_Label2}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal"
+                                     Margin="0,10,0,0"
+                                     IsVisible="{Binding IsStartEnabled}">
+                            <CheckBox Color="#754DFF"
+                                      x:Name="PrivacyCheckbox"
+                                      CheckedChanged="CheckboxChecked"
+                                      VerticalOptions="Start"/>
+                            <Label Style="{StaticResource BaseIDBodyLabel}">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{lang:L10n BaseIDPage_StartScreen_Privacy_Consent_Label1}"/>
+                                        <Span Text="{lang:L10n BaseIDPage_StartScreen_Privacy_Consent_Label}"
+                                              TextColor="#754DFF"
+                                              FontAttributes="Bold">
+                                            <Span.GestureRecognizers>
+                                                <TapGestureRecognizer x:Name="privacyConsentClick"
+                                                                      Command="{Binding LinkTappedCommand, Source={x:Reference Root}}" />
+                                            </Span.GestureRecognizers>
+                                        </Span>
+                                        <Span Text="{lang:L10n BaseIDPage_StartScreen_Privacy_Consent_Label2}"/>
+                                        <Span Text="{lang:L10n BaseIDPage_StartScreen_Privacy_Policy_Label}"
+                                              TextColor="#754DFF"
+                                              FontAttributes="Bold">
+                                            <Span.GestureRecognizers>
+                                                <TapGestureRecognizer x:Name="privacyClick" 
+                                                                      Command="{Binding LinkTappedCommand, Source={x:Reference Root}}" />
+                                            </Span.GestureRecognizers>
+                                        </Span>
+                                        <Span Text="{lang:L10n BaseIDPage_StartScreen_Privacy_Policy_Label2}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </ScrollView>
+
+        <StackLayout VerticalOptions="EndAndExpand">
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+            </StackLayout.GestureRecognizers>
+            <StackLayout.Margin>
+                <OnPlatform x:TypeArguments="Thickness" Android="0,0,0,0" iOS="0,0,1,0"/>
+            </StackLayout.Margin>
+            <Button IsEnabled="{Binding IsStartEnabled}"
+                    Style="{StaticResource PrimaryButton}"
+                    Text="{lang:L10n BaseIDPage_StartScreen_Button_Label}"
+                    Clicked="Button_Clicked"
+                    CornerRadius="8"
+                    HorizontalOptions="FillAndExpand"
+                    x:Name="GoToNextButton">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" 
+                                    Value="#0A008E"/>
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Disabled">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" 
+                                    Value="#800A008E" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+            </Button>
+        </StackLayout>
+
+        <Button VerticalOptions="End"
+                CornerRadius="8"
+                BorderColor="#0A008D"
+                BorderWidth="1"
+                TextColor="#0A008D"
+                BackgroundColor="Transparent"
+                Text="{lang:L10n BaseIDPage_StartScreen_Second_Button_Label}"
+                Clicked="Second_Button_Clicked"
+                HorizontalOptions="FillAndExpand">
+            <Button.Margin>
+                <OnPlatform x:TypeArguments="Thickness" Android="0,0,0,0" iOS="0,0,1,1"/>
+            </Button.Margin>
+        </Button>
+    </StackLayout>
+</ContentView>

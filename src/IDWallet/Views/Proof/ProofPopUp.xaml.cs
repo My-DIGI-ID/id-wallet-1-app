@@ -5,7 +5,6 @@ using IDWallet.ViewModels;
 using IDWallet.Views.Customs.PopUps;
 using Plugin.Permissions;
 using System;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -57,9 +56,9 @@ namespace IDWallet.Views.Proof
 
         private async void OnSend(object sender, EventArgs e)
         {
-            var authPopUp = new PopUps.ProofAuthenticationPopUp(_authViewModel) 
-            { 
-                ProofSendPopUp = true 
+            PopUps.ProofAuthenticationPopUp authPopUp = new PopUps.ProofAuthenticationPopUp(_authViewModel)
+            {
+                AlwaysDisplay = true
             };
 #pragma warning disable CS4014 // Da auf diesen Aufruf nicht gewartet wird, wird die Ausführung der aktuellen Methode vor Abschluss des Aufrufs fortgesetzt.
             authPopUp.ShowPopUp(); // No await.
@@ -89,7 +88,7 @@ namespace IDWallet.Views.Proof
                             Lang.PopUp_Network_Error_Text,
                             Lang.PopUp_Network_Error_Button)
                         {
-                            ProofSendPopUp = true
+                            AlwaysDisplay = true
                         };
                         await alertPopUp.ShowPopUp();
                         OnPopUpCanceled(sender, e);
@@ -113,7 +112,7 @@ namespace IDWallet.Views.Proof
                                 Lang.PopUp_Proof_Sending_Error_Message,
                                 Lang.PopUp_Proof_Sending_Error_Button)
                             {
-                                ProofSendPopUp = true
+                                AlwaysDisplay = true
                             };
                             await alertPopUp.ShowPopUp();
                             OnPopUpCanceled(sender, e);
@@ -126,7 +125,7 @@ namespace IDWallet.Views.Proof
                             Lang.PopUp_Storage_Permission_Needed_Proof_Text,
                             Lang.PopUp_Storage_Permission_Needed_Proof_Button)
                         {
-                            ProofSendPopUp = true
+                            AlwaysDisplay = true
                         };
                         await alertPopUp.ShowPopUp();
                         OnPopUpCanceled(sender, e);

@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<base:CustomPopUp xmlns="http://xamarin.com/schemas/2014/forms" 
+                  xmlns:lang="clr-namespace:IDWallet.Extensions"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:base="clr-namespace:IDWallet.Views.Customs.PopUps;assembly=IDWallet"
+                  x:Class="IDWallet.Views.Customs.PopUps.ExpiredDDLPopUp">
+    <base:CustomPopUp.Content>
+        <StackLayout Style="{StaticResource PopUpStackLayout}">
+            <Frame Style="{StaticResource PopUpFrame}"
+                   Padding="0,20">
+                <ContentView>
+                    <StackLayout>
+                        <Label Text="{lang:L10n PopUp_Expired_DDL_Title}"
+                               Style="{StaticResource LabelHeader}"
+                               MaxLines="100"
+                               LineBreakMode="WordWrap"
+                               Margin="20,0" />
+                        <BoxView BackgroundColor="{StaticResource PopUpHeaderSeparatorColor}"
+                                 HeightRequest="1"
+                                 HorizontalOptions="FillAndExpand" />
+                        <Label Text="{lang:L10n PopUp_Expired_DDL_Text}"
+                               Margin="20,0"
+                               Style="{StaticResource LabelMultiLine}"
+                               TextColor="{StaticResource AttributeValueColor}" />
+                        <StackLayout Style="{StaticResource PopUpButtonArea}"
+                                     Margin="20,0" 
+                                     HorizontalOptions="FillAndExpand">
+                            <Button Style="{StaticResource CancelButton}"
+                                    HorizontalOptions="FillAndExpand"
+                                    Clicked="OnPopUpCanceled"
+                                    Text="{lang:L10n PopUp_Expired_DDL_Cancel_Button}" />
+                            <Button Style="{StaticResource AcceptButton}"
+                                    HorizontalOptions="FillAndExpand"
+                                    Clicked="OnPopUpAccepted"
+                                    Text="{lang:L10n PopUp_Expired_DDL_Accept_Button}" />
+                        </StackLayout>
+                    </StackLayout>
+                </ContentView>
+            </Frame>
+        </StackLayout>
+    </base:CustomPopUp.Content>
+</base:CustomPopUp>

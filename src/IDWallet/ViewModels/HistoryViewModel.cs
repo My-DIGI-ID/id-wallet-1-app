@@ -49,6 +49,7 @@ namespace IDWallet.ViewModels
             MessagingCenter.Subscribe<AutoAcceptViewModel, string>(this, WalletEvents.SentProofRequest, OnProofSent);
             MessagingCenter.Subscribe<LoginViewModel>(this, WalletEvents.AppStarted, OnAppStart);
             MessagingCenter.Subscribe<BaseIdViewModel>(this, WalletEvents.ReloadHistory, ReloadHistory);
+            MessagingCenter.Subscribe<DdlViewModel>(this, WalletEvents.ReloadHistory, ReloadHistory);
             MessagingCenter.Subscribe<AddVacService>(this, WalletEvents.ReloadHistory, ReloadHistory);
             MessagingCenter.Subscribe<CustomAgentProvider>(this, WalletEvents.AgentSwitched, ReloadHistory);
             MessagingCenter.Subscribe<ServiceMessageEventService, string>(this,
@@ -246,7 +247,7 @@ namespace IDWallet.ViewModels
                             {
                                 CustomServiceDecorator service = proofRecord.GetTag(DecoratorNames.ServiceDecorator)
                                     .ToObject<CustomServiceDecorator>();
-                                var endpointUri = new Uri(service.ServiceEndpoint);
+                                Uri endpointUri = new Uri(service.ServiceEndpoint);
                                 serviceAlias = !string.IsNullOrEmpty(service.EndpointName) ? service.EndpointName + " - " + endpointUri.Host : service.ServiceEndpoint;
                             }
 
@@ -320,6 +321,10 @@ namespace IDWallet.ViewModels
                     case "MGfd8JjWRoiXMm2YGL4SGj":
                         historyCredentialElement.ImageUri = ImageSource.FromFile("bdr_logo.png");
                         break;
+                    case "9hsRe5jdzAbbyLAStV6sPc":
+                    case "KqtBRiQSyWqnzaxN3u2d7G":
+                        historyCredentialElement.ImageUri = ImageSource.FromFile("kraftfahrtbundesamt_logo.png");
+                        break;
                     case "En38baYaTqVYSB8SFwguhT":
                     case "9HX4bs8pdH2uJB7sjeWPtU":
                         historyCredentialElement.ImageUri = ImageSource.FromFile("bosch_logo.png");
@@ -335,15 +340,11 @@ namespace IDWallet.ViewModels
                     case "X2p16G1BeEceJauzqofjQW":
                         historyCredentialElement.ImageUri = ImageSource.FromFile("dlufthansa_logo.png");
                         break;
+                    case "XnGEZ7gJxDNfxwnZpkkVcs":
+                        historyCredentialElement.ImageUri = ImageSource.FromFile("kba_logo.png");
+                        break;
                     default:
-                        if (record.CredentialDefinitionId.Equals("XnGEZ7gJxDNfxwnZpkkVcs:3:CL:988:Digitaler Führerschein"))
-                        {
-                            historyCredentialElement.ImageUri = ImageSource.FromFile("kba_logo.png");
-                        }
-                        else
-                        {
-                            historyCredentialElement.ImageUri = ImageSource.FromFile("default_logo.png");
-                        }
+                        historyCredentialElement.ImageUri = ImageSource.FromFile("default_logo.png");
                         break;
                 }
 
@@ -385,7 +386,7 @@ namespace IDWallet.ViewModels
 
                 historyCredentialElement.ImageUri = ImageSource.FromFile("qr_code.png");
 
-                historyCredentialElement.Claims.Add(new CredentialPreviewAttribute() { Name = "QR-Code", Value = record.QrContent });
+                historyCredentialElement.Claims.Add(new CredentialPreviewAttribute() { Name = "COVID-Zertifikat", Value = record.QrContent });
 
                 issuedCredentialHistoryElements.Add(historyCredentialElement);
             }

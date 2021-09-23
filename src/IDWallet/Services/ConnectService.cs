@@ -2,13 +2,16 @@ using IDWallet.Agent.Interface;
 using IDWallet.Agent.Models;
 using IDWallet.Agent.Services;
 using IDWallet.Events;
+using IDWallet.Resources;
 using IDWallet.Views.Customs.PopUps;
 using IDWallet.Views.Settings.Connections.PopUps;
 using Hyperledger.Aries.Agents;
 using Hyperledger.Aries.Extensions;
 using Hyperledger.Aries.Features.DidExchange;
 using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace IDWallet.Services
@@ -31,6 +34,18 @@ namespace IDWallet.Services
 
         public async Task<ConnectionRecord> AcceptInvitationAsync(CustomConnectionInvitationMessage invitationMessage)
         {
+            NetworkAccess connectivity = Connectivity.NetworkAccess;
+            if (connectivity != NetworkAccess.ConstrainedInternet && connectivity != NetworkAccess.Internet)
+            {
+                BasicPopUp alertPopUp = new BasicPopUp(
+                    Lang.PopUp_Network_Error_Title,
+                    Lang.PopUp_Network_Error_Text,
+                    Lang.PopUp_Network_Error_Button);
+                await alertPopUp.ShowPopUp();
+
+                return null;
+            }
+
             IAgentContext context = await _agentProvider.GetContextAsync();
             (ConnectionRequestMessage connectionRequest, ConnectionRecord connectionRecord) =
                 await _connectionService.CreateRequestAsync(context, invitationMessage);

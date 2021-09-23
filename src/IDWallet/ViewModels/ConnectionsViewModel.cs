@@ -73,6 +73,7 @@ namespace IDWallet.ViewModels
                 ReloadConnections);
             MessagingCenter.Subscribe<BaseIdViewModel>(this, WalletEvents.ReloadConnections,
                 ReloadConnections);
+            MessagingCenter.Subscribe<DdlViewModel>(this, WalletEvents.ReloadConnections, ReloadConnections);
             MessagingCenter.Subscribe<SettingsPage>(this, WalletEvents.ToggleShowMediator, ReloadConnections);
             MessagingCenter.Subscribe<SettingsPage>(this, WalletEvents.ToggleUseMediatorImages, ReloadConnections);
             MessagingCenter.Subscribe<LoginViewModel>(this, WalletEvents.AppStarted, OnAppStart);

@@ -54,7 +54,7 @@
            HorizontalOptions="End"
            HeightRequest="15"
            WidthRequest="15"
-           IsVisible="{Binding State, Converter={StaticResource ConnectionStateConnectedConverter}}">
+           IsVisible="{Binding ConnectionState, Converter={StaticResource ConnectionStateConnectedConverter}}">
         <Image.Source>
             <svg:SvgImageSource Source="imagesources.ConnectionConnected_Icon.svg"
                                 Width="15" Height="15" />
@@ -66,7 +66,7 @@
            HorizontalOptions="End"
            HeightRequest="15"
            WidthRequest="15"
-           IsVisible="{Binding State, Converter={StaticResource ConnectionStateNotConnectedConverter}}">
+           IsVisible="{Binding ConnectionState, Converter={StaticResource ConnectionStateNotConnectedConverter}}">
         <Image.Source>
             <svg:SvgImageSource Source="imagesources.ConnectionNotConnected_Icon.svg"
                                 Width="15" Height="15" />

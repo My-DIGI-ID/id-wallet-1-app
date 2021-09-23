@@ -15,7 +15,6 @@ using IDWallet.Views.Wallet;
 using IDWallet.Views.Wallet.PopUps;
 using Hyperledger.Aries.Agents;
 using Hyperledger.Aries.Configuration;
-using Hyperledger.Aries.Contracts;
 using Hyperledger.Aries.Decorators;
 using Hyperledger.Aries.Extensions;
 using Hyperledger.Aries.Features.DidExchange;
@@ -26,7 +25,6 @@ using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
@@ -84,9 +82,9 @@ namespace IDWallet.ViewModels
             ProofRequest proofRequest = proofRecord.RequestJson.ToObject<ProofRequest>();
             ProofViewModel viewModel = new ProofViewModel(proofRequest, proofRecord.Id, onlyKnownProofs, takeNewest);
 
-            var authPopUp = new ProofAuthenticationPopUp(new AuthViewModel(viewModel))
+            ProofAuthenticationPopUp authPopUp = new ProofAuthenticationPopUp(new AuthViewModel(viewModel))
             {
-                ProofSendPopUp = true
+                AlwaysDisplay = true
             };
 #pragma warning disable CS4014 // Da auf diesen Aufruf nicht gewartet wird, wird die Ausführung der aktuellen Methode vor Abschluss des Aufrufs fortgesetzt.
             authPopUp.ShowPopUp(); // No await.
@@ -115,6 +113,10 @@ namespace IDWallet.ViewModels
                     await viewModel.CreateAndSendProof();
                     return true;
                 }
+                else
+                {
+
+                }
 
                 return false;
             }
@@ -124,7 +126,7 @@ namespace IDWallet.ViewModels
             }
         }
 
-        public async void HandleProofRequestResult(ConnectionRecord connectionRecord = null)
+        public async Task HandleProofRequestResult(ConnectionRecord connectionRecord = null)
         {
             try
             {
@@ -143,7 +145,7 @@ namespace IDWallet.ViewModels
                 {
                     ProofSentPopUp popUp = new ProofSentPopUp()
                     {
-                        ProofSendPopUp = true
+                        AlwaysDisplay = true
                     };
 
                     PopUpResult result = await popUp.ShowPopUp();
@@ -175,7 +177,7 @@ namespace IDWallet.ViewModels
                     ActivateAutoAcceptPopUp activateAutoAcceptPopUp =
                         new ActivateAutoAcceptPopUp(connectionRecord, true)
                         {
-                            ProofSendPopUp = true
+                            AlwaysDisplay = true
                         };
                     PopUpResult accepted = await activateAutoAcceptPopUp.ShowPopUp();
 
@@ -273,8 +275,28 @@ namespace IDWallet.ViewModels
                 }
                 else
                 {
-                    ProofMissingCredentialsPopUp popUp = new ProofMissingCredentialsPopUp(request, proofViewModel.FailedRequests);
-                    await popUp.ShowPopUp();
+                    if (proofViewModel.DriverLicenseIsValid)
+                    {
+                        ProofMissingCredentialsPopUp popUp = new ProofMissingCredentialsPopUp(request, proofViewModel.FailedRequests);
+                        await popUp.ShowPopUp();
+                    }
+                    else
+                    {
+                        ExpiredDDLPopUp popUp = new ExpiredDDLPopUp();
+                        PopUpResult popUpResult = await popUp.ShowPopUp();
+
+                        if (popUpResult == PopUpResult.Accepted)
+                        {
+                            try
+                            {
+                                await StartDdlFlow();
+                            }
+                            catch (Exception ex) when (ex.Message.Equals("NFC-ERROR") || ex.Message.Equals("SDK-NOT-CONNECTED-ERROR"))
+                            {
+                                //ignore
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -882,7 +904,7 @@ namespace IDWallet.ViewModels
                             .ToObject<CustomServiceDecorator>();
 
                         string presentationText = Resources.Lang.PopUp_Presentation_Request_Received_Text;
-                        var endpointUri = new Uri(service.ServiceEndpoint);
+                        Uri endpointUri = new Uri(service.ServiceEndpoint);
                         string serviceAlias = !string.IsNullOrEmpty(service.EndpointName) ? service.EndpointName + " - " + endpointUri.Host : service.ServiceEndpoint;
                         PresentationRequestPopUp presentationRequestPopUp =
                             new PresentationRequestPopUp(presentationText, serviceAlias);
@@ -915,7 +937,7 @@ namespace IDWallet.ViewModels
 
                             if (proofViewModel.ReadyToSend)
                             {
-                                var endpointUri2 = new Uri(service.ServiceEndpoint);
+                                Uri endpointUri2 = new Uri(service.ServiceEndpoint);
                                 string serviceName = !string.IsNullOrEmpty(service.EndpointName) ? service.EndpointName + " - " + endpointUri.Host : service.ServiceEndpoint;
                                 ProofPopUp popUp = new ProofPopUp(proofViewModel, proofRecordId, service, serviceName);
                                 PopUpResult result = await popUp.ShowPopUp();
@@ -926,8 +948,28 @@ namespace IDWallet.ViewModels
                             }
                             else
                             {
-                                ProofMissingCredentialsPopUp popUp = new ProofMissingCredentialsPopUp(request, proofViewModel.FailedRequests);
-                                await popUp.ShowPopUp();
+                                if (proofViewModel.DriverLicenseIsValid)
+                                {
+                                    ProofMissingCredentialsPopUp popUp = new ProofMissingCredentialsPopUp(request, proofViewModel.FailedRequests);
+                                    await popUp.ShowPopUp();
+                                }
+                                else
+                                {
+                                    ExpiredDDLPopUp popUp = new ExpiredDDLPopUp();
+                                    PopUpResult popUpResult = await popUp.ShowPopUp();
+
+                                    if (popUpResult == PopUpResult.Accepted)
+                                    {
+                                        try
+                                        {
+                                            await StartDdlFlow();
+                                        }
+                                        catch (Exception ex) when (ex.Message.Equals("NFC-ERROR") || ex.Message.Equals("SDK-NOT-CONNECTED-ERROR"))
+                                        {
+                                            //ignore
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -958,6 +1000,60 @@ namespace IDWallet.ViewModels
                     Resources.Lang.PopUp_Storage_Permission_Needed_Proof_Button);
                 await alertPopUp.ShowPopUp();
                 return false;
+            }
+        }
+
+        public async Task StartDdlFlow()
+        {
+            if (!DependencyService.Get<IAusweisSdk>().DeviceHasNfc())
+            {
+                BasicPopUp popUp = new BasicPopUp(
+                    Resources.Lang.PopUp_NFC_No_NFC_Title,
+                    Resources.Lang.PopUp_NFC_No_NFC_Text,
+                    Resources.Lang.PopUp_NFC_No_NFC_Button
+                );
+                await popUp.ShowPopUp();
+
+                throw new Exception("NFC-ERROR");
+            }
+
+            if (!DependencyService.Get<IAusweisSdk>().IsConnected())
+            {
+                BasicPopUp popUp = new BasicPopUp(
+                    Resources.Lang.PopUp_SDK_Not_Connected_Title,
+                    Resources.Lang.PopUp_SDK_Not_Connected_Text,
+                    Resources.Lang.PopUp_SDK_Not_Connected_Button
+                );
+                await popUp.ShowPopUp();
+
+                throw new Exception("SDK-NOT-CONNECTED-ERROR");
+            }
+
+            if (DependencyService.Get<IAusweisSdk>().NfcEnabled())
+            {
+                DependencyService.Get<IAusweisSdk>().StartSdkIos();
+                DependencyService.Get<IAusweisSdk>().EnableNfcDispatcher();
+                try
+                {
+                    Views.CustomTabbedPage mainPage = Application.Current.MainPage as Views.CustomTabbedPage;
+                    mainPage.CurrentPage = mainPage.Children.First();
+                    await ((NavigationPage)mainPage.CurrentPage).Navigation.PushAsync(new Views.DDL.DdlPage());
+                }
+                catch (Exception)
+                {
+                    //...
+                }
+            }
+            else
+            {
+                BasicPopUp popUp = new BasicPopUp(
+                    Resources.Lang.PopUp_NFC_Not_Enabled_Title,
+                    Resources.Lang.PopUp_NFC_Not_Enabled_Text,
+                    Resources.Lang.PopUp_NFC_Not_Enabled_Button
+                    );
+                await popUp.ShowPopUp();
+
+                throw new Exception("NFC-ERROR");
             }
         }
     }

@@ -34,7 +34,7 @@
                                Margin="0,10">
                             <Label.FormattedText>
                                 <FormattedString>
-                                    <Span x:Name="bodySpan1"/>
+                                    <Span x:Name="bodySpan"/>
                                     <Span Text=" "/>
                                     <Span Text="{lang:L10n PopUp_BaseID_Enter_CAN_Text_2}"
                                           FontAttributes="Bold"/>

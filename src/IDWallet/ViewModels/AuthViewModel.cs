@@ -190,7 +190,7 @@ namespace IDWallet.ViewModels
                    Resources.Lang.PopUp_Login_Ultimately_Failed_Text,
                    Resources.Lang.PopUp_Login_Ultimately_Failed_Button)
                 {
-                    ProofSendPopUp = true
+                    AlwaysDisplay = true
                 };
                 await popUp.ShowPopUp();
                 Process.GetCurrentProcess().Kill();
@@ -202,7 +202,7 @@ namespace IDWallet.ViewModels
                     Resources.Lang.PopUp_Login_Failed_Text,
                     Resources.Lang.PopUp_Login_Failed_Button)
                 {
-                    ProofSendPopUp = true
+                    AlwaysDisplay = true
                 };
                 await popUp.ShowPopUp();
             }
@@ -214,7 +214,7 @@ namespace IDWallet.ViewModels
                     Resources.Lang.PopUp_Login_Last_Try_Label,
                     Resources.Lang.PopUp_Login_Failed_Button)
                 {
-                    ProofSendPopUp = true
+                    AlwaysDisplay = true
                 };
                 await popUp.ShowPopUp();
                 PinText = Resources.Lang.PopUp_Login_Last_Try_Label;

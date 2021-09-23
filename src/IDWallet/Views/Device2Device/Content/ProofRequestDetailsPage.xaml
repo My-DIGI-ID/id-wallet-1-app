@@ -140,9 +140,15 @@
                                                             <ColumnDefinition Width="Auto" />
                                                             <ColumnDefinition Width="6*" />
                                                         </Grid.ColumnDefinitions>
-                                                        <Label Text="{Binding Name, Converter={StaticResource LabelTextConverter}}"
-                                                               Opacity=".6"
-                                                               Grid.Column="0" />
+                                                        <Label Opacity=".6"
+                                                               Grid.Column="0">
+                                                            <Label.Text>
+                                                                <MultiBinding Converter="{StaticResource MultiLabelTextConverter}">
+                                                                    <Binding Path="Name"/>
+                                                                    <Binding Path="DEFAULT"/>
+                                                                </MultiBinding>
+                                                            </Label.Text>
+                                                        </Label>
                                                         <Label Text="{Binding Value}"
                                                                Grid.Column="2" />
                                                     </Grid>
@@ -197,9 +203,15 @@
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="Auto" />
                                             </Grid.RowDefinitions>
-                                            <Label Text="{Binding Name, Converter={StaticResource LabelTextConverter}}"
-                                                   Style="{StaticResource LabelMultiLine}"
-                                                   HeightRequest="50" />
+                                            <Label Style="{StaticResource LabelMultiLine}"
+                                                   HeightRequest="50">
+                                                <Label.Text>
+                                                    <MultiBinding Converter="{StaticResource MultiLabelTextConverter}">
+                                                        <Binding Path="Name"/>
+                                                        <Binding Path="DEFAULT"/>
+                                                    </MultiBinding>
+                                                </Label.Text>
+                                            </Label>
                                             <StackLayout Spacing="0"
                                                          Margin="0"
                                                          Padding="0">
@@ -256,7 +268,12 @@
                                     <Label Style="{StaticResource LabelMultiLine}">
                                         <Label.FormattedText>
                                             <FormattedString>
-                                                <Span Text="{Binding Name, Converter={StaticResource LabelTextConverter}}" />
+                                                <Span>
+                                                    <MultiBinding Converter="{StaticResource MultiLabelTextConverter}">
+                                                        <Binding Path="Name"/>
+                                                        <Binding Path="DEFAULT"/>
+                                                    </MultiBinding>
+                                                </Span>
                                                 <Span Text=" " />
                                                 <Span Text="{Binding PredicateType}" />
                                                 <Span Text=" " />

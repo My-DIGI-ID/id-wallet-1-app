@@ -81,7 +81,7 @@ namespace IDWallet.Models
             Attributes = new ObservableCollection<CredentialPreviewAttribute>();
 
             ObservableCollection<CredentialPreviewAttribute> tmpAttributes = new ObservableCollection<CredentialPreviewAttribute>();
-            foreach (var attrib in credentialRecord.CredentialAttributesValues)
+            foreach (CredentialPreviewAttribute attrib in credentialRecord.CredentialAttributesValues)
             {
                 tmpAttributes.Add(attrib);
             }
