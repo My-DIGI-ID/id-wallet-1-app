@@ -6,11 +6,11 @@ namespace IDWallet.Views.BaseId.PopUps
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class EnterCANPopUp : CustomPopUp
     {
-        public EnterCANPopUp(string bodyText1)
+        public EnterCANPopUp(string bodyText)
         {
             InitializeComponent();
 
-            bodySpan1.Text = bodyText1;
+            bodySpan.Text = bodyText;
         }
     }
 }

@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<base:CustomPopUp  xmlns:base="clr-namespace:IDWallet.Views.Customs.PopUps" 
+                   xmlns="http://xamarin.com/schemas/2014/forms"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                   xmlns:lang="clr-namespace:IDWallet.Extensions"
+                   x:Class="IDWallet.Views.DDL.PopUps.EnterCANPopUp">
+    <base:CustomPopUp.Resources>
+        <ResourceDictionary>
+            <Style x:Key="PopUpButtonArea" TargetType="StackLayout">
+                <Setter Property="Spacing" Value="20" />
+                <Setter Property="Margin" Value="0,20,0,0" />
+                <Setter Property="Orientation" Value="Horizontal" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+            </Style>
+        </ResourceDictionary>
+    </base:CustomPopUp.Resources>
+    <ContentPage.Content>
+        <StackLayout Style="{StaticResource PopUpStackLayout}">
+            <Frame Style="{StaticResource PopUpFrame}"
+                   Padding="20">
+                <ContentView>
+                    <StackLayout Spacing="0">
+                        <Label FontSize="20"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource PrimaryTextColor}"
+                               MaxLines="100"
+                               LineBreakMode="WordWrap"
+                               Text="{lang:L10n PopUp_BaseID_Enter_CAN_Title}"/>
+                        <Label FontSize="14"
+                               TextColor="{StaticResource SecondaryTextColor}"
+                               MaxLines="100"
+                               LineBreakMode="WordWrap"
+                               Margin="0,10">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span x:Name="bodySpan"/>
+                                    <Span Text=" "/>
+                                    <Span Text="{lang:L10n PopUp_BaseID_Enter_CAN_Text_2}"
+                                          FontAttributes="Bold"/>
+                                    <Span Text=" "/>
+                                    <Span Text="{lang:L10n PopUp_BaseID_Enter_CAN_Text_3}"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                        <Image Source="CAN_Info.png"
+                               HorizontalOptions="CenterAndExpand"/>
+
+                        <StackLayout Style="{StaticResource PopUpButtonArea}">
+                            <Button Text="{lang:L10n PopUp_BaseID_Enter_CAN_Button}"
+                                    Style="{StaticResource AcceptButton}"
+                                    HorizontalOptions="FillAndExpand"
+                                    Clicked="OnPopUpAccepted" />
+                        </StackLayout>
+                    </StackLayout>
+                </ContentView>
+            </Frame>
+        </StackLayout>
+    </ContentPage.Content>
+</base:CustomPopUp>

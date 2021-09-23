@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<base:CustomPopUp xmlns="http://xamarin.com/schemas/2014/forms"
+                  xmlns:base="clr-namespace:IDWallet.Views.Customs.PopUps"
+                  xmlns:iconize="clr-namespace:Plugin.Iconize;assembly=Plugin.Iconize"                  
+                  xmlns:lang="clr-namespace:IDWallet.Extensions"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  x:Class="IDWallet.Views.BaseId.PopUps.MissingInformationPopUp">
+    <base:CustomPopUp.Content>
+        <StackLayout Style="{StaticResource PopUpStackLayout}">
+            <Frame Style="{StaticResource PopUpFrame}">
+                <StackLayout>
+                    <iconize:IconLabel Text="mdi-close"
+                                       Margin="15,15,15,0"
+                                       HorizontalOptions="EndAndExpand"
+                                       HorizontalTextAlignment="End"
+                                       TextColor="{StaticResource FontBlackColor}"
+                                       FontSize="20">
+                        <iconize:IconLabel.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnPopUpCanceled"/>
+                        </iconize:IconLabel.GestureRecognizers>
+                    </iconize:IconLabel>
+
+                    <Label Text="{lang:L10n PopUp_MissingInformation_Title}"
+                           FontSize="22"
+                           MaxLines="5"
+                           FontAttributes="Bold"
+                           Margin="20,0,30,20"/>
+
+                    <Label Text="{lang:L10n PopUp_MissingInformation_Body1}"
+                           FontSize="14"
+                           MaxLines="5"
+                           FontAttributes="Bold"
+                           Margin="20,0,30,-3"/>
+
+                    <Label FontSize="14"
+                           MaxLines="10"
+                           Margin="20,0,30,30">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{lang:L10n PopUp_MissingInformation_Body2}"/>
+                                <Span Text=" "/>
+                                <Span Text="{lang:L10n PopUp_MissingInformation_Body3}"
+                                      FontAttributes="Bold"
+                                      TextDecorations="Underline">
+                                    <Span.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="Burgeramt_Tapped"/>
+                                    </Span.GestureRecognizers>
+                                </Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <Label FontSize="14"
+                           MaxLines="10"
+                           Margin="20,0,30,50">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{lang:L10n PopUp_MissingInformation_Body4}"/>
+                                <Span Text=" "/>
+                                <Span Text="{lang:L10n PopUp_MissingInformation_Body5}"
+                                      FontAttributes="Bold"
+                                      TextDecorations="Underline">
+                                    <Span.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="EMail_Tapped"/>
+                                    </Span.GestureRecognizers>
+                                </Span>
+                                <Span Text="."/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </base:CustomPopUp.Content>
+</base:CustomPopUp>

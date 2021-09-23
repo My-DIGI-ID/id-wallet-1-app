@@ -21,7 +21,14 @@
                                 <FormattedString>
                                     <Span Text="{lang:L10n PopUp_Restriction_Header}" />
                                     <Span Text=" " />
-                                    <Span Text="{Binding Name, Converter={StaticResource LabelTextConverter}}" />
+                                    <Span>
+                                        <Span.Text>
+                                            <MultiBinding Converter="{StaticResource MultiLabelTextConverter}">
+                                                <Binding Path="Name"/>
+                                                <Binding Path="DEFAULT"/>
+                                            </MultiBinding>
+                                        </Span.Text>
+                                    </Span>
                                     <Span Text=":" />
                                 </FormattedString>
                             </Label.FormattedText>

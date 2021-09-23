@@ -89,11 +89,17 @@
                                         <BindableLayout.ItemTemplate>
                                             <DataTemplate>
                                                 <StackLayout Spacing="0">
-                                                    <Label Text="{Binding Name, Converter={StaticResource LabelTextConverter}}"
-                                                           FontSize="12"
+                                                    <Label FontSize="12"
                                                            TextColor="{StaticResource AttributeNameColor}"
                                                            VerticalTextAlignment="End"
-                                                           PropertyChanged="Label_PropertyChanged"/>
+                                                           PropertyChanged="Label_PropertyChanged">
+                                                        <Label.Text>
+                                                            <MultiBinding Converter="{StaticResource MultiLabelTextConverter}">
+                                                                <Binding Path="Name"/>
+                                                                <Binding Path="DEFAULT"/>
+                                                            </MultiBinding>
+                                                        </Label.Text>
+                                                    </Label>
                                                 </StackLayout>
                                             </DataTemplate>
                                         </BindableLayout.ItemTemplate>
@@ -110,11 +116,17 @@
                                         <BindableLayout.ItemTemplate>
                                             <DataTemplate>
                                                 <StackLayout Spacing="0">
-                                                    <Label Text="{Binding Name, Converter={StaticResource LabelTextConverter}}"                                                    
-                                                           FontSize="12"
+                                                    <Label FontSize="12"
                                                            TextColor="{StaticResource AttributeNameColor}"
                                                            VerticalTextAlignment="End"
-                                                           PropertyChanged="Label_PropertyChanged"/>
+                                                           PropertyChanged="Label_PropertyChanged">
+                                                        <Label.Text>
+                                                            <MultiBinding Converter="{StaticResource MultiLabelTextConverter}">
+                                                                <Binding Path="Name"/>
+                                                                <Binding Path="DEFAULT"/>
+                                                            </MultiBinding>
+                                                        </Label.Text>
+                                                    </Label>
                                                 </StackLayout>
                                             </DataTemplate>
                                         </BindableLayout.ItemTemplate>
@@ -131,11 +143,17 @@
                                         <BindableLayout.ItemTemplate>
                                             <DataTemplate>
                                                 <StackLayout Spacing="0">
-                                                    <Label Text="{Binding Name, Converter={StaticResource LabelTextConverter}}"                                                    
-                                                           FontSize="12"
+                                                    <Label FontSize="12"
                                                            TextColor="{StaticResource AttributeNameColor}"
                                                            VerticalTextAlignment="End"
-                                                           PropertyChanged="Label_PropertyChanged"/>
+                                                           PropertyChanged="Label_PropertyChanged">
+                                                        <Label.Text>
+                                                            <MultiBinding Converter="{StaticResource MultiLabelTextConverter}">
+                                                                <Binding Path="Name"/>
+                                                                <Binding Path="DEFAULT"/>
+                                                            </MultiBinding>
+                                                        </Label.Text>
+                                                    </Label>
                                                 </StackLayout>
                                             </DataTemplate>
                                         </BindableLayout.ItemTemplate>
@@ -152,11 +170,17 @@
                                         <BindableLayout.ItemTemplate>
                                             <DataTemplate>
                                                 <StackLayout Spacing="0">
-                                                    <Label Text="{Binding Name, Converter={StaticResource LabelTextConverter}}"                                                    
-                                                           FontSize="12"
+                                                    <Label FontSize="12"
                                                            TextColor="{StaticResource AttributeNameColor}"
                                                            VerticalTextAlignment="End"
-                                                           PropertyChanged="Label_PropertyChanged"/>
+                                                           PropertyChanged="Label_PropertyChanged">
+                                                        <Label.Text>
+                                                            <MultiBinding Converter="{StaticResource MultiLabelTextConverter}">
+                                                                <Binding Path="Name"/>
+                                                                <Binding Path="DEFAULT"/>
+                                                            </MultiBinding>
+                                                        </Label.Text>
+                                                    </Label>
                                                 </StackLayout>
                                             </DataTemplate>
                                         </BindableLayout.ItemTemplate>

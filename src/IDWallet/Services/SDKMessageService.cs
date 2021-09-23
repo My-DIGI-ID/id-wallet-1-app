@@ -1,7 +1,10 @@
 ﻿using IDWallet.Events;
 using IDWallet.Interfaces;
 using IDWallet.Models.AusweisSDK;
+using IDWallet.Resources;
 using IDWallet.Utils;
+using IDWallet.Views.BaseId.PopUps;
+using IDWallet.Views.DDL.PopUps;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -17,22 +20,48 @@ namespace IDWallet.Services
 {
     public class SDKMessageService
     {
-        public HttpClient AusweisSdkHttpClient;
-        public HttpClientHandler AusweisSdkHttpClientHandler;
-        public CookieContainer AusweisSdkCookieContainer;
+        public HttpClient SdkHttpClient;
+        public HttpClientHandler SdkHttpClientHandler;
+        public CookieContainer SdkCookieContainer;
         public string PublicKey;
+        private SdkMessageFlow _messageFlow = SdkMessageFlow.BaseId;
 
         public SDKMessageService()
         {
+        }
+
+        public void StartBaseIdFlow()
+        {
+            _messageFlow = SdkMessageFlow.BaseId;
+            InitHttpClient();
+        }
+
+        public void StartDdlFlow()
+        {
+            _messageFlow = SdkMessageFlow.DDL;
             InitHttpClient();
         }
 
         public void InitHttpClient()
         {
-            AusweisSdkCookieContainer = new CookieContainer();
-            AusweisSdkHttpClientHandler = new HttpClientHandler()
+            SdkCookieContainer = new CookieContainer();
+            switch (_messageFlow)
             {
-                CookieContainer = AusweisSdkCookieContainer,
+                case SdkMessageFlow.BaseId:
+                    CreateBaseIdHttpClientHandler();
+                    break;
+                case SdkMessageFlow.DDL:
+                    CreateDdlHttpClientHandler();
+                    break;
+            }
+            SdkHttpClient = new HttpClient(SdkHttpClientHandler);
+        }
+
+        private void CreateBaseIdHttpClientHandler()
+        {
+            SdkHttpClientHandler = new HttpClientHandler()
+            {
+                CookieContainer = SdkCookieContainer,
                 UseCookies = true,
                 ServerCertificateCustomValidationCallback = (sender, cert, chain, error) =>
                 {
@@ -57,99 +86,265 @@ namespace IDWallet.Services
                     }
                 }
             };
+        }
 
-            AusweisSdkHttpClient = new HttpClient(AusweisSdkHttpClientHandler);
+        private void CreateDdlHttpClientHandler()
+        {
+            SdkHttpClientHandler = new HttpClientHandler()
+            {
+                CookieContainer = SdkCookieContainer,
+                UseCookies = true,
+                ServerCertificateCustomValidationCallback = (sender, cert, chain, error) =>
+                {
+                    List<string> allowedPublicKeys = new List<string>
+                    {
+                        // BDR API Public Key Pinning
+                    };
+                    if (sender.RequestUri.Host.Equals(new Uri($"https://{WalletParams.DdlHost}").Host))
+                    {
+                        string pubKey = cert.GetPublicKeyString();
+                        if (allowedPublicKeys.Contains(cert.GetPublicKeyString()))
+                        {
+                            return error == SslPolicyErrors.None;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        return error == SslPolicyErrors.None;
+                    }
+                }
+            };
         }
 
         public void ReceiveAccessRights(SdkMessage sdkMessage)
         {
-            MessagingCenter.Send(this, BaseIDEvents.AccessRights, sdkMessage);
+            switch (_messageFlow)
+            {
+                case SdkMessageFlow.BaseId:
+                    MessagingCenter.Send(this, BaseIDEvents.AccessRights, sdkMessage);
+                    break;
+                case SdkMessageFlow.DDL:
+                    MessagingCenter.Send(this, DDLEvents.AccessRights, sdkMessage);
+                    break;
+            }
         }
 
         public void ReceiveEnterPIN(SdkMessage sdkMessage)
         {
-            MessagingCenter.Send(this, BaseIDEvents.EnterPIN, sdkMessage);
+            switch (_messageFlow)
+            {
+                case SdkMessageFlow.BaseId:
+                    MessagingCenter.Send(this, BaseIDEvents.EnterPIN, sdkMessage);
+                    break;
+                case SdkMessageFlow.DDL:
+                    MessagingCenter.Send(this, DDLEvents.EnterPIN, sdkMessage);
+                    break;
+            }
         }
 
         public void ReceiveEnterNewPIN(SdkMessage sdkMessage)
         {
-            MessagingCenter.Send(this, BaseIDEvents.EnterNewPIN, sdkMessage);
+            switch (_messageFlow)
+            {
+                case SdkMessageFlow.BaseId:
+                    MessagingCenter.Send(this, BaseIDEvents.EnterNewPIN, sdkMessage);
+                    break;
+                case SdkMessageFlow.DDL:
+                    MessagingCenter.Send(this, DDLEvents.EnterNewPIN, sdkMessage);
+                    break;
+            }
         }
 
         public void ReceiveEnterCAN(SdkMessage sdkMessage)
         {
-            MessagingCenter.Send(this, BaseIDEvents.EnterCAN, sdkMessage);
+            switch (_messageFlow)
+            {
+                case SdkMessageFlow.BaseId:
+                    MessagingCenter.Send(this, BaseIDEvents.EnterCAN, sdkMessage);
+                    break;
+                case SdkMessageFlow.DDL:
+                    MessagingCenter.Send(this, DDLEvents.EnterCAN, sdkMessage);
+                    break;
+            }
         }
 
         public void ReceiveEnterPUK(SdkMessage sdkMessage)
         {
-            MessagingCenter.Send(this, BaseIDEvents.EnterPUK, sdkMessage);
+            switch (_messageFlow)
+            {
+                case SdkMessageFlow.BaseId:
+                    MessagingCenter.Send(this, BaseIDEvents.EnterPUK, sdkMessage);
+                    break;
+                case SdkMessageFlow.DDL:
+                    MessagingCenter.Send(this, DDLEvents.EnterPUK, sdkMessage);
+                    break;
+            }
         }
 
         public void ReceiveAuth(SdkMessage sdkMessage)
         {
-            MessagingCenter.Send(this, BaseIDEvents.Auth, sdkMessage);
+            switch (_messageFlow)
+            {
+                case SdkMessageFlow.BaseId:
+                    MessagingCenter.Send(this, BaseIDEvents.Auth, sdkMessage);
+                    break;
+                case SdkMessageFlow.DDL:
+                    MessagingCenter.Send(this, DDLEvents.Auth, sdkMessage);
+                    break;
+            }
         }
 
         public void ReceiveChangePIN(SdkMessage sdkMessage)
         {
-            MessagingCenter.Send(this, BaseIDEvents.ChangePIN, sdkMessage);
+            switch (_messageFlow)
+            {
+                case SdkMessageFlow.BaseId:
+                    MessagingCenter.Send(this, BaseIDEvents.ChangePIN, sdkMessage);
+                    break;
+                case SdkMessageFlow.DDL:
+                    MessagingCenter.Send(this, DDLEvents.ChangePIN, sdkMessage);
+                    break;
+            }
         }
 
         public void ReceiveInsertCard(SdkMessage sdkMessage)
         {
-            MessagingCenter.Send(this, BaseIDEvents.InsertCard, sdkMessage);
+            switch (_messageFlow)
+            {
+                case SdkMessageFlow.BaseId:
+                    MessagingCenter.Send(this, BaseIDEvents.InsertCard, sdkMessage);
+                    break;
+                case SdkMessageFlow.DDL:
+                    MessagingCenter.Send(this, DDLEvents.InsertCard, sdkMessage);
+                    break;
+            }
         }
 
         public void ReceiveReader(SdkMessage sdkMessage)
         {
-            MessagingCenter.Send(this, BaseIDEvents.Reader, sdkMessage);
+            switch (_messageFlow)
+            {
+                case SdkMessageFlow.BaseId:
+                    MessagingCenter.Send(this, BaseIDEvents.Reader, sdkMessage);
+                    break;
+                case SdkMessageFlow.DDL:
+                    MessagingCenter.Send(this, DDLEvents.Reader, sdkMessage);
+                    break;
+            }
         }
 
-        public async void SendRunAuth()
+        public async Task SendRunAuth()
         {
-            App.SafetyResult = "";
-            TcTokenModel tcToken = await GetToken();
-
-            if (!string.IsNullOrEmpty(tcToken.IssuerNonce))
+            try
             {
-                // Safety Check is done here
-                DependencyService.Get<ISecurityChecks>().SafetyCheck(GetNonce(tcToken.IssuerNonce, 0));
-
-                Device.StartTimer(new TimeSpan(0, 0, 0, 0, 100), () =>
+                string hwAlias = "";
+                switch (_messageFlow)
                 {
-                    if (!string.IsNullOrEmpty(App.SafetyResult))
+                    case SdkMessageFlow.BaseId:
+                        hwAlias = WalletParams.BaseIdAlias;
+                        break;
+                    case SdkMessageFlow.DDL:
+                        hwAlias = WalletParams.DdlAlias;
+                        break;
+                }
+
+                App.SafetyResult = "";
+                TcTokenModel tcToken = await GetToken();
+
+                if (!string.IsNullOrEmpty(tcToken.IssuerNonce))
+                {
+                    // Safety Check is done here
+                    DependencyService.Get<ISecurityChecks>().SafetyCheck(GetNonce(tcToken.IssuerNonce, 0));
+
+                    Device.StartTimer(new TimeSpan(0, 0, 0, 0, 100), () =>
                     {
-                        IHardwareKeyService hardwareKeyService = DependencyService.Resolve<IHardwareKeyService>();
+                        if (!string.IsNullOrEmpty(App.SafetyResult))
+                        {
+                            IHardwareKeyService hardwareKeyService = DependencyService.Resolve<IHardwareKeyService>();
 
-                        string hwKey = hardwareKeyService.GetPublicKeyAsBase64(GetNonce(tcToken.IssuerNonce, 1));
+                            string hwKey = hardwareKeyService.GetPublicKeyAsBase64(GetNonce(tcToken.IssuerNonce, 1), hwAlias);
 
-                        string signedNonce = hardwareKeyService.Sign(GetNonce(tcToken.IssuerNonce, 2));
+                            string signedNonce = hardwareKeyService.Sign(GetNonce(tcToken.IssuerNonce, 2), hwAlias);
 
-                        Uri uri = CreateDeviceDependentUri(Device.RuntimePlatform);
-                        StringContent body = CreateDeviceDependentRequestBody(Device.RuntimePlatform, hwKey, signedNonce);
+                            Uri uri = CreateDeviceDependentUri(Device.RuntimePlatform);
+                            StringContent body = CreateDeviceDependentRequestBody(Device.RuntimePlatform, hwKey, signedNonce);
 
-                        HttpResponseMessage response = AusweisSdkHttpClient.PostAsync(uri, body).GetAwaiter().GetResult();
+                            HttpResponseMessage response = SdkHttpClient.PostAsync(uri, body).GetAwaiter().GetResult();
 
-                        App.SafetyResult = "";
-                        App.SafetyKey = "";
+                            App.SafetyResult = "";
+                            App.SafetyKey = "";
 
-                        return false;
-                    }
-                    else
-                    {
-                        return true;
-                    }
-                });
+                            return false;
+                        }
+                        else
+                        {
+                            return true;
+                        }
+                    });
+                }
+                SdkHttpClient.DefaultRequestHeaders.Clear();
             }
-            AusweisSdkHttpClient.DefaultRequestHeaders.Clear();
+            catch (Exception)
+            {
+                switch (_messageFlow)
+                {
+                    case SdkMessageFlow.BaseId:
+                        BaseIdBasicPopUp popUpBaseId = new BaseIdBasicPopUp(
+                            Lang.PopUp_BaseID_Auth_Error_Title,
+                            Lang.PopUp_BaseID_Auth_Error_Text,
+                            Lang.PopUp_BaseID_Auth_Error_Button
+                        );
+                        await popUpBaseId.ShowPopUp();
+                        break;
+                    case SdkMessageFlow.DDL:
+                        DdlBasicPopUp popUpDdl = new DdlBasicPopUp(
+                            Lang.PopUp_DDL_Auth_Error_Title,
+                            Lang.PopUp_DDL_Auth_Error_Text,
+                            Lang.PopUp_DDL_Auth_Error_Button
+                        );
+                        await popUpDdl.ShowPopUp();
+                        break;
+                }
+
+                SendCancel();
+
+                Views.CustomTabbedPage mainPage = Application.Current.MainPage as Views.CustomTabbedPage;
+                INavigation Navigation = ((NavigationPage)mainPage.CurrentPage).Navigation;
+                try
+                {
+                    await Navigation.PopAsync();
+                }
+                catch (Exception)
+                { }
+            }
         }
 
         private async Task<TcTokenModel> GetToken()
         {
-            AusweisSdkHttpClient.DefaultRequestHeaders.Add(WalletParams.ApiHeader, StringCipher.Decrypt(WalletParams.ApiKey, WalletParams.PackageName + WalletParams.AppVersion));
+            switch (_messageFlow)
+            {
+                case SdkMessageFlow.BaseId:
+                    SdkHttpClient.DefaultRequestHeaders.Add(WalletParams.ApiHeader, StringCipher.Decrypt(WalletParams.ApiKeyBaseId, WalletParams.PackageName + WalletParams.AppVersion));
+                    break;
+                case SdkMessageFlow.DDL:
+                    SdkHttpClient.DefaultRequestHeaders.Add(WalletParams.ApiHeader, StringCipher.Decrypt(WalletParams.ApiKeyDdl, WalletParams.PackageName + WalletParams.AppVersion));
+                    break;
+            }
 
-            HttpResponseMessage result = await AusweisSdkHttpClient.GetAsync($"https://{WalletParams.AusweisHost}/oauth2/authorization/ausweisident-integrated");
+            HttpResponseMessage result = new HttpResponseMessage();
+            switch (_messageFlow)
+            {
+                case SdkMessageFlow.BaseId:
+                    result = await SdkHttpClient.GetAsync($"https://{WalletParams.AusweisHost}/oauth2/authorization/ausweisident-integrated");
+                    break;
+                case SdkMessageFlow.DDL:
+                    result = await SdkHttpClient.GetAsync($"https://{WalletParams.DdlHost}/oauth2/authorization/ausweisident-integrated");
+                    break;
+            }
 
             TcTokenModel tcToken = new TcTokenModel();
             if (result.IsSuccessStatusCode)
@@ -157,13 +352,55 @@ namespace IDWallet.Services
                 tcToken = JObject.Parse(await result.Content.ReadAsStringAsync()).ToObject<TcTokenModel>();
                 DependencyService.Get<IAusweisSdk>().SendCall($"{{\"cmd\": \"RUN_AUTH\", \"tcTokenURL\": \"{tcToken.TcTokenUrl}\"}}");
             }
+            else
+            {
+                switch (_messageFlow)
+                {
+                    case SdkMessageFlow.BaseId:
+                        BaseIdBasicPopUp popUpBaseId = new BaseIdBasicPopUp(
+                            Lang.PopUp_BaseID_Auth_Error_Title,
+                            Lang.PopUp_BaseID_Auth_Error_Text,
+                            Lang.PopUp_BaseID_Auth_Error_Button
+                        );
+                        await popUpBaseId.ShowPopUp();
+                        break;
+                    case SdkMessageFlow.DDL:
+                        DdlBasicPopUp popUpDdl = new DdlBasicPopUp(
+                            Lang.PopUp_DDL_Auth_Error_Title,
+                            Lang.PopUp_DDL_Auth_Error_Text,
+                            Lang.PopUp_DDL_Auth_Error_Button
+                        );
+                        await popUpDdl.ShowPopUp();
+                        break;
+                }
+
+                SendCancel();
+
+                Views.CustomTabbedPage mainPage = Application.Current.MainPage as Views.CustomTabbedPage;
+                INavigation Navigation = ((NavigationPage)mainPage.CurrentPage).Navigation;
+                try
+                {
+                    await Navigation.PopAsync();
+                }
+                catch (Exception)
+                { }
+            }
 
             return tcToken;
         }
 
         private Uri CreateDeviceDependentUri(string runtimePlatform)
         {
-            string baseUrl = $"https://{WalletParams.AusweisHost}/api/integrated/wallet-validation";
+            string baseUrl = "";
+            switch (_messageFlow)
+            {
+                case SdkMessageFlow.BaseId:
+                    baseUrl = $"https://{WalletParams.AusweisHost}/api/integrated/wallet-validation";
+                    break;
+                case SdkMessageFlow.DDL:
+                    baseUrl = $"https://{WalletParams.DdlHost}/api/integrated/wallet-validation";
+                    break;
+            }
 
             if (runtimePlatform == Device.Android)
             {
@@ -199,7 +436,10 @@ namespace IDWallet.Services
         {
             StringBuilder hex = new StringBuilder(ba.Length * 2);
             foreach (byte b in ba)
+            {
                 hex.AppendFormat("{0:x2}", b);
+            }
+
             return hex.ToString();
         }
 
@@ -244,11 +484,6 @@ namespace IDWallet.Services
         public static IEnumerable<string> SplitBy(this string str, int chunkLength)
         {
             if (string.IsNullOrEmpty(str))
-            {
-                throw new ArgumentException();
-            }
-
-            if (chunkLength < 1)
             {
                 throw new ArgumentException();
             }

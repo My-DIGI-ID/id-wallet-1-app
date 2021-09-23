@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<base:CustomPopUp  xmlns:base="clr-namespace:IDWallet.Views.Customs.PopUps" 
+                   xmlns="http://xamarin.com/schemas/2014/forms"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                   x:Class="IDWallet.Views.DDL.PopUps.DdlBasicPopUp">
+    <base:CustomPopUp.Content>
+        <StackLayout Style="{StaticResource PopUpStackLayout}">
+            <Frame Style="{StaticResource PopUpFrame}"
+                   Padding="0,20">
+                <ContentView>
+                    <StackLayout>
+                        <Label x:Name="TitleLabel"
+                               Style="{StaticResource LabelHeader}"
+                               MaxLines="100"
+                               LineBreakMode="WordWrap"
+                               Margin="20,0" />
+                        <BoxView BackgroundColor="{StaticResource PopUpHeaderSeparatorColor}"
+                                 HeightRequest="1"
+                                 HorizontalOptions="FillAndExpand" />
+                        <Label x:Name="TextLabel"
+                               Margin="20,0"
+                               Style="{StaticResource LabelMultiLine}"
+                               TextColor="{StaticResource AttributeValueColor}" />
+                        <StackLayout Style="{StaticResource PopUpButtonArea}"
+                                     Margin="20,20,20,0"
+                                     HorizontalOptions="FillAndExpand">
+                            <Button x:Name="ButtonLabel"
+                                    HorizontalOptions="FillAndExpand"
+                                    Style="{StaticResource AcceptButton}"
+                                    Clicked="OnPopUpAccepted" />
+                        </StackLayout>
+                    </StackLayout>
+                </ContentView>
+            </Frame>
+        </StackLayout>
+    </base:CustomPopUp.Content>
+</base:CustomPopUp>

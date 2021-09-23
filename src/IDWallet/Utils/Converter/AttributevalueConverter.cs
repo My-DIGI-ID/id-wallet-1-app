@@ -1,5 +1,4 @@
-﻿using IDWallet.Models;
-using IDWallet.Resources;
+﻿using IDWallet.Resources;
 using System;
 using System.Globalization;
 using Xamarin.Forms;

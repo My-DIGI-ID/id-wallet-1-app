@@ -13,6 +13,7 @@ namespace IDWallet.Models
         private string _iconSource = "mdi-checkbox-blank-circle-outline";
         private bool _showInfo = false;
         private bool _showSeparator = true;
+        private bool _isSelfAttested = false;
         public event PropertyChangedEventHandler PropertyChanged;
 
         public ObservableCollection<CredentialClaim> Attributes
@@ -40,6 +41,12 @@ namespace IDWallet.Models
         {
             get => _showSeparator;
             set => SetProperty(ref _showSeparator, value);
+        }
+
+        public bool IsSelfAttested
+        {
+            get => _isSelfAttested;
+            set => SetProperty(ref _isSelfAttested, value);
         }
 
         public string Value { get; set; }

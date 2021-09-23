@@ -2,7 +2,8 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:pin="clr-namespace:IDWallet.Packages.FormsPinView"
-             xmlns:lang="clr-namespace:IDWallet.Extensions" xmlns:svg="clr-namespace:Xamarin.Forms.Svg;assembly=SvgImageSource"
+             xmlns:lang="clr-namespace:IDWallet.Extensions" 
+             xmlns:svg="clr-namespace:Xamarin.Forms.Svg;assembly=SvgImageSource"
              x:Class="IDWallet.Views.BaseId.Content.BaseIdPINView"
              BackgroundColor="{StaticResource BackgroundColor}"
              x:Name="Root">
@@ -76,7 +77,7 @@
                     </Label.GestureRecognizers>
                 </Label>
             </Grid>
-            
+
             <Label IsVisible="{Binding MoreInformationLinkIsVisible}"
                    Style="{StaticResource BaseIDLinkLabel}" 
                    Text="{lang:L10n BaseIDPage_PINScreen_More_Information}">
@@ -137,6 +138,6 @@
                         Command="{Binding ForgotPINTappedCommand}"/>
             </StackLayout>
 
-        </StackLayout>      
-  </ContentView.Content>
+        </StackLayout>
+    </ContentView.Content>
 </ContentView>

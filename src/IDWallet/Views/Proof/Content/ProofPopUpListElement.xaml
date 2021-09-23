@@ -59,123 +59,141 @@
                 </Image>
             </Frame>
         </StackLayout>
+
         <StackLayout IsVisible="{Binding OnlyOneOption, Converter={StaticResource InverseBooleanConverter}}"
                      Spacing="0">
-            <StackLayout HeightRequest="49"
+            <StackLayout IsVisible="{Binding IsSelfAttested}">
+                <Label Text="{Binding RequestedValue, Converter={StaticResource LabelTextConverter}}" />
+                <Entry Text="{Binding SelectedValue, Mode=TwoWay}"
+                       Placeholder="{lang:L10n PopUp_ProofRequest_SelfAttest_Placeholder_Text}"
+                       IsVisible="{Binding IsSelfAttested}"
+                       FontSize="16"
+                       TextColor="{StaticResource SecondaryTextColor}" />
+            </StackLayout>
+
+            <StackLayout IsVisible="{Binding IsSelfAttested, Converter={StaticResource InverseBooleanConverter}}">
+
+                <StackLayout HeightRequest="49"
                          Spacing="0">
-                <Label Text="{Binding SelectedOption.WalletElement.Name, Converter={StaticResource CredDefNameConverter}}"
+                    <Label Text="{Binding SelectedOption.WalletElement.Name, Converter={StaticResource CredDefNameConverter}}"
                        VerticalTextAlignment="Center"
                        VerticalOptions="EndAndExpand"
                        FontSize="16"
                        FontAttributes="Bold"
                        TextColor="{StaticResource PrimaryTextColor}" />
-                <Label Text="{lang:L10n PopUp_ProofRequest_ItemText}"
+                    <Label Text="{lang:L10n PopUp_ProofRequest_ItemText}"
                        VerticalOptions="StartAndExpand"
                        VerticalTextAlignment="Center"
                        FontSize="13"
                        TextColor="{StaticResource PrimaryTextColor}" />
-            </StackLayout>
-            <BoxView BackgroundColor="{StaticResource SeparatorColor}"
+                </StackLayout>
+                <BoxView BackgroundColor="{StaticResource SeparatorColor}"
                      HeightRequest="1"
                      HorizontalOptions="FillAndExpand" />
-            <StackLayout BindableLayout.ItemsSource="{Binding ProofElementOptions}"
+                <StackLayout BindableLayout.ItemsSource="{Binding ProofElementOptions}"
                          Spacing="0">
-                <BindableLayout.ItemTemplate>
-                    <DataTemplate>
-                        <StackLayout Spacing="0">
-                            <StackLayout HeightRequest="49"
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Spacing="0">
+                                <StackLayout HeightRequest="49"
                                          Spacing="10"
                                          Orientation="Horizontal">
-                                <StackLayout.GestureRecognizers>
-                                    <TapGestureRecognizer
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer
                                         Command="{Binding ListViewOptionTappedCommand, Source={x:Reference Root}}"
                                         CommandParameter="{Binding .}" />
-                                </StackLayout.GestureRecognizers>
-                                <iconize:IconImage Icon="{Binding IconSource}"
+                                    </StackLayout.GestureRecognizers>
+                                    <iconize:IconImage Icon="{Binding IconSource}"
                                                    Margin="3,0,0,0"
                                                    IconSize="20"
                                                    IconColor="{StaticResource PrimaryTextColor}"
                                                    VerticalOptions="CenterAndExpand"/>
-                                <Frame WidthRequest="35"
+                                    <Frame WidthRequest="35"
                                        HeightRequest="35"
                                        CornerRadius="0"
                                        BorderColor="{StaticResource BackgroundColor}"
                                        Margin="0,7">
-                                    <Image Source="{Binding WalletElement.CredentialImageSource}" />
-                                </Frame>
-                                <StackLayout Spacing="0">
-                                    <Label Text="{Binding WalletElement.IssuedBy}"
+                                        <Image Source="{Binding WalletElement.CredentialImageSource}" />
+                                    </Frame>
+                                    <StackLayout Spacing="0">
+                                        <Label Text="{Binding WalletElement.IssuedBy}"
                                            VerticalTextAlignment="Center"
                                            FontSize="16"
                                            FontAttributes="Bold"
                                            VerticalOptions="CenterAndExpand"
                                            TextColor="{StaticResource PrimaryTextColor}" />
-                                </StackLayout>
-                                <Frame WidthRequest="25"
+                                    </StackLayout>
+                                    <Frame WidthRequest="25"
                                        HeightRequest="25"
                                        VerticalOptions="CenterAndExpand"
                                        HorizontalOptions="EndAndExpand">
-                                    <iconize:IconImage x:Name="revokeWarning"
+                                        <iconize:IconImage x:Name="revokeWarning"
                                                Icon="mdi-alert"
                                                IconColor="{StaticResource DeletePrimaryColor}"
                                                IconSize="20"
                                                HorizontalOptions="Center"
                                                IsVisible="{Binding WalletElement.Revoked}"/>
-                                </Frame>
-                                <Frame WidthRequest="30"
+                                    </Frame>
+                                    <Frame WidthRequest="30"
                                        HeightRequest="30"
                                        VerticalOptions="CenterAndExpand"
                                        HorizontalOptions="End">
-                                    <Frame.GestureRecognizers>
-                                        <TapGestureRecognizer
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer
                                             Command="{Binding InfoButtonTappedCommand, Source={x:Reference Root}}"
                                             CommandParameter="{Binding .}" />
-                                    </Frame.GestureRecognizers>
-                                    <Image>
-                                        <Image.Source>
-                                            <svg:SvgImageSource Source="imagesources.InfoProof_Icon.svg" Width="30"
+                                        </Frame.GestureRecognizers>
+                                        <Image>
+                                            <Image.Source>
+                                                <svg:SvgImageSource Source="imagesources.InfoProof_Icon.svg" Width="30"
                                                                 Height="30" />
-                                        </Image.Source>
-                                    </Image>
-                                </Frame>
-                            </StackLayout>
-                            <StackLayout IsVisible="{Binding ShowInfo}"
+                                            </Image.Source>
+                                        </Image>
+                                    </Frame>
+                                </StackLayout>
+                                <StackLayout IsVisible="{Binding ShowInfo}"
                                          Margin="30,0,0,5">
-                                <Grid IsVisible="{Binding WalletElement.Revoked}">
-                                    <iconize:IconImage x:Name="revokeWarning2"
+                                    <Grid IsVisible="{Binding WalletElement.Revoked}">
+                                        <iconize:IconImage x:Name="revokeWarning2"
                                                Icon="mdi-alert"
                                                IconColor="{StaticResource DeletePrimaryColor}"
                                                IconSize="20"
                                                HorizontalOptions="Start"/>
-                                    <Label HorizontalOptions="Start" Margin="25,0,0,0" TextColor="{StaticResource DeletePrimaryColor}"
+                                        <Label HorizontalOptions="Start" Margin="25,0,0,0" TextColor="{StaticResource DeletePrimaryColor}"
                                             Text="{lang:L10n WalletPage_Revocation_Label}"/>
-                                </Grid>
-                                <StackLayout BindableLayout.ItemsSource="{Binding Attributes}">
-                                    <BindableLayout.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackLayout Spacing="0"
+                                    </Grid>
+                                    <StackLayout BindableLayout.ItemsSource="{Binding Attributes}">
+                                        <BindableLayout.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackLayout Spacing="0"
                                                      x:Name="AttributeStack">
-                                                <Label Text="{Binding Name, Converter={StaticResource LabelTextConverter}}"
-                                                   FontSize="12"
-                                                   TextColor="{StaticResource SecondaryTextColor}"
-                                                   VerticalTextAlignment="End" />
-                                                <Label Text="{Binding Value, Converter={StaticResource AttributeValueConverter}}"
+                                                    <Label FontSize="12"
+                                                       TextColor="{StaticResource SecondaryTextColor}"
+                                                       VerticalTextAlignment="End" >
+                                                        <Label.Text>
+                                                            <MultiBinding Converter="{StaticResource MultiLabelTextConverter}">
+                                                                <Binding Path="Name"/>
+                                                                <Binding Path="DEFAULT"/>
+                                                            </MultiBinding>
+                                                        </Label.Text>
+                                                    </Label>
+                                                    <Label Text="{Binding Value, Converter={StaticResource AttributeValueConverter}}"
                                                    IsVisible="{Binding Name, Converter={StaticResource ValueVisibilityConverter}}"
                                                    FontSize="16"
                                                    FontAttributes="Bold"
                                                    TextColor="{StaticResource SecondaryTextColor}" />
-                                                <Frame x:Name="EmbeddedImageFrame"
+                                                    <Frame x:Name="EmbeddedImageFrame"
                                                        HorizontalOptions="Start"
                                                        CornerRadius="0"
                                                        HeightRequest="50"
                                                        WidthRequest="100"
                                                        IsVisible="{Binding Name, Converter={StaticResource ValueVisibilityConverter}, ConverterParameter=embeddedImage}">
-                                                    <ff:CachedImage Source="{Binding Parent.BindingContext.WalletElement.PortraitByteArray, Source={x:Reference AttributeStack}, Converter={StaticResource EmbeddedImageConverter}}"
+                                                        <ff:CachedImage Source="{Binding Parent.BindingContext.WalletElement.PortraitByteArray, Source={x:Reference AttributeStack}, Converter={StaticResource EmbeddedImageConverter}}"
                                                                     Aspect="AspectFit"
                                                                     ErrorPlaceholder="default_logo.png"
                                                                     LoadingPlaceholder="default_logo.png" />
-                                                </Frame>
-                                                <iconize:IconButton WidthRequest="35"
+                                                    </Frame>
+                                                    <iconize:IconButton WidthRequest="35"
                                                                     HeightRequest="35"
                                                                     IsVisible="{Binding Name, Converter={StaticResource ValueVisibilityConverter}, ConverterParameter=embeddedDocument}"
                                                                     Padding="0"
@@ -186,59 +204,69 @@
                                                                     FontSize="30"
                                                                     Command="{Binding OpenPdfButtonTappedCommand, Source={x:Reference Root}}"
                                                                     CommandParameter="{Binding Parent.BindingContext.WalletElement.DocumentString, Source={x:Reference AttributeStack}}"/>
-                                            </StackLayout>
-                                        </DataTemplate>
-                                    </BindableLayout.ItemTemplate>
+                                                </StackLayout>
+                                            </DataTemplate>
+                                        </BindableLayout.ItemTemplate>
+                                    </StackLayout>
                                 </StackLayout>
-                            </StackLayout>
-                            <BoxView BackgroundColor="{StaticResource SeparatorColor}"
+                                <BoxView BackgroundColor="{StaticResource SeparatorColor}"
                                      IsVisible="{Binding ShowSeparator}"
                                      HeightRequest="1"
                                      Margin="30,0,0,0"
                                      HorizontalOptions="FillAndExpand" />
-                        </StackLayout>
-                    </DataTemplate>
-                </BindableLayout.ItemTemplate>
+                            </StackLayout>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+
             </StackLayout>
         </StackLayout>
+
         <StackLayout IsVisible="{Binding OnlyOneOption}">
-            <StackLayout IsVisible="{Binding SelectedOption.ShowInfo}"
+            <StackLayout IsVisible="{Binding IsSelfAttested, Converter={StaticResource InverseBooleanConverter}}">
+                <StackLayout IsVisible="{Binding SelectedOption.ShowInfo}"
                          Margin="0,0,0,7">
-                <Grid IsVisible="{Binding SelectedOption.WalletElement.Revoked}">
-                    <iconize:IconImage x:Name="revokeWarning2"
+                    <Grid IsVisible="{Binding SelectedOption.WalletElement.Revoked}">
+                        <iconize:IconImage x:Name="revokeWarning2"
                                                Icon="mdi-alert"
                                                IconColor="{StaticResource DeletePrimaryColor}"
                                                IconSize="20"
                                                HorizontalOptions="Start"/>
-                    <Label HorizontalOptions="Start" Margin="25,0,0,0" TextColor="{StaticResource DeletePrimaryColor}"
+                        <Label HorizontalOptions="Start" Margin="25,0,0,0" TextColor="{StaticResource DeletePrimaryColor}"
                                             Text="{lang:L10n WalletPage_Revocation_Label}"/>
-                </Grid>
-                <StackLayout BindableLayout.ItemsSource="{Binding SelectedOption.Attributes}">
-                    <BindableLayout.ItemTemplate>
-                        <DataTemplate>
-                            <StackLayout Spacing="0"
+                    </Grid>
+                    <StackLayout BindableLayout.ItemsSource="{Binding SelectedOption.Attributes}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout Spacing="0"
                                      x:Name="AttributeStack">
-                                <Label Text="{Binding Name, Converter={StaticResource LabelTextConverter}}"
-                                   FontSize="12"
-                                   TextColor="{StaticResource SecondaryTextColor}"
-                                   VerticalTextAlignment="End" />
-                                <Label Text="{Binding Value, Converter={StaticResource AttributeValueConverter}}"
-                                   IsVisible="{Binding Name, Converter={StaticResource ValueVisibilityConverter}}"
-                                   FontSize="16"
-                                   FontAttributes="Bold"
-                                   TextColor="{StaticResource SecondaryTextColor}" />
-                                <Frame x:Name="EmbeddedImageFrame"
+                                    <Label FontSize="12"
+                                       TextColor="{StaticResource SecondaryTextColor}"
+                                       VerticalTextAlignment="End">
+                                        <Label.Text>
+                                            <MultiBinding Converter="{StaticResource MultiLabelTextConverter}">
+                                                <Binding Path="Name"/>
+                                                <Binding Path="DEFAULT"/>
+                                            </MultiBinding>
+                                        </Label.Text>
+                                    </Label>
+                                    <Label Text="{Binding Value, Converter={StaticResource AttributeValueConverter}}"
+                                       IsVisible="{Binding Name, Converter={StaticResource ValueVisibilityConverter}}"
+                                       FontSize="16"
+                                       FontAttributes="Bold"
+                                       TextColor="{StaticResource SecondaryTextColor}"/>
+                                    <Frame x:Name="EmbeddedImageFrame"
                                     HorizontalOptions="Start"
                                     CornerRadius="0"
                                     HeightRequest="50"
                                     WidthRequest="100"
                                     IsVisible="{Binding Name, Converter={StaticResource ValueVisibilityConverter}, ConverterParameter=embeddedImage}">
-                                    <ff:CachedImage Source="{Binding Parent.BindingContext.SelectedOption.WalletElement.PortraitByteArray, Source={x:Reference AttributeStack}, Converter={StaticResource EmbeddedImageConverter}}"
+                                        <ff:CachedImage Source="{Binding Parent.BindingContext.SelectedOption.WalletElement.PortraitByteArray, Source={x:Reference AttributeStack}, Converter={StaticResource EmbeddedImageConverter}}"
                                                 Aspect="AspectFit"
                                                 ErrorPlaceholder="default_logo.png"
                                                 LoadingPlaceholder="default_logo.png" />
-                                </Frame>
-                                <iconize:IconButton WidthRequest="35"
+                                    </Frame>
+                                    <iconize:IconButton WidthRequest="35"
                                                 HeightRequest="35"
                                                 IsVisible="{Binding Name, Converter={StaticResource ValueVisibilityConverter}, ConverterParameter=embeddedDocument}"
                                                 Padding="0"
@@ -249,12 +277,16 @@
                                                 FontSize="30"
                                                 Command="{Binding OpenPdfButtonTappedCommand, Source={x:Reference Root}}"
                                                 CommandParameter="{Binding Parent.BindingContext.SelectedOption.WalletElement.DocumentString, Source={x:Reference AttributeStack}}"/>
-                            </StackLayout>
-                        </DataTemplate>
-                    </BindableLayout.ItemTemplate>
+                                </StackLayout>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
                 </StackLayout>
             </StackLayout>
+
+
         </StackLayout>
+
         <BoxView BackgroundColor="{StaticResource SeparatorColor}"
                  HeightRequest="1"
                  HorizontalOptions="FillAndExpand" />

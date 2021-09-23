@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:lang="clr-namespace:IDWallet.Extensions" 
+             xmlns:svg="clr-namespace:Xamarin.Forms.Svg;assembly=SvgImageSource" 
+             xmlns:pin="clr-namespace:IDWallet.Packages.FormsPinView"
+             x:Class="IDWallet.Views.DDL.Content.DdlPINView">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label" BasedOn="{StaticResource BaseIDBodyLabel}">
+                <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <StackLayout HorizontalOptions="FillAndExpand"
+                     VerticalOptions="FillAndExpand">
+            <Label x:Name="HeaderLabel" 
+                   Style="{StaticResource BaseIDHeaderLabel}"
+                   Text="{Binding DdlPinHeaderLabel}"/>
+            <Label IsVisible="{Binding DdlPinBoldIsVisible}"
+                   Text="{Binding DdlPinBoldLabel}"
+                   Style="{StaticResource BaseIDBodyLabel}"
+                   FontAttributes="Bold"/>
+            <Label x:Name="BodyLabel" 
+                   Style="{StaticResource BaseIDBodyLabel}"
+                   Text="{Binding DdlPinBodyLabel}"
+                   IsVisible="{Binding DdlPinLinkIsVisible, Converter={StaticResource InverseBooleanConverter}}"/>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Image Aspect="AspectFit"
+                       IsVisible="{Binding DdlPinLinkIsVisible}"
+                       Grid.Row="0"
+                       Grid.Column="0">
+                    <Image.Source>
+                        <svg:SvgImageSource Source="imagesources.RoundClick_Icon.svg"  Width="20" Height="20" />
+                    </Image.Source>
+                </Image>
+                <Label x:Name="LinkLabel" 
+                       IsVisible="{Binding DdlPinLinkIsVisible}"
+                       Style="{StaticResource BaseIDLinkLabel}" 
+                       Text="{lang:L10n BaseIDPage_PINScreen_Transport_Label}"
+                       Grid.Row="0"
+                       Grid.Column="1">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ChangeDigitsTappedCommand}"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Image Aspect="AspectFit"
+                       IsVisible="{Binding ForgotPINLinkIsVisible}"
+                       Grid.Row="1"
+                       Grid.Column="0">
+                    <Image.Source>
+                        <svg:SvgImageSource Source="imagesources.RoundClick_Icon.svg"  Width="20" Height="20" />
+                    </Image.Source>
+                </Image>
+                <Label IsVisible="{Binding ForgotPINLinkIsVisible}"
+                       Style="{StaticResource BaseIDLinkLabel}"  
+                       Text="{lang:L10n BaseIDPage_PINScreen_Forgot_Your_PIN}"
+                       Grid.Row="1"
+                       Grid.Column="1">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ForgotPINTappedCommand}"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
+
+            <Label IsVisible="{Binding MoreInformationLinkIsVisible}"
+                   Style="{StaticResource BaseIDLinkLabel}" 
+                   Text="{lang:L10n BaseIDPage_PINScreen_More_Information}">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding MoreInformationTappedCommand}"/>
+                </Label.GestureRecognizers>
+            </Label>
+
+            <pin:PinView x:Name="baseIdPinView"
+                        Margin="0"
+                        ItemScale="0.7"
+                        IsVisible="{Binding PinPadIsVisible}"
+                        HorizontalOptions="Center"
+                        VerticalOptions="FillAndExpand"
+                        PinLength="{Binding DdlPinLength}"
+                        Validator="{Binding DdlPinValidator}"
+                        ErrorCommand="{Binding DdlPinErrorCommand}"
+                        SuccessCommand="{Binding DdlPinSuccessCommand}"
+                        Color="{StaticResource PrimaryTextColor}"
+                        BorderColor="{StaticResource SecondaryTextColor}"
+                        RippleColor="{StaticResource PinRippleColor}" />
+
+            <StackLayout IsVisible="{Binding PinPadIsVisible, Converter={StaticResource InverseBooleanConverter}}"
+                         VerticalOptions="EndAndExpand"
+                         HorizontalOptions="FillAndExpand">
+                <Button Text="{lang:L10n BaseIDPage_PINScreen_Selection_Default_Button}"
+                        Style="{StaticResource AcceptButton}"
+                        HorizontalOptions="FillAndExpand"
+                        Command="{Binding SixDigitsTappedCommand}"/>
+                <Button Text="{lang:L10n BaseIDPage_PINScreen_Selection_Transport_Button}"
+                        Style="{StaticResource AcceptButton}"
+                        HorizontalOptions="FillAndExpand"
+                        Command="{Binding FiveDigitsTappedCommand}"/>
+                <Button Text="{lang:L10n BaseIDPage_PINScreen_Selection_Forgot_Button}"
+                        Style="{StaticResource AcceptButton}"
+                        HorizontalOptions="FillAndExpand"
+                        Command="{Binding ForgotPINTappedCommand}"/>
+            </StackLayout>
+
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

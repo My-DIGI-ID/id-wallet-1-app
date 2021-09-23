@@ -244,5 +244,19 @@ namespace IDWallet.Droid
             }
             return true;
         }
+
+        public override Android.Content.Res.Resources Resources
+        {
+            get
+            {
+                Android.Content.Res.Configuration config = base.Resources.Configuration;
+                config.FontScale = 1f;
+                if (config == null)
+                {
+                    config = new Android.Content.Res.Configuration();
+                }
+                return CreateConfigurationContext(config).Resources;
+            }
+        }
     }
 }

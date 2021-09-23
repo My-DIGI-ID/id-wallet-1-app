@@ -34,7 +34,7 @@
                                Margin="0,20">
                             <Label.FormattedText>
                                 <FormattedString>
-                                    <Span x:Name="bodySpan1"/>
+                                    <Span x:Name="bodySpan"/>
                                     <Span Text=" "/>
                                     <Span x:Name="BoldTextLabel"
                                           FontAttributes="Bold"/>

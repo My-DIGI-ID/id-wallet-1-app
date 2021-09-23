@@ -31,8 +31,9 @@ namespace IDWallet.ViewModels
         private string _connectionAlias;
         private int _currentlyOpen;
         private bool _readyToSend;
-        private ProofModel _hwRequest;
+        private List<ProofModel> _hwRequest = new List<ProofModel>();
         private bool _isHwRequest;
+
         public ProofViewModel(ProofRequest proofRequest, string proofRecordId, bool onlyKnownProofs = false,
             bool takeNewest = true)
         {
@@ -61,6 +62,7 @@ namespace IDWallet.ViewModels
         }
 
         public ConnectionRecord Connection { get; set; }
+        public bool DriverLicenseIsValid = true;
         public string ConnectionAlias
         {
             get => _connectionAlias;
@@ -95,9 +97,12 @@ namespace IDWallet.ViewModels
         {
             Hyperledger.Aries.Agents.IAgentContext agentContext = await _agentProvider.GetContextAsync();
 
-            if (_hwRequest != null)
+            if (_hwRequest != null && _hwRequest.Any())
             {
-                Requests.Add(_hwRequest);
+                foreach (var request in _hwRequest)
+                {
+                    Requests.Add(request);
+                }
             }
 
             return await _proofRequestService.CreateAndSendProof(Requests, agentContext, _proofRecordId,
@@ -112,7 +117,8 @@ namespace IDWallet.ViewModels
                 {
                     foreach (ProofElementOption currentOption in currentRequest.ProofElementOptions)
                     {
-                        if (currentOption.WalletElement.CredentialRecord.CredentialId ==
+                        if (currentOption.WalletElement != null &&
+                            currentOption.WalletElement.CredentialRecord.CredentialId ==
                             listViewOption.WalletElement.CredentialRecord.CredentialId)
                         {
                             listViewOption.Attributes.Add(new CredentialClaim
@@ -126,18 +132,10 @@ namespace IDWallet.ViewModels
         public void SelectCredential(ProofElementOption listViewOption)
         {
             ProofModel currentRequest = Requests[_currentlyOpen];
-            string oldCredDefId = "";
             IEnumerable<ProofModel> keyGroup = from request in Requests
                                                where request.DictionaryKey == currentRequest.DictionaryKey
                                                select request;
 
-            if (currentRequest.SelectedOption != null)
-            {
-                oldCredDefId = currentRequest.SelectedOption.WalletElement.CredentialRecord
-                    .CredentialDefinitionId;
-            }
-
-            string newCredDefId = listViewOption.WalletElement.CredentialRecord.CredentialDefinitionId;
             foreach (ProofModel request in keyGroup)
             {
                 request.SelectedOption.IconSource = "mdi-checkbox-blank-circle-outline";
@@ -175,7 +173,7 @@ namespace IDWallet.ViewModels
                 {
                     request.SelectedValue = (from attribute in listViewOption.WalletElement.Claims
                                              where attribute.Name == valueType
-                                             select attribute.Value).First();
+                                             select attribute.Value).FirstOrDefault();
                 }
                 else if (request.IsEmbeddedImage)
                 {
@@ -355,11 +353,14 @@ namespace IDWallet.ViewModels
                 ReadyToSend = IsAvailable();
             }
 
-            _hwRequest = Requests.Where(x => x.RequestedValue.Equals(WalletParams.HardwareSignature)).FirstOrDefault();
-            if (_hwRequest != null)
+            _hwRequest = Requests.Where(x => x.RequestedValue.Equals(WalletParams.HardwareSignature) || x.RequestedValue.Equals(WalletParams.HardwareSignatureDdl)).ToList();
+            if (_hwRequest != null && _hwRequest.Any())
             {
+                foreach (var request in _hwRequest)
+                {
+                    Requests.Remove(request);
+                }
                 _isHwRequest = true;
-                Requests.Remove(_hwRequest);
             }
             else
             {
@@ -373,9 +374,19 @@ namespace IDWallet.ViewModels
         {
             foreach (ProofModel proofModel in Requests)
             {
-                if (!proofModel.IsSelected)
+                if (!proofModel.IsSelected && !proofModel.IsSelfAttested)
                 {
                     FailedRequests.Add(proofModel);
+                }
+
+                List<DDL> ddls = (from option in proofModel.ProofElementOptions
+                                  where option.WalletElement is DDL
+                                  select (DDL)option.WalletElement).ToList();
+
+                if (ddls.Any() && ddls.FirstOrDefault(x => DateTime.Parse(x.DateOfIssuance).DayOfYear != DateTime.Now.DayOfYear || DateTime.Parse(x.DateOfIssuance).Year != DateTime.Now.Year) != null)
+                {
+                    DriverLicenseIsValid = false;
+                    return false;
                 }
             }
 

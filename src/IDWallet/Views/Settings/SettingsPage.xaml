@@ -150,10 +150,10 @@
                         Style="{StaticResource ItemLabel}"
                         Text="{lang:L10n SettingsPage_Recover_Backup}" />
                     <iconize:IconImage Style="{StaticResource IconRight}" />
-                </StackLayout>-->
+                </StackLayout>
 
                 <BoxView HeightRequest="1"
-                         Color="{StaticResource BorderColor}" />
+                         Color="{StaticResource BorderColor}" />-->
 
                 <StackLayout Style="{StaticResource HorizontalItem}"
                              x:Name="ChangePasscodeStack">
@@ -264,7 +264,7 @@
                 <BoxView HeightRequest="1"
                          Color="{StaticResource BorderColor}" />
 
-				<StackLayout x:Name="LiabilityStack"
+                <StackLayout x:Name="LiabilityStack"
                              Style="{StaticResource HorizontalItem}">
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer Tapped="Tapped_Liability" />

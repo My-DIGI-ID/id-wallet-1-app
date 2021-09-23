@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:lang="clr-namespace:IDWallet.Extensions"
+             xmlns:lang="clr-namespace:IDWallet.Extensions" xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
              x:Class="IDWallet.Views.BaseId.Content.BaseIdReadView"
              BackgroundColor="{StaticResource BackgroundColor}"
              x:Name="Root">
@@ -15,6 +15,14 @@
         <Label Style="{StaticResource BaseIDBodyLabel}"
                Text="{lang:L10n BaseIDPage_ReadIdScreen_Security_Label}"
                Margin="0,0,0,20"/>
+        <forms:AnimationView x:Name="AnimationView"
+                         Animation="loader.json"
+                         RepeatMode="Infinite"
+                         AutoPlay="True"
+                         HorizontalOptions="FillAndExpand"
+                         HeightRequest="150"
+                         Margin="0,20,0,0"
+                         IsVisible="{Binding IsActivityIndicatorVisible}"/>
         <Button VerticalOptions="EndAndExpand"
                 Style="{StaticResource AcceptButton}"
                 Text="{lang:L10n BaseIDPage_ReadIdScreen_Button_Label}"

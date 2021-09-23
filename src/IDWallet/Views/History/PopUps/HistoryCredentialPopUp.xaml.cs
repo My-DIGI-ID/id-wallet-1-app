@@ -81,7 +81,7 @@ namespace IDWallet.Views.History.PopUps
 
                     stackLayout.Children.Add(iconButton);
                 }
-                else if (nameLabel.Text == "QR-Code")
+                else if (nameLabel.Text == "COVID-Zertifikat")
                 {
                     HistoryCredentialTitle.Text = Lang.Qr_History_Message_1;
                     HistoryCredentialText2.Text = Lang.Qr_History_Message_2;

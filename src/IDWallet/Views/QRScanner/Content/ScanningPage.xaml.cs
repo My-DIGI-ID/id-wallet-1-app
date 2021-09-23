@@ -10,7 +10,6 @@ using IDWallet.Views.Customs.PopUps;
 using IDWallet.Views.QRScanner.PopUps;
 using IDWallet.Views.Settings.Connections.PopUps;
 using Hyperledger.Aries.Agents;
-using Hyperledger.Aries.Configuration;
 using Hyperledger.Aries.Features.IssueCredential;
 using Hyperledger.Aries.Features.PresentProof;
 using Plugin.Permissions;
@@ -437,35 +436,44 @@ namespace IDWallet.Views.QRScanner.Content
                             NavigateToWallet();
                             break;
 
-                        case "vac_qr":
-                            SaveNewVacPopUp saveVacPopUp = new SaveNewVacPopUp();
-                            PopUpResult saveVacPopUpResult = await saveVacPopUp.ShowPopUp();
+                        //case "vac_qr":
+                        //    SaveNewVacPopUp saveVacPopUp = new SaveNewVacPopUp();
+                        //    PopUpResult saveVacPopUpResult = await saveVacPopUp.ShowPopUp();
 
-                            if (PopUpResult.Accepted == saveVacPopUpResult)
-                            {
-                                await _addVacService.AddVac(vacCode);
-                            }
+                        //    if (PopUpResult.Accepted == saveVacPopUpResult)
+                        //    {
+                        //        await _addVacService.AddVac(vacCode);
+                        //    }
 
-                            int counterVacConnectionId = 0;
-                            while (!string.IsNullOrEmpty(App.VacConnectionId))
-                            {
-                                await Task.Delay(100);
+                        //    int counterVacConnectionId = 0;
+                        //    while (!string.IsNullOrEmpty(App.VacConnectionId))
+                        //    {
+                        //        await Task.Delay(100);
 
-                                counterVacConnectionId++;
+                        //        counterVacConnectionId++;
 
-                                if (counterVacConnectionId == 1000)
-                                {
-                                    break;
-                                }
-                            }
+                        //        if (counterVacConnectionId == 1000)
+                        //        {
+                        //            break;
+                        //        }
+                        //    }
 
-                            NavigateToWallet();
-                            break;
+                        //    NavigateToWallet();
+                        //    break;
 
                         case "eid_uc":
                             if (arguments["eid_uc"].Equals("de.kba.fs-nachweis"))
                             {
-                                //Call eID DDL Flow
+                                try
+                                {
+                                    await App.AutoAcceptViewModel.StartDdlFlow();
+                                }
+                                catch (Exception ex) when (ex.Message.Equals("NFC-ERROR") || ex.Message.Equals("SDK-NOT-CONNECTED-ERROR"))
+                                {
+                                    scanner.IsScanning = true;
+                                    scanner.IsAnalyzing = true;
+                                    scanner.IsEnabled = true;
+                                }
                             }
                             break;
 

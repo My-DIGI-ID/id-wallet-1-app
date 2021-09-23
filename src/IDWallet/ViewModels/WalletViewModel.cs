@@ -23,7 +23,6 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
@@ -48,7 +47,9 @@ namespace IDWallet.ViewModels
         private int _walletElementPosition;
 
         private bool _emptyLayoutVisible;
-        private bool _addBaseIdIsVisible;
+        private bool _baseIdExisting;
+        private bool _ddlExisting;
+        private bool _vacCertExisting;
 
         private double _historyHeight;
         private bool _isCheckingRevocationStatus = false;
@@ -59,7 +60,9 @@ namespace IDWallet.ViewModels
             Title = "Credentials";
             WalletElements = new ObservableCollection<WalletElement>();
             EmptyLayoutVisible = true;
-            AddBaseIdIsVisible = true;
+            BaseIdExisting = false;
+            DdlExisting = false;
+            VacCertExisting = false;
             LoadItemsCommand = new Command(async () => await ExecuteLoadWalletElements());
             _allProofs = new List<(CredentialHistoryElements, ProofRecord)>();
 
@@ -75,6 +78,7 @@ namespace IDWallet.ViewModels
             MessagingCenter.Subscribe<AutoAcceptViewModel, string>(this, WalletEvents.SentProofRequest, OnProofSent);
             MessagingCenter.Subscribe<CustomAgentProvider>(this, WalletEvents.AgentSwitched, ReloadWalletElements);
             MessagingCenter.Subscribe<BaseIdViewModel>(this, WalletEvents.ReloadCredentials, ReloadWalletElements);
+            MessagingCenter.Subscribe<DdlViewModel>(this, WalletEvents.ReloadCredentials, ReloadWalletElements);
             MessagingCenter.Subscribe<AddVacService>(this, WalletEvents.ReloadCredentials, ReloadWalletElements);
             MessagingCenter.Subscribe<AddVacService, string>(this, WalletEvents.VacAdded, OnVacQrAdded);
             MessagingCenter.Subscribe<InboxListElement, string>(this, WalletEvents.CredentialDeleted,
@@ -115,10 +119,22 @@ namespace IDWallet.ViewModels
             set => SetProperty(ref _emptyLayoutVisible, value);
         }
 
-        public bool AddBaseIdIsVisible
+        public bool BaseIdExisting
         {
-            get => _addBaseIdIsVisible;
-            set => SetProperty(ref _addBaseIdIsVisible, value);
+            get => _baseIdExisting;
+            set => SetProperty(ref _baseIdExisting, value);
+        }
+
+        public bool DdlExisting
+        {
+            get => _ddlExisting;
+            set => SetProperty(ref _ddlExisting, value);
+        }
+
+        public bool VacCertExisting
+        {
+            get => _vacCertExisting;
+            set => SetProperty(ref _vacCertExisting, value);
         }
 
         public double HistoryHeight
@@ -126,6 +142,7 @@ namespace IDWallet.ViewModels
             get => _historyHeight;
             set => SetProperty(ref _historyHeight, value);
         }
+
 
         public Command LoadItemsCommand { get; set; }
         public Command OpenPdfButtonClickedCommand =>
@@ -211,20 +228,37 @@ namespace IDWallet.ViewModels
             }
         }
 
-        private void CheckForBaseId()
+        private void CheckForSpecialElements()
         {
+            bool tmpBaseIdExisting = false;
+            bool tmpDdlExisting = false;
+            bool tmpVacCertExisting = false;
+
             foreach (WalletElement walletElement in WalletElements.Where(x => x.CredentialRecord != null))
             {
-                if (walletElement.CredentialRecord.CredentialDefinitionId == "Vq2C7Wfc44Q1cSroPuXaw2:3:CL:1128:Basis-ID" || walletElement.CredentialRecord.CredentialDefinitionId == "MGfd8JjWRoiXMm2YGL4SGj:3:CL:43:Basis-ID Testnetzwerk")
+                if (IsBaseIdCredential(walletElement.CredentialRecord))
                 {
-                    AddBaseIdIsVisible = false;
-                    return;
+                    tmpBaseIdExisting = true;
                 }
-                else
+
+                if (IsDdlCredential(walletElement.CredentialRecord))
                 {
-                    AddBaseIdIsVisible = true;
+                    tmpDdlExisting = true;
                 }
             }
+
+            if (WalletElements.Where(x => !string.IsNullOrEmpty(x.VacQrRecordId)).Any())
+            {
+                tmpVacCertExisting = true;
+            }
+            else
+            {
+                tmpVacCertExisting = false;
+            }
+
+            BaseIdExisting = tmpBaseIdExisting;
+            DdlExisting = tmpDdlExisting;
+            VacCertExisting = tmpVacCertExisting;
         }
 
         public async Task DeleteWalletElement(string recordId)
@@ -257,7 +291,7 @@ namespace IDWallet.ViewModels
             {
             }
 
-            CheckForBaseId();
+            CheckForSpecialElements();
         }
 
         public async Task DeleteWalletQrElement(string recordId)
@@ -283,6 +317,8 @@ namespace IDWallet.ViewModels
 
                 WalletElements.Remove(walletElement);
             }
+
+            CheckForSpecialElements();
         }
 
         public void EnableNotification()
@@ -348,9 +384,6 @@ namespace IDWallet.ViewModels
                         //ignore
                     }
                 }
-
-                CheckAllRevocations();
-                CheckForBaseId();
             }
             catch (Exception)
             {
@@ -361,6 +394,9 @@ namespace IDWallet.ViewModels
                 EmptyLayoutVisible = !WalletElements.Any();
                 IsLoading = false;
                 App.CredentialsLoaded = true;
+
+                CheckAllRevocations();
+                CheckForSpecialElements();
             }
         }
 
@@ -476,6 +512,14 @@ namespace IDWallet.ViewModels
             {
                 CredentialRecord = credentialRecord
             };
+
+            if (IsDdlCredential(credentialRecord))
+            {
+                result = new DDL(credentialRecord)
+                {
+                    CredentialRecord = credentialRecord
+                };
+            }
 
             string[] credDefId = credentialRecord.CredentialDefinitionId.Split(':');
 
@@ -617,19 +661,19 @@ namespace IDWallet.ViewModels
                 }
             }
 
-            if (IsFuehrerscheinCredential(credentialRecord))
-            {
-                ObservableCollection<string> orderedAttributeNames = new ObservableCollection<string> { "name", "geburtsname", "vorname", "geburtsdatum", "geburtsort", "ausstellungsdatum", "ablaufdatum", "aussteller", "führerscheinnummer", "führerscheinklassen", "gültigab", "gültigbis", "beschränkungen" };
-                foreach (string attributeName in orderedAttributeNames)
-                {
-                    CredentialClaim tmpAttribute = temporaryAttributes.FirstOrDefault(x => x.Name.ToLower().Equals(attributeName));
-                    if (tmpAttribute != null)
-                    {
-                        result.Claims.Add(tmpAttribute);
-                        temporaryAttributes.Remove(tmpAttribute);
-                    }
-                }
-            }
+            //if (IsDdlCredential(credentialRecord))
+            //{
+            //    ObservableCollection<string> orderedAttributeNames = new ObservableCollection<string> { "name", "geburtsname", "vorname", "geburtsdatum", "geburtsort", "ausstellungsdatum", "ablaufdatum", "aussteller", "führerscheinnummer", "führerscheinklassen", "gültigab", "gültigbis", "beschränkungen" };
+            //    foreach (string attributeName in orderedAttributeNames)
+            //    {
+            //        CredentialClaim tmpAttribute = temporaryAttributes.FirstOrDefault(x => x.Name.ToLower().Equals(attributeName));
+            //        if (tmpAttribute != null)
+            //        {
+            //            result.Claims.Add(tmpAttribute);
+            //            temporaryAttributes.Remove(tmpAttribute);
+            //        }
+            //    }
+            //}
 
             temporaryAttributes = temporaryAttributes.OrderBy(x => x.Name).ToList();
             foreach (CredentialClaim attribute in temporaryAttributes)
@@ -715,6 +759,12 @@ namespace IDWallet.ViewModels
                     result.ImageUri = ImageSource.FromFile("bdr_logo.png");
                     result.CredentialBarColor = Color.FromHex("#f9f9e0");
                     break;
+                case "9hsRe5jdzAbbyLAStV6sPc":
+                case "KqtBRiQSyWqnzaxN3u2d7G":
+                    result.CredentialImageSource = ImageSource.FromFile("kraftfahrtbundesamt_logo.png");
+                    result.ImageUri = ImageSource.FromFile("kraftfahrtbundesamt_logo.png");
+                    result.CredentialBarColor = Color.FromHex("#ffffff");
+                    break;
                 case "En38baYaTqVYSB8SFwguhT":
                 case "9HX4bs8pdH2uJB7sjeWPtU":
                     result.CredentialImageSource = ImageSource.FromFile("bosch_logo.png");
@@ -738,19 +788,15 @@ namespace IDWallet.ViewModels
                     result.ImageUri = ImageSource.FromFile("dlufthansa_logo.png");
                     result.CredentialBarColor = Color.FromHex("#ffffff");
                     break;
+                case "XnGEZ7gJxDNfxwnZpkkVcs":
+                    result.CredentialImageSource = ImageSource.FromFile("kba_logo.png");
+                    result.ImageUri = ImageSource.FromFile("kba_logo.png");
+                    result.CredentialBarColor = Color.FromHex("#eaeaea");
+                    break;
                 default:
-                    if (credentialRecord.CredentialDefinitionId.Equals("XnGEZ7gJxDNfxwnZpkkVcs:3:CL:988:Digitaler Führerschein"))
-                    {
-                        result.CredentialImageSource = ImageSource.FromFile("kba_logo.png");
-                        result.ImageUri = ImageSource.FromFile("kba_logo.png");
-                        result.CredentialBarColor = Color.FromHex("#eaeaea");
-                    }
-                    else
-                    {
-                        result.CredentialImageSource = ImageSource.FromFile("default_logo.png");
-                        result.ImageUri = ImageSource.FromFile("default_logo.png");
-                        result.CredentialBarColor = Color.FromHex("#cfcfcf");
-                    }
+                    result.CredentialImageSource = ImageSource.FromFile("default_logo.png");
+                    result.ImageUri = ImageSource.FromFile("default_logo.png");
+                    result.CredentialBarColor = Color.FromHex("#cfcfcf");
                     break;
             }
 
@@ -861,6 +907,10 @@ namespace IDWallet.ViewModels
                     Resources.Lang.PopUp_Undefined_Error_Button);
                 await alertPopUp.ShowPopUp();
             }
+            finally
+            {
+                CheckForSpecialElements();
+            }
         }
 
         private async void OnVacQrAdded(AddVacService msg, string recordId)
@@ -876,6 +926,10 @@ namespace IDWallet.ViewModels
             catch (Exception)
             {
                 //ignore
+            }
+            finally
+            {
+                CheckForSpecialElements();
             }
         }
 
@@ -1201,6 +1255,7 @@ namespace IDWallet.ViewModels
         {
             string credentialIssuerDID = credential.CredentialDefinitionId.Split(":")[0];
             if (credentialIssuerDID == "Vq2C7Wfc44Q1cSroPuXaw2" || credentialIssuerDID == "MGfd8JjWRoiXMm2YGL4SGj")
+
             {
                 return true;
             }
@@ -1223,21 +1278,9 @@ namespace IDWallet.ViewModels
             }
         }
 
-        private bool IsVaccinePassCredential(CredentialRecord credential)
+        private bool IsDdlCredential(CredentialRecord credential)
         {
-            if (credential.CredentialDefinitionId.Equals("REPLACE"))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        private bool IsFuehrerscheinCredential(CredentialRecord credential)
-        {
-            if (credential.CredentialDefinitionId.Equals("XnGEZ7gJxDNfxwnZpkkVcs:3:CL:988:Digitaler Führerschein"))
+            if (credential.CredentialDefinitionId.Equals(WalletParams.DdlCredentialId) || credential.CredentialDefinitionId.Equals(WalletParams.DdlDemoCredentialId) || credential.CredentialDefinitionId.Equals(WalletParams.DdlDemoCredentialIdOld))
             {
                 return true;
             }

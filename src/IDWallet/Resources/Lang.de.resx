@@ -178,7 +178,7 @@
     <value>Achtung:</value>
   </data>
   <data name="ChangeLedgerPage_EESDI" xml:space="preserve">
-    <value>EESDI Pilot Ledger</value>
+    <value>EESDI Produktiv Ledger</value>
   </data>
   <data name="ChangeLedgerPage_Esatus" xml:space="preserve">
     <value>esatus Test Ledger</value>
@@ -349,10 +349,10 @@
     <value>An</value>
   </data>
   <data name="WalletPage_Empty_Wallet_Title" xml:space="preserve">
-    <value>Ihre Wallet ist noch leer</value>
+    <value>Ihre Dokumente</value>
   </data>
   <data name="WalletPage_Empty_Wallet_Text" xml:space="preserve">
-    <value>Oder scannen Sie einen QR-Code um Ihre Wallet zu befüllen</value>
+    <value>Ihre ID Wallet ist noch leer. Fügen Sie Ihr erstes Dokument hinzu, indem Sie unten klicken:</value>
   </data>
   <data name="WalletPage_Empty_Wallet_BaseID_Text" xml:space="preserve">
     <value>Erstellen Sie eine Basis-ID:</value>
@@ -1500,13 +1500,13 @@
     <value>Credentials</value>
   </data>
   <data name="Tabbar_History" xml:space="preserve">
-    <value>Verlauf</value>
+    <value>Aktivität</value>
   </data>
   <data name="Tabbar_Proofs" xml:space="preserve">
     <value>Proofs</value>
   </data>
   <data name="Tabbar_Scan" xml:space="preserve">
-    <value>Scan</value>
+    <value>QR-Code Scan</value>
   </data>
   <data name="Tabbar_Wallet" xml:space="preserve">
     <value>Wallet</value>
@@ -1641,19 +1641,16 @@
     <value>Personalausweis auslesen</value>
   </data>
   <data name="BaseIDPage_StartScreen_Header_Label" xml:space="preserve">
-    <value>Basis-ID anlegen</value>
-  </data>
-  <data name="BaseIDPage_StartScreen_Body_Label" xml:space="preserve">
-    <value>Die Bundesdruckerei GmbH stellt im Rahmen des Projekts „Europäisches Identitätsökosystem“ für das Bundeskanzleramt eine Basis-ID nach einer erfolgreichen Identifizierung mit Hilfe der Online-Ausweisfunktion des Personalausweises aus. Diese Basis-ID steht Ihnen im Rahmen eines Testbetriebs zur späteren Nutzung nach Maßgabe der nachfolgenden Bestimmungen zur Verfügung.</value>
+    <value>Erstellen Sie Ihre Basis-ID</value>
   </data>
   <data name="BaseIDPage_StartScreen_Button_Label" xml:space="preserve">
-    <value>Los gehts</value>
+    <value>Das habe ich alles! Jetzt starten</value>
   </data>
   <data name="BaseIDPage_StartScreen_User_Agreement_Label" xml:space="preserve">
     <value>Nutzungsbedingungen</value>
   </data>
-  <data name="BaseIDPage_StartScreen_Accept_After_Label" xml:space="preserve">
-    <value />
+  <data name="BaseIDPage_StartScreen_Privacy_Consent_Label2" xml:space="preserve">
+    <value> zur Verarbeitung Ihrer personenbezogenen Daten und </value>
   </data>
   <data name="PopUp_BaseID_AccessRights_Text" xml:space="preserve">
     <value>Bitte prüfen Sie, ob Sie diese Daten teilen möchten.</value>
@@ -1886,8 +1883,8 @@
   <data name="LoginPage_Title" xml:space="preserve">
     <value>ID Wallet</value>
   </data>
-  <data name="BaseIDPage_StartScreen_Accept_Before_Label" xml:space="preserve">
-    <value>Akzeptieren der </value>
+  <data name="BaseIDPage_StartScreen_User_Agreement_Label2" xml:space="preserve">
+    <value> akzeptieren</value>
   </data>
   <data name="BaseIDPage_PINScreen_ChangePIN_Body_Label" xml:space="preserve">
     <value>Bitte geben Sie nun Ihre aktuelle Ausweis-PIN ein.</value>
@@ -1929,7 +1926,7 @@
     <value>Okay</value>
   </data>
   <data name="PopUp_NFC_Not_Enabled_Text" xml:space="preserve">
-    <value>Um eine Basis-ID zu erstellen, müssen Sie NFC auf ihrem Mobilgerät aktivieren.</value>
+    <value>Um diesen Schritt auszuführen, müssen Sie NFC auf ihrem Mobilgerät aktivieren.</value>
   </data>
   <data name="PopUp_NFC_Not_Enabled_Title" xml:space="preserve">
     <value>NFC nicht aktiviert</value>
@@ -2016,7 +2013,7 @@
     <value>Sie haben zweimal eine falsche Transport-PIN eingegeben.</value>
   </data>
   <data name="PopUp_BaseID_Wrong_PIN_Pre_Text_2" xml:space="preserve">
-    <value>Sie haben eine falsche Transport-PIN eingegeben. Sie haben </value>
+    <value>Sie haben eine falsche Transport-PIN eingegeben oder die einmalig mögliche Nutzung ist bereits erfolgt. Sie haben </value>
   </data>
   <data name="PopUp_Vitual_Device_Title" xml:space="preserve">
     <value>Warnung</value>
@@ -2193,10 +2190,10 @@
     <value>Standardiserter Vorname</value>
   </data>
   <data name="PopUp_Add_Vac_Title" xml:space="preserve">
-    <value>Speicherung des QR-Code</value>
+    <value>Speicherung des COVID-Zertifikates</value>
   </data>
   <data name="PopUp_Add_Vac_Message" xml:space="preserve">
-    <value>Bitte bestätigen Sie, dass Sie mit der Speicherung des QR-Code in Ihrem Wallet fortfahren möchten.</value>
+    <value>Bitte bestätigen Sie, dass Sie mit der Speicherung des COVID-Zertifikates in Ihrem Wallet fortfahren möchten.</value>
   </data>
   <data name="PopUp_Add_Vac_Button_Ok" xml:space="preserve">
     <value>Okay</value>
@@ -2213,14 +2210,14 @@
   <data name="PopUp_BaseID_ReadyToScan_Process_Before_Label" xml:space="preserve">
     <value>Auslesevorgang: </value>
   </data>
-  <data name="BaseIDPage_StartScreen_Middle_Label" xml:space="preserve">
-    <value> zur Verarbeitung Ihrer personenbezogenen Daten und Kenntnisnahme der </value>
+  <data name="BaseIDPage_StartScreen_Privacy_Policy_Label2" xml:space="preserve">
+    <value> anerkennen</value>
   </data>
   <data name="BaseIDPage_StartScreen_Privacy_Consent_Label" xml:space="preserve">
     <value>Einwilligungserklärung</value>
   </data>
-  <data name="BaseIDPage_StartScreen_Revoke_Label" xml:space="preserve">
-    <value>Achtung: Sofern mit diesem Ausweis bereits eine Basis-ID erstellt wurde, wird diese widerrufen.</value>
+  <data name="BaseIDPage_StartScreen_Privacy_Consent_Label1" xml:space="preserve">
+    <value />
   </data>
   <data name="LegalNoticePage_Commercial_Register" xml:space="preserve">
     <value>Handelsregister: Amtsgericht Offenbach - HRB 53742</value>
@@ -2232,7 +2229,7 @@
     <value>Abbrechen</value>
   </data>
   <data name="BaseIDPage_ReadIdScreen_Security_Label" xml:space="preserve">
-    <value>Wenn Sie fortfahren, wird zur Gewährleistung der ID Wallet Authentizität eine Geräteprüfung (Android: SafetyNet, iOS: DeviceCheck) durchgeführt. Die Ergebnisse dieses Checks werden zur Überprüfung an die Bundesdruckerei GmbH übermittelt.</value>
+    <value>Wenn Sie fortfahren, wird zur Überprüfung der ID Wallet Authentizität eine Geräteprüfung (Android: SafetyNet, iOS: DeviceCheck) durchgeführt. Die Ergebnisse dieses Checks werden zur Überprüfung an die Bundesdruckerei GmbH übermittelt.</value>
   </data>
   <data name="LabelTextConvert_DriveName" xml:space="preserve">
     <value>1. Name</value>
@@ -2283,12 +2280,309 @@
     <value>Hinweis</value>
   </data>
   <data name="Qr_History_Message_1" xml:space="preserve">
-    <value>QR-Code hinzugefügt</value>
+    <value>COVID-Zertifikat hinzugefügt</value>
   </data>
   <data name="Qr_History_Message_2" xml:space="preserve">
-    <value>haben Sie folgenden QR-Code hinzugefügt.</value>
+    <value>haben Sie folgenden COVID-Zertifikat hinzugefügt.</value>
   </data>
   <data name="HwProofNotice" xml:space="preserve">
     <value>Hinweis: Diese Überprüfung fragt die Informationen der Basis-ID zur Gerätebindung an. Beachten Sie bitte, dass auch diese einen Personenbezug darstellen. Des weiteren wird der Überprüfung eine Signatur unter Verwendung der Gerätebindungsschlüssel hinzugefügt.</value>
+  </data>
+  <data name="PopUp_Expired_DDL_Text" xml:space="preserve">
+    <value>Der digitale Führerschein muss tagesaktuell sein. Bitte stellen Sie vor dem Teilen Ihrer Daten sicher, dass Ihr digitaler Führerschein heute ausgestellt wurde.</value>
+  </data>
+  <data name="PopUp_Expired_DDL_Title" xml:space="preserve">
+    <value>Digitaler Führerschein muss erneuert werden</value>
+  </data>
+  <data name="DdlPage_StartScreen_Body_Label" xml:space="preserve">
+    <value>Der Digitale Führerschein ergänzt den EU-Kartenführerschein, ist jedoch aufgrund der rechtlichen Rahmenbedingungen kein vollständiger Ersatz. Geschäftliche und private, digitaler Vorgänge, wie zum Beispiel Autoanmietung, Carsharing und Flottenmanagement, werden so unterstützt. Er wird mit Hilfe der Online-Ausweisfunktion Ihres Personalausweises erstellt. Durchlaufen Sie den kurzen Prozess und fügen Sie Ihrer ID Wallet Ihren Digitalen Führerschein hinzu.</value>
+  </data>
+  <data name="DdlPage_StartScreen_Header_Label" xml:space="preserve">
+    <value>Erstellen Sie Ihren Digitalen Führerschein</value>
+  </data>
+  <data name="PopUp_Ddl_KBA_Error_001_Text" xml:space="preserve">
+    <value>Die Ausgabe des digitalen Führerscheins darf nur bei einem eindeutigen Treffer im Zentralen Fahrerlaubnisregister erfolgen.</value>
+  </data>
+  <data name="PopUp_Ddl_KBA_Error_001_Title" xml:space="preserve">
+    <value>Keine eindeutige Identifizierung möglich</value>
+  </data>
+  <data name="PopUp_Ddl_KBA_Error_002_Title" xml:space="preserve">
+    <value>Keine Eintragung im Zentralen Fahrerlaubnisregister gefunden</value>
+  </data>
+  <data name="PopUp_Ddl_KBA_Error_003_Text" xml:space="preserve">
+    <value>Zu Ihrer Person sind negative Registereintragungen (z.B. Fahrverbot) vorhanden.</value>
+  </data>
+  <data name="PopUp_Ddl_KBA_Error_003_Title" xml:space="preserve">
+    <value>Negative Registereintragung vorhanden</value>
+  </data>
+  <data name="PopUp_Ddl_KBA_Error_004_Text" xml:space="preserve">
+    <value>Aufgrund einer Entziehung der Fahrerlaubnis konnte keine gültige deutsche Fahrerlaubnis ermittelt werden.</value>
+  </data>
+  <data name="PopUp_Ddl_KBA_Error_004_Title" xml:space="preserve">
+    <value>Keine gültige Fahrerlaubnis vorhanden</value>
+  </data>
+  <data name="PopUp_Ddl_KBA_Error_005_Text" xml:space="preserve">
+    <value>Entschuldigen Sie, aktuell liegt ein Fehler vor. Bitte versuchen Sie es zu einem späteren Zeitpunkt erneut.</value>
+  </data>
+  <data name="PopUp_Ddl_KBA_Error_005_Title" xml:space="preserve">
+    <value>Technischer Fehler</value>
+  </data>
+  <data name="PopUp_Ddl_KBA_Error_Button" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="PopUp_Ddl_Offer_Accept_Button" xml:space="preserve">
+    <value>Annehmen</value>
+  </data>
+  <data name="PopUp_Ddl_Offer_Delete_Button" xml:space="preserve">
+    <value>Ablehnen</value>
+  </data>
+  <data name="PopUp_Ddl_Offer_Notification_Text" xml:space="preserve">
+    <value>Ihr abgelaufenes Credential wird nach dem Annehmen gelöscht.</value>
+  </data>
+  <data name="PopUp_Ddl_Offer_Send_Label" xml:space="preserve">
+    <value> sendet Ihnen </value>
+  </data>
+  <data name="PopUp_Ddl_Offer_Text" xml:space="preserve">
+    <value>Bitte prüfen Sie, ob Sie diese Daten annehmen möchten.</value>
+  </data>
+  <data name="DdlPage_SuccessScreen_Button" xml:space="preserve">
+    <value>Digitalen Führerschein anzeigen</value>
+  </data>
+  <data name="DdlPage_SuccessScreen_Text" xml:space="preserve">
+    <value>Ihr digitaler Führerschein liegt jetzt in Ihrer Wallet bereit.</value>
+  </data>
+  <data name="DdlPage_SuccessScreen_Title" xml:space="preserve">
+    <value>Digitaler Führerschein wurde erfolgreich angelegt</value>
+  </data>
+  <data name="DdlPage_StartScreen_Notification_Label" xml:space="preserve">
+    <value>Hinweis: Ein zuvor gespeicherter digitaler Führerschein wird ersetzt.</value>
+  </data>
+  <data name="DdlIDPage_StartScreen_Acknowledge_Before_Label" xml:space="preserve">
+    <value>Kenntnisnahme der </value>
+  </data>
+  <data name="PopUp_DDL_AccessRights_Provider_Label_2" xml:space="preserve">
+    <value>Kraftfahrt-Bundesamt</value>
+  </data>
+  <data name="PopUp_DDL_AccessRights_Purpose_Label_2" xml:space="preserve">
+    <value>Identitätsnachweis zur Ausstellung des digitalen Führerscheins</value>
+  </data>
+  <data name="OnboardingPage_Text_First" xml:space="preserve">
+    <value>Fügen Sie Ausweise, Dokumente und Nachweise der ID Wallet hinzu und haben Sie diese immer per Smartphone griffbereit.</value>
+  </data>
+  <data name="OnboardingPage_Text_Second" xml:space="preserve">
+    <value>Ihre Daten werden verschlüsselt gesichert und können jederzeit von Ihnen gelöscht werden. Zudem können Sie festlegen mit wem Sie welche Detaildaten teilen möchten und dies nachverfolgen – zum Beispiel nur Ihre Altersangabe in Jahren und nicht Ihr Geburtsdatum mit Datumsangabe.</value>
+  </data>
+  <data name="OnboardingPage_Text_Third" xml:space="preserve">
+    <value>Haben Sie einmal Ihre Dokumente und Nachweise hinzugefügt, können Sie die ID Wallet für verschiedenste Zwecke nutzen – zum Beispiel für die Beantragung Ihrer neuen SIM-Karte oder für den digitalen Hotel-Check-In.</value>
+  </data>
+  <data name="OnboardingPage_Title_First" xml:space="preserve">
+    <value>Erstellen Sie Ihre persönliche digitale Brieftasche mit der ID Wallet</value>
+  </data>
+  <data name="OnboardingPage_Title_Second" xml:space="preserve">
+    <value>Bewahren Sie Ihre Dokumente und Nachweise sicher und behalten Sie die Kontrolle</value>
+  </data>
+  <data name="OnboardingPage_Title_Third" xml:space="preserve">
+    <value>Weisen Sie sich mit Ihrer ID Wallet einfach und digital aus</value>
+  </data>
+  <data name="OnboardingPage_Button_Text" xml:space="preserve">
+    <value>Starten</value>
+  </data>
+  <data name="WalletPage_Empty_Wallet_Button_Text" xml:space="preserve">
+    <value>Dokument hinzufügen</value>
+  </data>
+  <data name="PopUp_AddDocument_Info_Text" xml:space="preserve">
+    <value>Wir arbeiten gerade mit mehreren Partnern daran, weitere Dokumentenarten hinzuzufügen, die in Zukunft hier erscheinen werden - wie beispielsweise Ihre Zugangskarte zum Hotel oder Ihr Konzertticket.</value>
+  </data>
+  <data name="PopUp_AddDocument_Text" xml:space="preserve">
+    <value>Klicken Sie hier:</value>
+  </data>
+  <data name="PopUp_AddDocument_Title" xml:space="preserve">
+    <value>Folgende Dokumente können Sie bereits hinzufügen:</value>
+  </data>
+  <data name="PopUp_AddVacCert_Button_Text" xml:space="preserve">
+    <value>Jetzt scannen</value>
+  </data>
+  <data name="PopUp_AddVacCert_Info_Text" xml:space="preserve">
+    <value>Sie bekommen diesen entweder per POST mit Ihrem COVID-Impfzertifikat zugeschickt oder können ihn in teilnehmenden Apotheken generieren lassen.</value>
+  </data>
+  <data name="PopUp_AddVacCert_Text_One" xml:space="preserve">
+    <value>Scannen Sie den QR-Code von Ihrem COVID-Zertifikat der EU ein. Das Zertifikat wird im Anschluss direkt digital in die ID Wallet App übertragen.</value>
+  </data>
+  <data name="PopUp_AddVacCert_Text_Two" xml:space="preserve">
+    <value>Halten Sie hierfür einfach Ihre Kamera über den QR-Code</value>
+  </data>
+  <data name="PopUp_AddVacCert_Title" xml:space="preserve">
+    <value>Impfzertifikat hinzufügen</value>
+  </data>
+  <data name="PopUp_DDL_Auth_Error_Button" xml:space="preserve">
+    <value>Okay</value>
+  </data>
+  <data name="PopUp_DDL_Auth_Error_Card_Text" xml:space="preserve">
+    <value>Die Echtheit Ihres Ausweises konnte nicht überprüft werden. Bitte stellen Sie sicher, dass Sie einen echten Ausweis verwenden. Bitte beachten Sie, dass Testanwendungen die Verwendung eines Testausweises erfordern.</value>
+  </data>
+  <data name="PopUp_DDL_Auth_Error_Text" xml:space="preserve">
+    <value>Bei der Ausstellung Ihres digitalen Führerscheins ist etwas schief gelaufen. Bitte starten Sie den Prozess erneut.</value>
+  </data>
+  <data name="PopUp_DDL_Auth_Error_Title" xml:space="preserve">
+    <value>Digitaler Führerschein Fehler</value>
+  </data>
+  <data name="PopUp_Expired_DDL_Cancel_Button" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="PopUp_Expired_DDL_Accept_Button" xml:space="preserve">
+    <value>Erneuern</value>
+  </data>
+  <data name="DdlPage_Connecting_Title" xml:space="preserve">
+    <value>Identifizierung wird durchgeführt</value>
+  </data>
+  <data name="DdlPage_Connecting_Title_Issue" xml:space="preserve">
+    <value>Digitaler Führerschein wird ausgestellt</value>
+  </data>
+  <data name="PopUp_Ddl_KBA_Error_002_Text" xml:space="preserve">
+    <value>Zu Ihren Personendaten konnten im Zentralen Fahrerlaubnisregister keine Eintragungen gefunden werden.</value>
+  </data>
+  <data name="DdlPage_ReadIdScreen_Body_Label" xml:space="preserve">
+    <value>Bitte halten Sie Ihre Wallet-PIN, Ihren Personalausweis, sowie die zugehörige Ausweis- oder Transport-PIN bereit.</value>
+  </data>
+  <data name="DdlPage_ReadIdScreen_Button_Label" xml:space="preserve">
+    <value>Vorgang starten</value>
+  </data>
+  <data name="DdlPage_ReadIdScreen_Header_Label" xml:space="preserve">
+    <value>Personalausweis auslesen</value>
+  </data>
+  <data name="DdlPage_ReadIdScreen_Security_Label" xml:space="preserve">
+    <value>Wenn Sie fortfahren, wird zur Überprüfung der Echtheit Ihrer ID Wallet eine Geräteprüfung durchgeführt. Die Ergebnisse dieses Checks werden zur Überprüfung an das Kraftfahrt-Bundesamt übermittelt.</value>
+  </data>
+  <data name="PopUp_Ddl_AccessRights_Text" xml:space="preserve">
+    <value>Bitte prüfen Sie, ob Sie diese Daten übermitteln möchten.</value>
+  </data>
+  <data name="PopUp_Ddl_AccessRights_Continue_Button" xml:space="preserve">
+    <value>Übermitteln</value>
+  </data>
+  <data name="DdlPage_StartScreen_Button_Label" xml:space="preserve">
+    <value>Weiter</value>
+  </data>
+  <data name="BaseIDPage_StartScreen_Second_Button_Label" xml:space="preserve">
+    <value>Mir fehlt noch etwas</value>
+  </data>
+  <data name="BaseIDPage_StartScreen_Requirement_Body1" xml:space="preserve">
+    <value>Wie kann ich erkennen, ob die Online-Ausweisfunktion bei meinem Personalausweis aktiviert ist?</value>
+  </data>
+  <data name="BaseIDPage_StartScreen_Requirement_Body2" xml:space="preserve">
+    <value>Wo finde ich diese PINs?</value>
+  </data>
+  <data name="BaseIDPage_StartScreen_Requirement_Title1" xml:space="preserve">
+    <value>Personalausweis inkl. Online-Ausweisfunktion (seit 2017)</value>
+  </data>
+  <data name="BaseIDPage_StartScreen_Requirement_Title2" xml:space="preserve">
+    <value>Ihre Ausweis- oder Transport-PIN</value>
+  </data>
+  <data name="BaseIDPage_StartScreen_User_Agreement_Label1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PopUp_MissingInformation_Body1" xml:space="preserve">
+    <value>Falls Sie die Transport-PIN vermissen:</value>
+  </data>
+  <data name="PopUp_MissingInformation_Body2" xml:space="preserve">
+    <value>Bitte beantragen Sie den Brief mit der PIN</value>
+  </data>
+  <data name="PopUp_MissingInformation_Body3" xml:space="preserve">
+    <value>in Ihrem Bürgeramt</value>
+  </data>
+  <data name="PopUp_MissingInformation_Body4" xml:space="preserve">
+    <value>Falls Sie weitere Fragen oder Probleme haben, senden Sie eine</value>
+  </data>
+  <data name="PopUp_MissingInformation_Body5" xml:space="preserve">
+    <value>E-Mail an unser Support-Team</value>
+  </data>
+  <data name="PopUp_MissingInformation_Title" xml:space="preserve">
+    <value>Mir fehlt noch etwas</value>
+  </data>
+  <data name="PopUp_StartInfo1_Body1" xml:space="preserve">
+    <value>Seit 2017 ist diese Funktion bei jedem neu ausgestellten Ausweis automatisch aktiviert.</value>
+  </data>
+  <data name="PopUp_StartInfo1_Body2" xml:space="preserve">
+    <value>Hinweis: Bei Ausweisen ab 2011 war die Funktion optional.</value>
+  </data>
+  <data name="PopUp_StartInfo1_Body3" xml:space="preserve">
+    <value>Zudem können Sie jederzeit mit einer Software für die Online-Ausweisfunktion, wie zum Beispiel der kostenlosen </value>
+  </data>
+  <data name="PopUp_StartInfo1_Body4" xml:space="preserve">
+    <value>, prüfen, ob Ihre Online-Ausweisfunktion aktiviert ist.</value>
+  </data>
+  <data name="PopUp_StartInfo1_Body5" xml:space="preserve">
+    <value>Sollte die Online-Ausweisfunktion deaktiviert sein, können Sie diese in dem für Sie zuständigen Bürgeramt aktivieren lassen.</value>
+  </data>
+  <data name="PopUp_StartInfo1_Body6" xml:space="preserve">
+    <value>Das für Sie zuständige Bürgeramt finden Sie zum Beispiel auf </value>
+  </data>
+  <data name="PopUp_StartInfo1_Title" xml:space="preserve">
+    <value>Wie kann ich erkennen, ob die Online-Ausweisfunktion bei meinem Personalausweis aktiviert ist?</value>
+  </data>
+  <data name="PopUp_StartInfo2_Body1" xml:space="preserve">
+    <value>Ausweis-PIN:</value>
+  </data>
+  <data name="PopUp_StartInfo2_Body2" xml:space="preserve">
+    <value>Dies ist die 6-stellige PIN, die Sie entweder selbst in der AusweisApp2 angelegt haben oder mit der Transport-PIN im Folgenden einrichten können.</value>
+  </data>
+  <data name="PopUp_StartInfo2_Body3" xml:space="preserve">
+    <value>Transport-PIN:</value>
+  </data>
+  <data name="PopUp_StartInfo2_Body4" xml:space="preserve">
+    <value>Dies ist die 5-stellige PIN, die Sie per Brief zusammen mit Ihrem Personalausweis erhalten haben.</value>
+  </data>
+  <data name="PopUp_StartInfo2_Body5" xml:space="preserve">
+    <value>Wenn Sie Ihre Transport-PIN verloren haben, müssen Sie sich an Ihr örtliches Bürgeramt wenden und diese beantragen.</value>
+  </data>
+  <data name="PopUp_StartInfo2_Body6" xml:space="preserve">
+    <value>Mehr Info</value>
+  </data>
+  <data name="PopUp_StartInfo2_Title" xml:space="preserve">
+    <value>Wo finde ich diese PINs?</value>
+  </data>
+  <data name="BaseIDPage_StartScreen_Body_Label" xml:space="preserve">
+    <value>Die Basis-ID repräsentiert Ihre Identität in Ihrer ID Wallet und wird mit Hilfe der Online-Ausweisfunktion Ihres Personalausweises erstellt. Durchlaufen Sie den kurzen Prozess und fügen Sie Ihrer ID Wallet Ihre Basis-ID hinzu.</value>
+  </data>
+  <data name="PopUp_NFC_No_NFC_Title" xml:space="preserve">
+    <value>Kein NFC</value>
+  </data>
+  <data name="PopUp_NFC_No_NFC_Button" xml:space="preserve">
+    <value>Okay</value>
+  </data>
+  <data name="PopUp_NFC_No_NFC_Text" xml:space="preserve">
+    <value>Ihr Gerät verfügt nicht über eine NFC-Schnittstelle, daher steht Ihnen diese Funktion leider nicht zur Verfügung.</value>
+  </data>
+  <data name="PopUp_SDK_Not_Connected_Title" xml:space="preserve">
+    <value>AusweisApp2 SDK noch nicht verbunden</value>
+  </data>
+  <data name="PopUp_SDK_Not_Connected_Button" xml:space="preserve">
+    <value>Okay</value>
+  </data>
+  <data name="PopUp_SDK_Not_Connected_Text" xml:space="preserve">
+    <value>Das AusweisApp2 SDK ist leider noch nicht verbunden, versuchen Sie es bitte erneut.</value>
+  </data>
+  <data name="BaseIDPage_StartScreen_Body_Label2" xml:space="preserve">
+    <value>Hierfür benötigen Sie:</value>
+  </data>
+  <data name="DdlPage_StartScreen_Body_Label2" xml:space="preserve">
+    <value>Hierfür benötigen Sie:</value>
+  </data>
+  <data name="PopUp_DDL_Auth_Message_Error_Text" xml:space="preserve">
+    <value>Bei der Ausstellung Ihres digitalen Führerscheins ist etwas schief gelaufen. Prüfen Sie bitte ob Ihr Ausweis noch gültig ist und starten Sie den Prozess erneut.</value>
+  </data>
+  <data name="PopUp_BaseID_Auth_Message_Error_Text" xml:space="preserve">
+    <value>Bei der Ausstellung ihrer Basis-ID ist etwas schief gelaufen. Prüfen Sie bitte ob Ihr Ausweis noch gültig ist und starten Sie den Prozess erneut.</value>
+  </data>
+  <data name="PopUp_StartInfo2_Body7" xml:space="preserve">
+    <value>Bundesministerium des Innern, für Bau und Heimat</value>
+  </data>
+  <data name="PopUp_AddVacCertSoonClose_Button_Text" xml:space="preserve">
+    <value>Schließen</value>
+  </data>
+  <data name="PopUp_AddVacCertSoon_Text" xml:space="preserve">
+    <value>Sie werden in Kürze auch Ihr COVID-Zertifikat durch Einscannen des ausgegebenen QR-Codes hier einlesen und anschließend aus der ID Wallet heraus nutzen können.</value>
+  </data>
+  <data name="PopUp_AddVacCertSoon_Title" xml:space="preserve">
+    <value>Fügen Sie später Ihr COVID-Zertifikat hinzu</value>
   </data>
 </root>

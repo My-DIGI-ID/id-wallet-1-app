@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<base:CustomPopUp  xmlns:base="clr-namespace:IDWallet.Views.Customs.PopUps" 
+                   xmlns="http://xamarin.com/schemas/2014/forms"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+                   xmlns:iconize="clr-namespace:Plugin.Iconize;assembly=Plugin.Iconize"                    
+                   xmlns:lang="clr-namespace:IDWallet.Extensions"
+                   xmlns:svg="clr-namespace:Xamarin.Forms.Svg;assembly=SvgImageSource"
+                   xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" 
+                   x:Class="IDWallet.Views.Wallet.PopUps.AddVacCertPopUpSoon">
+    <base:CustomPopUp.Content>
+        <StackLayout Style="{StaticResource PopUpStackLayout}">
+            <Frame Style="{StaticResource PopUpFrame}">
+                <StackLayout Margin="15">
+                    <iconize:IconLabel Text="mdi-close"
+                                       HorizontalOptions="EndAndExpand"
+                                       HorizontalTextAlignment="End"
+                                       TextColor="{StaticResource FontBlackColor}"
+                                       FontSize="20">
+                        <iconize:IconLabel.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnPopUpCanceled"/>
+                        </iconize:IconLabel.GestureRecognizers>
+                    </iconize:IconLabel>
+
+                    <Label Text="{lang:L10n PopUp_AddVacCertSoon_Title}"
+                           MaxLines="3"
+                           LineBreakMode="WordWrap"
+                           TextColor="{StaticResource EmptyWalletPrimaryTextColor}"
+                           FontSize="20"
+                           Margin="0,0,0,10"
+                           FontAttributes="Bold"/>
+
+                    <Label Text="{lang:L10n PopUp_AddVacCertSoon_Text}"
+                           MaxLines="10"
+                           LineBreakMode="WordWrap"
+                           Margin="0,0,0,15"
+                           TextColor="{StaticResource EmptyWalletPrimaryTextColor}"/>
+
+                    <Button Style="{StaticResource PrimaryButton}"
+                            BackgroundColor="{StaticResource AddVacButtonColor}"
+                            Text="{lang:L10n PopUp_AddVacCertSoonClose_Button_Text}"
+                            Margin="0,0,0,10"
+                            Clicked="Button_Clicked"/>
+
+                </StackLayout>
+            </Frame>            
+        </StackLayout>
+    </base:CustomPopUp.Content>
+</base:CustomPopUp>
