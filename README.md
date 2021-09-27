@@ -1,5 +1,9 @@
 # ID Wallet
 
+<p align="center">
+      <a href="https://play.google.com/store/apps/details?id=com.digitalenabling.idw&hl=en" title="Get it on Google Play"><img src="images/Google_Play_Badge.svg" width="135"></a>
+      <a href="https://apps.apple.com/de/app/id-wallet/id1564933989" title="Download on the App Store"><img src="images/App_Store_Badge.svg"></a>
+
 ## Contact
 Digital Enabling GmbH  
 Rheinstr. 5  
