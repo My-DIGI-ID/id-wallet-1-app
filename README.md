@@ -74,5 +74,5 @@ Set public keys hashes (key pinning) and API-Key of Bundesdruckerei API
 - src/IDWallet/Services/SDKMessageService.cs
 
 ## App Build
-It is recommended to build the project directly from a Xamarin compatible IDE (e.g. Visual Studio or JetBrains Rider). For building and running the iOS app you will need to be on or to be connected to a Mac with the macOS operating system with all necessary Xamarin dependencies (https://docs.microsoft.com/de-de/xamarin/ios/) installed.
+It is recommended to build the project directly from a Xamarin compatible IDE (e.g. Visual Studio or JetBrains Rider). For building and running the iOS app you will need to be on or to be connected to a device running the macOS operating system with all necessary Xamarin dependencies (https://docs.microsoft.com/de-de/xamarin/ios/) installed.
 Further information for Android can also be found here: https://docs.microsoft.com/de-de/xamarin/android/
